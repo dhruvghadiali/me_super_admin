@@ -32,8 +32,6 @@ class Snackbar extends GetxController {
         return ThemeDataUtil.harvestGold;
       case AppSnackbarStatus.error:
         return ThemeDataUtil.metallicRed;
-      default:
-        return ThemeDataUtil.eerieBlack;
     }
   }
 
@@ -44,8 +42,6 @@ class Snackbar extends GetxController {
       case AppSnackbarStatus.warning:
         return Icons.warning_rounded;
       case AppSnackbarStatus.error:
-        return Icons.error_rounded;
-      default:
         return Icons.error_rounded;
     }
   }

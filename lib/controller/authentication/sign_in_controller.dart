@@ -1,17 +1,18 @@
 import 'dart:convert';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/utils/utils.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:me_super_admin/utils/snackbar/snackbar.dart';
 import 'package:me_super_admin/model/authentication/user.dart';
 import 'package:me_super_admin/service/http/http_service.dart';
-import 'package:me_super_admin/model/authentication/login.dart';
+import 'package:me_super_admin/model/authentication/sign_in.dart';
 import 'package:me_super_admin/model/http_service/post_http_service.dart';
 import 'package:me_super_admin/model/http_service/http_response_service.dart';
 import 'package:me_super_admin/model/http_service/mock_http_api_property_service.dart';
 
-class LoginController extends GetxController {
+class SignInController extends GetxController {
   bool isLoader = false;
   bool showUsernameTextfieldError = false;
   bool showPasswordTextfieldError = false;
@@ -54,7 +55,7 @@ class LoginController extends GetxController {
     }
   }
 
-  Future<void> login(Login loginDetails) async {
+  Future<void> signIn(SignIn signInDetails) async {
     final prefs = await SharedPreferences.getInstance();
 
     isLoader = true;
@@ -64,10 +65,10 @@ class LoginController extends GetxController {
       endPoint: 'super-admin/signin',
       headers: {},
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/login/login_200.json',
+        endPoint: 'assets/mock_data/sign_in/sign_in_200.json',
         statusCode: 200,
       ),
-      body: loginDetails.toJson(),
+      body: signInDetails.toJson(),
     );
 
     HttpResponseService response =

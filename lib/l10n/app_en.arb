@@ -1,10 +1,13 @@
 {
   "apiRequestProcessingTitle" : "Processing ...",
   "apiRequestProcessingMessage" : "Please wait your request is processing",
-  "loginFormTitle" : "Hello, Boss!!",
+  "signInFormTitle" : "Hello, Boss!!",
   "deleteAlertTitle" : "Are you sure?",
   "deleteAlertSubtitle" : "Do you really want to delete these record? This process cannot be undone",
   "restoreAlertSubtitle" : "Do you really want to restore these record? This process cannot be undone",
   "noDataFoundTitleMessage" : "No records found",
-  "noDataFoundSubtitleMessage" : "Please try again later"
+  "noDataFoundSubtitleMessage" : "Please try again later",
+  "usernameLabelText" : "Username",
+  "passwordLabelText" : "Password",
+  "signInButtonText" : "SIGNIN"
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 
 class ThemeDataUtil {
-  static double elevatedButtonpadding = 25.0;
+  static double elevatedButtonPadding = 15.0;
   static Color eerieBlack = const Color(0xFF191825);
   static Color calPolyPomonaGreen = const Color(0xFF285430);
   static Color isabelline = const Color(0xFFF0EEED);
@@ -13,7 +13,12 @@ class ThemeDataUtil {
     style: ButtonStyle(
       backgroundColor: WidgetStatePropertyAll<Color>(eerieBlack),
       padding: WidgetStateProperty.all<EdgeInsets>(
-        EdgeInsets.symmetric(vertical: elevatedButtonpadding),
+        EdgeInsets.symmetric(vertical: elevatedButtonPadding),
+      ),
+      shape: WidgetStateProperty.all<OutlinedBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ),
       ),
     ),
   );
@@ -22,7 +27,12 @@ class ThemeDataUtil {
     style: ButtonStyle(
       backgroundColor: WidgetStatePropertyAll<Color>(calPolyPomonaGreen),
       padding: WidgetStateProperty.all<EdgeInsets>(
-        EdgeInsets.symmetric(vertical: elevatedButtonpadding),
+        EdgeInsets.symmetric(vertical: elevatedButtonPadding),
+      ),
+      shape: WidgetStateProperty.all<OutlinedBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ),
       ),
     ),
   );
@@ -31,7 +41,12 @@ class ThemeDataUtil {
     style: ButtonStyle(
       backgroundColor: WidgetStatePropertyAll<Color>(metallicRed),
       padding: WidgetStateProperty.all<EdgeInsets>(
-        EdgeInsets.symmetric(vertical: elevatedButtonpadding),
+        EdgeInsets.symmetric(vertical: elevatedButtonPadding),
+      ),
+      shape: WidgetStateProperty.all<OutlinedBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ),
       ),
     ),
   );
@@ -40,7 +55,12 @@ class ThemeDataUtil {
     style: ButtonStyle(
       backgroundColor: WidgetStatePropertyAll<Color>(harvestGold),
       padding: WidgetStateProperty.all<EdgeInsets>(
-        EdgeInsets.symmetric(vertical: elevatedButtonpadding),
+        EdgeInsets.symmetric(vertical: elevatedButtonPadding),
+      ),
+      shape: WidgetStateProperty.all<OutlinedBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5.0),
+        ),
       ),
     ),
   );
