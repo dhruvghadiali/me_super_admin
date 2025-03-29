@@ -19,13 +19,13 @@ class MobileScaffoldWidget extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
-        leading: BackButton(color: themeData.isabelline),
+        leading: BackButton(color: themeData.offWhite),
         title: Text(
           title,
           style: Theme.of(context)
               .textTheme
               .titleLarge!
-              .copyWith(color: themeData.isabelline),
+              .copyWith(color: themeData.offWhite),
         ),
       ),
       body: child,

@@ -1,72 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
-
+import 'package:me_super_admin/utils/theme_data/elevation_button_theme_config.dart';
 class ThemeDataUtil {
-  static double elevatedButtonPadding = 15.0;
   static Color eerieBlack = const Color(0xFF191825);
   static Color calPolyPomonaGreen = const Color(0xFF285430);
-  static Color isabelline = const Color(0xFFF0EEED);
+  static Color offWhite = const Color(0xFFF0EEED);
   static Color metallicRed = const Color(0xFFA93226);
   static Color harvestGold = const Color(0xFFD68910);
-  static ElevatedButtonThemeData eerieBlackElevatedButtonThemeData =
-      ElevatedButtonThemeData(
-    style: ButtonStyle(
-      backgroundColor: WidgetStatePropertyAll<Color>(eerieBlack),
-      padding: WidgetStateProperty.all<EdgeInsets>(
-        EdgeInsets.symmetric(vertical: elevatedButtonPadding),
-      ),
-      shape: WidgetStateProperty.all<OutlinedBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-      ),
-    ),
-  );
-  static ElevatedButtonThemeData calPolyPomonaGreenElevatedButtonThemeData =
-      ElevatedButtonThemeData(
-    style: ButtonStyle(
-      backgroundColor: WidgetStatePropertyAll<Color>(calPolyPomonaGreen),
-      padding: WidgetStateProperty.all<EdgeInsets>(
-        EdgeInsets.symmetric(vertical: elevatedButtonPadding),
-      ),
-      shape: WidgetStateProperty.all<OutlinedBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-      ),
-    ),
-  );
-  static ElevatedButtonThemeData metallicRedElevatedButtonThemeData =
-      ElevatedButtonThemeData(
-    style: ButtonStyle(
-      backgroundColor: WidgetStatePropertyAll<Color>(metallicRed),
-      padding: WidgetStateProperty.all<EdgeInsets>(
-        EdgeInsets.symmetric(vertical: elevatedButtonPadding),
-      ),
-      shape: WidgetStateProperty.all<OutlinedBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-      ),
-    ),
-  );
-  static ElevatedButtonThemeData harvestGoldElevatedButtonThemeData =
-      ElevatedButtonThemeData(
-    style: ButtonStyle(
-      backgroundColor: WidgetStatePropertyAll<Color>(harvestGold),
-      padding: WidgetStateProperty.all<EdgeInsets>(
-        EdgeInsets.symmetric(vertical: elevatedButtonPadding),
-      ),
-      shape: WidgetStateProperty.all<OutlinedBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-      ),
-    ),
-  );
+  static ElevatedButtonThemeData eerieBlackElevatedButtonThemeData = ElevationButtonThemeConfig.elevatedButtonThemeData(eerieBlack);
+  static ElevatedButtonThemeData calPolyPomonaGreenElevatedButtonThemeData = ElevationButtonThemeConfig.elevatedButtonThemeData(calPolyPomonaGreen);
+  static ElevatedButtonThemeData metallicRedElevatedButtonThemeData = ElevationButtonThemeConfig.elevatedButtonThemeData(metallicRed);
+  static ElevatedButtonThemeData harvestGoldElevatedButtonThemeData = ElevationButtonThemeConfig.elevatedButtonThemeData(harvestGold);
 
   static ThemeData theme = ThemeData(
-    primaryColor: isabelline,
+    primaryColor: offWhite,
     colorScheme: ColorScheme(
       brightness: Brightness.light,
       primary: eerieBlack,
@@ -78,13 +25,13 @@ class ThemeDataUtil {
       surface: eerieBlack,
       onSurface: eerieBlack,
     ),
-    scaffoldBackgroundColor: isabelline,
+    scaffoldBackgroundColor: offWhite,
     textTheme: textTheme,
     extensions: [
       ExtensionsThemeData(
         eerieBlack: eerieBlack,
         calPolyPomonaGreen: calPolyPomonaGreen,
-        isabelline: isabelline,
+        offWhite: offWhite,
         metallicRed: metallicRed,
         harvestGold: harvestGold,
         eerieBlackElevatedButtonThemeData: eerieBlackElevatedButtonThemeData,

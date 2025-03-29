@@ -51,7 +51,7 @@ class DropdownWidget extends StatelessWidget {
         DropdownButtonFormField(
           isDense: true,
           isExpanded: true,
-          dropdownColor: themeData.isabelline,
+          dropdownColor: themeData.offWhite,
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
@@ -72,7 +72,7 @@ class DropdownWidget extends StatelessWidget {
               ),
             ),
             filled: true,
-            fillColor: themeData.isabelline,
+            fillColor: themeData.offWhite,
           ),
           icon: Icon(
             Icons.arrow_drop_down_rounded,

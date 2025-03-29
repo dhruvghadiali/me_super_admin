@@ -5,7 +5,7 @@ class ExtensionsThemeData extends ThemeExtension<ExtensionsThemeData> {
   const ExtensionsThemeData({
     required this.eerieBlack,
     required this.calPolyPomonaGreen,
-    required this.isabelline,
+    required this.offWhite,
     required this.metallicRed,
     required this.harvestGold,
     required this.eerieBlackElevatedButtonThemeData,
@@ -16,7 +16,7 @@ class ExtensionsThemeData extends ThemeExtension<ExtensionsThemeData> {
 
   final Color? eerieBlack;
   final Color? calPolyPomonaGreen;
-  final Color? isabelline;
+  final Color? offWhite;
   final Color? metallicRed;
   final Color? harvestGold;
   final ElevatedButtonThemeData? eerieBlackElevatedButtonThemeData;
@@ -28,7 +28,7 @@ class ExtensionsThemeData extends ThemeExtension<ExtensionsThemeData> {
   ExtensionsThemeData copyWith({
     Color? eerieBlack,
     Color? calPolyPomonaGreen,
-    Color? isabelline,
+    Color? offWhite,
     Color? metallicRed,
     Color? harvestGold,
     ElevatedButtonThemeData? eerieBlackElevatedButtonThemeData,
@@ -39,7 +39,7 @@ class ExtensionsThemeData extends ThemeExtension<ExtensionsThemeData> {
     return ExtensionsThemeData(
       eerieBlack: eerieBlack ?? eerieBlack,
       calPolyPomonaGreen: calPolyPomonaGreen ?? calPolyPomonaGreen,
-      isabelline: isabelline ?? isabelline,
+      offWhite: offWhite ?? offWhite,
       metallicRed: metallicRed ?? metallicRed,
       harvestGold: harvestGold ?? harvestGold,
       eerieBlackElevatedButtonThemeData: eerieBlackElevatedButtonThemeData ??
@@ -64,7 +64,7 @@ class ExtensionsThemeData extends ThemeExtension<ExtensionsThemeData> {
       eerieBlack: Color.lerp(eerieBlack, other.eerieBlack, t),
       calPolyPomonaGreen:
           Color.lerp(calPolyPomonaGreen, other.calPolyPomonaGreen, t),
-      isabelline: Color.lerp(isabelline, other.isabelline, t),
+      offWhite: Color.lerp(offWhite, other.offWhite, t),
       metallicRed: Color.lerp(metallicRed, other.metallicRed, t),
       harvestGold: Color.lerp(harvestGold, other.harvestGold, t),
       eerieBlackElevatedButtonThemeData: ElevatedButtonThemeData.lerp(

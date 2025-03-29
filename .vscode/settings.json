@@ -1,0 +1,33 @@
+{
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            // Variables
+            {
+                "scope": "variable",
+                "settings": {
+                    "foreground": "#5DB996",
+                    "fontStyle": "italic"
+                }
+            },
+            // Data types
+            {
+                "scope": "source.dart",
+                "settings": {
+                    "foreground": "#F0BB78", 
+                    "fontStyle": "italic"
+                }
+            },
+            // Function name
+            {
+                "scope": "entity.name.function",
+                "settings": {
+                    "foreground": "#FA7070", 
+                    "fontStyle": "italic bold"
+                }
+            },            
+        ]
+    },
+    "cSpell.words": [
+        "prefs"
+    ]
+}

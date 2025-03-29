@@ -13,10 +13,10 @@ class Snackbar extends GetxController {
       title,
       message,
       backgroundColor: backgroundColor(appSnackbarStatus),
-      colorText: ThemeDataUtil.isabelline,
+      colorText: ThemeDataUtil.offWhite,
       icon: Icon(
         setSnackbarIcon(appSnackbarStatus),
-        color: ThemeDataUtil.isabelline,
+        color: ThemeDataUtil.offWhite,
         size: 45,
       ),
       margin: const EdgeInsets.all(20.0),

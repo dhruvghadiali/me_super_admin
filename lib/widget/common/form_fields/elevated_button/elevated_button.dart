@@ -56,7 +56,7 @@ class ElevatedButtonWidget extends StatelessWidget {
           child: Text(
             buttonText,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: themeData.isabelline,
+                  color: themeData.offWhite,
                 ),
           ),
         ),
