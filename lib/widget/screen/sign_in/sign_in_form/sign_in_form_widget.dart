@@ -1,0 +1,143 @@
+import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'package:me_super_admin/app_enum.dart';
+import 'package:me_super_admin/model/authentication/sign_in.dart';
+import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
+import 'package:me_super_admin/controller/authentication/sign_in_controller.dart';
+import 'package:me_super_admin/widget/common/loader/api_request_loader_widget.dart';
+import 'package:me_super_admin/widget/common/form_fields/elevated_button/elevated_button.dart';
+import 'package:me_super_admin/widget/common/form_fields/text_fields/floating_text_field_widget.dart';
+
+class SignInFormWidget extends StatelessWidget {
+  SignInFormWidget({super.key});
+
+  final SignInController signInController = Get.put(SignInController());
+  final TextEditingController usernameTextEditingController =
+      TextEditingController();
+  final TextEditingController passwordTextEditingController =
+      TextEditingController();
+
+  void onPressed() {
+    signInController.signIn(
+      SignIn(
+        username: usernameTextEditingController.text,
+        password: passwordTextEditingController.text,
+      ),
+    );
+  }
+
+  void onUsernameChange(String value) {
+    usernameTextEditingController.text = value;
+    usernameTextEditingController.selection = TextSelection.collapsed(
+      offset: usernameTextEditingController.text.length,
+    );
+  }
+
+  void onPasswordChange(String value) {
+    passwordTextEditingController.text = value;
+    passwordTextEditingController.selection = TextSelection.collapsed(
+      offset: passwordTextEditingController.text.length,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    ExtensionsThemeData themeData =
+        Theme.of(context).extension<ExtensionsThemeData>()!;
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          vertical: 40,
+          horizontal: 25,
+        ),
+        decoration: BoxDecoration(
+          color: themeData.offWhite,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(50),
+            topRight: Radius.circular(50),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: themeData.offWhite as Color,
+              blurRadius: 10.0,
+              blurStyle: BlurStyle.outer,
+            ),
+          ],
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 30),
+                child: Text(
+                  appLocalizations.signInFormTitle,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+              ),
+              GetBuilder<SignInController>(
+                builder: (signInControllerContext) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 30),
+                        child: FloatingTextFieldWidget(
+                          appColorScheme: AppColorScheme.primary,
+                          controller: usernameTextEditingController,
+                          labelText: appLocalizations.usernameLabelText,
+                          showError:
+                              signInControllerContext.showUsernameTextfieldError,
+                          textInputAction: TextInputAction.next,
+                          onChange: (String value) => onUsernameChange(value),
+                          onSubmitted: (String value) =>
+                              signInControllerContext.usernameValidation(
+                            usernameTextEditingController.text,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 30),
+                        child: FloatingTextFieldWidget(
+                          appColorScheme: AppColorScheme.primary,
+                          controller: passwordTextEditingController,
+                          labelText: appLocalizations.passwordLabelText,
+                          showError:
+                              signInControllerContext.showPasswordTextfieldError,
+                          textInputAction: TextInputAction.done,
+                          obscureText: true,
+                          onChange: (String value) => onPasswordChange(value),
+                          onSubmitted: (String value) =>
+                              signInControllerContext.passwordValidation(
+                            passwordTextEditingController.text,
+                          ),
+                        ),
+                      ),
+                      signInControllerContext.isLoader
+                          ? const ApiRequestLoaderWidget(
+                              appColorScheme: AppColorScheme.primary,
+                            )
+                          : Container(),
+                      Container(
+                        margin: const EdgeInsets.only(top: 150),
+                        child: ElevatedButtonWidget(
+                          appColorScheme: AppColorScheme.primary,
+                          buttonText: appLocalizations.signInButtonText,
+                          disabled: signInControllerContext.isLoader,
+                          onPressed: () => onPressed(),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
