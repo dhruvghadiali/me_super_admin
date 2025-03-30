@@ -6,6 +6,7 @@ import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/model/authentication/sign_in.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 import 'package:me_super_admin/controller/authentication/sign_in_controller.dart';
+import 'package:me_super_admin/widget/common/loader/api_request_loader_widget.dart';
 import 'package:me_super_admin/widget/common/form_fields/elevated_button/elevated_button.dart';
 import 'package:me_super_admin/widget/common/form_fields/text_fields/floating_text_field_widget.dart';
 
@@ -28,17 +29,17 @@ class SignInFormWidget extends StatelessWidget {
   }
 
   void onUsernameChange(String value) {
-    // usernameTextEditingController.text = value;
-    // usernameTextEditingController.selection = TextSelection.collapsed(
-    //   offset: usernameTextEditingController.text.length,
-    // );
+    usernameTextEditingController.text = value;
+    usernameTextEditingController.selection = TextSelection.collapsed(
+      offset: usernameTextEditingController.text.length,
+    );
   }
 
   void onPasswordChange(String value) {
-    // passwordTextEditingController.text = value;
-    // passwordTextEditingController.selection = TextSelection.collapsed(
-    //   offset: passwordTextEditingController.text.length,
-    // );
+    passwordTextEditingController.text = value;
+    passwordTextEditingController.selection = TextSelection.collapsed(
+      offset: passwordTextEditingController.text.length,
+    );
   }
 
   @override
@@ -77,7 +78,7 @@ class SignInFormWidget extends StatelessWidget {
                 ),
               ),
               GetBuilder<SignInController>(
-                builder: (loginControllerContext) {
+                builder: (signInControllerContext) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -89,11 +90,11 @@ class SignInFormWidget extends StatelessWidget {
                           controller: usernameTextEditingController,
                           labelText: appLocalizations.usernameLabelText,
                           showError:
-                              loginControllerContext.showUsernameTextfieldError,
+                              signInControllerContext.showUsernameTextfieldError,
                           textInputAction: TextInputAction.next,
                           onChange: (String value) => onUsernameChange(value),
                           onSubmitted: (String value) =>
-                              loginControllerContext.usernameValidation(
+                              signInControllerContext.usernameValidation(
                             usernameTextEditingController.text,
                           ),
                         ),
@@ -105,27 +106,27 @@ class SignInFormWidget extends StatelessWidget {
                           controller: passwordTextEditingController,
                           labelText: appLocalizations.passwordLabelText,
                           showError:
-                              loginControllerContext.showPasswordTextfieldError,
+                              signInControllerContext.showPasswordTextfieldError,
                           textInputAction: TextInputAction.done,
                           obscureText: true,
                           onChange: (String value) => onPasswordChange(value),
                           onSubmitted: (String value) =>
-                              loginControllerContext.passwordValidation(
+                              signInControllerContext.passwordValidation(
                             passwordTextEditingController.text,
                           ),
                         ),
                       ),
-                      // loginControllerContext.isLoader
-                      //     ? const ApiRequestLoaderWidget(
-                      //         appColorScheme: AppColorScheme.primary,
-                      //       )
-                      //     : Container(),
+                      signInControllerContext.isLoader
+                          ? const ApiRequestLoaderWidget(
+                              appColorScheme: AppColorScheme.primary,
+                            )
+                          : Container(),
                       Container(
                         margin: const EdgeInsets.only(top: 150),
                         child: ElevatedButtonWidget(
                           appColorScheme: AppColorScheme.primary,
                           buttonText: appLocalizations.signInButtonText,
-                          disabled: loginControllerContext.isLoader,
+                          disabled: signInControllerContext.isLoader,
                           onPressed: () => onPressed(),
                         ),
                       ),

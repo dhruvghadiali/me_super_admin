@@ -6,7 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:me_super_admin/screens/sign_in/sign_in_screen.dart';
 import 'package:me_super_admin/utils/theme_data/theme_data_util.dart';
 import 'package:me_super_admin/screens/dashboard/dashboard_screen.dart';
-
+  
 void main() async {
   await dotenv.load(fileName: ".env");
   runApp(const MeSuperAdminApp());
@@ -25,7 +25,7 @@ class MeSuperAdminApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const SignInScreen(),
-        '/login': (context) => const SignInScreen(),
+        '/sign-in': (context) => const SignInScreen(),
         '/dashboard': (context) => const DashboardScreen(),
       },
     );
