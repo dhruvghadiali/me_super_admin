@@ -7,9 +7,12 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ScaffoldWidget(
+    return ScaffoldWidget(
       title: 'Dashboard',
-      child: Text('Dashboard Screen'),
+      child: Container(
+        alignment: Alignment.center,
+        child: const Text('Dashboard'),
+      ),
     );
   }
 }

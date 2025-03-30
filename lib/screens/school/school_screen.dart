@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:me_super_admin/widget/screen/school/school_widget.dart';
 import 'package:me_super_admin/widget/common/scaffold/scaffold_widget.dart';
 
 class SchoolScreen extends StatelessWidget {
@@ -9,7 +10,7 @@ class SchoolScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ScaffoldWidget(
       title: 'Schools',
-      child: Text('Schools Screen'),
+      child: SchoolWidget(),
     );
   }
 }
