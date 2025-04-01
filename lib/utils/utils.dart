@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:me_super_admin/model/authentication/user.dart';
 
 class Utils {

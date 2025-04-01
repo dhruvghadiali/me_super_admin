@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tab_container/tab_container.dart';
 
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
+import 'package:me_super_admin/widget/screen/school/school_form/school_form_widget.dart';
 import 'package:me_super_admin/widget/screen/school/school_list/school_list_widget.dart';
 import 'package:me_super_admin/widget/common/tab/tab_container/tab_container_widget.dart';
 
@@ -76,7 +77,7 @@ class _SchoolWidgetState extends State<SchoolWidget>
       children: [
         TabContainerWidget(child: SchoolListWidget(isActive: true)),
         TabContainerWidget(child: SchoolListWidget(isActive: false)),
-        TabContainerWidget(child: Text('Add School')),
+        TabContainerWidget(child: SchoolFormWidget()),
       ],
     );
   }

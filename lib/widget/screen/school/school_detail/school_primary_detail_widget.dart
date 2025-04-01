@@ -20,7 +20,7 @@ class SchoolPrimaryDetailWidget extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: Theme.of(
             context,
-          ).textTheme.headlineMedium!.copyWith(color: themeData.offWhite),
+          ).textTheme.headlineSmall!.copyWith(color: themeData.offWhite),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 5),
