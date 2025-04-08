@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/model/drawer_item/drawer_item.dart';
 
 List<DrawerItem> drawerItems = [
@@ -114,21 +116,15 @@ List<DrawerItem> drawerItems = [
     route: '',
     submenu: [
       DrawerItem(
-        title: 'Active School Types',
+        title: 'School Types',
         icon: Icons.check_circle,
-        route: '/school-types/active',
-        submenu: [],
-      ),
-      DrawerItem(
-        title: 'Inactive School Types',
-        icon: Icons.remove_circle,
-        route: '/school-types/inactive',
+        route: RoutePaths.schoolTypes,
         submenu: [],
       ),
       DrawerItem(
         title: 'Register School Types',
         icon: Icons.add_circle,
-        route: '/school-types/register',
+        route: RoutePaths.schoolTypesRegistration,
         submenu: [],
       ),
     ],
@@ -208,7 +204,7 @@ List<DrawerItem> drawerItems = [
       ),
     ],
   ),
-   DrawerItem(
+  DrawerItem(
     title: 'Manage Zipcodes',
     icon: Icons.menu,
     route: '',
