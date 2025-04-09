@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:me_super_admin/model/school_type/school_type.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
+import 'package:me_super_admin/widget/common/container/audit_trail_widget.dart';
 
 class SchoolTypeCardWidget extends StatelessWidget {
   const SchoolTypeCardWidget({super.key, required this.schoolType});
@@ -34,11 +35,15 @@ class SchoolTypeCardWidget extends StatelessWidget {
                 ).textTheme.titleMedium!.copyWith(color: themeData.offWhite),
               ),
               Divider(color: themeData.offWhite, thickness: 0.4),
-              Text(
-                "Created At:  ${DateFormat('dd MMM yyyy').format(schoolType.createdAt)}",
-                style: Theme.of(
-                  context,
-                ).textTheme.labelSmall!.copyWith(color: themeData.offWhite),
+              AuditTrailWidget(
+                audioUserInfo: "Created By:  ${schoolType.createdBy}",
+                auditDateTimeInfo:
+                    "Created At:  ${DateFormat('dd MMM yyyy hh:mm a').format(schoolType.createdAt)}",
+              ),
+              AuditTrailWidget(
+                audioUserInfo: "Updated By:  ${schoolType.updatedBy}",
+                auditDateTimeInfo:
+                    "Updated At:  ${DateFormat('dd MMM yyyy hh:mm a').format(schoolType.updatedAt)}",
               ),
             ],
           ),

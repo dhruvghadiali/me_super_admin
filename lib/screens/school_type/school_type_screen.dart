@@ -1,8 +1,10 @@
-
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
+import 'package:me_super_admin/app_enum.dart';
+import 'package:me_super_admin/widget/common/loader/loader_widget.dart';
 import 'package:me_super_admin/widget/common/scaffold/scaffold_widget.dart';
+import 'package:me_super_admin/widget/common/container/no_data_found_widget.dart';
 import 'package:me_super_admin/controller/school_type/school_type_controller.dart';
 import 'package:me_super_admin/widget/screen/school_type/school_type_list_view_widget.dart';
 
@@ -14,8 +16,9 @@ class SchoolTypeScreen extends StatefulWidget {
 }
 
 class _SchoolTypeScreenState extends State<SchoolTypeScreen> {
-
-  final SchoolTypeController schoolTypeController = Get.put(SchoolTypeController());
+  final SchoolTypeController schoolTypeController = Get.put(
+    SchoolTypeController(),
+  );
 
   @override
   void initState() {
@@ -23,7 +26,7 @@ class _SchoolTypeScreenState extends State<SchoolTypeScreen> {
     getSchoolTypes();
     super.initState();
   }
-  
+
   Future<void> getSchoolTypes() async {
     await Future.delayed(Duration.zero);
     schoolTypeController.getSchoolTypes();
@@ -33,11 +36,19 @@ class _SchoolTypeScreenState extends State<SchoolTypeScreen> {
   Widget build(BuildContext context) {
     return GetBuilder<SchoolTypeController>(
       builder: (schoolTypeControllerContext) {
-        return  ScaffoldWidget(
+        return ScaffoldWidget(
           title: 'School Types',
-          child: SchoolTypeListViewWidget(onRefresh: () => getSchoolTypes(), schoolTypes: schoolTypeControllerContext.schoolTypes,),
+          child:
+              schoolTypeControllerContext.isLoader
+                  ? LoaderWidget(appColorScheme: AppColorScheme.primary)
+                  : schoolTypeControllerContext.schoolTypes.isEmpty
+                  ? NoDataFoundWidget()
+                  : SchoolTypeListViewWidget(
+                    onRefresh: () => getSchoolTypes(),
+                    schoolTypes: schoolTypeControllerContext.schoolTypes,
+                  ),
         );
-      }
+      },
     );
   }
 }

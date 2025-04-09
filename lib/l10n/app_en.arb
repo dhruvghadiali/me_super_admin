@@ -41,5 +41,11 @@
   "signInButtonText" : "SIGNIN",
   "@signInButtonText": {},
   "registerSchoolButtonText" : "REGISTER SCHOOL",
-  "@registerSchoolButtonText": {}
+  "@registerSchoolButtonText": {},
+  "cancelButtonText" : "Cancel",
+  "@cancelButtonText": {},
+  "deleteButtonText" : "Delete",
+  "@deleteButtonText": {},
+  "restoreButtonText" : "Restore",
+  "@restoreButtonText": {}
 }

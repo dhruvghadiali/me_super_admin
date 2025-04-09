@@ -6,15 +6,18 @@ import 'package:me_super_admin/utils/snackbar/snackbar.dart';
 import 'package:me_super_admin/service/http/http_service.dart';
 import 'package:me_super_admin/model/school_type/school_type.dart';
 import 'package:me_super_admin/model/http_service/get_http_service.dart';
+import 'package:me_super_admin/model/http_service/delete_http_service.dart';
 import 'package:me_super_admin/model/http_service/http_response_service.dart';
 import 'package:me_super_admin/model/http_service/mock_http_api_property_service.dart';
 
 class SchoolTypeController extends GetxController {
+  String snackbarTitle = "School Type Alert";
   bool isLoader = false;
   List<SchoolType> schoolTypes = [];
 
   Future<void> getSchoolTypes() async {
     String authToken = await Utils.getAuthToken();
+    schoolTypes = [];
     isLoader = true;
     update();
 
@@ -39,7 +42,44 @@ class SchoolTypeController extends GetxController {
     } else {
       isLoader = false;
       Snackbar.getSnackbar(
-        title: 'School Types Issue',
+        title: snackbarTitle,
+        message: response.message,
+        appSnackbarStatus: AppSnackbarStatus.error,
+      );
+    }
+
+    update();
+  }
+
+  Future<void> deleteSchoolTypes(String id) async {
+    String authToken = await Utils.getAuthToken();
+    isLoader = true;
+    update();
+
+    DeleteHttpService deleteHttpService = DeleteHttpService(
+      endPoint: 'super-admin/school-types/$id',
+      headers: {"Authorization": 'Bearer $authToken'},
+      mockHttpAPIProperty: MockHttpAPIPropertyService(
+        endPoint: 'assets/mock_data/school_types/school_types_200.json',
+        statusCode: 200,
+      ),
+    );
+
+    HttpResponseService response = await HttpService.deleteRequest(deleteHttpService);
+
+    if (response.appHttpRequestStatus ==
+        AppHttpRequestStatus.isSuccessfullyServiced) {
+      isLoader = false;
+      Snackbar.getSnackbar(
+        title: snackbarTitle,
+        message: response.message,
+        appSnackbarStatus: AppSnackbarStatus.success,
+      );
+      getSchoolTypes();
+    } else {
+      isLoader = false;
+      Snackbar.getSnackbar(
+        title: snackbarTitle,
         message: response.message,
         appSnackbarStatus: AppSnackbarStatus.error,
       );
