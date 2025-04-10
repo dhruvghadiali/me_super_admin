@@ -7,8 +7,8 @@ import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 import 'package:me_super_admin/widget/common/alert/delete_alert_widget.dart';
 import 'package:me_super_admin/controller/school_type/school_type_controller.dart';
 import 'package:me_super_admin/widget/screen/school_type/school_type_card_widget.dart';
-import 'package:me_super_admin/widget/common/slidable_action/delete_slidable_action_widget.dart';
 import 'package:me_super_admin/widget/common/slidable_action/edit_slidable_action_widget.dart';
+import 'package:me_super_admin/widget/common/slidable_action/delete_slidable_action_widget.dart';
 
 class SchoolTypeListViewWidget extends StatelessWidget {
   const SchoolTypeListViewWidget({
@@ -45,8 +45,10 @@ class SchoolTypeListViewWidget extends StatelessWidget {
     required BuildContext context,
     required SchoolType schoolType,
   }) async {
-    // final CityController cityController = Get.put(CityController());
-    // cityController.navigateToCityForm(cityDetail: cityDetail);
+    final SchoolTypeController schoolTypeController = Get.put(
+      SchoolTypeController(),
+    );
+    schoolTypeController.setSchoolTypeForm(schoolType);
   }
 
   @override

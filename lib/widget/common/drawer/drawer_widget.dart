@@ -1,16 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/drawer_items.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
+import 'package:me_super_admin/controller/school_type/school_type_controller.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
+
+  void onDrawerClick(BuildContext context, String route) {
+    switch (route) {
+      case RoutePaths.schoolTypesRegistration || RoutePaths.schoolTypes:
+        SchoolTypeController schoolTypeController = Get.put(
+          SchoolTypeController(),
+        );
+        schoolTypeController.resetSchoolTypeForm();
+        break;
+      default:
+        break;
+    }
+    
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      route,
+      (Route<dynamic> route) => false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     ExtensionsThemeData themeData =
         Theme.of(context).extension<ExtensionsThemeData>()!;
-        
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -49,7 +71,7 @@ class DrawerWidget extends StatelessWidget {
                                         ?.copyWith(color: themeData.offWhite),
                                   ),
                                   onTap:
-                                      () => Navigator.pushNamed(
+                                      () => onDrawerClick(
                                         context,
                                         submenuItem.route,
                                       ),
@@ -65,7 +87,7 @@ class DrawerWidget extends StatelessWidget {
                         style: Theme.of(context).textTheme.titleMedium
                             ?.copyWith(color: themeData.offWhite),
                       ),
-                      onTap: () => Navigator.pushNamed(context, item.route),
+                      onTap: () => onDrawerClick(context, item.route),
                     ),
           ),
         ],

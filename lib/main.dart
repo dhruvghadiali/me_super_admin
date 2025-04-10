@@ -11,6 +11,7 @@ import 'package:me_super_admin/screens/fee_type/fee_type_screen.dart';
 import 'package:me_super_admin/utils/theme_data/theme_data_util.dart';
 import 'package:me_super_admin/screens/dashboard/dashboard_screen.dart';
 import 'package:me_super_admin/screens/school_type/school_type_screen.dart';
+import 'package:me_super_admin/screens/school_type/school_type_register_screen.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -36,7 +37,7 @@ class MeSuperAdminApp extends StatelessWidget {
         '/faculties': (context) => const FacilityScreen(),
         '/fees-types': (context) => const FeeTypeScreen(),
         RoutePaths.schoolTypes: (context) => const SchoolTypeScreen(),
-        RoutePaths.schoolTypesRegistration: (context) => const FeeTypeScreen(),
+        RoutePaths.schoolTypesRegistration: (context) => SchoolTypeRegisterScreen(),
       },
     );
   }

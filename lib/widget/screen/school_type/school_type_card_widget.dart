@@ -30,9 +30,10 @@ class SchoolTypeCardWidget extends StatelessWidget {
             children: [
               Text(
                 schoolType.schoolType.toUpperCase(),
-                style: Theme.of(
-                  context,
-                ).textTheme.titleMedium!.copyWith(color: themeData.offWhite),
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                  color: themeData.offWhite,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Divider(color: themeData.offWhite, thickness: 0.4),
               AuditTrailWidget(
