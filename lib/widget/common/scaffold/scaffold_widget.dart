@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
+import 'package:me_super_admin/widget/common/drawer/drawer_widget.dart';
 
 class ScaffoldWidget extends StatelessWidget {
   const ScaffoldWidget({super.key, required this.title, required this.child});
@@ -14,53 +15,7 @@ class ScaffoldWidget extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(color: themeData.offWhite),
-              child: Text(''),
-            ),
-            ListTile(
-              title: Text(
-                'Dashboard',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleMedium?.copyWith(color: themeData.offWhite),
-              ),
-              onTap: () => Navigator.pushNamed(context, "/dashboard"),
-            ),
-            ListTile(
-              title: Text(
-                'Schools',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleMedium?.copyWith(color: themeData.offWhite),
-              ),
-              onTap: () => Navigator.pushNamed(context, "/schools"),
-            ),
-            ListTile(
-              title: Text(
-                'Faculties',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleMedium?.copyWith(color: themeData.offWhite),
-              ),
-              onTap: () => Navigator.pushNamed(context, "/faculties"),
-            ),
-            ListTile(
-              title: Text(
-                'Fees Types',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleMedium?.copyWith(color: themeData.offWhite),
-              ),
-              onTap: () => Navigator.pushNamed(context, "/fees-types"),
-            ),
-          ],
-        ),
-      ),
+      drawer: DrawerWidget(),
       appBar: AppBar(
         iconTheme: IconThemeData(color: themeData.offWhite),
         title: Text(
