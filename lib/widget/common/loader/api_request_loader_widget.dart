@@ -5,10 +5,7 @@ import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 
 class ApiRequestLoaderWidget extends StatelessWidget {
-  const ApiRequestLoaderWidget({
-    super.key,
-    required this.appColorScheme,
-  });
+  const ApiRequestLoaderWidget({super.key, required this.appColorScheme});
 
   final AppColorScheme appColorScheme;
 
@@ -47,13 +44,20 @@ class ApiRequestLoaderWidget extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              color: themeData.offWhite,
-              margin: const EdgeInsets.only(right: 10),
-              padding: const EdgeInsets.only(
-                left: 10,
-                top: 5,
-                bottom: 5,
+              decoration: BoxDecoration(
+                color: themeData.offWhite,
+                border: Border.all(
+                  color:
+                      setLoaderColor(
+                            context: context,
+                            appColorScheme: appColorScheme,
+                          )
+                          as Color,
+                  width: 1,
+                ),
               ),
+              margin: const EdgeInsets.only(right: 10),
+              padding: const EdgeInsets.only(left: 10, top: 5, bottom: 5),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

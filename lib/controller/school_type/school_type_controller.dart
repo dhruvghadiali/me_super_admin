@@ -22,13 +22,6 @@ class SchoolTypeController extends GetxController {
   SchoolType schoolType = SchoolType.defaultValues();
   List<SchoolType> schoolTypes = [];
 
-  final schoolTypeValidator =
-      ValidationBuilder()
-          .required(ValidationMessage.schoolTypeNameRequired)
-          .minLength(2, ValidationMessage.schoolTypeNameMinLength)
-          .maxLength(100, ValidationMessage.schoolTypeNameMaxLength)
-          .build();
-
   void resetSchoolTypeForm() {
     schoolType = SchoolType.defaultValues();
     update();
@@ -43,18 +36,29 @@ class SchoolTypeController extends GetxController {
     }
   }
 
+  String? schoolTypeValidator(String? value) {
+    return ValidationBuilder(
+          requiredMessage: ValidationMessage.schoolTypeNameRequired,
+        )
+        .required(ValidationMessage.schoolTypeNameRequired)
+        .minLength(2, ValidationMessage.schoolTypeNameMinLength)
+        .maxLength(100, ValidationMessage.schoolTypeNameMaxLength)
+        .build()(value?.trim());
+  }
+
   void onSchoolTypeChange(String value) {
-    schoolType = schoolType.copyWith(schoolType: value);
+    schoolType = schoolType.copyWith(schoolType: value.trim());
     update();
   }
 
   void onSchoolTypeSubmitted(
     String value,
     GlobalKey<FormFieldState> formFieldKey,
+    GlobalKey<FormState> formKey,
   ) {
     schoolType = schoolType.copyWith(schoolType: value);
     formFieldKey.currentState?.validate();
-    update();
+    onSubmitForm(formKey);
   }
 
   void onSubmitForm(GlobalKey<FormState> formKey) async {

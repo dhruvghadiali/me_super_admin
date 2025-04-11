@@ -37,6 +37,15 @@ class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
     super.initState();
   }
 
+  onSchoolTypeTextFieldSubmit(BuildContext context, String value) {
+    FocusScope.of(context).unfocus();
+    schoolTypeController.onSchoolTypeSubmitted(
+      value,
+      _schoolTypeFieldKey,
+      _formKey,
+    );
+  }
+
   onSubmitForm(BuildContext context) {
     FocusScope.of(context).unfocus();
     schoolTypeController.onSubmitForm(_formKey);
@@ -85,11 +94,8 @@ class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
                             (String value) => schoolTypeControllerContext
                                 .onSchoolTypeChange(value),
                         onFieldSubmitted:
-                            (String value) => schoolTypeControllerContext
-                                .onSchoolTypeSubmitted(
-                                  value,
-                                  _schoolTypeFieldKey,
-                                ),
+                            (String value) =>
+                                onSchoolTypeTextFieldSubmit(context, value),
                       ),
                     ),
                     schoolTypeControllerContext.isLoader
