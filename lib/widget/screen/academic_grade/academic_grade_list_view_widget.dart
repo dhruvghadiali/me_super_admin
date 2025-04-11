@@ -2,30 +2,30 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import 'package:me_super_admin/model/school_type/school_type.dart';
+import 'package:me_super_admin/model/academic_grade/academic_grade.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 import 'package:me_super_admin/widget/common/alert/delete_alert_widget.dart';
-import 'package:me_super_admin/controller/school_type/school_type_controller.dart';
-import 'package:me_super_admin/widget/screen/school_type/school_type_card_widget.dart';
+import 'package:me_super_admin/controller/academic_grade/academic_grade_controller.dart';
+import 'package:me_super_admin/widget/screen/academic_grade/academic_grade_card_widget.dart';
 import 'package:me_super_admin/widget/common/slidable_action/edit_slidable_action_widget.dart';
 import 'package:me_super_admin/widget/common/slidable_action/delete_slidable_action_widget.dart';
 
-class SchoolTypeListViewWidget extends StatelessWidget {
-  const SchoolTypeListViewWidget({
+class AcademicGradeListViewWidget extends StatelessWidget {
+  const AcademicGradeListViewWidget({
     super.key,
     required this.onRefresh,
-    required this.schoolTypes,
+    required this.academicGrades,
   });
 
   final Function onRefresh;
-  final List<SchoolType> schoolTypes;
+  final List<AcademicGrade> academicGrades;
 
-  Future<void> deleteSchoolType({
+  Future<void> deleteAcademicGrade({
     required BuildContext context,
-    required SchoolType schoolType,
+    required AcademicGrade academicGrade,
   }) async {
-    final SchoolTypeController schoolTypeController = Get.put(
-      SchoolTypeController(),
+    final AcademicGradeController academicGradeController = Get.put(
+      AcademicGradeController(),
     );
     showDialog(
       context: context,
@@ -33,7 +33,7 @@ class SchoolTypeListViewWidget extends StatelessWidget {
       builder: (BuildContext context) {
         return DeleteAlertWidget(
           onDelete: () {
-            schoolTypeController.deleteSchoolType(schoolType.id);
+            academicGradeController.deleteAcademicGrade(academicGrade.id);
             Navigator.of(context).pop();
           },
         );
@@ -41,14 +41,14 @@ class SchoolTypeListViewWidget extends StatelessWidget {
     );
   }
 
-  Future<void> editSchoolType({
+  Future<void> editAcademicGrade({
     required BuildContext context,
-    required SchoolType schoolType,
+    required AcademicGrade academicGrade,
   }) async {
-    final SchoolTypeController schoolTypeController = Get.put(
-      SchoolTypeController(),
+    final AcademicGradeController academicGradeController = Get.put(
+      AcademicGradeController(),
     );
-    schoolTypeController.setSchoolTypeForm(schoolType);
+    academicGradeController.setAcademicGradeForm(academicGrade);
   }
 
   @override
@@ -62,7 +62,7 @@ class SchoolTypeListViewWidget extends StatelessWidget {
         onRefresh: () => onRefresh(),
         color: themeData.offWhite,
         child: ListView.builder(
-          itemCount: schoolTypes.length,
+          itemCount: academicGrades.length,
           padding: const EdgeInsets.all(0.0),
           itemBuilder: (BuildContext context, int index) {
             return SizedBox(
@@ -75,21 +75,23 @@ class SchoolTypeListViewWidget extends StatelessWidget {
                   children: [
                     EditSlidableActionWidget(
                       onEdit:
-                          () => editSchoolType(
+                          () => editAcademicGrade(
                             context: context,
-                            schoolType: schoolTypes[index],
+                            academicGrade: academicGrades[index],
                           ),
                     ),
                     DeleteSlidableActionWidget(
                       onDelete:
-                          () => deleteSchoolType(
+                          () => deleteAcademicGrade(
                             context: context,
-                            schoolType: schoolTypes[index],
+                            academicGrade: academicGrades[index],
                           ),
                     ),
                   ],
                 ),
-                child: SchoolTypeCardWidget(schoolType: schoolTypes[index]),
+                child: AcademicGradeCardWidget(
+                  academicGrade: academicGrades[index],
+                ),
               ),
             );
           },

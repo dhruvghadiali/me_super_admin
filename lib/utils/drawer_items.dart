@@ -122,9 +122,9 @@ List<DrawerItem> drawerItems = [
         submenu: [],
       ),
       DrawerItem(
-        title: 'Register School Types',
+        title: 'Add School Types',
         icon: Icons.add_circle,
-        route: RoutePaths.schoolTypesRegistration,
+        route: RoutePaths.schoolTypeForm,
         submenu: [],
       ),
     ],
@@ -135,21 +135,15 @@ List<DrawerItem> drawerItems = [
     route: '',
     submenu: [
       DrawerItem(
-        title: 'Active Academic Grades',
+        title: 'Academic Grades',
         icon: Icons.check_circle,
-        route: '/academic-grades/active',
+        route: RoutePaths.academicGrades,
         submenu: [],
       ),
       DrawerItem(
-        title: 'Inactive Academic Grades',
+        title: 'Add Academic Grades',
         icon: Icons.remove_circle,
-        route: '/academic-grades/inactive',
-        submenu: [],
-      ),
-      DrawerItem(
-        title: 'Register Academic Grades',
-        icon: Icons.add_circle,
-        route: '/academic-grades/register',
+        route: RoutePaths.academicGradeForm,
         submenu: [],
       ),
     ],

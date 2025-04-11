@@ -34,8 +34,10 @@
   "@establishedYearLabelText": {},
   "affiliationNumberLabelText" : "School affiliation number",
   "@affiliationNumberLabelText": {},
-  "schoolTypeLabelText" : "School type",
-  "@schoolTypeLabelText": {},
+  "schoolTypeTextFieldLabelText" : "School type",
+  "@schoolTypeTextFieldLabelText": {},
+  "academicGradeTextFieldLabelText" : "Academic grade",
+  "@academicGradeTextFieldLabelText": {},
   "schoolBoardLabelText" : "School board",
   "@schoolBoardLabelText": {},
   "signInButtonText" : "SIGNIN",
@@ -47,5 +49,7 @@
   "deleteButtonText" : "Delete",
   "@deleteButtonText": {},
   "restoreButtonText" : "Restore",
-  "@restoreButtonText": {}
+  "@restoreButtonText": {},
+  "submitButtonText" : "Submit",
+  "@submitButtonText": {}
 }

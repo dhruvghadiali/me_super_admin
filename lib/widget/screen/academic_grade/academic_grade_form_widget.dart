@@ -4,51 +4,51 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
-import 'package:me_super_admin/controller/school_type/school_type_controller.dart';
 import 'package:me_super_admin/widget/common/loader/api_request_loader_widget.dart';
+import 'package:me_super_admin/controller/academic_grade/academic_grade_controller.dart';
 import 'package:me_super_admin/widget/common/form_fields/elevated_button/elevated_button.dart';
 import 'package:me_super_admin/widget/common/form_fields/text_fields/floating_text_field_widget.dart';
 
-class SchoolTypeFormWidget extends StatefulWidget {
-  const SchoolTypeFormWidget({super.key});
+class AcademicGradeFormWidget extends StatefulWidget {
+  const AcademicGradeFormWidget({super.key});
 
   @override
-  State<SchoolTypeFormWidget> createState() => _SchoolTypeFormWidgetState();
+  State<AcademicGradeFormWidget> createState() => _AcademicGradeFormWidgetState();
 }
 
-class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
+class _AcademicGradeFormWidgetState extends State<AcademicGradeFormWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GlobalKey<FormFieldState> _schoolTypeFieldKey =
+  final GlobalKey<FormFieldState> _academicGradeFieldKey =
       GlobalKey<FormFieldState>();
 
-  final SchoolTypeController schoolTypeController = Get.put(
-    SchoolTypeController(),
+  final AcademicGradeController academicGradeController = Get.put(
+    AcademicGradeController(),
   );
 
-  final TextEditingController schoolTypeTextEditingController =
+  final TextEditingController academicGradeTextEditingController =
       TextEditingController();
 
   @override
   void initState() {
-    if (schoolTypeController.schoolType.id.isNotEmpty) {
-      schoolTypeTextEditingController.text =
-          schoolTypeController.schoolType.schoolType;
+    if (academicGradeController.academicGrade.id.isNotEmpty) {
+      academicGradeTextEditingController.text =
+          academicGradeController.academicGrade.academicGrade;
     }
     super.initState();
   }
 
-  onSchoolTypeTextFieldSubmit(BuildContext context, String value) {
+  onAcademicGradeTextFieldSubmit(BuildContext context, String value) {
     FocusManager.instance.primaryFocus?.unfocus();
-    schoolTypeController.onSchoolTypeSubmitted(
+    academicGradeController.onAcademicGradeSubmitted(
       value,
-      _schoolTypeFieldKey,
+      _academicGradeFieldKey,
       _formKey,
     );
   }
 
   onSubmitForm(BuildContext context) {
     FocusManager.instance.primaryFocus?.unfocus();
-    schoolTypeController.onSubmitForm(_formKey);
+    academicGradeController.onSubmitForm(_formKey);
   }
 
   @override
@@ -74,8 +74,8 @@ class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
           ],
         ),
         child: SingleChildScrollView(
-          child: GetBuilder<SchoolTypeController>(
-            builder: (schoolTypeControllerContext) {
+          child: GetBuilder<AcademicGradeController>(
+            builder: (academicGradeControllerContext) {
               return Form(
                 key: _formKey,
                 child: Column(
@@ -83,22 +83,22 @@ class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
                     Container(
                       margin: const EdgeInsets.only(top: 30),
                       child: FloatingTextFieldWidget(
-                        key: _schoolTypeFieldKey,
+                        key: _academicGradeFieldKey,
                         appColorScheme: AppColorScheme.primary,
-                        controller: schoolTypeTextEditingController,
-                        labelText: appLocalizations.schoolTypeTextFieldLabelText,
+                        controller: academicGradeTextEditingController,
+                        labelText: appLocalizations.academicGradeTextFieldLabelText,
                         textInputAction: TextInputAction.next,
                         validator:
-                            schoolTypeControllerContext.schoolTypeValidator,
+                            academicGradeControllerContext.academicGradeValidator,
                         onChange:
-                            (String value) => schoolTypeControllerContext
-                                .onSchoolTypeChange(value),
+                            (String value) => academicGradeControllerContext
+                                .onAcademicGradeChange(value),
                         onFieldSubmitted:
                             (String value) =>
-                                onSchoolTypeTextFieldSubmit(context, value),
+                                onAcademicGradeTextFieldSubmit(context, value),
                       ),
                     ),
-                    schoolTypeControllerContext.isLoader
+                    academicGradeControllerContext.isLoader
                         ? const ApiRequestLoaderWidget(
                           appColorScheme: AppColorScheme.primary,
                         )
@@ -107,8 +107,8 @@ class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
                       margin: const EdgeInsets.only(top: 30),
                       child: ElevatedButtonWidget(
                         appColorScheme: AppColorScheme.primary,
-                        buttonText: appLocalizations.signInButtonText,
-                        disabled: schoolTypeControllerContext.isLoader,
+                        buttonText: appLocalizations.submitButtonText,
+                        disabled: academicGradeControllerContext.isLoader,
                         onPressed: () => onSubmitForm(context),
                       ),
                     ),

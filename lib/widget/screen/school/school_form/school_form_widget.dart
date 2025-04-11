@@ -199,7 +199,7 @@ class SchoolFormWidget extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 25),
                     child: DropdownWidget(
                       appColorScheme: AppColorScheme.primary,
-                      labelText: appLocalizations.schoolTypeLabelText,
+                      labelText: appLocalizations.schoolTypeTextFieldLabelText,
                       items: [
                         {"value": 'public', "label": 'Public'},
                         {"value": 'private', "label": 'Private'},

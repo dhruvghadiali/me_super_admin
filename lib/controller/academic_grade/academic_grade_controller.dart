@@ -8,7 +8,7 @@ import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/snackbar/snackbar.dart';
 import 'package:me_super_admin/utils/validation_message.dart';
 import 'package:me_super_admin/service/http/http_service.dart';
-import 'package:me_super_admin/model/school_type/school_type.dart';
+import 'package:me_super_admin/model/academic_grade/academic_grade.dart';
 import 'package:me_super_admin/model/http_service/get_http_service.dart';
 import 'package:me_super_admin/model/http_service/put_http_service.dart';
 import 'package:me_super_admin/model/http_service/post_http_service.dart';
@@ -16,72 +16,72 @@ import 'package:me_super_admin/model/http_service/delete_http_service.dart';
 import 'package:me_super_admin/model/http_service/http_response_service.dart';
 import 'package:me_super_admin/model/http_service/mock_http_api_property_service.dart';
 
-class SchoolTypeController extends GetxController {
-  String snackbarTitle = "School Type Alert";
+class AcademicGradeController extends GetxController {
+  String snackbarTitle = "Academic Grade Alert";
   bool isLoader = false;
-  SchoolType schoolType = SchoolType.defaultValues();
-  List<SchoolType> schoolTypes = [];
+  AcademicGrade academicGrade = AcademicGrade.defaultValues();
+  List<AcademicGrade> academicGrades = [];
 
-  void resetSchoolTypeForm() {
-    schoolType = SchoolType.defaultValues();
+  void resetAcademicGradeForm() {
+    academicGrade = AcademicGrade.defaultValues();
     update();
   }
 
-  void setSchoolTypeForm(SchoolType schoolTypeObj) {
-    schoolType = schoolTypeObj;
+  void setAcademicGradeForm(AcademicGrade academicGradeObj) {
+    academicGrade = academicGradeObj;
     update();
 
-    if (schoolType.id.isNotEmpty) {
-      Get.offAllNamed(RoutePaths.schoolTypeForm);
+    if (academicGrade.id.isNotEmpty) {
+      Get.offAllNamed(RoutePaths.academicGradeForm);
     }
   }
 
-  String? schoolTypeValidator(String? value) {
+  String? academicGradeValidator(String? value) {
     return ValidationBuilder(
-          requiredMessage: ValidationMessage.schoolTypeRequired,
+          requiredMessage: ValidationMessage.academicGradeRequired,
         )
-        .required(ValidationMessage.schoolTypeRequired)
-        .minLength(2, ValidationMessage.schoolTypeMinLength)
-        .maxLength(100, ValidationMessage.schoolTypeMaxLength)
+        .required(ValidationMessage.academicGradeRequired)
+        .minLength(2, ValidationMessage.academicGradeMinLength)
+        .maxLength(100, ValidationMessage.academicGradeMaxLength)
         .build()(value?.trim());
   }
 
-  void onSchoolTypeChange(String value) {
-    schoolType = schoolType.copyWith(schoolType: value.trim());
+  void onAcademicGradeChange(String value) {
+    academicGrade = academicGrade.copyWith(academicGrade: value.trim());
     update();
   }
 
-  void onSchoolTypeSubmitted(
+  void onAcademicGradeSubmitted(
     String value,
     GlobalKey<FormFieldState> formFieldKey,
     GlobalKey<FormState> formKey,
   ) {
-    schoolType = schoolType.copyWith(schoolType: value.trim());
+    academicGrade = academicGrade.copyWith(academicGrade: value.trim());
     formFieldKey.currentState?.validate();
     onSubmitForm(formKey);
   }
 
   void onSubmitForm(GlobalKey<FormState> formKey) async {
     if (formKey.currentState?.validate() ?? false) {
-      if (schoolType.id.isEmpty) {
-        await postSchoolType();
+      if (academicGrade.id.isEmpty) {
+        await postAcademicGrade();
       } else {
-        await putSchoolType();
+        await putAcademicGrade();
       }
     }
   }
 
-  Future<void> getSchoolTypes() async {
+  Future<void> getAcademicGrades() async {
     String authToken = await Utils.getAuthToken();
-    schoolTypes = [];
+    academicGrades = [];
     isLoader = true;
     update();
 
     GetHttpService getHttpService = GetHttpService(
-      endPoint: 'super-admin/school-types',
+      endPoint: 'super-admin/academic-grades',
       headers: {"Authorization": 'Bearer $authToken'},
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/school_types/school_types_200.json',
+        endPoint: 'assets/mock_data/academic_grades/academic_grades_200.json',
         statusCode: 200,
       ),
     );
@@ -91,9 +91,11 @@ class SchoolTypeController extends GetxController {
     if (response.appHttpRequestStatus ==
         AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
-      for (var schoolTypeJson in response.data) {
-        final SchoolType schoolTypeObj = SchoolType.fromJson(schoolTypeJson);
-        schoolTypes.add(schoolTypeObj);
+      for (var academicGradeJson in response.data) {
+        final AcademicGrade academicGradeObj = AcademicGrade.fromJson(
+          academicGradeJson,
+        );
+        academicGrades.add(academicGradeObj);
       }
     } else {
       isLoader = false;
@@ -107,17 +109,17 @@ class SchoolTypeController extends GetxController {
     update();
   }
 
-  Future<void> postSchoolType() async {
+  Future<void> postAcademicGrade() async {
     String authToken = await Utils.getAuthToken();
     isLoader = true;
     update();
 
     PostHttpService postHttpService = PostHttpService(
-      endPoint: 'super-admin/school-types',
+      endPoint: 'super-admin/academic-grades',
       headers: {"Authorization": 'Bearer $authToken'},
-      body: schoolType.toJson(),
+      body: academicGrade.toJson(),
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/school_types/school_types_200.json',
+        endPoint: 'assets/mock_data/academic_grades/academic_grades_200.json',
         statusCode: 200,
       ),
     );
@@ -134,7 +136,7 @@ class SchoolTypeController extends GetxController {
         message: response.message,
         appSnackbarStatus: AppSnackbarStatus.success,
       );
-      Get.offAllNamed(RoutePaths.schoolTypes);
+      Get.offAllNamed(RoutePaths.academicGrades);
     } else {
       isLoader = false;
       Snackbar.getSnackbar(
@@ -147,17 +149,17 @@ class SchoolTypeController extends GetxController {
     update();
   }
 
-  Future<void> putSchoolType() async {
+  Future<void> putAcademicGrade() async {
     String authToken = await Utils.getAuthToken();
     isLoader = true;
     update();
 
     PutHttpService putHttpService = PutHttpService(
-      endPoint: 'super-admin/school-types/${schoolType.id}',
+      endPoint: 'super-admin/academic-grades/${academicGrade.id}',
       headers: {"Authorization": 'Bearer $authToken'},
-      body: schoolType.toJson(),
+      body: academicGrade.toJson(),
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/school_types/school_types_200.json',
+        endPoint: 'assets/mock_data/academic_grades/academic_grades_200.json',
         statusCode: 200,
       ),
     );
@@ -172,7 +174,7 @@ class SchoolTypeController extends GetxController {
         message: response.message,
         appSnackbarStatus: AppSnackbarStatus.success,
       );
-      Get.offAllNamed(RoutePaths.schoolTypes);
+      Get.offAllNamed(RoutePaths.academicGrades);
     } else {
       isLoader = false;
       Snackbar.getSnackbar(
@@ -185,16 +187,16 @@ class SchoolTypeController extends GetxController {
     update();
   }
 
-  Future<void> deleteSchoolType(String id) async {
+  Future<void> deleteAcademicGrade(String id) async {
     String authToken = await Utils.getAuthToken();
     isLoader = true;
     update();
 
     DeleteHttpService deleteHttpService = DeleteHttpService(
-      endPoint: 'super-admin/school-types/$id',
+      endPoint: 'super-admin/academic-grades/$id',
       headers: {"Authorization": 'Bearer $authToken'},
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/school_types/school_types_200.json',
+        endPoint: 'assets/mock_data/academic_grades/academic_grades_200.json',
         statusCode: 200,
       ),
     );
@@ -211,7 +213,7 @@ class SchoolTypeController extends GetxController {
         message: response.message,
         appSnackbarStatus: AppSnackbarStatus.success,
       );
-      getSchoolTypes();
+      getAcademicGrades();
     } else {
       isLoader = false;
       Snackbar.getSnackbar(
