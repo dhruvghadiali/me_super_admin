@@ -43,6 +43,7 @@ dependencies:
   flutter_slidable: ^4.0.0
   tab_container: ^3.5.3
   shared_preferences: ^2.5.2
+  form_validator: ^2.1.1
 
 dev_dependencies:
   flutter_test:

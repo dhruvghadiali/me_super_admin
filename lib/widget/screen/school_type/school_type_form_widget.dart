@@ -1,5 +1,3 @@
-
-
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,6 +17,10 @@ class SchoolTypeFormWidget extends StatefulWidget {
 }
 
 class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormFieldState> _schoolTypeFieldKey =
+      GlobalKey<FormFieldState>();
+
   final SchoolTypeController schoolTypeController = Get.put(
     SchoolTypeController(),
   );
@@ -28,17 +30,16 @@ class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
 
   @override
   void initState() {
-    // TODO: implement initState
     if (schoolTypeController.schoolType.id.isNotEmpty) {
       schoolTypeTextEditingController.text =
           schoolTypeController.schoolType.schoolType;
     }
     super.initState();
   }
-  
+
   onSubmitForm(BuildContext context) {
     FocusScope.of(context).unfocus();
-    schoolTypeController.onSubmitForm();
+    schoolTypeController.onSubmitForm(_formKey);
   }
 
   @override
@@ -66,41 +67,47 @@ class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
         child: SingleChildScrollView(
           child: GetBuilder<SchoolTypeController>(
             builder: (schoolTypeControllerContext) {
-              return Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 30),
-                    child: FloatingTextFieldWidget(
-                      appColorScheme: AppColorScheme.primary,
-                      controller: schoolTypeTextEditingController,
-                      labelText: appLocalizations.schoolTypeLabelText,
-                      showError:
-                          schoolTypeControllerContext
-                              .showErrorForSchoolTypeTextEditingController,
-                      textInputAction: TextInputAction.next,
-                      onChange:
-                          (String value) => schoolTypeControllerContext
-                              .onSchoolTypeChange(value),
-                      onSubmitted:
-                          (String value) => schoolTypeControllerContext
-                              .onSchoolTypeSubmit(value),
-                    ),
-                  ),
-                  schoolTypeControllerContext.isLoader
-                      ? const ApiRequestLoaderWidget(
+              return Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: 30),
+                      child: FloatingTextFieldWidget(
+                        key: _schoolTypeFieldKey,
                         appColorScheme: AppColorScheme.primary,
-                      )
-                      : Container(),
-                  Container(
-                    margin: const EdgeInsets.only(top: 30),
-                    child: ElevatedButtonWidget(
-                      appColorScheme: AppColorScheme.primary,
-                      buttonText: appLocalizations.signInButtonText,
-                      disabled: schoolTypeControllerContext.isLoader,
-                      onPressed: () => onSubmitForm(context),
+                        controller: schoolTypeTextEditingController,
+                        labelText: appLocalizations.schoolTypeLabelText,
+                        textInputAction: TextInputAction.next,
+                        validator:
+                            schoolTypeControllerContext.schoolTypeValidator,
+                        onChange:
+                            (String value) => schoolTypeControllerContext
+                                .onSchoolTypeChange(value),
+                        onFieldSubmitted:
+                            (String value) => schoolTypeControllerContext
+                                .onSchoolTypeSubmitted(
+                                  value,
+                                  _schoolTypeFieldKey,
+                                ),
+                      ),
                     ),
-                  ),
-                ],
+                    schoolTypeControllerContext.isLoader
+                        ? const ApiRequestLoaderWidget(
+                          appColorScheme: AppColorScheme.primary,
+                        )
+                        : Container(),
+                    Container(
+                      margin: const EdgeInsets.only(top: 30),
+                      child: ElevatedButtonWidget(
+                        appColorScheme: AppColorScheme.primary,
+                        buttonText: appLocalizations.signInButtonText,
+                        disabled: schoolTypeControllerContext.isLoader,
+                        onPressed: () => onSubmitForm(context),
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
           ),

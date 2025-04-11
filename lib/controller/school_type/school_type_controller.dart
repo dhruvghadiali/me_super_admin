@@ -1,9 +1,12 @@
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 
 import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/utils/utils.dart';
 import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/snackbar/snackbar.dart';
+import 'package:me_super_admin/utils/validation_message.dart';
 import 'package:me_super_admin/service/http/http_service.dart';
 import 'package:me_super_admin/model/school_type/school_type.dart';
 import 'package:me_super_admin/model/http_service/get_http_service.dart';
@@ -16,9 +19,15 @@ import 'package:me_super_admin/model/http_service/mock_http_api_property_service
 class SchoolTypeController extends GetxController {
   String snackbarTitle = "School Type Alert";
   bool isLoader = false;
-  bool showErrorForSchoolTypeTextEditingController = false;
   SchoolType schoolType = SchoolType.defaultValues();
   List<SchoolType> schoolTypes = [];
+
+  final schoolTypeValidator =
+      ValidationBuilder()
+          .required(ValidationMessage.schoolTypeNameRequired)
+          .minLength(2, ValidationMessage.schoolTypeNameMinLength)
+          .maxLength(100, ValidationMessage.schoolTypeNameMaxLength)
+          .build();
 
   void resetSchoolTypeForm() {
     schoolType = SchoolType.defaultValues();
@@ -27,7 +36,6 @@ class SchoolTypeController extends GetxController {
 
   void setSchoolTypeForm(SchoolType schoolTypeObj) {
     schoolType = schoolTypeObj;
-    showErrorForSchoolTypeTextEditingController = false;
     update();
 
     if (schoolType.id.isNotEmpty) {
@@ -40,31 +48,22 @@ class SchoolTypeController extends GetxController {
     update();
   }
 
-  void onSchoolTypeSubmit(String value) {
+  void onSchoolTypeSubmitted(
+    String value,
+    GlobalKey<FormFieldState> formFieldKey,
+  ) {
     schoolType = schoolType.copyWith(schoolType: value);
-    formValidation();
+    formFieldKey.currentState?.validate();
     update();
   }
 
-  void onSubmitForm() {
-    formValidation();
-    update();
-  }
-
-  Future<void> formValidation() async {
-    if (schoolType.schoolType.isNotEmpty &&
-        schoolType.schoolType.length > 2 &&
-        schoolType.schoolType.length < 100) {
-      showErrorForSchoolTypeTextEditingController = false;
+  void onSubmitForm(GlobalKey<FormState> formKey) async {
+    if (formKey.currentState?.validate() ?? false) {
       if (schoolType.id.isEmpty) {
         await postSchoolType();
       } else {
         await putSchoolType();
       }
-      update();
-    } else {
-      showErrorForSchoolTypeTextEditingController = true;
-      update();
     }
   }
 

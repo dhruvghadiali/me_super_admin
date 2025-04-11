@@ -7,10 +7,10 @@ class FloatingTextFieldWidget extends StatelessWidget {
     super.key,
     required this.labelText,
     required this.controller,
-    required this.showError,
     required this.appColorScheme,
     required this.onChange,
-    required this.onSubmitted,
+    required this.onFieldSubmitted,
+    required this.validator,
     this.obscureText = false,
     this.textInputType = TextInputType.multiline,
     this.textCapitalization = TextCapitalization.none,
@@ -19,14 +19,14 @@ class FloatingTextFieldWidget extends StatelessWidget {
 
   final String labelText;
   final bool obscureText;
-  final bool showError;
   final TextEditingController controller;
   final TextInputType? textInputType;
   final TextCapitalization? textCapitalization;
   final TextInputAction? textInputAction;
   final AppColorScheme appColorScheme;
   final Function onChange;
-  final Function onSubmitted;
+  final Function onFieldSubmitted;
+  final Function validator;
 
   Color? setFloatingTextFieldColor({
     required BuildContext context,
@@ -45,55 +45,76 @@ class FloatingTextFieldWidget extends StatelessWidget {
     ExtensionsThemeData themeData =
         Theme.of(context).extension<ExtensionsThemeData>()!;
 
-    return TextField(
+    return TextFormField(
+      key: key,
       controller: controller,
       onChanged: (String value) => onChange(value),
-      onSubmitted: (String value) => onSubmitted(value),
+      onFieldSubmitted: (String value) => onFieldSubmitted(value),
+      onEditingComplete: () {},
+      onSaved: (String? value) {},
+      validator: (String? value) => validator(value),
       obscureText: obscureText,
       textInputAction: textInputAction,
-      cursorColor: setFloatingTextFieldColor(
-        context: context,
-        appColorScheme: appColorScheme,
-      ),
-      style: TextStyle(
-        color: setFloatingTextFieldColor(
-          context: context,
-          appColorScheme: appColorScheme,
-        ),
-      ),
       textCapitalization: textCapitalization ?? TextCapitalization.none,
       keyboardType: textInputType,
+      cursorColor:
+          setFloatingTextFieldColor(
+                context: context,
+                appColorScheme: appColorScheme,
+              )
+              as Color,
+      style: TextStyle(
+        color:
+            setFloatingTextFieldColor(
+                  context: context,
+                  appColorScheme: appColorScheme,
+                )
+                as Color,
+      ),
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: TextStyle(
-          color: showError
-              ? themeData.metallicRed
-              : setFloatingTextFieldColor(
-                  context: context,
-                  appColorScheme: appColorScheme,
-                ),
+          color:
+              setFloatingTextFieldColor(
+                    context: context,
+                    appColorScheme: appColorScheme,
+                  )
+                  as Color,
+        ),
+        border: OutlineInputBorder(),
+        errorStyle: TextStyle(color: themeData.metallicRed),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color:
+                setFloatingTextFieldColor(
+                      context: context,
+                      appColorScheme: appColorScheme,
+                    )
+                    as Color,
+          ),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: showError
-                ? themeData.metallicRed as Color
-                : setFloatingTextFieldColor(
-                    context: context,
-                    appColorScheme: appColorScheme,
-                  ) as Color,
-            width: 2.0,
+            color:
+                setFloatingTextFieldColor(
+                      context: context,
+                      appColorScheme: appColorScheme,
+                    )
+                    as Color,
           ),
         ),
-        enabledBorder: OutlineInputBorder(
+        disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: showError
-                ? themeData.metallicRed as Color
-                : setFloatingTextFieldColor(
-                    context: context,
-                    appColorScheme: appColorScheme,
-                  ) as Color,
-            width: 1.0,
+            color:
+                setFloatingTextFieldColor(
+                      context: context,
+                      appColorScheme: appColorScheme,
+                    )
+                    as Color,
           ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: themeData.metallicRed as Color),
         ),
       ),
     );

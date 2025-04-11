@@ -49,10 +49,7 @@ class SignInFormWidget extends StatelessWidget {
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          vertical: 40,
-          horizontal: 25,
-        ),
+        padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 25),
         decoration: BoxDecoration(
           color: themeData.offWhite,
           borderRadius: const BorderRadius.only(
@@ -89,14 +86,14 @@ class SignInFormWidget extends StatelessWidget {
                           appColorScheme: AppColorScheme.primary,
                           controller: usernameTextEditingController,
                           labelText: appLocalizations.usernameLabelText,
-                          showError:
-                              signInControllerContext.showUsernameTextfieldError,
                           textInputAction: TextInputAction.next,
+                          validator: () {},
                           onChange: (String value) => onUsernameChange(value),
-                          onSubmitted: (String value) =>
-                              signInControllerContext.usernameValidation(
-                            usernameTextEditingController.text,
-                          ),
+                          onFieldSubmitted:
+                              (String value) =>
+                                  signInControllerContext.usernameValidation(
+                                    usernameTextEditingController.text,
+                                  ),
                         ),
                       ),
                       Container(
@@ -105,21 +102,21 @@ class SignInFormWidget extends StatelessWidget {
                           appColorScheme: AppColorScheme.primary,
                           controller: passwordTextEditingController,
                           labelText: appLocalizations.passwordLabelText,
-                          showError:
-                              signInControllerContext.showPasswordTextfieldError,
                           textInputAction: TextInputAction.done,
                           obscureText: true,
+                          validator: () {},
                           onChange: (String value) => onPasswordChange(value),
-                          onSubmitted: (String value) =>
-                              signInControllerContext.passwordValidation(
-                            passwordTextEditingController.text,
-                          ),
+                          onFieldSubmitted:
+                              (String value) =>
+                                  signInControllerContext.passwordValidation(
+                                    passwordTextEditingController.text,
+                                  ),
                         ),
                       ),
                       signInControllerContext.isLoader
                           ? const ApiRequestLoaderWidget(
-                              appColorScheme: AppColorScheme.primary,
-                            )
+                            appColorScheme: AppColorScheme.primary,
+                          )
                           : Container(),
                       Container(
                         margin: const EdgeInsets.only(top: 150),

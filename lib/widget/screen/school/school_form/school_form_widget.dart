@@ -63,14 +63,13 @@ class SchoolFormWidget extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 10),
                     child: FloatingTextFieldWidget(
+                      validator: (){},
                       appColorScheme: AppColorScheme.primary,
                       controller: schoolNameTextEditingController,
                       labelText: appLocalizations.schoolNameLabelText,
-                      showError:
-                          signInControllerContext.showUsernameTextfieldError,
                       textInputAction: TextInputAction.next,
                       onChange: (String value) => {},
-                      onSubmitted:
+                      onFieldSubmitted:
                           (String value) =>
                               signInControllerContext.usernameValidation(
                                 usernameTextEditingController.text,
@@ -80,15 +79,14 @@ class SchoolFormWidget extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 30),
                     child: FloatingTextFieldWidget(
+                      validator: (){},
                       appColorScheme: AppColorScheme.primary,
                       controller: phoneNumberTextEditingController,
                       labelText: appLocalizations.phoneNumberLabelText,
-                      showError:
-                          signInControllerContext.showPasswordTextfieldError,
-                      textInputAction: TextInputAction.done,
+                     textInputAction: TextInputAction.done,
                       obscureText: true,
                       onChange: (String value) => {},
-                      onSubmitted:
+                      onFieldSubmitted:
                           (String value) =>
                               signInControllerContext.passwordValidation(
                                 passwordTextEditingController.text,
@@ -98,15 +96,14 @@ class SchoolFormWidget extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 30),
                     child: FloatingTextFieldWidget(
+                      validator: (){},
                       appColorScheme: AppColorScheme.primary,
                       controller: emailTextEditingController,
                       labelText: appLocalizations.emailLabelText,
-                      showError:
-                          signInControllerContext.showPasswordTextfieldError,
                       textInputAction: TextInputAction.done,
                       obscureText: true,
                       onChange: (String value) => {},
-                      onSubmitted:
+                      onFieldSubmitted:
                           (String value) =>
                               signInControllerContext.passwordValidation(
                                 passwordTextEditingController.text,
@@ -116,15 +113,14 @@ class SchoolFormWidget extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 30),
                     child: FloatingTextFieldWidget(
+                      validator: (){},
                       appColorScheme: AppColorScheme.primary,
                       controller: addressTextEditingController,
                       labelText: appLocalizations.addressLabelText,
-                      showError:
-                          signInControllerContext.showPasswordTextfieldError,
                       textInputAction: TextInputAction.done,
                       obscureText: true,
                       onChange: (String value) => {},
-                      onSubmitted:
+                      onFieldSubmitted:
                           (String value) =>
                               signInControllerContext.passwordValidation(
                                 passwordTextEditingController.text,
@@ -134,15 +130,14 @@ class SchoolFormWidget extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 30),
                     child: FloatingTextFieldWidget(
+                      validator: (){},
                       appColorScheme: AppColorScheme.primary,
                       controller: establishedYearTextEditingController,
                       labelText: appLocalizations.establishedYearLabelText,
-                      showError:
-                          signInControllerContext.showPasswordTextfieldError,
                       textInputAction: TextInputAction.done,
                       obscureText: true,
                       onChange: (String value) => {},
-                      onSubmitted:
+                      onFieldSubmitted:
                           (String value) =>
                               signInControllerContext.passwordValidation(
                                 passwordTextEditingController.text,
@@ -152,15 +147,14 @@ class SchoolFormWidget extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 30),
                     child: FloatingTextFieldWidget(
+                      validator: (){},
                       appColorScheme: AppColorScheme.primary,
                       controller: affiliationNumberTextEditingController,
                       labelText: appLocalizations.affiliationNumberLabelText,
-                      showError:
-                          signInControllerContext.showPasswordTextfieldError,
                       textInputAction: TextInputAction.done,
                       obscureText: true,
                       onChange: (String value) => {},
-                      onSubmitted:
+                      onFieldSubmitted:
                           (String value) =>
                               signInControllerContext.passwordValidation(
                                 passwordTextEditingController.text,
@@ -170,15 +164,14 @@ class SchoolFormWidget extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 30),
                     child: FloatingTextFieldWidget(
+                      validator: (){},
                       appColorScheme: AppColorScheme.primary,
                       controller: usernameTextEditingController,
                       labelText: appLocalizations.usernameLabelText,
-                      showError:
-                          signInControllerContext.showPasswordTextfieldError,
                       textInputAction: TextInputAction.done,
                       obscureText: true,
                       onChange: (String value) => {},
-                      onSubmitted:
+                      onFieldSubmitted:
                           (String value) =>
                               signInControllerContext.passwordValidation(
                                 passwordTextEditingController.text,
@@ -188,15 +181,14 @@ class SchoolFormWidget extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(top: 30),
                     child: FloatingTextFieldWidget(
+                      validator: (){},
                       appColorScheme: AppColorScheme.primary,
                       controller: passwordTextEditingController,
                       labelText: appLocalizations.passwordLabelText,
-                      showError:
-                          signInControllerContext.showPasswordTextfieldError,
                       textInputAction: TextInputAction.done,
                       obscureText: true,
                       onChange: (String value) => {},
-                      onSubmitted:
+                      onFieldSubmitted:
                           (String value) =>
                               signInControllerContext.passwordValidation(
                                 passwordTextEditingController.text,
