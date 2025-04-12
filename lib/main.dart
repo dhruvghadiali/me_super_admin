@@ -10,10 +10,13 @@ import 'package:me_super_admin/screens/facility/facility_screen.dart';
 import 'package:me_super_admin/screens/fee_type/fee_type_screen.dart';
 import 'package:me_super_admin/utils/theme_data/theme_data_util.dart';
 import 'package:me_super_admin/screens/dashboard/dashboard_screen.dart';
+import 'package:me_super_admin/screens/fee_type/fee_type_form_screen.dart';
 import 'package:me_super_admin/screens/school_type/school_type_screen.dart';
 import 'package:me_super_admin/screens/school_type/school_type_form_screen.dart';
 import 'package:me_super_admin/screens/academic_grade/academic_grade_screen.dart';
+import 'package:me_super_admin/screens/education_board/education_board_screen.dart';
 import 'package:me_super_admin/screens/academic_grade/academic_grade_form_screen.dart';
+import 'package:me_super_admin/screens/education_board/education_board_form_screen.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -37,9 +40,12 @@ class MeSuperAdminApp extends StatelessWidget {
         '/dashboard': (context) => const DashboardScreen(),
         '/schools': (context) => const SchoolScreen(),
         '/faculties': (context) => const FacilityScreen(),
-        '/fees-types': (context) => const FeeTypeScreen(),
+        RoutePaths.feeTypes: (context) => const FeeTypeScreen(),
+        RoutePaths.feeTypeForm: (context) => const FeeTypeFormScreen(),
         RoutePaths.schoolTypes: (context) => const SchoolTypeScreen(),
         RoutePaths.schoolTypeForm: (context) => SchoolTypeFormScreen(),
+        RoutePaths.educationBoards: (context) => const EducationBoardScreen(),
+        RoutePaths.educationBoardForm: (context) => EducationBoardFormScreen(),
         RoutePaths.academicGrades: (context) => const AcademicGradeScreen(),
         RoutePaths.academicGradeForm: (context) => AcademicGradeFormScreen(),
       },

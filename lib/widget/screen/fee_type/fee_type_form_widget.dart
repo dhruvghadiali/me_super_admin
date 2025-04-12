@@ -4,51 +4,44 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
-import 'package:me_super_admin/controller/school_type/school_type_controller.dart';
+import 'package:me_super_admin/controller/fee_type/fee_type_controller.dart';
 import 'package:me_super_admin/widget/common/loader/api_request_loader_widget.dart';
 import 'package:me_super_admin/widget/common/form_fields/elevated_button/elevated_button.dart';
 import 'package:me_super_admin/widget/common/form_fields/text_fields/floating_text_field_widget.dart';
 
-class SchoolTypeFormWidget extends StatefulWidget {
-  const SchoolTypeFormWidget({super.key});
+class FeeTypeFormWidget extends StatefulWidget {
+  const FeeTypeFormWidget({super.key});
 
   @override
-  State<SchoolTypeFormWidget> createState() => _SchoolTypeFormWidgetState();
+  State<FeeTypeFormWidget> createState() => _FeeTypeFormWidgetState();
 }
 
-class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
+class _FeeTypeFormWidgetState extends State<FeeTypeFormWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GlobalKey<FormFieldState> _schoolTypeFieldKey =
+  final GlobalKey<FormFieldState> _feeTypeFieldKey =
       GlobalKey<FormFieldState>();
 
-  final SchoolTypeController schoolTypeController = Get.put(
-    SchoolTypeController(),
-  );
+  final FeeTypeController feeTypeController = Get.put(FeeTypeController());
 
-  final TextEditingController schoolTypeTextEditingController =
+  final TextEditingController feeTypeTextEditingController =
       TextEditingController();
 
   @override
   void initState() {
-    if (schoolTypeController.schoolType.id.isNotEmpty) {
-      schoolTypeTextEditingController.text =
-          schoolTypeController.schoolType.schoolType;
+    if (feeTypeController.feeType.id.isNotEmpty) {
+      feeTypeTextEditingController.text = feeTypeController.feeType.feeType;
     }
     super.initState();
   }
 
-  onSchoolTypeTextFieldSubmit(BuildContext context, String value) {
+  onFeeTypeTextFieldSubmit(BuildContext context, String value) {
     FocusManager.instance.primaryFocus?.unfocus();
-    schoolTypeController.onSchoolTypeSubmitted(
-      value,
-      _schoolTypeFieldKey,
-      _formKey,
-    );
+    feeTypeController.onFeeTypeSubmitted(value, _feeTypeFieldKey, _formKey);
   }
 
   onSubmitForm(BuildContext context) {
     FocusManager.instance.primaryFocus?.unfocus();
-    schoolTypeController.onSubmitForm(_formKey);
+    feeTypeController.onSubmitForm(_formKey);
   }
 
   @override
@@ -74,8 +67,8 @@ class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
           ],
         ),
         child: SingleChildScrollView(
-          child: GetBuilder<SchoolTypeController>(
-            builder: (schoolTypeControllerContext) {
+          child: GetBuilder<FeeTypeController>(
+            builder: (feeTypeControllerContext) {
               return Form(
                 key: _formKey,
                 child: Column(
@@ -83,22 +76,24 @@ class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
                     Container(
                       margin: const EdgeInsets.only(top: 30),
                       child: FloatingTextFieldWidget(
-                        key: _schoolTypeFieldKey,
+                        key: _feeTypeFieldKey,
                         appColorScheme: AppColorScheme.primary,
-                        controller: schoolTypeTextEditingController,
-                        labelText: appLocalizations.schoolTypeTextFieldLabelText,
+                        controller: feeTypeTextEditingController,
+                        labelText:
+                            appLocalizations.feeTypeTextFieldLabelText,
                         textInputAction: TextInputAction.next,
                         validator:
-                            schoolTypeControllerContext.schoolTypeValidator,
+                            feeTypeControllerContext
+                                .feeTypeValidator,
                         onChange:
-                            (String value) => schoolTypeControllerContext
-                                .onSchoolTypeChange(value),
+                            (String value) => feeTypeControllerContext
+                                .onFeeTypeChange(value),
                         onFieldSubmitted:
                             (String value) =>
-                                onSchoolTypeTextFieldSubmit(context, value),
+                                onFeeTypeTextFieldSubmit(context, value),
                       ),
                     ),
-                    schoolTypeControllerContext.isLoader
+                    feeTypeControllerContext.isLoader
                         ? const ApiRequestLoaderWidget(
                           appColorScheme: AppColorScheme.primary,
                         )
@@ -108,7 +103,7 @@ class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
                       child: ElevatedButtonWidget(
                         appColorScheme: AppColorScheme.primary,
                         buttonText: appLocalizations.submitButtonText,
-                        disabled: schoolTypeControllerContext.isLoader,
+                        disabled: feeTypeControllerContext.isLoader,
                         onPressed: () => onSubmitForm(context),
                       ),
                     ),

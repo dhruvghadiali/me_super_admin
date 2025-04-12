@@ -8,76 +8,78 @@ import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/snackbar/snackbar.dart';
 import 'package:me_super_admin/utils/validation_message.dart';
 import 'package:me_super_admin/service/http/http_service.dart';
-import 'package:me_super_admin/model/school_type/school_type.dart';
 import 'package:me_super_admin/model/http_service/get_http_service.dart';
 import 'package:me_super_admin/model/http_service/put_http_service.dart';
 import 'package:me_super_admin/model/http_service/post_http_service.dart';
+import 'package:me_super_admin/model/education_board/education_board.dart';
 import 'package:me_super_admin/model/http_service/delete_http_service.dart';
 import 'package:me_super_admin/model/http_service/http_response_service.dart';
 import 'package:me_super_admin/model/http_service/mock_http_api_property_service.dart';
 
-class SchoolTypeController extends GetxController {
-  String snackbarTitle = "School Type Alert";
+class EducationBoardController extends GetxController {
+  String snackbarTitle = "Education Board Alert";
   bool isLoader = false;
-  SchoolType schoolType = SchoolType.defaultValues();
-  List<SchoolType> schoolTypes = [];
+  EducationBoard educationBoard = EducationBoard.defaultValues();
+  List<EducationBoard> educationBoards = [];
 
-  void resetSchoolTypeForm() {
-    schoolType = SchoolType.defaultValues();
+  void resetEducationBoardForm() {
+    educationBoard = EducationBoard.defaultValues();
     update();
   }
 
-  void setSchoolTypeForm(SchoolType schoolTypeObj) {
-    schoolType = schoolTypeObj;
+  void setEducationBoardForm(EducationBoard educationBoardObj) {
+    educationBoard = educationBoardObj;
     update();
 
-    if (schoolType.id.isNotEmpty) {
-      Get.offAllNamed(RoutePaths.schoolTypeForm);
+    if (educationBoard.id.isNotEmpty) {
+      Get.offAllNamed(RoutePaths.educationBoardForm);
     }
   }
 
-  String? schoolTypeValidator(String? value) {
+  String? educationBoardValidator(String? value) {
     return ValidationBuilder(
-          requiredMessage: ValidationMessage.schoolTypeRequired,
+          requiredMessage: ValidationMessage.educationBoardRequired,
         )
-        .required(ValidationMessage.schoolTypeRequired)
-        .minLength(2, ValidationMessage.schoolTypeMinLength)
-        .maxLength(100, ValidationMessage.schoolTypeMaxLength)
+        .required(ValidationMessage.educationBoardRequired)
+        .minLength(2, ValidationMessage.educationBoardMinLength)
+        .maxLength(100, ValidationMessage.educationBoardMaxLength)
         .build()(value?.trim());
   }
 
-  void onSchoolTypeChange(String value) {
-    schoolType = schoolType.copyWith(schoolType: value.trim());
+  void onEducationBoardChange(String value) {
+    educationBoard = educationBoard.copyWith(educationBoard: value.trim());
     update();
   }
 
-  void onSchoolTypeSubmitted(
+  void onEducationBoardSubmitted(
     String value,
     GlobalKey<FormFieldState> formFieldKey,
     GlobalKey<FormState> formKey,
   ) {
-    schoolType = schoolType.copyWith(schoolType: value.trim());
+    educationBoard = educationBoard.copyWith(educationBoard: value.trim());
     formFieldKey.currentState?.validate();
     onSubmitForm(formKey);
   }
 
   void onSubmitForm(GlobalKey<FormState> formKey) async {
     if (formKey.currentState?.validate() ?? false) {
-      (schoolType.id.isEmpty) ? await postSchoolType() : await putSchoolType();
+      (educationBoard.id.isEmpty)
+          ? await postEducationBoard()
+          : await putEducationBoard();
     }
   }
 
-  Future<void> getSchoolTypes() async {
+  Future<void> getEducationBoards() async {
     String authToken = await Utils.getAuthToken();
-    schoolTypes = [];
+    educationBoards = [];
     isLoader = true;
     update();
 
     GetHttpService getHttpService = GetHttpService(
-      endPoint: 'super-admin/school-types',
+      endPoint: 'super-admin/education-boards',
       headers: {"Authorization": 'Bearer $authToken'},
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/school_types/school_types_200.json',
+        endPoint: 'assets/mock_data/education_boards/education_boards_200.json',
         statusCode: 200,
       ),
     );
@@ -87,9 +89,11 @@ class SchoolTypeController extends GetxController {
     if (response.appHttpRequestStatus ==
         AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
-      for (var schoolTypeJson in response.data) {
-        final SchoolType schoolTypeObj = SchoolType.fromJson(schoolTypeJson);
-        schoolTypes.add(schoolTypeObj);
+      for (var educationBoardJson in response.data) {
+        final EducationBoard educationBoardObj = EducationBoard.fromJson(
+          educationBoardJson,
+        );
+        educationBoards.add(educationBoardObj);
       }
     } else {
       isLoader = false;
@@ -103,17 +107,17 @@ class SchoolTypeController extends GetxController {
     update();
   }
 
-  Future<void> postSchoolType() async {
+  Future<void> postEducationBoard() async {
     String authToken = await Utils.getAuthToken();
     isLoader = true;
     update();
 
     PostHttpService postHttpService = PostHttpService(
-      endPoint: 'super-admin/school-types',
+      endPoint: 'super-admin/education-boards',
       headers: {"Authorization": 'Bearer $authToken'},
-      body: schoolType.toJson(),
+      body: educationBoard.toJson(),
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/school_types/school_types_200.json',
+        endPoint: 'assets/mock_data/education_boards/education_boards_200.json',
         statusCode: 200,
       ),
     );
@@ -130,7 +134,7 @@ class SchoolTypeController extends GetxController {
         message: response.message,
         appSnackbarStatus: AppSnackbarStatus.success,
       );
-      Get.offAllNamed(RoutePaths.schoolTypes);
+      Get.offAllNamed(RoutePaths.educationBoards);
     } else {
       isLoader = false;
       Snackbar.getSnackbar(
@@ -143,17 +147,17 @@ class SchoolTypeController extends GetxController {
     update();
   }
 
-  Future<void> putSchoolType() async {
+  Future<void> putEducationBoard() async {
     String authToken = await Utils.getAuthToken();
     isLoader = true;
     update();
 
     PutHttpService putHttpService = PutHttpService(
-      endPoint: 'super-admin/school-types/${schoolType.id}',
+      endPoint: 'super-admin/education-boards/${educationBoard.id}',
       headers: {"Authorization": 'Bearer $authToken'},
-      body: schoolType.toJson(),
+      body: educationBoard.toJson(),
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/school_types/school_types_200.json',
+        endPoint: 'assets/mock_data/education_boards/education_boards_200.json',
         statusCode: 200,
       ),
     );
@@ -168,7 +172,7 @@ class SchoolTypeController extends GetxController {
         message: response.message,
         appSnackbarStatus: AppSnackbarStatus.success,
       );
-      Get.offAllNamed(RoutePaths.schoolTypes);
+      Get.offAllNamed(RoutePaths.educationBoards);
     } else {
       isLoader = false;
       Snackbar.getSnackbar(
@@ -181,16 +185,16 @@ class SchoolTypeController extends GetxController {
     update();
   }
 
-  Future<void> deleteSchoolType(String id) async {
+  Future<void> deleteEducationBoard(String id) async {
     String authToken = await Utils.getAuthToken();
     isLoader = true;
     update();
 
     DeleteHttpService deleteHttpService = DeleteHttpService(
-      endPoint: 'super-admin/school-types/$id',
+      endPoint: 'super-admin/education-boards/$id',
       headers: {"Authorization": 'Bearer $authToken'},
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/school_types/school_types_200.json',
+        endPoint: 'assets/mock_data/education_boards/education_boards_200.json',
         statusCode: 200,
       ),
     );
@@ -207,7 +211,7 @@ class SchoolTypeController extends GetxController {
         message: response.message,
         appSnackbarStatus: AppSnackbarStatus.success,
       );
-      getSchoolTypes();
+      getEducationBoards();
     } else {
       isLoader = false;
       Snackbar.getSnackbar(

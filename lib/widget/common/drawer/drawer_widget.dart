@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/drawer_items.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
+import 'package:me_super_admin/controller/fee_type/fee_type_controller.dart';
 import 'package:me_super_admin/controller/school_type/school_type_controller.dart';
 import 'package:me_super_admin/controller/academic_grade/academic_grade_controller.dart';
+import 'package:me_super_admin/controller/education_board/education_board_controller.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
@@ -23,6 +25,16 @@ class DrawerWidget extends StatelessWidget {
           AcademicGradeController(),
         );
         academicGradeController.resetAcademicGradeForm();
+        break;
+      case RoutePaths.educationBoardForm || RoutePaths.educationBoards:
+        EducationBoardController educationBoardController = Get.put(
+          EducationBoardController(),
+        );
+        educationBoardController.resetEducationBoardForm();
+        break;
+      case RoutePaths.feeTypeForm || RoutePaths.feeTypes:
+        FeeTypeController feeTypeController = Get.put(FeeTypeController());
+        feeTypeController.resetFeeTypeForm();
         break;
       default:
         break;

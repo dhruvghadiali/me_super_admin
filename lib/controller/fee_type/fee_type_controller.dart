@@ -6,9 +6,9 @@ import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/utils/utils.dart';
 import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/snackbar/snackbar.dart';
+import 'package:me_super_admin/model/fee_type/fee_type.dart';
 import 'package:me_super_admin/utils/validation_message.dart';
 import 'package:me_super_admin/service/http/http_service.dart';
-import 'package:me_super_admin/model/school_type/school_type.dart';
 import 'package:me_super_admin/model/http_service/get_http_service.dart';
 import 'package:me_super_admin/model/http_service/put_http_service.dart';
 import 'package:me_super_admin/model/http_service/post_http_service.dart';
@@ -16,68 +16,66 @@ import 'package:me_super_admin/model/http_service/delete_http_service.dart';
 import 'package:me_super_admin/model/http_service/http_response_service.dart';
 import 'package:me_super_admin/model/http_service/mock_http_api_property_service.dart';
 
-class SchoolTypeController extends GetxController {
-  String snackbarTitle = "School Type Alert";
+class FeeTypeController extends GetxController {
+  String snackbarTitle = "Fee Type Alert";
   bool isLoader = false;
-  SchoolType schoolType = SchoolType.defaultValues();
-  List<SchoolType> schoolTypes = [];
+  FeeType feeType = FeeType.defaultValues();
+  List<FeeType> feeTypes = [];
 
-  void resetSchoolTypeForm() {
-    schoolType = SchoolType.defaultValues();
+  void resetFeeTypeForm() {
+    feeType = FeeType.defaultValues();
     update();
   }
 
-  void setSchoolTypeForm(SchoolType schoolTypeObj) {
-    schoolType = schoolTypeObj;
+  void setFeeTypeForm(FeeType feeTypeObj) {
+    feeType = feeTypeObj;
     update();
 
-    if (schoolType.id.isNotEmpty) {
-      Get.offAllNamed(RoutePaths.schoolTypeForm);
+    if (feeType.id.isNotEmpty) {
+      Get.offAllNamed(RoutePaths.feeTypeForm);
     }
   }
 
-  String? schoolTypeValidator(String? value) {
-    return ValidationBuilder(
-          requiredMessage: ValidationMessage.schoolTypeRequired,
-        )
-        .required(ValidationMessage.schoolTypeRequired)
-        .minLength(2, ValidationMessage.schoolTypeMinLength)
-        .maxLength(100, ValidationMessage.schoolTypeMaxLength)
+  String? feeTypeValidator(String? value) {
+    return ValidationBuilder(requiredMessage: ValidationMessage.feeTypeRequired)
+        .required(ValidationMessage.feeTypeRequired)
+        .minLength(2, ValidationMessage.feeTypeMinLength)
+        .maxLength(100, ValidationMessage.feeTypeMaxLength)
         .build()(value?.trim());
   }
 
-  void onSchoolTypeChange(String value) {
-    schoolType = schoolType.copyWith(schoolType: value.trim());
+  void onFeeTypeChange(String value) {
+    feeType = feeType.copyWith(feeType: value.trim());
     update();
   }
 
-  void onSchoolTypeSubmitted(
+  void onFeeTypeSubmitted(
     String value,
     GlobalKey<FormFieldState> formFieldKey,
     GlobalKey<FormState> formKey,
   ) {
-    schoolType = schoolType.copyWith(schoolType: value.trim());
+    feeType = feeType.copyWith(feeType: value.trim());
     formFieldKey.currentState?.validate();
     onSubmitForm(formKey);
   }
 
   void onSubmitForm(GlobalKey<FormState> formKey) async {
     if (formKey.currentState?.validate() ?? false) {
-      (schoolType.id.isEmpty) ? await postSchoolType() : await putSchoolType();
+      (feeType.id.isEmpty) ? await postFeeType() : await putFeeType();
     }
   }
 
-  Future<void> getSchoolTypes() async {
+  Future<void> getFeeTypes() async {
     String authToken = await Utils.getAuthToken();
-    schoolTypes = [];
+    feeTypes = [];
     isLoader = true;
     update();
 
     GetHttpService getHttpService = GetHttpService(
-      endPoint: 'super-admin/school-types',
+      endPoint: 'super-admin/fee-types',
       headers: {"Authorization": 'Bearer $authToken'},
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/school_types/school_types_200.json',
+        endPoint: 'assets/mock_data/fee_types/fee_types_200.json',
         statusCode: 200,
       ),
     );
@@ -87,9 +85,9 @@ class SchoolTypeController extends GetxController {
     if (response.appHttpRequestStatus ==
         AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
-      for (var schoolTypeJson in response.data) {
-        final SchoolType schoolTypeObj = SchoolType.fromJson(schoolTypeJson);
-        schoolTypes.add(schoolTypeObj);
+      for (var feeTypeJson in response.data) {
+        final FeeType feeTypeObj = FeeType.fromJson(feeTypeJson);
+        feeTypes.add(feeTypeObj);
       }
     } else {
       isLoader = false;
@@ -103,17 +101,17 @@ class SchoolTypeController extends GetxController {
     update();
   }
 
-  Future<void> postSchoolType() async {
+  Future<void> postFeeType() async {
     String authToken = await Utils.getAuthToken();
     isLoader = true;
     update();
 
     PostHttpService postHttpService = PostHttpService(
-      endPoint: 'super-admin/school-types',
+      endPoint: 'super-admin/fee-types',
       headers: {"Authorization": 'Bearer $authToken'},
-      body: schoolType.toJson(),
+      body: feeType.toJson(),
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/school_types/school_types_200.json',
+        endPoint: 'assets/mock_data/fee_types/fee_types_200.json',
         statusCode: 200,
       ),
     );
@@ -130,7 +128,7 @@ class SchoolTypeController extends GetxController {
         message: response.message,
         appSnackbarStatus: AppSnackbarStatus.success,
       );
-      Get.offAllNamed(RoutePaths.schoolTypes);
+      Get.offAllNamed(RoutePaths.feeTypes);
     } else {
       isLoader = false;
       Snackbar.getSnackbar(
@@ -143,17 +141,17 @@ class SchoolTypeController extends GetxController {
     update();
   }
 
-  Future<void> putSchoolType() async {
+  Future<void> putFeeType() async {
     String authToken = await Utils.getAuthToken();
     isLoader = true;
     update();
 
     PutHttpService putHttpService = PutHttpService(
-      endPoint: 'super-admin/school-types/${schoolType.id}',
+      endPoint: 'super-admin/fee-types/${feeType.id}',
       headers: {"Authorization": 'Bearer $authToken'},
-      body: schoolType.toJson(),
+      body: feeType.toJson(),
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/school_types/school_types_200.json',
+        endPoint: 'assets/mock_data/fee_types/fee_types_200.json',
         statusCode: 200,
       ),
     );
@@ -168,7 +166,7 @@ class SchoolTypeController extends GetxController {
         message: response.message,
         appSnackbarStatus: AppSnackbarStatus.success,
       );
-      Get.offAllNamed(RoutePaths.schoolTypes);
+      Get.offAllNamed(RoutePaths.feeTypes);
     } else {
       isLoader = false;
       Snackbar.getSnackbar(
@@ -181,16 +179,16 @@ class SchoolTypeController extends GetxController {
     update();
   }
 
-  Future<void> deleteSchoolType(String id) async {
+  Future<void> deleteFeeType(String id) async {
     String authToken = await Utils.getAuthToken();
     isLoader = true;
     update();
 
     DeleteHttpService deleteHttpService = DeleteHttpService(
-      endPoint: 'super-admin/school-types/$id',
+      endPoint: 'super-admin/fee-types/$id',
       headers: {"Authorization": 'Bearer $authToken'},
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/school_types/school_types_200.json',
+        endPoint: 'assets/mock_data/fee_types/fee_types_200.json',
         statusCode: 200,
       ),
     );
@@ -207,7 +205,7 @@ class SchoolTypeController extends GetxController {
         message: response.message,
         appSnackbarStatus: AppSnackbarStatus.success,
       );
-      getSchoolTypes();
+      getFeeTypes();
     } else {
       isLoader = false;
       Snackbar.getSnackbar(

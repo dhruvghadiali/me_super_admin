@@ -68,19 +68,13 @@ List<DrawerItem> drawerItems = [
       DrawerItem(
         title: 'Active Fee Types',
         icon: Icons.check_circle,
-        route: '/fee-types/active',
+        route: RoutePaths.feeTypes,
         submenu: [],
       ),
       DrawerItem(
-        title: 'Inactive Fee Types',
+        title: 'Add Fee Types',
         icon: Icons.remove_circle,
-        route: '/fee-types/inactive',
-        submenu: [],
-      ),
-      DrawerItem(
-        title: 'Register Fee Types',
-        icon: Icons.add_circle,
-        route: '/fee-types/register',
+        route: RoutePaths.feeTypeForm,
         submenu: [],
       ),
     ],
@@ -91,21 +85,15 @@ List<DrawerItem> drawerItems = [
     route: '',
     submenu: [
       DrawerItem(
-        title: 'Active Eduction Boards',
+        title: 'Eduction Boards',
         icon: Icons.check_circle,
-        route: '/education-boards/active',
+        route: RoutePaths.educationBoards,
         submenu: [],
       ),
       DrawerItem(
-        title: 'Inactive Eduction Boards',
+        title: 'Add Eduction Boards',
         icon: Icons.remove_circle,
-        route: '/education-boards/inactive',
-        submenu: [],
-      ),
-      DrawerItem(
-        title: 'Register Eduction Boards',
-        icon: Icons.add_circle,
-        route: '/education-boards/register',
+        route: RoutePaths.educationBoardForm,
         submenu: [],
       ),
     ],

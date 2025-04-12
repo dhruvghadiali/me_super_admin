@@ -63,11 +63,9 @@ class AcademicGradeController extends GetxController {
 
   void onSubmitForm(GlobalKey<FormState> formKey) async {
     if (formKey.currentState?.validate() ?? false) {
-      if (academicGrade.id.isEmpty) {
-        await postAcademicGrade();
-      } else {
-        await putAcademicGrade();
-      }
+      (academicGrade.id.isEmpty)
+          ? await postAcademicGrade()
+          : await putAcademicGrade();
     }
   }
 
