@@ -195,19 +195,19 @@ class SchoolFormWidget extends StatelessWidget {
                               ),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 25),
-                    child: DropdownWidget(
-                      appColorScheme: AppColorScheme.primary,
-                      labelText: appLocalizations.schoolTypeTextFieldLabelText,
-                      items: [
-                        {"value": 'public', "label": 'Public'},
-                        {"value": 'private', "label": 'Private'},
-                      ],
-                      selectedItem: '',
-                      onChanged: () {},
-                    ),
-                  ),
+                  // Container(
+                  //   margin: const EdgeInsets.only(top: 25),
+                  //   child: DropdownWidget(
+                  //     appColorScheme: AppColorScheme.primary,
+                  //     labelText: appLocalizations.schoolTypeTextFieldLabelText,
+                  //     items: [
+                  //       {"value": 'public', "label": 'Public'},
+                  //       {"value": 'private', "label": 'Private'},
+                  //     ],
+                  //     selectedItem: '',
+                  //     onChanged: () {},
+                  //   ),
+                  // ),
                   Container(
                     margin: const EdgeInsets.only(top: 25),
                     child: Text(

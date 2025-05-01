@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:me_super_admin/controller/district/district_controller.dart';
+import 'package:me_super_admin/controller/state/state_controller.dart';
 
 import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/drawer_items.dart';
@@ -35,6 +37,16 @@ class DrawerWidget extends StatelessWidget {
       case RoutePaths.feeTypeForm || RoutePaths.feeTypes:
         FeeTypeController feeTypeController = Get.put(FeeTypeController());
         feeTypeController.resetFeeTypeForm();
+        break;
+      case RoutePaths.stateForm || RoutePaths.states:
+        StateController stateController = Get.put(StateController());
+        stateController.resetStateForm();
+        break;
+      case RoutePaths.districtForm || RoutePaths.districts:
+        DistrictController districtController = Get.put(DistrictController());
+        StateController stateController = Get.put(StateController());
+        stateController.getStates();
+        districtController.resetDistrictForm();
         break;
       default:
         break;

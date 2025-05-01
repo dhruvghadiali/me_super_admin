@@ -37,14 +37,20 @@ class FeeTypeCardWidget extends StatelessWidget {
               ),
               Divider(color: themeData.offWhite, thickness: 0.4),
               AuditTrailWidget(
-                audioUserInfo: "Created By:  ${feeType.createdBy}",
-                auditDateTimeInfo:
-                    "Created At:  ${DateFormat('dd MMM yyyy hh:mm a').format(feeType.createdAt)}",
+                audioDateTimeInfoLabel: 'Created At:',
+                audioInfoLabel: 'Created By:',
+                audioUserInfo: feeType.createdBy,
+                auditDateTimeInfo: DateFormat(
+                  'dd MMM yyyy hh:mm a',
+                ).format(feeType.createdAt),
               ),
               AuditTrailWidget(
-                audioUserInfo: "Updated By:  ${feeType.updatedBy}",
-                auditDateTimeInfo:
-                    "Updated At:  ${DateFormat('dd MMM yyyy hh:mm a').format(feeType.updatedAt)}",
+                audioDateTimeInfoLabel: 'Updated At:',
+                audioInfoLabel: 'Updated By:',
+                audioUserInfo: feeType.createdBy,
+                auditDateTimeInfo: DateFormat(
+                  'dd MMM yyyy hh:mm a',
+                ).format(feeType.createdAt),
               ),
             ],
           ),

@@ -1,13 +1,13 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
-import 'package:me_super_admin/model/school_type/school_type.dart';
+import 'package:me_super_admin/model/state/state.dart' as state_model;
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 import 'package:me_super_admin/widget/common/container/audit_trail_widget.dart';
 
-class SchoolTypeCardWidget extends StatelessWidget {
-  const SchoolTypeCardWidget({super.key, required this.schoolType});
-  final SchoolType schoolType;
+class StateCardWidget extends StatelessWidget {
+  const StateCardWidget({super.key, required this.state});
+  final state_model.State state;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class SchoolTypeCardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                schoolType.schoolType.toUpperCase(),
+                state.name.toUpperCase(),
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   color: themeData.offWhite,
                   fontWeight: FontWeight.bold,
@@ -39,18 +39,18 @@ class SchoolTypeCardWidget extends StatelessWidget {
               AuditTrailWidget(
                 audioDateTimeInfoLabel: 'Created At:',
                 audioInfoLabel: 'Created By:',
-                audioUserInfo: schoolType.createdBy,
+                audioUserInfo: state.createdBy,
                 auditDateTimeInfo: DateFormat(
                   'dd MMM yyyy hh:mm a',
-                ).format(schoolType.createdAt),
+                ).format(state.createdAt),
               ),
               AuditTrailWidget(
                 audioDateTimeInfoLabel: 'Updated At:',
                 audioInfoLabel: 'Updated By:',
-                audioUserInfo: schoolType.createdBy,
+                audioUserInfo: state.updatedBy,
                 auditDateTimeInfo: DateFormat(
                   'dd MMM yyyy hh:mm a',
-                ).format(schoolType.createdAt),
+                ).format(state.updatedAt),
               ),
             ],
           ),

@@ -142,21 +142,34 @@ List<DrawerItem> drawerItems = [
     route: '',
     submenu: [
       DrawerItem(
-        title: 'Active States',
+        title: 'States',
         icon: Icons.check_circle,
-        route: '/states/active',
+        route: RoutePaths.states,
         submenu: [],
       ),
       DrawerItem(
-        title: 'Inactive States',
-        icon: Icons.remove_circle,
-        route: '/states/inactive',
-        submenu: [],
-      ),
-      DrawerItem(
-        title: 'Register States',
+        title: 'Add State',
         icon: Icons.add_circle,
-        route: '/states/register',
+        route: RoutePaths.stateForm,
+        submenu: [],
+      ),
+    ],
+  ),
+   DrawerItem(
+    title: 'Manage Districts',
+    icon: Icons.menu,
+    route: '',
+    submenu: [
+      DrawerItem(
+        title: 'Districts',
+        icon: Icons.check_circle,
+        route: RoutePaths.districts,
+        submenu: [],
+      ),
+      DrawerItem(
+        title: 'Add District',
+        icon: Icons.add_circle,
+        route: RoutePaths.districtForm,
         submenu: [],
       ),
     ],

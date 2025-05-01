@@ -7,4 +7,8 @@ class RoutePaths {
   static const String educationBoardForm = '/education-board/form';
   static const String feeTypes = '/fee-types';
   static const String feeTypeForm = '/fee-type/form';
+  static const String states = '/states';
+  static const String stateForm = '/state/form';
+  static const String districts = '/districts';
+  static const String districtForm = '/district/form';
 }

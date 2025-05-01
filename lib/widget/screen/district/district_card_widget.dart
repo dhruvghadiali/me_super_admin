@@ -1,13 +1,13 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:me_super_admin/model/district/district.dart';
 
-import 'package:me_super_admin/model/school_type/school_type.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 import 'package:me_super_admin/widget/common/container/audit_trail_widget.dart';
 
-class SchoolTypeCardWidget extends StatelessWidget {
-  const SchoolTypeCardWidget({super.key, required this.schoolType});
-  final SchoolType schoolType;
+class DistrictCardWidget extends StatelessWidget {
+  const DistrictCardWidget({super.key, required this.district});
+  final District district;
 
   @override
   Widget build(BuildContext context) {
@@ -29,28 +29,38 @@ class SchoolTypeCardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                schoolType.schoolType.toUpperCase(),
+                district.name.toUpperCase(),
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   color: themeData.offWhite,
                   fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              Container(
+                margin: const EdgeInsets.only(top: 5),
+                child: Text(
+                  '(${district.state.name.toUpperCase()})',
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleSmall!.copyWith(color: themeData.offWhite),
                 ),
               ),
               Divider(color: themeData.offWhite, thickness: 0.4),
               AuditTrailWidget(
                 audioDateTimeInfoLabel: 'Created At:',
                 audioInfoLabel: 'Created By:',
-                audioUserInfo: schoolType.createdBy,
+                audioUserInfo: district.createdBy,
                 auditDateTimeInfo: DateFormat(
                   'dd MMM yyyy hh:mm a',
-                ).format(schoolType.createdAt),
+                ).format(district.createdAt),
               ),
               AuditTrailWidget(
                 audioDateTimeInfoLabel: 'Updated At:',
                 audioInfoLabel: 'Updated By:',
-                audioUserInfo: schoolType.createdBy,
+                audioUserInfo: district.updatedBy,
                 auditDateTimeInfo: DateFormat(
                   'dd MMM yyyy hh:mm a',
-                ).format(schoolType.createdAt),
+                ).format(district.updatedAt),
               ),
             ],
           ),

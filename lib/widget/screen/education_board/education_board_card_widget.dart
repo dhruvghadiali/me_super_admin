@@ -37,14 +37,20 @@ class EducationBoardCardWidget extends StatelessWidget {
               ),
               Divider(color: themeData.offWhite, thickness: 0.4),
               AuditTrailWidget(
-                audioUserInfo: "Created By:  ${educationBoard.createdBy}",
-                auditDateTimeInfo:
-                    "Created At:  ${DateFormat('dd MMM yyyy hh:mm a').format(educationBoard.createdAt)}",
+                audioDateTimeInfoLabel: 'Created At:',
+                audioInfoLabel: 'Created By:',
+                audioUserInfo: educationBoard.createdBy,
+                auditDateTimeInfo: DateFormat(
+                  'dd MMM yyyy hh:mm a',
+                ).format(educationBoard.createdAt),
               ),
               AuditTrailWidget(
-                audioUserInfo: "Updated By:  ${educationBoard.updatedBy}",
-                auditDateTimeInfo:
-                    "Updated At:  ${DateFormat('dd MMM yyyy hh:mm a').format(educationBoard.updatedAt)}",
+                audioDateTimeInfoLabel: 'Updated At:',
+                audioInfoLabel: 'Updated By:',
+                audioUserInfo: educationBoard.createdBy,
+                auditDateTimeInfo: DateFormat(
+                  'dd MMM yyyy hh:mm a',
+                ).format(educationBoard.createdAt),
               ),
             ],
           ),

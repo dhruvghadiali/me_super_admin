@@ -37,14 +37,20 @@ class AcademicGradeCardWidget extends StatelessWidget {
               ),
               Divider(color: themeData.offWhite, thickness: 0.4),
               AuditTrailWidget(
-                audioUserInfo: "Created By:  ${academicGrade.createdBy}",
-                auditDateTimeInfo:
-                    "Created At:  ${DateFormat('dd MMM yyyy hh:mm a').format(academicGrade.createdAt)}",
+                audioDateTimeInfoLabel: 'Created At:',
+                audioInfoLabel: 'Created By:',
+                audioUserInfo: academicGrade.createdBy,
+                auditDateTimeInfo: DateFormat(
+                  'dd MMM yyyy hh:mm a',
+                ).format(academicGrade.createdAt),
               ),
               AuditTrailWidget(
-                audioUserInfo: "Updated By:  ${academicGrade.updatedBy}",
-                auditDateTimeInfo:
-                    "Updated At:  ${DateFormat('dd MMM yyyy hh:mm a').format(academicGrade.updatedAt)}",
+                audioDateTimeInfoLabel: 'Updated At:',
+                audioInfoLabel: 'Updated By:',
+                audioUserInfo: academicGrade.createdBy,
+                auditDateTimeInfo: DateFormat(
+                  'dd MMM yyyy hh:mm a',
+                ).format(academicGrade.createdAt),
               ),
             ],
           ),
