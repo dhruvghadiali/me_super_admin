@@ -194,6 +194,25 @@ List<DrawerItem> drawerItems = [
     ],
   ),
   DrawerItem(
+    title: 'Manage Area Names',
+    icon: Icons.menu,
+    route: '',
+    submenu: [
+      DrawerItem(
+        title: 'Area Names',
+        icon: Icons.check_circle,
+        route: RoutePaths.areaNames,
+        submenu: [],
+      ),
+      DrawerItem(
+        title: 'Add Area Name',
+        icon: Icons.add_circle,
+        route: RoutePaths.areaNameForm,
+        submenu: [],
+      ),
+    ],
+  ),
+  DrawerItem(
     title: 'Manage Zipcodes',
     icon: Icons.menu,
     route: '',

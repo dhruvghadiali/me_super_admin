@@ -1,13 +1,13 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:me_super_admin/model/district/district.dart';
 
+import 'package:me_super_admin/model/area_name/area_name.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 import 'package:me_super_admin/widget/common/container/audit_trail_widget.dart';
 
-class DistrictCardWidget extends StatelessWidget {
-  const DistrictCardWidget({super.key, required this.district});
-  final District district;
+class AreaNameCardWidget extends StatelessWidget {
+  const AreaNameCardWidget({super.key, required this.areaName});
+  final AreaName areaName;
 
   @override
   Widget build(BuildContext context) {
@@ -29,18 +29,30 @@ class DistrictCardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                district.name.toUpperCase(),
+                areaName.name.toUpperCase(),
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   color: themeData.offWhite,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              district.state.name.isNotEmpty
+              areaName.city.name.isNotEmpty &&
+                      areaName.city.district.name.isNotEmpty
                   ? Container(
                     margin: const EdgeInsets.only(top: 5),
                     child: Text(
-                      '(${district.state.name.toUpperCase()})',
+                      '(${areaName.city.name.toUpperCase()} - ${areaName.city.district.name.toUpperCase()})',
                       style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        color: themeData.offWhite,
+                      ),
+                    ),
+                  )
+                  : Container(),
+              areaName.city.district.state.name.isNotEmpty
+                  ? Container(
+                    margin: const EdgeInsets.only(top: 5),
+                    child: Text(
+                      '(${areaName.city.district.state.name.toUpperCase()})',
+                      style: Theme.of(context).textTheme.labelSmall!.copyWith(
                         color: themeData.offWhite,
                       ),
                     ),
@@ -50,18 +62,18 @@ class DistrictCardWidget extends StatelessWidget {
               AuditTrailWidget(
                 audioDateTimeInfoLabel: 'Created At:',
                 audioInfoLabel: 'Created By:',
-                audioUserInfo: district.createdBy,
+                audioUserInfo: areaName.createdBy,
                 auditDateTimeInfo: DateFormat(
                   'dd MMM yyyy hh:mm a',
-                ).format(district.createdAt),
+                ).format(areaName.createdAt),
               ),
               AuditTrailWidget(
                 audioDateTimeInfoLabel: 'Updated At:',
                 audioInfoLabel: 'Updated By:',
-                audioUserInfo: district.updatedBy,
+                audioUserInfo: areaName.updatedBy,
                 auditDateTimeInfo: DateFormat(
                   'dd MMM yyyy hh:mm a',
-                ).format(district.updatedAt),
+                ).format(areaName.updatedAt),
               ),
             ],
           ),

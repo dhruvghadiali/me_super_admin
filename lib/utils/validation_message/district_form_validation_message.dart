@@ -1,5 +1,5 @@
 class DistrictFormValidationMessage {
-  static String districtRequired = "district is required";
-  static String districtMaxLength = "district must be less then 100 characters";
-  static String districtMinLength = "district must be greater then 2 characters";
+  static String districtRequired = "District is required";
+  static String districtMaxLength = "District must be less then 100 characters";
+  static String districtMinLength = "District must be greater then 2 characters";
 }

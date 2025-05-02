@@ -13,4 +13,6 @@ class RoutePaths {
   static const String districtForm = '/district/form';
   static const String cities = '/cities';
   static const String cityForm = '/city/form';
+  static const String areaNames = '/area-names';
+  static const String areaNameForm = '/area-name/form';
 }

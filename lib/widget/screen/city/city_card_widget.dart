@@ -35,16 +35,18 @@ class CityCardWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-
-              Container(
-                margin: const EdgeInsets.only(top: 5),
-                child: Text(
-                  '(${city.district.name.toUpperCase()} - ${city.district.state.name.toUpperCase()})',
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleSmall!.copyWith(color: themeData.offWhite),
-                ),
-              ),
+              city.district.name.isNotEmpty &&
+                      city.district.state.name.isNotEmpty
+                  ? Container(
+                    margin: const EdgeInsets.only(top: 5),
+                    child: Text(
+                      '(${city.district.name.toUpperCase()} - ${city.district.state.name.toUpperCase()})',
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        color: themeData.offWhite,
+                      ),
+                    ),
+                  )
+                  : Container(),
               Divider(color: themeData.offWhite, thickness: 0.4),
               AuditTrailWidget(
                 audioDateTimeInfoLabel: 'Created At:',

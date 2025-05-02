@@ -24,13 +24,15 @@ class StateSelectionFormWidget extends StatelessWidget {
   final Function onChange;
 
   void onStateChange(String value, List<state_model.State> states) {
-    state_model.State stateInfo = state_model.State.defaultValues();
+    if (value != selectedState.id) {
+      state_model.State stateInfo = state_model.State.defaultValues();
 
-    if (value.isNotEmpty) {
-      stateInfo = states.firstWhere((state) => state.id == value);
+      if (value.isNotEmpty) {
+        stateInfo = states.firstWhere((state) => state.id == value);
+      }
+
+      onChange(stateInfo);
     }
-
-    onChange(stateInfo);
   }
 
   @override

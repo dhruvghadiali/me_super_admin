@@ -6,9 +6,10 @@ import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/utils/utils.dart';
 import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/model/city/city.dart';
-import 'package:me_super_admin/utils/snackbar/snackbar.dart';
 import 'package:me_super_admin/model/district/district.dart';
+import 'package:me_super_admin/utils/snackbar/snackbar.dart';
 import 'package:me_super_admin/service/http/http_service.dart';
+import 'package:me_super_admin/model/area_name/area_name.dart';
 import 'package:me_super_admin/model/state/state.dart' as state_mode;
 import 'package:me_super_admin/model/http_service/put_http_service.dart';
 import 'package:me_super_admin/model/http_service/get_http_service.dart';
@@ -16,27 +17,28 @@ import 'package:me_super_admin/model/http_service/post_http_service.dart';
 import 'package:me_super_admin/model/http_service/delete_http_service.dart';
 import 'package:me_super_admin/model/http_service/http_response_service.dart';
 import 'package:me_super_admin/model/http_service/mock_http_api_property_service.dart';
+import 'package:me_super_admin/utils/validation_message/area_name_validation_message.dart';
 import 'package:me_super_admin/utils/validation_message/city_form_validation_message.dart';
 import 'package:me_super_admin/utils/validation_message/state_form_validation_message.dart';
 import 'package:me_super_admin/utils/validation_message/district_form_validation_message.dart';
 
-class CityController extends GetxController {
-  String snackbarTitle = "City Alert";
-  List<City> cities = [];
-  City city = City.defaultValues();
+class AreaNameController extends GetxController {
+  String snackbarTitle = "Area Name Alert";
+  List<AreaName> areaNames = [];
+  AreaName areaName = AreaName.defaultValues();
   bool isLoader = false;
 
-  void resetCityForm() {
-    city = City.defaultValues();
+  void resetAreaNameForm() {
+    areaName = AreaName.defaultValues();
     update();
   }
 
-  void setCityForm(City cityObj) {
-    city = cityObj;
+  void setAreaNameForm(AreaName areaNameObj) {
+    areaName = areaNameObj;
     update();
 
-    if (city.id.isNotEmpty) {
-      Get.offAllNamed(RoutePaths.cityForm);
+    if (areaName.id.isNotEmpty) {
+      Get.offAllNamed(RoutePaths.areaNameForm);
     }
   }
 
@@ -56,11 +58,17 @@ class CityController extends GetxController {
 
   String? cityValidator(String? value) {
     return ValidationBuilder(
-          requiredMessage: CityFormValidationMessage.cityRequired,
+      requiredMessage: CityFormValidationMessage.cityRequired,
+    ).required(CityFormValidationMessage.cityRequired).build()(value?.trim());
+  }
+
+  String? areaNameValidator(String? value) {
+    return ValidationBuilder(
+          requiredMessage: AreaNameFormValidationMessage.areaNameRequired,
         )
-        .required(CityFormValidationMessage.cityRequired)
-        .minLength(2, CityFormValidationMessage.cityMinLength)
-        .maxLength(100, CityFormValidationMessage.cityMaxLength)
+        .required(AreaNameFormValidationMessage.areaNameRequired)
+        .minLength(2, AreaNameFormValidationMessage.areaNameMinLength)
+        .maxLength(100, AreaNameFormValidationMessage.areaNameMaxLength)
         .build()(value?.trim());
   }
 
@@ -68,9 +76,13 @@ class CityController extends GetxController {
     state_mode.State value,
     GlobalKey<FormFieldState> formFieldKey,
   ) {
+    City city = areaName.city;
     District district = city.district;
+
     district = district.copyWith(state: value, id: "", name: "");
-    city = city.copyWith(district: district);
+    city = city.copyWith(district: district, id: "", name: "");
+    areaName = areaName.copyWith(city: city);
+
     formFieldKey.currentState?.validate();
     update();
   }
@@ -79,38 +91,51 @@ class CityController extends GetxController {
     District value,
     GlobalKey<FormFieldState> formFieldKey,
   ) {
-    city = city.copyWith(district: value);
+    City city = areaName.city;
+    city = city.copyWith(district: value, id: "", name: "");
+
+    areaName = areaName.copyWith(city: city);
+    formFieldKey.currentState?.validate();
+
+    update();
+  }
+
+  void onCityChange(City value, GlobalKey<FormFieldState> formFieldKey) {
+    areaName = areaName.copyWith(city: value);
     formFieldKey.currentState?.validate();
     update();
   }
 
-  void onCityChange(String value) {
-    city = city.copyWith(name: value.trim());
+  void onAreaNameChange(String value) {
+    areaName = areaName.copyWith(name: value.trim());
     update();
   }
 
-  void onCitySubmitted(String value, GlobalKey<FormFieldState> formFieldKey) {
-    city = city.copyWith(name: value.trim());
+  void onAreaNameSubmitted(
+    String value,
+    GlobalKey<FormFieldState> formFieldKey,
+  ) {
+    areaName = areaName.copyWith(name: value.trim());
     formFieldKey.currentState?.validate();
   }
 
   void onSubmitForm(GlobalKey<FormState> formKey) async {
     if (formKey.currentState?.validate() ?? false) {
-      (city.id.isEmpty) ? await postCity() : await putCity();
+      (areaName.id.isEmpty) ? await postAreaName() : await putAreaName();
     }
   }
 
-  Future<void> getCities() async {
+  Future<void> getAreaNames() async {
     String authToken = await Utils.getAuthToken();
-    cities = [];
+    areaNames = [];
     isLoader = true;
     update();
 
     GetHttpService getHttpService = GetHttpService(
-      endPoint: 'super-admin/cities',
+      endPoint: 'super-admin/area-names',
       headers: {"Authorization": 'Bearer $authToken'},
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/cities/cities_200.json',
+        endPoint: 'assets/mock_data/area-names/area-names_200.json',
         statusCode: 200,
       ),
     );
@@ -121,9 +146,9 @@ class CityController extends GetxController {
         AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
 
-      for (var cityJson in response.data) {
-        final City cityObj = City.fromJson(cityJson);
-        cities.add(cityObj);
+      for (var areaNameJson in response.data) {
+        final AreaName areaNameObj = AreaName.fromJson(areaNameJson);
+        areaNames.add(areaNameObj);
       }
     } else {
       isLoader = false;
@@ -137,17 +162,17 @@ class CityController extends GetxController {
     update();
   }
 
-  Future<void> postCity() async {
+  Future<void> postAreaName() async {
     String authToken = await Utils.getAuthToken();
     isLoader = true;
     update();
 
     PostHttpService postHttpService = PostHttpService(
-      endPoint: 'super-admin/cities',
+      endPoint: 'super-admin/area-names',
       headers: {"Authorization": 'Bearer $authToken'},
-      body: city.toJson(),
+      body: areaName.toJson(),
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/cities/cities_200.json',
+        endPoint: 'assets/mock_data/area-names/area-names_200.json',
         statusCode: 200,
       ),
     );
@@ -164,7 +189,7 @@ class CityController extends GetxController {
         message: response.message,
         appSnackbarStatus: AppSnackbarStatus.success,
       );
-      Get.offAllNamed(RoutePaths.cities);
+      Get.offAllNamed(RoutePaths.areaNames);
     } else {
       isLoader = false;
       Snackbar.getSnackbar(
@@ -177,17 +202,17 @@ class CityController extends GetxController {
     update();
   }
 
-  Future<void> putCity() async {
+  Future<void> putAreaName() async {
     String authToken = await Utils.getAuthToken();
     isLoader = true;
     update();
 
     PutHttpService putHttpService = PutHttpService(
-      endPoint: 'super-admin/cities/${city.id}',
+      endPoint: 'super-admin/area-names/${areaName.id}',
       headers: {"Authorization": 'Bearer $authToken'},
-      body: city.toJson(),
+      body: areaName.toJson(),
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/cities/cities_200.json',
+        endPoint: 'assets/mock_data/area-names/area-names_200.json',
         statusCode: 200,
       ),
     );
@@ -202,7 +227,7 @@ class CityController extends GetxController {
         message: response.message,
         appSnackbarStatus: AppSnackbarStatus.success,
       );
-      Get.offAllNamed(RoutePaths.cities);
+      Get.offAllNamed(RoutePaths.areaNames);
     } else {
       isLoader = false;
       Snackbar.getSnackbar(
@@ -215,16 +240,16 @@ class CityController extends GetxController {
     update();
   }
 
-  Future<void> deleteCity(String id) async {
+  Future<void> deleteAreaName(String id) async {
     String authToken = await Utils.getAuthToken();
     isLoader = true;
     update();
 
     DeleteHttpService deleteHttpService = DeleteHttpService(
-      endPoint: 'super-admin/cities/$id',
+      endPoint: 'super-admin/area-names/$id',
       headers: {"Authorization": 'Bearer $authToken'},
       mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/cities/cities_200.json',
+        endPoint: 'assets/mock_data/area-names/area-names_200.json',
         statusCode: 200,
       ),
     );
@@ -241,7 +266,7 @@ class CityController extends GetxController {
         message: response.message,
         appSnackbarStatus: AppSnackbarStatus.success,
       );
-      getCities();
+      getAreaNames();
     } else {
       isLoader = false;
       Snackbar.getSnackbar(

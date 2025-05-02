@@ -27,14 +27,16 @@ class DistrictSelectionFormWidget extends StatelessWidget {
   final Function onChange;
 
   void onDistrictChange(String value, List<District> districts) {
-    District districtInfo = District.defaultValues();
-    districtInfo = districtInfo.copyWith(state: selectedState);
+    if (value != selectedDistrict.id) {
+      District districtInfo = District.defaultValues();
+      districtInfo = districtInfo.copyWith(state: selectedState);
 
-    if (value.isNotEmpty) {
-      districtInfo = districts.firstWhere((district) => district.id == value);
+      if (value.isNotEmpty) {
+        districtInfo = districts.firstWhere((district) => district.id == value);
+      }
+
+      onChange(districtInfo);
     }
-
-    onChange(districtInfo);
   }
 
   @override
@@ -60,7 +62,12 @@ class DistrictSelectionFormWidget extends StatelessWidget {
                       .where(
                         (district) => district.state.id == selectedState.id,
                       )
-                      .map((state) => {'label': state.name, "value": state.id})
+                      .map(
+                        (district) => {
+                          'label': district.name,
+                          "value": district.id,
+                        },
+                      )
                       .toList(),
         );
       },

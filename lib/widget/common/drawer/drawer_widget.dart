@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:me_super_admin/controller/city/city_controller.dart';
-import 'package:me_super_admin/controller/district/district_controller.dart';
-import 'package:me_super_admin/controller/state/state_controller.dart';
 
 import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/drawer_items.dart';
+import 'package:me_super_admin/controller/city/city_controller.dart';
+import 'package:me_super_admin/controller/state/state_controller.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
+import 'package:me_super_admin/controller/district/district_controller.dart';
 import 'package:me_super_admin/controller/fee_type/fee_type_controller.dart';
+import 'package:me_super_admin/controller/area_name/area_name_controller.dart';
 import 'package:me_super_admin/controller/school_type/school_type_controller.dart';
 import 'package:me_super_admin/controller/academic_grade/academic_grade_controller.dart';
 import 'package:me_super_admin/controller/education_board/education_board_controller.dart';
@@ -56,6 +57,16 @@ class DrawerWidget extends StatelessWidget {
         stateController.getStates();
         districtController.getDistricts();
         cityController.resetCityForm();
+        break;
+      case RoutePaths.areaNameForm || RoutePaths.areaNames:
+        DistrictController districtController = Get.put(DistrictController());
+        StateController stateController = Get.put(StateController());
+        CityController cityController = Get.put(CityController());
+        AreaNameController areaNameController = Get.put(AreaNameController());
+        stateController.getStates();
+        districtController.getDistricts();
+        cityController.getCities();
+        areaNameController.resetAreaNameForm();
         break;
       default:
         break;
