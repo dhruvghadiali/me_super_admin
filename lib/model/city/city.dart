@@ -1,65 +1,65 @@
-import 'package:me_super_admin/model/state/state.dart';
+import 'package:me_super_admin/model/district/district.dart';
 
-class District {
+class City {
   String id;
   String name;
   String createdBy;
   String updatedBy;
   DateTime createdAt;
   DateTime updatedAt;
-  State state;
+  District district;
 
-  District({
+  City({
     required this.id,
     required this.name,
     required this.createdBy,
     required this.updatedBy,
     required this.createdAt,
     required this.updatedAt,
-    required this.state,
+    required this.district,
   });
 
-  factory District.fromJson(Map<String, dynamic> json) {
-    return District(
+  factory City.fromJson(Map<String, dynamic> json) {
+    return City(
       id: setId(json),
       name: setName(json),
       createdBy: setCreatedBy(json),
       updatedBy: setUpdatedBy(json),
       createdAt: setCreatedAt(json),
       updatedAt: setUpdatedAt(json),
-      state: setState(json),
+      district: setDistrict(json),
     );
   }
 
-  District copyWith({
+  City copyWith({
     String? id,
     String? name,
     String? createdBy,
     String? updatedBy,
     DateTime? createdAt,
     DateTime? updatedAt,
-    State? state,
-  }) => District(
+    District? district,
+  }) => City(
     id: id ?? this.id,
     name: name ?? this.name,
     createdBy: createdBy ?? this.createdBy,
     updatedBy: updatedBy ?? this.updatedBy,
     createdAt: createdAt ?? this.createdAt,
     updatedAt: updatedAt ?? this.updatedAt,
-    state: state ?? this.state,
+    district: district ?? this.district,
   );
 
-  static District defaultValues() => District(
+  static City defaultValues() => City(
     id: '',
     name: '',
     createdBy: '',
     updatedBy: '',
     createdAt: DateTime(1500, 01, 01),
     updatedAt: DateTime(1500, 01, 01),
-    state: State.defaultValues(),
+    district: District.defaultValues(),
   );
 
-  Map<String, dynamic> toJson() => {'name': name, 'state': state.id};
+  Map<String, dynamic> toJson() => {'name': name, 'district': district.id};
 
   static String setId(Map<String, dynamic> json) {
     if (json.containsKey('id')) {
@@ -141,12 +141,12 @@ class District {
     return DateTime(1500, 01, 01);
   }
 
-  static State setState(Map<String, dynamic> json) {
-    if (json.containsKey('state')) {
-      if (json['state'] != null) {
-        return State.fromJson(json['state']);
+  static District setDistrict(Map<String, dynamic> json) {
+    if (json.containsKey('district')) {
+      if (json['district'] != null) {
+        return District.fromJson(json['district']);
       }
     }
-    return State.defaultValues();
+    return District.defaultValues();
   }
 }

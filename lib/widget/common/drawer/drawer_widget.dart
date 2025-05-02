@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:me_super_admin/controller/city/city_controller.dart';
 import 'package:me_super_admin/controller/district/district_controller.dart';
 import 'package:me_super_admin/controller/state/state_controller.dart';
 
@@ -47,6 +48,14 @@ class DrawerWidget extends StatelessWidget {
         StateController stateController = Get.put(StateController());
         stateController.getStates();
         districtController.resetDistrictForm();
+        break;
+      case RoutePaths.cityForm || RoutePaths.cities:
+        DistrictController districtController = Get.put(DistrictController());
+        StateController stateController = Get.put(StateController());
+        CityController cityController = Get.put(CityController());
+        stateController.getStates();
+        districtController.getDistricts();
+        cityController.resetCityForm();
         break;
       default:
         break;

@@ -180,21 +180,15 @@ List<DrawerItem> drawerItems = [
     route: '',
     submenu: [
       DrawerItem(
-        title: 'Active Cities',
+        title: 'Cities',
         icon: Icons.check_circle,
-        route: '/cities/active',
+        route: RoutePaths.cities,
         submenu: [],
       ),
       DrawerItem(
-        title: 'Inactive Cities',
-        icon: Icons.remove_circle,
-        route: '/cities/inactive',
-        submenu: [],
-      ),
-      DrawerItem(
-        title: 'Register Cities',
+        title: 'Add City',
         icon: Icons.add_circle,
-        route: '/cities/register',
+        route: RoutePaths.cityForm,
         submenu: [],
       ),
     ],

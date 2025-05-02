@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:me_super_admin/screens/city/city_form_screen.dart';
+import 'package:me_super_admin/screens/city/city_screen.dart';
 
 import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/screens/state/state_screen.dart';
@@ -56,6 +58,8 @@ class MeSuperAdminApp extends StatelessWidget {
         RoutePaths.stateForm: (context) => StateFormScreen(),
         RoutePaths.districts: (context) => DistrictScreen(),
         RoutePaths.districtForm: (context) => DistrictFormScreen(),
+        RoutePaths.cities: (context) => CityScreen(),
+        RoutePaths.cityForm: (context) => CityFormScreen(),
       },
     );
   }

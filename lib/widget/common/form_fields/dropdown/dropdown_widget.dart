@@ -52,6 +52,7 @@ class DropdownWidget extends StatelessWidget {
           isDense: true,
           isExpanded: true,
           dropdownColor: themeData.offWhite,
+          validator: (String? value) => validator(value),
           icon: Icon(
             Icons.arrow_drop_down_rounded,
             color: themeData.calPolyPomonaGreen,
@@ -136,7 +137,7 @@ class DropdownWidget extends StatelessWidget {
                           ),
                         ),
                       );
-                    }).toList(),
+                    }),
                   ]
                   : [
                     DropdownMenuItem(
@@ -163,11 +164,12 @@ class DropdownWidget extends StatelessWidget {
                       -1
                   ? ""
                   : selectedItem,
-          onChanged: (String? selectedItem) {
-            print("selectedItem $selectedItem");
-            onChanged(selectedItem);
-          },
-          validator: (String? value) => validator(value),
+          onChanged:
+              isEnable == true
+                  ? (String? selectedItem) {
+                    onChanged(selectedItem);
+                  }
+                  : null,
         ),
       ],
     );
