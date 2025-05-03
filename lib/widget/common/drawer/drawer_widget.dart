@@ -5,6 +5,7 @@ import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/drawer_items.dart';
 import 'package:me_super_admin/controller/city/city_controller.dart';
 import 'package:me_super_admin/controller/state/state_controller.dart';
+import 'package:me_super_admin/controller/zipcode/zipcode_controller.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 import 'package:me_super_admin/controller/district/district_controller.dart';
 import 'package:me_super_admin/controller/fee_type/fee_type_controller.dart';
@@ -67,6 +68,18 @@ class DrawerWidget extends StatelessWidget {
         districtController.getDistricts();
         cityController.getCities();
         areaNameController.resetAreaNameForm();
+        break;
+      case RoutePaths.zipcodeForm || RoutePaths.zipcodes:
+        DistrictController districtController = Get.put(DistrictController());
+        StateController stateController = Get.put(StateController());
+        CityController cityController = Get.put(CityController());
+        AreaNameController areaNameController = Get.put(AreaNameController());
+        ZipcodeController zipcodeController = Get.put(ZipcodeController());
+        stateController.getStates();
+        districtController.getDistricts();
+        cityController.getCities();
+        areaNameController.getAreaNames();
+        zipcodeController.resetZipcodeForm();
         break;
       default:
         break;

@@ -10,6 +10,7 @@ import 'package:me_super_admin/screens/state/state_screen.dart';
 import 'package:me_super_admin/screens/school/school_screen.dart';
 import 'package:me_super_admin/screens/city/city_form_screen.dart';
 import 'package:me_super_admin/screens/sign_in/sign_in_screen.dart';
+import 'package:me_super_admin/screens/zipcode/zipcode_screen.dart';
 import 'package:me_super_admin/screens/state/state_form_screen.dart';
 import 'package:me_super_admin/screens/district/district_screen.dart';
 import 'package:me_super_admin/screens/facility/facility_screen.dart';
@@ -17,6 +18,7 @@ import 'package:me_super_admin/screens/fee_type/fee_type_screen.dart';
 import 'package:me_super_admin/utils/theme_data/theme_data_util.dart';
 import 'package:me_super_admin/screens/dashboard/dashboard_screen.dart';
 import 'package:me_super_admin/screens/area_name/area_name_screen.dart';
+import 'package:me_super_admin/screens/zipcode/zipcode_form_screen.dart';
 import 'package:me_super_admin/screens/district/district_form_screen.dart';
 import 'package:me_super_admin/screens/fee_type/fee_type_form_screen.dart';
 import 'package:me_super_admin/screens/school_type/school_type_screen.dart';
@@ -65,6 +67,8 @@ class MeSuperAdminApp extends StatelessWidget {
         RoutePaths.cityForm: (context) => CityFormScreen(),
         RoutePaths.areaNames: (context) => AreaNameScreen(),
         RoutePaths.areaNameForm: (context) => AreaNameFormScreen(),
+        RoutePaths.zipcodes: (context) => ZipcodeScreen(),
+        RoutePaths.zipcodeForm: (context) => ZipcodeFormScreen(),
       },
     );
   }

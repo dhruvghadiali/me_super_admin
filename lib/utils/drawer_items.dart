@@ -218,21 +218,15 @@ List<DrawerItem> drawerItems = [
     route: '',
     submenu: [
       DrawerItem(
-        title: 'Active Zipcodes',
+        title: 'Zipcodes',
         icon: Icons.check_circle,
-        route: '/zipcodes/active',
+        route: RoutePaths.zipcodes,
         submenu: [],
       ),
       DrawerItem(
-        title: 'Inactive Zipcodes',
-        icon: Icons.remove_circle,
-        route: '/zipcodes/inactive',
-        submenu: [],
-      ),
-      DrawerItem(
-        title: 'Register Zipcodes',
+        title: 'Add Zipcode',
         icon: Icons.add_circle,
-        route: '/zipcodes/register',
+        route: RoutePaths.zipcodeForm,
         submenu: [],
       ),
     ],
