@@ -7,7 +7,6 @@ import 'package:me_super_admin/utils/utils.dart';
 import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/snackbar/snackbar.dart';
 import 'package:me_super_admin/model/fee_type/fee_type.dart';
-import 'package:me_super_admin/utils/validation_message.dart';
 import 'package:me_super_admin/service/http/http_service.dart';
 import 'package:me_super_admin/model/http_service/get_http_service.dart';
 import 'package:me_super_admin/model/http_service/put_http_service.dart';
@@ -15,6 +14,7 @@ import 'package:me_super_admin/model/http_service/post_http_service.dart';
 import 'package:me_super_admin/model/http_service/delete_http_service.dart';
 import 'package:me_super_admin/model/http_service/http_response_service.dart';
 import 'package:me_super_admin/model/http_service/mock_http_api_property_service.dart';
+import 'package:me_super_admin/utils/validation_message/fee_type_validation_message.dart';
 
 class FeeTypeController extends GetxController {
   String snackbarTitle = "Fee Type Alert";
@@ -37,10 +37,10 @@ class FeeTypeController extends GetxController {
   }
 
   String? feeTypeValidator(String? value) {
-    return ValidationBuilder(requiredMessage: ValidationMessage.feeTypeRequired)
-        .required(ValidationMessage.feeTypeRequired)
-        .minLength(2, ValidationMessage.feeTypeMinLength)
-        .maxLength(100, ValidationMessage.feeTypeMaxLength)
+    return ValidationBuilder(requiredMessage: FeeTypeValidationMessage.feeTypeRequired)
+        .required(FeeTypeValidationMessage.feeTypeRequired)
+        .minLength(2, FeeTypeValidationMessage.feeTypeMinLength)
+        .maxLength(100, FeeTypeValidationMessage.feeTypeMaxLength)
         .build()(value?.trim());
   }
 

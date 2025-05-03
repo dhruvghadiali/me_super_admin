@@ -12,7 +12,7 @@ List<DrawerItem> drawerItems = [
   ),
   DrawerItem(
     title: 'Manage Schools',
-    icon: Icons.school,
+    icon: Icons.supervised_user_circle_rounded,
     route: '',
     submenu: [
       DrawerItem(
@@ -36,63 +36,95 @@ List<DrawerItem> drawerItems = [
     ],
   ),
   DrawerItem(
-    title: 'Manage Faculties',
-    icon: Icons.menu,
+    title: 'Manage Facility Types',
+    icon: Icons.merge_type_sharp,
     route: '',
     submenu: [
       DrawerItem(
-        title: 'Active Faculties',
-        icon: Icons.check_circle,
-        route: '/faculties/active',
-        submenu: [],
-      ),
-      DrawerItem(
-        title: 'Inactive Faculties',
-        icon: Icons.remove_circle,
-        route: '/faculties/inactive',
-        submenu: [],
-      ),
-      DrawerItem(
-        title: 'Register Faculties',
-        icon: Icons.add_circle,
-        route: '/faculties/register',
-        submenu: [],
-      ),
-    ],
-  ),
-  DrawerItem(
-    title: 'Manage Fee Types',
-    icon: Icons.menu,
-    route: '',
-    submenu: [
-      DrawerItem(
-        title: 'Active Fee Types',
-        icon: Icons.check_circle,
+        title: 'Facility Types',
+        icon: Icons.folder,
         route: RoutePaths.feeTypes,
         submenu: [],
       ),
       DrawerItem(
-        title: 'Add Fee Types',
-        icon: Icons.remove_circle,
+        title: 'Add Facility Type',
+        icon: Icons.add_circle,
         route: RoutePaths.feeTypeForm,
         submenu: [],
       ),
     ],
   ),
   DrawerItem(
-    title: 'Manage Eduction Boards',
-    icon: Icons.menu,
+    title: 'Manage Faculties',
+    icon: Icons.home_repair_service_sharp,
     route: '',
     submenu: [
       DrawerItem(
-        title: 'Eduction Boards',
-        icon: Icons.check_circle,
+        title: 'Facilities',
+        icon: Icons.folder,
+        route: RoutePaths.feeTypes,
+        submenu: [],
+      ),
+      DrawerItem(
+        title: 'Add Facility',
+        icon: Icons.add_circle,
+        route: RoutePaths.feeTypeForm,
+        submenu: [],
+      ),
+    ],
+  ),
+  DrawerItem(
+    title: 'Manage Fee Types',
+    icon: Icons.currency_rupee,
+    route: '',
+    submenu: [
+      DrawerItem(
+        title: 'Fee Types',
+        icon: Icons.folder,
+        route: RoutePaths.feeTypes,
+        submenu: [],
+      ),
+      DrawerItem(
+        title: 'Add Fee Type',
+        icon: Icons.add_circle,
+        route: RoutePaths.feeTypeForm,
+        submenu: [],
+      ),
+    ],
+  ),
+  DrawerItem(
+    title: 'Manage Admission Documents',
+    icon: Icons.description,
+    route: '',
+    submenu: [
+      DrawerItem(
+        title: 'Admission Documents',
+        icon: Icons.folder,
         route: RoutePaths.educationBoards,
         submenu: [],
       ),
       DrawerItem(
-        title: 'Add Eduction Boards',
-        icon: Icons.remove_circle,
+        title: 'Add Admission Document',
+        icon: Icons.add_circle,
+        route: RoutePaths.educationBoardForm,
+        submenu: [],
+      ),
+    ],
+  ),
+  DrawerItem(
+    title: 'Manage Eduction Boards',
+    icon: Icons.import_contacts,
+    route: '',
+    submenu: [
+      DrawerItem(
+        title: 'Eduction Boards',
+        icon: Icons.folder,
+        route: RoutePaths.educationBoards,
+        submenu: [],
+      ),
+      DrawerItem(
+        title: 'Add Eduction Board',
+        icon: Icons.add_circle,
         route: RoutePaths.educationBoardForm,
         submenu: [],
       ),
@@ -100,17 +132,17 @@ List<DrawerItem> drawerItems = [
   ),
   DrawerItem(
     title: 'Manage School Types',
-    icon: Icons.menu,
+    icon: Icons.school_rounded,
     route: '',
     submenu: [
       DrawerItem(
         title: 'School Types',
-        icon: Icons.check_circle,
+        icon: Icons.folder,
         route: RoutePaths.schoolTypes,
         submenu: [],
       ),
       DrawerItem(
-        title: 'Add School Types',
+        title: 'Add School Type',
         icon: Icons.add_circle,
         route: RoutePaths.schoolTypeForm,
         submenu: [],
@@ -119,18 +151,18 @@ List<DrawerItem> drawerItems = [
   ),
   DrawerItem(
     title: 'Manage Academic Grades',
-    icon: Icons.menu,
+    icon: Icons.emoji_events,
     route: '',
     submenu: [
       DrawerItem(
         title: 'Academic Grades',
-        icon: Icons.check_circle,
+        icon: Icons.folder,
         route: RoutePaths.academicGrades,
         submenu: [],
       ),
       DrawerItem(
-        title: 'Add Academic Grades',
-        icon: Icons.remove_circle,
+        title: 'Add Academic Grade',
+        icon: Icons.add_circle,
         route: RoutePaths.academicGradeForm,
         submenu: [],
       ),
@@ -138,12 +170,12 @@ List<DrawerItem> drawerItems = [
   ),
   DrawerItem(
     title: 'Manage States',
-    icon: Icons.menu,
+    icon: Icons.map,
     route: '',
     submenu: [
       DrawerItem(
         title: 'States',
-        icon: Icons.check_circle,
+        icon: Icons.folder,
         route: RoutePaths.states,
         submenu: [],
       ),
@@ -155,14 +187,14 @@ List<DrawerItem> drawerItems = [
       ),
     ],
   ),
-   DrawerItem(
+  DrawerItem(
     title: 'Manage Districts',
-    icon: Icons.menu,
+    icon: Icons.account_balance,
     route: '',
     submenu: [
       DrawerItem(
         title: 'Districts',
-        icon: Icons.check_circle,
+        icon: Icons.folder,
         route: RoutePaths.districts,
         submenu: [],
       ),
@@ -176,12 +208,12 @@ List<DrawerItem> drawerItems = [
   ),
   DrawerItem(
     title: 'Manage Cities',
-    icon: Icons.menu,
+    icon: Icons.business,
     route: '',
     submenu: [
       DrawerItem(
         title: 'Cities',
-        icon: Icons.check_circle,
+        icon: Icons.folder,
         route: RoutePaths.cities,
         submenu: [],
       ),
@@ -195,12 +227,12 @@ List<DrawerItem> drawerItems = [
   ),
   DrawerItem(
     title: 'Manage Area Names',
-    icon: Icons.menu,
+    icon: Icons.location_city_outlined,
     route: '',
     submenu: [
       DrawerItem(
         title: 'Area Names',
-        icon: Icons.check_circle,
+        icon: Icons.folder,
         route: RoutePaths.areaNames,
         submenu: [],
       ),
@@ -214,12 +246,12 @@ List<DrawerItem> drawerItems = [
   ),
   DrawerItem(
     title: 'Manage Zipcodes',
-    icon: Icons.menu,
+    icon: Icons.location_on_outlined,
     route: '',
     submenu: [
       DrawerItem(
         title: 'Zipcodes',
-        icon: Icons.check_circle,
+        icon: Icons.folder,
         route: RoutePaths.zipcodes,
         submenu: [],
       ),

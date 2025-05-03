@@ -6,7 +6,6 @@ import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/utils/utils.dart';
 import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/snackbar/snackbar.dart';
-import 'package:me_super_admin/utils/validation_message.dart';
 import 'package:me_super_admin/service/http/http_service.dart';
 import 'package:me_super_admin/model/http_service/get_http_service.dart';
 import 'package:me_super_admin/model/http_service/put_http_service.dart';
@@ -15,6 +14,7 @@ import 'package:me_super_admin/model/education_board/education_board.dart';
 import 'package:me_super_admin/model/http_service/delete_http_service.dart';
 import 'package:me_super_admin/model/http_service/http_response_service.dart';
 import 'package:me_super_admin/model/http_service/mock_http_api_property_service.dart';
+import 'package:me_super_admin/utils/validation_message/education_board_validation_message.dart';
 
 class EducationBoardController extends GetxController {
   String snackbarTitle = "Education Board Alert";
@@ -38,11 +38,11 @@ class EducationBoardController extends GetxController {
 
   String? educationBoardValidator(String? value) {
     return ValidationBuilder(
-          requiredMessage: ValidationMessage.educationBoardRequired,
+          requiredMessage: EducationBoardValidationMessage.educationBoardRequired,
         )
-        .required(ValidationMessage.educationBoardRequired)
-        .minLength(2, ValidationMessage.educationBoardMinLength)
-        .maxLength(100, ValidationMessage.educationBoardMaxLength)
+        .required(EducationBoardValidationMessage.educationBoardRequired)
+        .minLength(2, EducationBoardValidationMessage.educationBoardMinLength)
+        .maxLength(100, EducationBoardValidationMessage.educationBoardMaxLength)
         .build()(value?.trim());
   }
 

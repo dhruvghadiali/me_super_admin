@@ -36,7 +36,7 @@ class _AcademicGradeScreenState extends State<AcademicGradeScreen> {
     return GetBuilder<AcademicGradeController>(
       builder: (academicGradeControllerContext) {
         return ScaffoldWidget(
-          title: 'School Types',
+          title: 'Academic Grades',
           child:
               academicGradeControllerContext.isLoader
                   ? LoaderWidget(appColorScheme: AppColorScheme.primary)

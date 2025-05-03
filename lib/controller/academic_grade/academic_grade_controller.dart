@@ -6,7 +6,6 @@ import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/utils/utils.dart';
 import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/snackbar/snackbar.dart';
-import 'package:me_super_admin/utils/validation_message.dart';
 import 'package:me_super_admin/service/http/http_service.dart';
 import 'package:me_super_admin/model/academic_grade/academic_grade.dart';
 import 'package:me_super_admin/model/http_service/get_http_service.dart';
@@ -15,6 +14,7 @@ import 'package:me_super_admin/model/http_service/post_http_service.dart';
 import 'package:me_super_admin/model/http_service/delete_http_service.dart';
 import 'package:me_super_admin/model/http_service/http_response_service.dart';
 import 'package:me_super_admin/model/http_service/mock_http_api_property_service.dart';
+import 'package:me_super_admin/utils/validation_message/academic_grade_validation_message.dart';
 
 class AcademicGradeController extends GetxController {
   String snackbarTitle = "Academic Grade Alert";
@@ -38,11 +38,11 @@ class AcademicGradeController extends GetxController {
 
   String? academicGradeValidator(String? value) {
     return ValidationBuilder(
-          requiredMessage: ValidationMessage.academicGradeRequired,
+          requiredMessage: AcademicGradeValidationMessage.academicGradeRequired,
         )
-        .required(ValidationMessage.academicGradeRequired)
-        .minLength(2, ValidationMessage.academicGradeMinLength)
-        .maxLength(100, ValidationMessage.academicGradeMaxLength)
+        .required(AcademicGradeValidationMessage.academicGradeRequired)
+        .minLength(2, AcademicGradeValidationMessage.academicGradeMinLength)
+        .maxLength(100, AcademicGradeValidationMessage.academicGradeMaxLength)
         .build()(value?.trim());
   }
 

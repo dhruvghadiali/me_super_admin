@@ -6,7 +6,6 @@ import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/utils/utils.dart';
 import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/snackbar/snackbar.dart';
-import 'package:me_super_admin/utils/validation_message.dart';
 import 'package:me_super_admin/service/http/http_service.dart';
 import 'package:me_super_admin/model/school_type/school_type.dart';
 import 'package:me_super_admin/model/http_service/get_http_service.dart';
@@ -15,6 +14,7 @@ import 'package:me_super_admin/model/http_service/post_http_service.dart';
 import 'package:me_super_admin/model/http_service/delete_http_service.dart';
 import 'package:me_super_admin/model/http_service/http_response_service.dart';
 import 'package:me_super_admin/model/http_service/mock_http_api_property_service.dart';
+import 'package:me_super_admin/utils/validation_message/school_type_validation_message.dart';
 
 class SchoolTypeController extends GetxController {
   String snackbarTitle = "School Type Alert";
@@ -38,11 +38,11 @@ class SchoolTypeController extends GetxController {
 
   String? schoolTypeValidator(String? value) {
     return ValidationBuilder(
-          requiredMessage: ValidationMessage.schoolTypeRequired,
+          requiredMessage: SchoolTypeValidationMessage.schoolTypeRequired,
         )
-        .required(ValidationMessage.schoolTypeRequired)
-        .minLength(2, ValidationMessage.schoolTypeMinLength)
-        .maxLength(100, ValidationMessage.schoolTypeMaxLength)
+        .required(SchoolTypeValidationMessage.schoolTypeRequired)
+        .minLength(2, SchoolTypeValidationMessage.schoolTypeMinLength)
+        .maxLength(100, SchoolTypeValidationMessage.schoolTypeMaxLength)
         .build()(value?.trim());
   }
 
