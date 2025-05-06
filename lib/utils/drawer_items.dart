@@ -100,13 +100,13 @@ List<DrawerItem> drawerItems = [
       DrawerItem(
         title: 'Admission Documents',
         icon: Icons.folder,
-        route: RoutePaths.educationBoards,
+        route: RoutePaths.admissionDocuments,
         submenu: [],
       ),
       DrawerItem(
         title: 'Add Admission Document',
         icon: Icons.add_circle,
-        route: RoutePaths.educationBoardForm,
+        route: RoutePaths.admissionDocumentForm,
         submenu: [],
       ),
     ],

@@ -42,6 +42,8 @@
   "@educationBoardTextFieldLabelText": {},
   "feeTypeTextFieldLabelText": "Fee type",
   "@feeTypeTextFieldLabelText": {},
+  "admissionDocumentTextFieldLabelText": "Admission Document",
+  "@admissionDocumentTextFieldLabelText": {},
   "stateTextFieldLabelText": "State",
   "@stateTextFieldLabelText": {},
   "districtTextFieldLabelText": "District",

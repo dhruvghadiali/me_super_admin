@@ -28,6 +28,8 @@ import 'package:me_super_admin/screens/academic_grade/academic_grade_screen.dart
 import 'package:me_super_admin/screens/education_board/education_board_screen.dart';
 import 'package:me_super_admin/screens/academic_grade/academic_grade_form_screen.dart';
 import 'package:me_super_admin/screens/education_board/education_board_form_screen.dart';
+import 'package:me_super_admin/screens/admission_document/admission_document_screen.dart';
+import 'package:me_super_admin/screens/admission_document/admission_document_form_screen.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -59,6 +61,8 @@ class MeSuperAdminApp extends StatelessWidget {
         RoutePaths.educationBoardForm: (context) => EducationBoardFormScreen(),
         RoutePaths.academicGrades: (context) => const AcademicGradeScreen(),
         RoutePaths.academicGradeForm: (context) => AcademicGradeFormScreen(),
+        RoutePaths.admissionDocuments: (context) => const AdmissionDocumentScreen(),
+        RoutePaths.admissionDocumentForm: (context) => AdmissionDocumentFormScreen(),
         RoutePaths.states: (context) => StateScreen(),
         RoutePaths.stateForm: (context) => StateFormScreen(),
         RoutePaths.districts: (context) => DistrictScreen(),

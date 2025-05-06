@@ -6,7 +6,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 import 'package:me_super_admin/controller/authentication/sign_in_controller.dart';
 import 'package:me_super_admin/widget/common/form_fields/checkbox/checkbox_widget.dart';
-import 'package:me_super_admin/widget/common/form_fields/dropdown/dropdown_widget.dart';
 import 'package:me_super_admin/widget/common/loader/api_request_loader_widget.dart';
 import 'package:me_super_admin/widget/common/form_fields/elevated_button/elevated_button.dart';
 import 'package:me_super_admin/widget/common/form_fields/text_fields/floating_text_field_widget.dart';
