@@ -1,4 +1,18 @@
 {
+    "dart.lineLength": 160, 
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+
+    // Editor appearance
+    "editor.fontFamily": "Fira Code, Consolas, 'Courier New', monospace", 
+    "editor.fontSize": 14, 
+    "editor.lineHeight": 22, 
+    "editor.tabSize": 2, 
+    "editor.renderWhitespace": "all", 
+    "editor.cursorSmoothCaretAnimation": "on", 
+    "editor.minimap.enabled": true, 
+    "editor.wordWrap": "on", 
+
     "editor.tokenColorCustomizations": {
         "textMateRules": [
             // Variables
@@ -27,7 +41,13 @@
             },            
         ]
     },
+
+    // Flutter-specific settings
+    "dart.flutterHotReloadOnSave": true, 
+    "dart.flutterOutline": true, 
+    "dart.showTodos": true, 
     "cSpell.words": [
+        "aadhaar",
         "Getx",
         "prefs",
         "Zipcodes"

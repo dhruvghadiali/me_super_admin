@@ -11,6 +11,8 @@ class FloatingTextFieldWidget extends StatelessWidget {
     required this.onChange,
     required this.onFieldSubmitted,
     required this.validator,
+    this.fieldKey,
+    this.focusNode,
     this.obscureText = false,
     this.textInputType = TextInputType.multiline,
     this.textCapitalization = TextCapitalization.none,
@@ -23,6 +25,8 @@ class FloatingTextFieldWidget extends StatelessWidget {
   final TextInputType? textInputType;
   final TextCapitalization? textCapitalization;
   final TextInputAction? textInputAction;
+  final FocusNode? focusNode;
+  final GlobalKey<FormFieldState>? fieldKey;
   final AppColorScheme appColorScheme;
   final Function onChange;
   final Function onFieldSubmitted;
@@ -46,8 +50,9 @@ class FloatingTextFieldWidget extends StatelessWidget {
         Theme.of(context).extension<ExtensionsThemeData>()!;
 
     return TextFormField(
-      key: key,
+      key: fieldKey ?? key,
       controller: controller,
+      focusNode: focusNode,
       onChanged: (String value) => onChange(value),
       onFieldSubmitted: (String value) => onFieldSubmitted(value),
       onEditingComplete: () {},

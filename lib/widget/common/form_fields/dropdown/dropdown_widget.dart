@@ -12,12 +12,14 @@ class DropdownWidget extends StatelessWidget {
     required this.appColorScheme,
     required this.validator,
     this.isEnable = true,
+    this.fieldKey,
   });
 
   final String labelText;
   final List<Map<String, String>> items;
   final String selectedItem;
   final bool? isEnable;
+  final GlobalKey<FormFieldState>? fieldKey;
   final AppColorScheme appColorScheme;
   final Function onChanged;
   final Function validator;
@@ -48,7 +50,7 @@ class DropdownWidget extends StatelessWidget {
           child: Text(labelText, style: Theme.of(context).textTheme.labelSmall),
         ),
         DropdownButtonFormField(
-          key: key,
+          key: fieldKey ?? key,
           isDense: true,
           isExpanded: true,
           dropdownColor: themeData.offWhite,

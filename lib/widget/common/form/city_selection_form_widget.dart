@@ -46,7 +46,7 @@ class CitySelectionFormWidget extends StatelessWidget {
     return GetBuilder<CityController>(
       builder: (cityControllerContext) {
         return DropdownWidget(
-          key: formFieldKey,
+          fieldKey: formFieldKey,
           validator: validator,
           isEnable: selectedDistrict.id.isNotEmpty,
           labelText: appLocalizations.cityDropdownFieldLabelText,

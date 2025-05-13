@@ -46,7 +46,7 @@ class AreaNameSelectionFormWidget extends StatelessWidget {
     return GetBuilder<AreaNameController>(
       builder: (areaNameControllerContext) {
         return DropdownWidget(
-          key: formFieldKey,
+          fieldKey: formFieldKey,
           validator: validator,
           isEnable: selectedCity.id.isNotEmpty,
           labelText: appLocalizations.areaNameDropdownFieldLabelText,

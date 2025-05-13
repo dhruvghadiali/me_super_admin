@@ -46,7 +46,7 @@ class DistrictSelectionFormWidget extends StatelessWidget {
     return GetBuilder<DistrictController>(
       builder: (districtControllerContext) {
         return DropdownWidget(
-          key: formFieldKey,
+          fieldKey: formFieldKey,
           validator: validator,
           isEnable: selectedState.id.isNotEmpty,
           labelText: appLocalizations.districtDropdownFieldLabelText,

@@ -42,7 +42,7 @@ class StateSelectionFormWidget extends StatelessWidget {
     return GetBuilder<StateController>(
       builder: (stateControllerContext) {
         return DropdownWidget(
-          key: formFieldKey,
+          fieldKey: formFieldKey,
           validator: validator,
           labelText: appLocalizations.stateDropdownFieldLabelText,
           selectedItem: selectedState.id,
