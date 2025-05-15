@@ -34,7 +34,6 @@ class OrganizationMemberController extends GetxController {
    */
 
   String snackbarTitle = "Organization Member Alert";
-  int activeOrganizationMemberFormIndex = 0;
   List<OrganizationMember> organizationMembers = [];
   List<bool> organizationMemberFormValidated = [];
   bool isLoader = false;
@@ -45,7 +44,6 @@ class OrganizationMemberController extends GetxController {
   void resetOrganizationMemberForm() {
     organizationMembers = [OrganizationMember.defaultValues(), OrganizationMember.defaultValues()];
     organizationMemberFormValidated = [false, false];
-    activeOrganizationMemberFormIndex = 0;
     update();
   }
 
@@ -72,14 +70,6 @@ class OrganizationMemberController extends GetxController {
    */
   void changeOrganizationMemberFormValidatedStatus(int index, bool status) {
     organizationMemberFormValidated[index] = status;
-    update();
-  }
-
-  /*
-   * Changes the active organization member form index.
-   */
-  void changeActiveOrganizationMemberFormIndex(int index) {
-    activeOrganizationMemberFormIndex = index;
     update();
   }
 
@@ -324,8 +314,8 @@ class OrganizationMemberController extends GetxController {
    * - `value`: The new state selected by the user.
    * - `formFieldKey`: A GlobalKey used to access the form field's state for validation.
    */
-  void onStateChange(state_mode.State value, GlobalKey<FormFieldState> formFieldKey) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onStateChange(state_mode.State value, int index, GlobalKey<FormFieldState> formFieldKey) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     Zipcode zipcode = organizationMember.zipcode;
     AreaName areaName = zipcode.areaName;
@@ -343,7 +333,7 @@ class OrganizationMemberController extends GetxController {
     organizationMember = organizationMember.copyWith(areaName: areaName);
     organizationMember = organizationMember.copyWith(zipcode: zipcode);
 
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     formFieldKey.currentState?.validate();
     update();
@@ -364,8 +354,8 @@ class OrganizationMemberController extends GetxController {
    * - `value`: The new district selected by the user.
    * - `formFieldKey`: A GlobalKey used to access the form field's state for validation.
    */
-  void onDistrictChange(District value, GlobalKey<FormFieldState> formFieldKey) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onDistrictChange(District value, int index, GlobalKey<FormFieldState> formFieldKey) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     Zipcode zipcode = organizationMember.zipcode;
     AreaName areaName = zipcode.areaName;
@@ -379,7 +369,7 @@ class OrganizationMemberController extends GetxController {
     organizationMember = organizationMember.copyWith(areaName: areaName);
     organizationMember = organizationMember.copyWith(zipcode: zipcode);
 
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     formFieldKey.currentState?.validate();
 
@@ -401,8 +391,8 @@ class OrganizationMemberController extends GetxController {
    * - `value`: The new city selected by the user.
    * - `formFieldKey`: A GlobalKey used to access the form field's state for validation.
    */
-  void onCityChange(City value, GlobalKey<FormFieldState> formFieldKey) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onCityChange(City value, int index, GlobalKey<FormFieldState> formFieldKey) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     Zipcode zipcode = organizationMember.zipcode;
     AreaName areaName = zipcode.areaName;
@@ -413,7 +403,7 @@ class OrganizationMemberController extends GetxController {
     organizationMember = organizationMember.copyWith(areaName: areaName);
     organizationMember = organizationMember.copyWith(zipcode: zipcode);
 
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     formFieldKey.currentState?.validate();
     update();
@@ -433,8 +423,8 @@ class OrganizationMemberController extends GetxController {
    * - `value`: The new area name selected by the user.
    * - `formFieldKey`: A GlobalKey used to access the form field's state for validation.
    */
-  void onAreaNameChange(AreaName value, GlobalKey<FormFieldState> formFieldKey) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onAreaNameChange(AreaName value, int index, GlobalKey<FormFieldState> formFieldKey) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     Zipcode zipcode = organizationMember.zipcode;
 
@@ -442,7 +432,7 @@ class OrganizationMemberController extends GetxController {
     organizationMember = organizationMember.copyWith(areaName: value);
     organizationMember = organizationMember.copyWith(zipcode: zipcode);
 
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     formFieldKey.currentState?.validate();
     update();
@@ -462,12 +452,12 @@ class OrganizationMemberController extends GetxController {
    * - `value`: The new zipcode entered by the user.
    * - `formFieldKey`: A GlobalKey used to access the form field's state for validation.
    */
-  void onZipcodeChange(Zipcode value, GlobalKey<FormFieldState> formFieldKey) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onZipcodeChange(Zipcode value, int index, GlobalKey<FormFieldState> formFieldKey) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     organizationMember = organizationMember.copyWith(zipcode: value);
 
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     formFieldKey.currentState?.validate();
     update();
@@ -488,11 +478,11 @@ class OrganizationMemberController extends GetxController {
    * - `value`: The new position entered by the user, which will be trimmed of any extra spaces.
    * - `formFieldKey`: A GlobalKey used to access the form field's state for validation.
    */
-  void onPositionChange(String value, GlobalKey<FormFieldState> formFieldKey) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onPositionChange(String value, int index, GlobalKey<FormFieldState> formFieldKey) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     organizationMember = organizationMember.copyWith(position: value.trim());
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     formFieldKey.currentState?.validate();
     update();
@@ -511,11 +501,11 @@ class OrganizationMemberController extends GetxController {
    * Parameters:
    * - `value`: The new first name entered by the user, which will be trimmed of any extra spaces.
    */
-  void onFirstNameChange(String value) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onFirstNameChange(String value, int index) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     organizationMember = organizationMember.copyWith(firstName: value.trim());
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     update();
   }
@@ -533,11 +523,11 @@ class OrganizationMemberController extends GetxController {
    * - `value`: The first name entered by the user, which will be trimmed of any extra spaces.
    * - `formFieldKey`: A GlobalKey used to access the form field's state for validation.
    */
-  void onFirstNameSubmitted(String value, GlobalKey<FormFieldState> formFieldKey) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onFirstNameSubmitted(String value, int index, GlobalKey<FormFieldState> formFieldKey) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     organizationMember = organizationMember.copyWith(firstName: value.trim());
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     formFieldKey.currentState?.validate();
   }
@@ -555,11 +545,11 @@ class OrganizationMemberController extends GetxController {
    * Parameters:
    * - `value`: The new last name entered by the user, which will be trimmed of any extra spaces.
    */
-  void onLastNameChange(String value) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onLastNameChange(String value, int index) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     organizationMember = organizationMember.copyWith(lastName: value.trim());
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     update();
   }
@@ -577,11 +567,11 @@ class OrganizationMemberController extends GetxController {
    * - `value`: The last name entered by the user, which will be trimmed of any extra spaces.
    * - `formFieldKey`: A GlobalKey used to access the form field's state for validation.
    */
-  void onLastNameSubmitted(String value, GlobalKey<FormFieldState> formFieldKey) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onLastNameSubmitted(String value, int index, GlobalKey<FormFieldState> formFieldKey) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     organizationMember = organizationMember.copyWith(lastName: value.trim());
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     formFieldKey.currentState?.validate();
   }
@@ -599,11 +589,11 @@ class OrganizationMemberController extends GetxController {
    * Parameters:
    * - `value`: The new email entered by the user, which will be trimmed of any extra spaces.
    */
-  void onEmailChange(String value) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onEmailChange(String value, int index) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     organizationMember = organizationMember.copyWith(email: value.trim());
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     update();
   }
@@ -621,11 +611,11 @@ class OrganizationMemberController extends GetxController {
    * - `value`: The email entered by the user, which will be trimmed of any extra spaces.
    * - `formFieldKey`: A GlobalKey used to access the form field's state for validation.
    */
-  void onEmailSubmitted(String value, GlobalKey<FormFieldState> formFieldKey) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onEmailSubmitted(String value, int index, GlobalKey<FormFieldState> formFieldKey) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     organizationMember = organizationMember.copyWith(email: value.trim());
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     formFieldKey.currentState?.validate();
   }
@@ -643,11 +633,11 @@ class OrganizationMemberController extends GetxController {
    * Parameters:
    * - `value`: The new phone number entered by the user, which will be trimmed of any extra spaces.
    */
-  void onPhoneNumberChange(String value) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onPhoneNumberChange(String value, int index) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     organizationMember = organizationMember.copyWith(phoneNumber: value.trim());
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     update();
   }
@@ -665,11 +655,11 @@ class OrganizationMemberController extends GetxController {
    * - `value`: The phone number entered by the user, which will be trimmed of any extra spaces.
    * - `formFieldKey`: A GlobalKey used to access the form field's state for validation.
    */
-  void onPhoneNumberSubmitted(String value, GlobalKey<FormFieldState> formFieldKey) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onPhoneNumberSubmitted(String value, int index, GlobalKey<FormFieldState> formFieldKey) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     organizationMember = organizationMember.copyWith(phoneNumber: value.trim());
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     formFieldKey.currentState?.validate();
   }
@@ -687,11 +677,11 @@ class OrganizationMemberController extends GetxController {
    * Parameters:
    * - `value`: The new Aadhaar number entered by the user, which will be trimmed of any extra spaces.
    */
-  void onAadhaarNumberChange(String value) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onAadhaarNumberChange(String value, int index) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     organizationMember = organizationMember.copyWith(aadhaarNumber: value.trim());
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     update();
   }
@@ -709,11 +699,11 @@ class OrganizationMemberController extends GetxController {
    * - `value`: The Aadhaar number entered by the user, which will be trimmed of any extra spaces.
    * - `formFieldKey`: A GlobalKey used to access the form field's state for validation.
    */
-  void onAadhaarNumberSubmitted(String value, GlobalKey<FormFieldState> formFieldKey) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onAadhaarNumberSubmitted(String value, int index, GlobalKey<FormFieldState> formFieldKey) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     organizationMember = organizationMember.copyWith(aadhaarNumber: value.trim());
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     formFieldKey.currentState?.validate();
   }
@@ -731,11 +721,11 @@ class OrganizationMemberController extends GetxController {
    * Parameters:
    * - `value`: The new address entered by the user, which will be trimmed of any extra spaces.
    */
-  void onAddressChange(String value) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onAddressChange(String value, int index) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     organizationMember = organizationMember.copyWith(address: value.trim());
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     update();
   }
@@ -753,11 +743,11 @@ class OrganizationMemberController extends GetxController {
    * - `value`: The address entered by the user, which will be trimmed of any extra spaces.
    * - `formFieldKey`: A GlobalKey used to access the form field's state for validation.
    */
-  void onAddressSubmitted(String value, GlobalKey<FormFieldState> formFieldKey) {
-    OrganizationMember organizationMember = organizationMembers[activeOrganizationMemberFormIndex];
+  void onAddressSubmitted(String value, int index, GlobalKey<FormFieldState> formFieldKey) {
+    OrganizationMember organizationMember = organizationMembers[index];
 
     organizationMember = organizationMember.copyWith(address: value.trim());
-    organizationMembers[activeOrganizationMemberFormIndex] = organizationMember;
+    organizationMembers[index] = organizationMember;
 
     formFieldKey.currentState?.validate();
   }
@@ -782,9 +772,10 @@ class OrganizationMemberController extends GetxController {
    * Returns:
    * - A `Future` that completes when the request is processed.
    */
-  Future<void> putOrganizationMember(OrganizationMember organizationMember) async {
+  Future<void> putOrganizationMember(int index) async {
+    OrganizationMember organizationMember = organizationMembers[index];
     String authToken = await Utils.getAuthToken();
-    // isLoader = true;
+    isLoader = true;
     update();
 
     PutHttpService putHttpService = PutHttpService(
@@ -822,13 +813,13 @@ class OrganizationMemberController extends GetxController {
    * Returns:
    * - A `Future` that completes when the request is processed.
    */
-  Future<void> deleteOrganizationMember(String id) async {
+  Future<void> deleteOrganizationMember(int index) async {
     String authToken = await Utils.getAuthToken();
     isLoader = true;
     update();
 
     DeleteHttpService deleteHttpService = DeleteHttpService(
-      endPoint: 'super-admin/organization-members/$id',
+      endPoint: 'super-admin/organization-members/${organizationMembers[index].id}',
       headers: {"Authorization": 'Bearer $authToken'},
       mockHttpAPIProperty: MockHttpAPIPropertyService(endPoint: 'assets/mock_data/organization_members/organization_members_200.json', statusCode: 200),
     );
@@ -838,6 +829,9 @@ class OrganizationMemberController extends GetxController {
     if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.success);
+
+      // Remove the organization member from the organizationMembers list by index.
+      organizationMembers.removeAt(index);
     } else {
       isLoader = false;
       Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.error);

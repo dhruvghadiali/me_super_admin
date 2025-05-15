@@ -5,20 +5,30 @@ import 'package:me_super_admin/model/district/district.dart';
 import 'package:me_super_admin/model/area_name/area_name.dart';
 
 /*
- * Represents an organization with its details and associated location information.
+ * The `OrganizationMember` class represents an organization member with various attributes
+ * such as personal details, address, and metadata for tracking creation and updates.
  *
- * This model includes fields for organization identification, contact details,
- * government registration, address, and location hierarchy (state, district, city, etc.).
- * It also tracks metadata such as creation and update timestamps, and the users
- * responsible for these actions.
+ * Attributes:
+ * - `id`: Unique identifier for the organization member.
+ * - `firstName`, `lastName`: Personal name details.
+ * - `email`: Contact email address.
+ * - `phoneNumber`: Contact phone number.
+ * - `position`: Role or position of the member in the organization.
+ * - `aadhaarNumber`: Unique Aadhaar number for identification.
+ * - `address`: Residential or official address.
+ * - `state`, `district`, `city`, `areaName`, `zipcode`: Address components.
+ * - `isActive`: Indicates if the member is currently active.
+ * - `createdBy`, `updatedBy`: Metadata for tracking who created or updated the record.
+ * - `createdAt`, `updatedAt`: Timestamps for creation and last update.
  */
-class Organization {
+class OrganizationMember {
   String id;
-  String name;
-  String shortName;
+  String firstName;
+  String lastName;
   String email;
   String phoneNumber;
-  String governmentRegistrationNumber;
+  String position;
+  String aadhaarNumber;
   String address;
   State state;
   District district;
@@ -31,13 +41,20 @@ class Organization {
   DateTime createdAt;
   DateTime updatedAt;
 
-  Organization({
+  /*
+   * Constructor for the `OrganizationMember` class.
+   *
+   * Parameters:
+   * - All attributes are required to ensure a complete representation of the member.
+   */
+  OrganizationMember({
     required this.id,
-    required this.name,
-    required this.shortName,
+    required this.firstName,
+    required this.lastName,
     required this.email,
     required this.phoneNumber,
-    required this.governmentRegistrationNumber,
+    required this.position,
+    required this.aadhaarNumber,
     required this.address,
     required this.state,
     required this.district,
@@ -52,26 +69,23 @@ class Organization {
   });
 
   /*
-   * Creates an `Organization` instance from a JSON object.
-   *
-   * This factory constructor parses the JSON object to initialize the fields of
-   * the `Organization` model. It uses helper methods to handle nested objects
-   * and default values for missing or invalid data.
+   * Factory method `fromJson` to create an `OrganizationMember` instance from a JSON object.
    *
    * Parameters:
-   * - `json`: A map containing the JSON representation of the organization.
+   * - `json`: A map containing key-value pairs representing the member's attributes.
    *
    * Returns:
-   * - An `Organization` instance populated with data from the JSON object.
+   * - An `OrganizationMember` instance populated with data from the JSON object.
    */
-  factory Organization.fromJson(Map<String, dynamic> json) {
-    return Organization(
+  factory OrganizationMember.fromJson(Map<String, dynamic> json) {
+    return OrganizationMember(
       id: setId(json),
-      name: setName(json),
-      shortName: setShortName(json),
+      firstName: setFirstName(json),
+      lastName: setLastName(json),
       email: setEmail(json),
       phoneNumber: setPhoneNumber(json),
-      governmentRegistrationNumber: setGovernmentRegistrationNumber(json),
+      position: setPosition(json),
+      aadhaarNumber: setAadhaarNumber(json),
       address: setAddress(json),
       state: setState(json),
       district: setDistrict(json),
@@ -87,24 +101,22 @@ class Organization {
   }
 
   /*
-   * Creates a copy of the current `Organization` instance with updated fields.
-   *
-   * This method allows selective updates to the fields of an `Organization` instance
-   * while retaining the values of other fields.
+   * Method `copyWith` to create a new `OrganizationMember` instance with updated attributes.
    *
    * Parameters:
-   * - Optional named parameters for each field in the `Organization` model.
+   * - Optional named parameters for each attribute.
    *
    * Returns:
-   * - A new `Organization` instance with the updated fields.
+   * - A new `OrganizationMember` instance with updated values for the specified attributes.
    */
-  Organization copyWith({
+  OrganizationMember copyWith({
     String? id,
-    String? name,
-    String? shortName,
+    String? firstName,
+    String? lastName,
     String? email,
     String? phoneNumber,
-    String? governmentRegistrationNumber,
+    String? position,
+    String? aadhaarNumber,
     String? address,
     State? state,
     District? district,
@@ -116,13 +128,14 @@ class Organization {
     String? updatedBy,
     DateTime? createdAt,
     DateTime? updatedAt,
-  }) => Organization(
+  }) => OrganizationMember(
     id: id ?? this.id,
-    name: name ?? this.name,
-    shortName: shortName ?? this.shortName,
+    firstName: firstName ?? this.firstName,
+    lastName: lastName ?? this.lastName,
     email: email ?? this.email,
     phoneNumber: phoneNumber ?? this.phoneNumber,
-    governmentRegistrationNumber: governmentRegistrationNumber ?? this.governmentRegistrationNumber,
+    position: position ?? this.position,
+    aadhaarNumber: aadhaarNumber ?? this.aadhaarNumber,
     address: address ?? this.address,
     state: state ?? this.state,
     district: district ?? this.district,
@@ -137,21 +150,19 @@ class Organization {
   );
 
   /*
-   * Provides default values for an `Organization` instance.
-   *
-   * This static method returns an `Organization` instance with default values
-   * for all fields. It is useful for initializing forms or creating placeholder data.
+   * Static method `defaultValues` to create an `OrganizationMember` instance with default values.
    *
    * Returns:
-   * - An `Organization` instance with default values.
+   * - An `OrganizationMember` instance with pre-defined default values for all attributes.
    */
-  static Organization defaultValues() => Organization(
+  static OrganizationMember defaultValues() => OrganizationMember(
     id: '',
-    name: '',
-    shortName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phoneNumber: '',
-    governmentRegistrationNumber: '',
+    position: '',
+    aadhaarNumber: '',
     address: '',
     state: State.defaultValues(),
     district: District.defaultValues(),
@@ -166,20 +177,18 @@ class Organization {
   );
 
   /*
-   * Converts the `Organization` instance to a JSON object.
-   *
-   * This method serializes the `Organization` instance into a map that can be
-   * used for API requests or data storage.
+   * Method `toJson` to convert an `OrganizationMember` instance into a JSON object.
    *
    * Returns:
-   * - A map containing the JSON representation of the `Organization` instance.
+   * - A map containing key-value pairs representing the member's attributes.
    */
   Map<String, dynamic> toJson() => {
-    'name': name,
-    'shortName': shortName,
+    'first_name': firstName,
+    'last_name': lastName,
     'email': email,
     'phone_number': phoneNumber,
-    'government_registration_number': governmentRegistrationNumber,
+    'position': position,
+    'aadhaar_number': aadhaarNumber,
     'address': address,
     'state': state.id,
     'district': district.id,
@@ -207,13 +216,14 @@ class Organization {
         return json['id'];
       }
     }
+
     return '';
   }
 
   /*
-   * Parses and validates the name field from a JSON object.
+   * Parses and validates the first name field from a JSON object.
    *
-   * This method extracts the 'name' field from the JSON object and ensures
+   * This method extracts the 'first_name' field from the JSON object and ensures
    * it is a non-empty string. If the field is missing or invalid, it returns
    * an empty string as the default value.
    *
@@ -221,34 +231,35 @@ class Organization {
    * - `json`: A map containing the JSON representation of the organization.
    *
    * Returns:
-   * - A validated name string.
+   * - A validated first name string.
    */
-  static String setName(Map<String, dynamic> json) {
-    if (json.containsKey('name')) {
-      if (json['name'] != null && json['name'] is String && json['name'].toString().isNotEmpty) {
-        return json['name'];
+  static String setFirstName(Map<String, dynamic> json) {
+    if (json.containsKey('first_name')) {
+      if (json['first_name'] != null && json['first_name'] is String && json['first_name'].toString().isNotEmpty) {
+        return json['first_name'];
       }
     }
+
     return '';
   }
 
   /*
-   * Parses and validates the short name field from a JSON object.
+   * Parses and validates the last name field from a JSON object.
    *
-   * This method extracts the 'short_name' field from the JSON object and ensures
-   * it is a non-empty string. If the field is missing or invalid, it returns an
-   * empty string as the default value.
+   * This method extracts the 'last_name' field from the JSON object and ensures
+   * it is a non-empty string. If the field is missing or invalid, it returns
+   * an empty string as the default value.
    *
    * Parameters:
    * - `json`: A map containing the JSON representation of the organization.
    *
    * Returns:
-   * - A validated short name string.
+   * - A validated last name string.
    */
-  static String setShortName(Map<String, dynamic> json) {
-    if (json.containsKey('short_name')) {
-      if (json['short_name'] != null && json['short_name'] is String && json['short_name'].toString().isNotEmpty) {
-        return json['short_name'];
+  static String setLastName(Map<String, dynamic> json) {
+    if (json.containsKey('last_name')) {
+      if (json['last_name'] != null && json['last_name'] is String && json['last_name'].toString().isNotEmpty) {
+        return json['last_name'];
       }
     }
 
@@ -259,8 +270,8 @@ class Organization {
    * Parses and validates the email field from a JSON object.
    *
    * This method extracts the 'email' field from the JSON object and ensures
-   * it is a non-empty string. If the field is missing or invalid, it returns an
-   * empty string as the default value.
+   * it is a non-empty string. If the field is missing or invalid, it returns
+   * an empty string as the default value.
    *
    * Parameters:
    * - `json`: A map containing the JSON representation of the organization.
@@ -282,8 +293,8 @@ class Organization {
    * Parses and validates the phone number field from a JSON object.
    *
    * This method extracts the 'phone_number' field from the JSON object and ensures
-   * it is a non-empty string. If the field is missing or invalid, it returns an
-   * empty string as the default value.
+   * it is a non-empty string. If the field is missing or invalid, it returns
+   * an empty string as the default value.
    *
    * Parameters:
    * - `json`: A map containing the JSON representation of the organization.
@@ -302,24 +313,45 @@ class Organization {
   }
 
   /*
-   * Parses and validates the government registration number field from a JSON object.
+   * Parses and validates the position field from a JSON object.
    *
-   * This method extracts the 'government_registration_number' field from the JSON object
-   * and ensures it is a non-empty string. If the field is missing or invalid, it returns
+   * This method extracts the 'position' field from the JSON object and ensures
+   * it is a non-empty string. If the field is missing or invalid, it returns
    * an empty string as the default value.
    *
    * Parameters:
    * - `json`: A map containing the JSON representation of the organization.
    *
    * Returns:
-   * - A validated government registration number string.
+   * - A validated position string.
    */
-  static String setGovernmentRegistrationNumber(Map<String, dynamic> json) {
-    if (json.containsKey('government_registration_number')) {
-      if (json['government_registration_number'] != null &&
-          json['government_registration_number'] is String &&
-          json['government_registration_number'].toString().isNotEmpty) {
-        return json['government_registration_number'];
+  static String setPosition(Map<String, dynamic> json) {
+    if (json.containsKey('position')) {
+      if (json['position'] != null && json['position'] is String && json['position'].toString().isNotEmpty) {
+        return json['position'];
+      }
+    }
+
+    return '';
+  }
+
+  /*
+   * Parses and validates the Aadhaar number field from a JSON object.
+   *
+   * This method extracts the 'aadhaar_number' field from the JSON object and ensures
+   * it is a non-empty string. If the field is missing or invalid, it returns
+   * an empty string as the default value.
+   *
+   * Parameters:
+   * - `json`: A map containing the JSON representation of the organization.
+   *
+   * Returns:
+   * - A validated Aadhaar number string.
+   */
+  static String setAadhaarNumber(Map<String, dynamic> json) {
+    if (json.containsKey('aadhaar_number')) {
+      if (json['aadhaar_number'] != null && json['aadhaar_number'] is String && json['aadhaar_number'].toString().isNotEmpty) {
+        return json['aadhaar_number'];
       }
     }
 
@@ -330,8 +362,8 @@ class Organization {
    * Parses and validates the address field from a JSON object.
    *
    * This method extracts the 'address' field from the JSON object and ensures
-   * it is a non-empty string. If the field is missing or invalid, it returns an
-   * empty string as the default value.
+   * it is a non-empty string. If the field is missing or invalid, it returns
+   * an empty string as the default value.
    *
    * Parameters:
    * - `json`: A map containing the JSON representation of the organization.
@@ -352,15 +384,15 @@ class Organization {
   /*
    * Parses and validates the state field from a JSON object.
    *
-   * This method extracts the 'state' field from the JSON object and converts it
-   * into a `State` object. If the field is missing or invalid, it returns a default
-   * `State` instance.
+   * This method extracts the 'state' field from the JSON object and converts
+   * it into a `State` object. If the field is missing or invalid, it returns
+   * a default `State` object.
    *
    * Parameters:
    * - `json`: A map containing the JSON representation of the organization.
    *
    * Returns:
-   * - A `State` object representing the organization's state.
+   * - A `State` object.
    */
   static State setState(Map<String, dynamic> json) {
     if (json.containsKey('state')) {
@@ -374,15 +406,15 @@ class Organization {
   /*
    * Parses and validates the district field from a JSON object.
    *
-   * This method extracts the 'district' field from the JSON object and converts it
-   * into a `District` object. If the field is missing or invalid, it returns a default
-   * `District` instance.
+   * This method extracts the 'district' field from the JSON object and converts
+   * it into a `District` object. If the field is missing or invalid, it returns
+   * a default `District` object.
    *
    * Parameters:
    * - `json`: A map containing the JSON representation of the organization.
    *
    * Returns:
-   * - A `District` object representing the organization's district.
+   * - A `District` object.
    */
   static District setDistrict(Map<String, dynamic> json) {
     if (json.containsKey('district')) {
@@ -396,15 +428,15 @@ class Organization {
   /*
    * Parses and validates the city field from a JSON object.
    *
-   * This method extracts the 'city' field from the JSON object and converts it
-   * into a `City` object. If the field is missing or invalid, it returns a default
-   * `City` instance.
+   * This method extracts the 'city' field from the JSON object and converts
+   * it into a `City` object. If the field is missing or invalid, it returns
+   * a default `City` object.
    *
    * Parameters:
    * - `json`: A map containing the JSON representation of the organization.
    *
    * Returns:
-   * - A `City` object representing the organization's city.
+   * - A `City` object.
    */
   static City setCity(Map<String, dynamic> json) {
     if (json.containsKey('city')) {
@@ -418,15 +450,15 @@ class Organization {
   /*
    * Parses and validates the area name field from a JSON object.
    *
-   * This method extracts the 'area_name' field from the JSON object and converts it
-   * into an `AreaName` object. If the field is missing or invalid, it returns a default
-   * `AreaName` instance.
+   * This method extracts the 'area_name' field from the JSON object and converts
+   * it into an `AreaName` object. If the field is missing or invalid, it returns
+   * a default `AreaName` object.
    *
    * Parameters:
    * - `json`: A map containing the JSON representation of the organization.
    *
    * Returns:
-   * - An `AreaName` object representing the organization's area name.
+   * - An `AreaName` object.
    */
   static AreaName setAreaName(Map<String, dynamic> json) {
     if (json.containsKey('area_name')) {
@@ -440,15 +472,15 @@ class Organization {
   /*
    * Parses and validates the zipcode field from a JSON object.
    *
-   * This method extracts the 'zipcode' field from the JSON object and converts it
-   * into a `Zipcode` object. If the field is missing or invalid, it returns a default
-   * `Zipcode` instance.
+   * This method extracts the 'zipcode' field from the JSON object and converts
+   * it into a `Zipcode` object. If the field is missing or invalid, it returns
+   * a default `Zipcode` object.
    *
    * Parameters:
    * - `json`: A map containing the JSON representation of the organization.
    *
    * Returns:
-   * - A `Zipcode` object representing the organization's zipcode.
+   * - A `Zipcode` object.
    */
   static Zipcode setZipcode(Map<String, dynamic> json) {
     if (json.containsKey('zipcode')) {
@@ -460,17 +492,17 @@ class Organization {
   }
 
   /*
-   * Parses and validates the active status field from a JSON object.
+   * Parses and validates the isActive field from a JSON object.
    *
    * This method extracts the 'is_active' field from the JSON object and ensures
-   * it is a boolean value. If the field is missing or invalid, it returns `false`
-   * as the default value.
+   * it is a boolean value. If the field is missing or invalid, it returns
+   * `false` as the default value.
    *
    * Parameters:
    * - `json`: A map containing the JSON representation of the organization.
    *
    * Returns:
-   * - A boolean indicating whether the organization is active.
+   * - A boolean indicating whether the member is active.
    */
   static bool setIsActive(Map<String, dynamic> json) {
     if (json.containsKey('is_active')) {
@@ -482,17 +514,17 @@ class Organization {
   }
 
   /*
-   * Parses and validates the created by field from a JSON object.
+   * Parses and validates the createdBy field from a JSON object.
    *
    * This method extracts the 'created_by' field from the JSON object and ensures
-   * it is a non-empty string. If the field is missing or invalid, it returns an
-   * empty string as the default value.
+   * it is a non-empty string. If the field is missing or invalid, it returns
+   * an empty string as the default value.
    *
    * Parameters:
    * - `json`: A map containing the JSON representation of the organization.
    *
    * Returns:
-   * - A validated created by string.
+   * - A validated createdBy string.
    */
   static String setCreatedBy(Map<String, dynamic> json) {
     if (json.containsKey('created_by')) {
@@ -505,17 +537,17 @@ class Organization {
   }
 
   /*
-   * Parses and validates the updated by field from a JSON object.
+   * Parses and validates the updatedBy field from a JSON object.
    *
    * This method extracts the 'updated_by' field from the JSON object and ensures
-   * it is a non-empty string. If the field is missing or invalid, it returns an
-   * empty string as the default value.
+   * it is a non-empty string. If the field is missing or invalid, it returns
+   * an empty string as the default value.
    *
    * Parameters:
    * - `json`: A map containing the JSON representation of the organization.
    *
    * Returns:
-   * - A validated updated by string.
+   * - A validated updatedBy string.
    */
   static String setUpdatedBy(Map<String, dynamic> json) {
     if (json.containsKey('updated_by')) {
@@ -528,11 +560,11 @@ class Organization {
   }
 
   /*
-   * Parses and validates the created at timestamp from a JSON object.
+   * Parses and validates the createdAt field from a JSON object.
    *
    * This method extracts the 'created_at' field from the JSON object and converts
-   * it into a `DateTime` object. If the field is missing or invalid, it returns a
-   * default `DateTime` instance.
+   * it into a `DateTime` object. If the field is missing or invalid, it returns
+   * a default `DateTime` object set to January 1, 1500.
    *
    * Parameters:
    * - `json`: A map containing the JSON representation of the organization.
@@ -555,17 +587,17 @@ class Organization {
   }
 
   /*
-   * Parses and validates the updated at timestamp from a JSON object.
+   * Parses and validates the updatedAt field from a JSON object.
    *
    * This method extracts the 'updated_at' field from the JSON object and converts
-   * it into a `DateTime` object. If the field is missing or invalid, it returns a
-   * default `DateTime` instance.
+   * it into a `DateTime` object. If the field is missing or invalid, it returns
+   * a default `DateTime` object set to January 1, 1500.
    *
    * Parameters:
    * - `json`: A map containing the JSON representation of the organization.
    *
    * Returns:
-   * - A `DateTime` object representing the update timestamp.
+   * - A `DateTime` object representing the last update timestamp.
    */
   static DateTime setUpdatedAt(Map<String, dynamic> json) {
     if (json.containsKey('updated_at')) {
