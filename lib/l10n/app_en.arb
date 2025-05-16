@@ -109,5 +109,17 @@
   "previousButtonText": "Previous",
   "@previousButtonText": {},
   "okButtonText": "OK",
-  "@okButtonText": {}
+  "@okButtonText": {},
+  "addMemberButtonText": "Add Member",
+  "@addMemberButtonText": {},
+  "organizationMemberFormValidationAlertMessage": "Please fill up all the organization member form details.",
+  "@organizationMemberFormValidationAlertMessage": {},
+  "organizationMemberFormExpansionTile":"Organization Member Form",
+  "@organizationMemberFormExpansionTile": {},
+  "selectedDropdownItemsText": "items selected",
+  "@selectedDropdownItemsText": {},
+  "selectDropdownOptionsText": "select options",
+  "@selectDropdownOptionsText": {},
+  "selectDropdownOptionText": "select option",
+  "@selectDropdownOptionText": {}
 }
