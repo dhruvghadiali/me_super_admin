@@ -89,14 +89,16 @@ class DropdownWidget extends StatelessWidget {
    *
    * @param context The build context.
    * @param label The label text to display.
+   * @param isSelected Whether the item is selected.
    * @return A styled Text widget for the selected item(s).
    */
-  Widget setSelectedItemLabel({required BuildContext context, required String label}) {
+  Widget setSelectedItemLabel({required BuildContext context, required String label, required bool isSelected}) {
     return Text(
       label.toUpperCase(),
-      style: Theme.of(
-        context,
-      ).textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold, color: setDropdownColor(context: context, appColorScheme: appColorScheme)),
+      style: Theme.of(context).textTheme.titleMedium!.copyWith(
+        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+        color: setDropdownColor(context: context, appColorScheme: appColorScheme),
+      ),
     );
   }
 
@@ -187,16 +189,26 @@ class DropdownWidget extends StatelessWidget {
           // Custom builder for the selected item label (shows count for multi-selection)
           selectedItemBuilder: (BuildContext context) {
             String label = appLocalizations.selectDropdownOptionText;
+            bool isSelected = false;
             if (multiSelection!) {
+              isSelected = setSelectedItems().isNotEmpty;
               label =
                   setSelectedItems().isNotEmpty
                       ? "${setSelectedItems().length} ${appLocalizations.selectedDropdownItemsText}"
                       : appLocalizations.selectDropdownOptionsText;
             } else {
               int index = items.indexWhere((item) => item['value'] == selectedItem);
-              label = index != -1 ? items[index]['label'] ?? appLocalizations.selectDropdownOptionText : appLocalizations.selectDropdownOptionText;
+              if (index != -1) {
+                isSelected = true;
+                label = items[index]['label'] ?? appLocalizations.selectDropdownOptionText;
+              }
             }
-            return items.map((item) => setSelectedItemLabel(context: context, label: label)).toList();
+            return items.isNotEmpty
+                ? [
+                  setSelectedItemLabel(context: context, label: label, isSelected: isSelected),
+                  ...items.map((item) => setSelectedItemLabel(context: context, label: label, isSelected: isSelected)),
+                ]
+                : [setSelectedItemLabel(context: context, label: label, isSelected: isSelected)];
           },
           // Dropdown menu items
           items:
