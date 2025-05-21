@@ -163,7 +163,14 @@ class DropdownWidget extends StatelessWidget {
           isDense: true,
           isExpanded: true,
           dropdownColor: themeData.offWhite,
-          validator: (String? value) => validator(value),
+          validator:
+              (String? value) => validator(
+                multiSelection!
+                    ? selectedItem.isEmpty
+                        ? value
+                        : "$selectedItem,$value"
+                    : value,
+              ), // Validation function
           icon: Icon(Icons.arrow_drop_down_rounded, color: themeData.calPolyPomonaGreen),
           decoration: InputDecoration(
             border: OutlineInputBorder(),
