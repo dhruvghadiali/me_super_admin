@@ -30,7 +30,7 @@ List<DrawerItem> drawerItems = [
       DrawerItem(
         title: 'Register Schools',
         icon: Icons.add_circle,
-        route: '/schools/register',
+        route: RoutePaths.schoolForm,
         submenu: [],
       ),
     ],

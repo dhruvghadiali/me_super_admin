@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:me_super_admin/controller/organization_member/organization_member_controller.dart';
 
 import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/drawer_items.dart';
@@ -13,8 +12,12 @@ import 'package:me_super_admin/controller/fee_type/fee_type_controller.dart';
 import 'package:me_super_admin/controller/area_name/area_name_controller.dart';
 import 'package:me_super_admin/controller/school_type/school_type_controller.dart';
 import 'package:me_super_admin/controller/organization/organization_controller.dart';
+import 'package:me_super_admin/controller/school_admin/school_admin_controller.dart';
+import 'package:me_super_admin/controller/school/school_form_stepper_controller.dart';
+import 'package:me_super_admin/controller/school_address/school_address_controller.dart';
 import 'package:me_super_admin/controller/academic_grade/academic_grade_controller.dart';
 import 'package:me_super_admin/controller/education_board/education_board_controller.dart';
+import 'package:me_super_admin/controller/organization_member/organization_member_controller.dart';
 
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({super.key});
@@ -112,9 +115,10 @@ class DrawerWidget extends StatelessWidget {
   void resetSchoolFormValues() {
     OrganizationController organizationController = Get.put(OrganizationController());
     OrganizationMemberController organizationMemberController = Get.put(OrganizationMemberController());
+    SchoolAddressController schoolAddressController = Get.put(SchoolAddressController());
+    SchoolAdminController schoolAdminController = Get.put(SchoolAdminController());
+    SchoolFormStepperController schoolFormStepperController = Get.put(SchoolFormStepperController());
 
-    organizationController.resetOrganizationForm();
-    organizationMemberController.resetOrganizationMemberForm();
     getStates();
     getCities();
     getZipcodes();
@@ -122,6 +126,12 @@ class DrawerWidget extends StatelessWidget {
     getDistricts();
     getSchoolTypes();
     getEducationBoards();
+
+    schoolFormStepperController.resetStepper();
+    organizationController.resetOrganizationForm();
+    organizationMemberController.resetOrganizationMemberForm();
+    schoolAddressController.resetSchoolAddressForm();
+    schoolAdminController.resetSchoolAdminForm();
   }
 
   void onDrawerClick(BuildContext context, String route) {

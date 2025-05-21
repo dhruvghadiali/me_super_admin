@@ -42,8 +42,8 @@ class SchoolAddressController extends GetxController {
    * None
    */
   void resetSchoolAddressForm() {
-    schoolAddresses = [SchoolAddress.defaultValues(), SchoolAddress.defaultValues()];
-    schoolAddressFormValidated = [false, false];
+    schoolAddresses = [SchoolAddress.defaultValues()];
+    schoolAddressFormValidated = [false];
     update();
   }
 
