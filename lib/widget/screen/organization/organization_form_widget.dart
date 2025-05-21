@@ -8,6 +8,7 @@ import 'package:me_super_admin/model/zipcode/zipcode.dart';
 import 'package:me_super_admin/model/district/district.dart';
 import 'package:me_super_admin/model/area_name/area_name.dart';
 import 'package:me_super_admin/model/state/state.dart' as state_model;
+import 'package:me_super_admin/widget/common/alert/alert_widget.dart';
 import 'package:me_super_admin/widget/common/form/city_selection_form_widget.dart';
 import 'package:me_super_admin/widget/common/loader/api_request_loader_widget.dart';
 import 'package:me_super_admin/widget/common/form/state_selection_form_widget.dart';
@@ -104,6 +105,28 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
   }
 
   /*
+   * Displays an alert dialog when validation fails.
+   *
+   * This function shows a dialog with a validation alert message. The dialog
+   * prevents dismissal by tapping outside and provides a button to close it.
+   */
+  void displayAlert() {
+    AppLocalizations appLocalizations = AppLocalizations.of(context)!;
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertWidget(
+          message: appLocalizations.organizationMemberFormValidationAlertMessage,
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        );
+      },
+    );
+  }
+
+  /*
    * The onNameTextFieldSubmit method is triggered when the user submits the name input field.
    * It performs the following actions:
    * 
@@ -114,7 +137,7 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
    * 
    * This method ensures a smooth user experience by managing focus transitions and handling form submission.
    */
-  onNameTextFieldSubmit(BuildContext context, String value) {
+  void onNameTextFieldSubmit(BuildContext context, String value) {
     FocusManager.instance.primaryFocus?.unfocus();
     FocusScope.of(context).requestFocus(_shortNameFocusNode);
     organizationController.onNameSubmitted(value, _nameFieldKey);
@@ -131,7 +154,7 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
    * 
    * This method ensures a smooth user experience by managing focus transitions and handling form submission.
    */
-  onShortNameTextFieldSubmit(BuildContext context, String value) {
+  void onShortNameTextFieldSubmit(BuildContext context, String value) {
     FocusManager.instance.primaryFocus?.unfocus();
     FocusScope.of(context).requestFocus(_emailFocusNode);
     organizationController.onShortNameSubmitted(value, _shortNameFieldKey);
@@ -148,7 +171,7 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
    * 
    * This method ensures a smooth user experience by managing focus transitions and handling form submission.
    */
-  onEmailTextFieldSubmit(BuildContext context, String value) {
+  void onEmailTextFieldSubmit(BuildContext context, String value) {
     FocusManager.instance.primaryFocus?.unfocus();
     FocusScope.of(context).requestFocus(_phoneNumberFocusNode);
     organizationController.onEmailSubmitted(value, _emailFieldKey);
@@ -165,7 +188,7 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
    * 
    * This method ensures a smooth user experience by managing focus transitions and handling form submission.
    */
-  onPhoneNumberTextFieldSubmit(BuildContext context, String value) {
+  void onPhoneNumberTextFieldSubmit(BuildContext context, String value) {
     FocusManager.instance.primaryFocus?.unfocus();
     FocusScope.of(context).requestFocus(_governmentRegistrationNumberFocusNode);
     organizationController.onPhoneNumberSubmitted(value, _phoneNumberFieldKey);
@@ -183,7 +206,7 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
    * 
    * This method ensures a smooth user experience by managing focus transitions and handling form submission.
    */
-  onGovernmentRegistrationNumberTextFieldSubmit(BuildContext context, String value) {
+  void onGovernmentRegistrationNumberTextFieldSubmit(BuildContext context, String value) {
     FocusManager.instance.primaryFocus?.unfocus();
     FocusScope.of(context).requestFocus(_addressFocusNode);
     organizationController.onGovernmentRegistrationNumberSubmitted(value, _governmentRegistrationNumberFieldKey);
@@ -199,7 +222,7 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
    * 
    * This method ensures a smooth user experience by handling the form submission and removing focus from the field.
    */
-  onAddressTextFieldSubmit(BuildContext context, String value) {
+  void onAddressTextFieldSubmit(BuildContext context, String value) {
     FocusManager.instance.primaryFocus?.unfocus();
     organizationController.onAddressSubmitted(value, _addressFieldKey);
   }
@@ -212,10 +235,11 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
    *    - If the organization exists, it triggers the organizationController.onSubmitForm method to handle the update process.
    *    - If the organization is not yet created, it proceeds to validate the form.
    * 3. If the form is valid (via the _formKey.currentState?.validate()), it triggers the next step in the process by calling widget.onNextStep!().
+   * 4. If the form is invalid, it displays an alert using the displayAlert() method.
    * 
    * This method handles the logic for both creating and updating an organization, ensuring that the form is validated before proceeding.
    */
-  onSubmitForm(BuildContext context) {
+  void onSubmitForm(BuildContext context) {
     FocusManager.instance.primaryFocus?.unfocus();
 
     if (organizationController.organization.id.isNotEmpty) {
@@ -223,6 +247,8 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
     } else {
       if (_formKey.currentState?.validate() ?? false) {
         widget.onNextStep!();
+      } else {
+        displayAlert();
       }
     }
   }
