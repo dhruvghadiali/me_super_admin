@@ -8,6 +8,7 @@ class SchoolFormStepperController extends GetxController {
 
   void resetStepper() {
     schoolFormStepper = SchoolFormStepper.defaultValues();
+    currentIndex = 0;
     update();
   }
 
