@@ -93,14 +93,12 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
    */
   @override
   void initState() {
-    if (organizationController.organization.id.isNotEmpty) {
-      _nameTextEditingController.text = organizationController.organization.name;
-      _emailTextEditingController.text = organizationController.organization.email;
-      _addressTextEditingController.text = organizationController.organization.address;
-      _shortNameTextEditingController.text = organizationController.organization.shortName;
-      _phoneNumberTextEditingController.text = organizationController.organization.phoneNumber;
-      _governmentRegistrationNumberTextEditingController.text = organizationController.organization.governmentRegistrationNumber;
-    }
+    _nameTextEditingController.text = organizationController.organization.name;
+    _emailTextEditingController.text = organizationController.organization.email;
+    _addressTextEditingController.text = organizationController.organization.address;
+    _shortNameTextEditingController.text = organizationController.organization.shortName;
+    _phoneNumberTextEditingController.text = organizationController.organization.phoneNumber;
+    _governmentRegistrationNumberTextEditingController.text = organizationController.organization.governmentRegistrationNumber;
     super.initState();
   }
 
@@ -272,7 +270,7 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     textInputAction: TextInputAction.next,
                     controller: _nameTextEditingController,
                     validator: organizationControllerContext.nameValidator,
-                    labelText: appLocalizations.organizationNameTextFieldLabelText,
+                    labelText: appLocalizations.organizationFormOrganizationNameTextFieldLabelText,
                     onChange: (String value) => organizationControllerContext.onNameChange(value),
                     onFieldSubmitted: (String value) => onNameTextFieldSubmit(context, value),
                   ),
@@ -286,7 +284,7 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     textInputAction: TextInputAction.next,
                     controller: _shortNameTextEditingController,
                     validator: organizationControllerContext.shortNameValidator,
-                    labelText: appLocalizations.organizationShortNameTextFieldLabelText,
+                    labelText: appLocalizations.organizationFormOrganizationShortNameTextFieldLabelText,
                     onChange: (String value) => organizationControllerContext.onShortNameChange(value),
                     onFieldSubmitted: (String value) => onShortNameTextFieldSubmit(context, value),
                   ),
@@ -301,7 +299,7 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     controller: _emailTextEditingController,
                     textInputType: TextInputType.emailAddress,
                     validator: organizationControllerContext.emailValidator,
-                    labelText: appLocalizations.organizationEmailTextFieldLabelText,
+                    labelText: appLocalizations.organizationFormOrganizationEmailTextFieldLabelText,
                     onChange: (String value) => organizationControllerContext.onEmailChange(value),
                     onFieldSubmitted: (String value) => onEmailTextFieldSubmit(context, value),
                   ),
@@ -316,7 +314,7 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     controller: _phoneNumberTextEditingController,
                     textInputType: TextInputType.phone,
                     validator: organizationControllerContext.phoneNumberValidator,
-                    labelText: appLocalizations.organizationPhoneNumberTextFieldLabelText,
+                    labelText: appLocalizations.organizationFormOrganizationPhoneNumberTextFieldLabelText,
                     onChange: (String value) => organizationControllerContext.onPhoneNumberChange(value),
                     onFieldSubmitted: (String value) => onPhoneNumberTextFieldSubmit(context, value),
                   ),
@@ -330,7 +328,7 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     textInputAction: TextInputAction.next,
                     controller: _governmentRegistrationNumberTextEditingController,
                     validator: organizationControllerContext.governmentRegistrationNumberValidator,
-                    labelText: appLocalizations.organizationGovernmentRegistrationNumberTextFieldLabelText,
+                    labelText: appLocalizations.organizationFormOrganizationGovernmentRegistrationNumberTextFieldLabelText,
                     onChange: (String value) => organizationControllerContext.onGovernmentRegistrationNumberChange(value),
                     onFieldSubmitted: (String value) => onGovernmentRegistrationNumberTextFieldSubmit(context, value),
                   ),
@@ -344,7 +342,7 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     textInputAction: TextInputAction.done,
                     controller: _addressTextEditingController,
                     validator: organizationControllerContext.addressValidator,
-                    labelText: appLocalizations.organizationAddressTextFieldLabelText,
+                    labelText: appLocalizations.organizationFormOrganizationAddressTextFieldLabelText,
                     onChange: (String value) => organizationControllerContext.onAddressChange(value),
                     onFieldSubmitted: (String value) => onAddressTextFieldSubmit(context, value),
                   ),
@@ -408,7 +406,7 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                             margin: const EdgeInsets.only(left: 5),
                             child: ElevatedButtonWidget(
                               appColorScheme: AppColorScheme.primary,
-                              buttonText: appLocalizations.nextButtonText,
+                              buttonText: appLocalizations.nextButtonText.toUpperCase(),
                               disabled: false,
                               onPressed: () => onSubmitForm(context),
                             ),
@@ -423,7 +421,7 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                           margin: const EdgeInsets.only(top: 30),
                           child: ElevatedButtonWidget(
                             appColorScheme: AppColorScheme.primary,
-                            buttonText: appLocalizations.submitButtonText,
+                            buttonText: appLocalizations.submitButtonText.toUpperCase(),
                             disabled: organizationControllerContext.isLoader,
                             onPressed: () => onSubmitForm(context),
                           ),

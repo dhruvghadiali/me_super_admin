@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:me_super_admin/app_enum.dart';
 
 import 'package:me_super_admin/model/stepper/school_form_stepper.dart';
+import 'package:me_super_admin/widget/screen/school/school_form_widget.dart';
 import 'package:me_super_admin/controller/school/school_form_stepper_controller.dart';
 import 'package:me_super_admin/widget/screen/organization/organization_form_widget.dart';
-import 'package:me_super_admin/widget/screen/school/school_form/school_form_widget.dart';
 import 'package:me_super_admin/widget/screen/school_admin/school_admins_form_widget.dart';
 import 'package:me_super_admin/widget/screen/school_address/school_addresses_form_widget.dart';
 import 'package:me_super_admin/widget/screen/organization_member/organization_members_form_widget.dart';
+import 'package:me_super_admin/widget/screen/school/new_school_form_summary/new_school_form_summary_widget.dart';
 
 /*
  * SchoolFormStepperScreen is a StatefulWidget that manages a multi-step form (stepper) for school-related data entry.
@@ -74,7 +75,7 @@ class _SchoolFormStepperScreenState extends State<SchoolFormStepperScreen> {
         // School admin step: shows the school admins form
         return SchoolAdminsFormWidget(
           isStepperForm: true,
-          onNextStep: () => schoolFormStepperController.nextStep(),
+          onNextStep: () => schoolFormStepperController.toggleShowSummary(),
           onPreviousStep: () => schoolFormStepperController.previousStep(),
         );
     }
@@ -95,23 +96,26 @@ class _SchoolFormStepperScreenState extends State<SchoolFormStepperScreen> {
         return Column(
           children: [
             Expanded(
-              child: Stepper(
-                onStepTapped: (int index) => schoolFormStepperControllerContext.onStepTapped(index),
-                currentStep: schoolFormStepperControllerContext.currentIndex,
-                controlsBuilder: (context, details) => SizedBox(),
-                steps:
-                    schoolFormStepperControllerContext.schoolFormStepper.asMap().entries.map((entry) {
-                      int index = entry.key;
-                      var step = entry.value;
-                      return Step(
-                        title: Text(step.title),
-                        subtitle: Text(step.subtitle),
-                        isActive: step.isActive,
-                        state: step.stepState,
-                        content: getStepperContent(step, index),
-                      );
-                    }).toList(),
-              ),
+              child:
+                  schoolFormStepperControllerContext.showSummary
+                      ? NewSchoolFormSummaryWidget()
+                      : Stepper(
+                        onStepTapped: (int index) => schoolFormStepperControllerContext.onStepTapped(index),
+                        currentStep: schoolFormStepperControllerContext.currentIndex,
+                        controlsBuilder: (context, details) => SizedBox(),
+                        steps:
+                            schoolFormStepperControllerContext.schoolFormStepper.asMap().entries.map((entry) {
+                              int index = entry.key;
+                              var step = entry.value;
+                              return Step(
+                                title: Text(step.title),
+                                subtitle: Text(step.subtitle),
+                                isActive: step.isActive,
+                                state: step.stepState,
+                                content: getStepperContent(step, index),
+                              );
+                            }).toList(),
+                      ),
             ),
           ],
         );

@@ -29,14 +29,14 @@ class _SchoolAdminsFormWidgetState extends State<SchoolAdminsFormWidget> {
    * This function shows a dialog with a validation alert message. The dialog
    * prevents dismissal by tapping outside and provides a button to close it.
    */
-  void displayAlert() {
+  void displayAlert({String? message}) {
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertWidget(
-          message: appLocalizations.organizationMemberFormValidationAlertMessage,
+          message: message ?? appLocalizations.organizationMemberFormValidationAlertMessage,
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -57,6 +57,9 @@ class _SchoolAdminsFormWidgetState extends State<SchoolAdminsFormWidget> {
    * - `false` if all forms are valid.
    */
   bool isSchoolAdminsFormValidated() {
+    schoolAdminController.schoolAdminFormValidated.forEach((element) {
+      print("element: $element");
+    });
     int index = schoolAdminController.schoolAdminFormValidated.indexOf(false);
     return index != -1;
   }
@@ -125,7 +128,11 @@ class _SchoolAdminsFormWidgetState extends State<SchoolAdminsFormWidget> {
    */
   void deleteSchoolAdminForm(int index) {
     if (widget.isStepperForm) {
-      schoolAdminController.deleteSchoolAdminForm(index);
+      if (schoolAdminController.schoolAdmins.length > 1) {
+        schoolAdminController.deleteSchoolAdminForm(index);
+      } else {
+        displayAlert(message: "At least one school admin is required.");
+      }
     }
   }
 

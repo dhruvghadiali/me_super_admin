@@ -29,14 +29,14 @@ class _OrganizationMembersFormWidgetState extends State<OrganizationMembersFormW
    * This function shows a dialog with a validation alert message. The dialog
    * prevents dismissal by tapping outside and provides a button to close it.
    */
-  void displayAlert() {
+  void displayAlert({String? message}) {
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertWidget(
-          message: appLocalizations.organizationMemberFormValidationAlertMessage,
+          message: message ?? appLocalizations.organizationMemberFormValidationAlertMessage,
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -125,7 +125,11 @@ class _OrganizationMembersFormWidgetState extends State<OrganizationMembersFormW
    */
   void deleteOrganizationMemberForm(int index) {
     if (widget.isStepperForm) {
-      organizationMemberController.deleteOrganizationMemberForm(index);
+      if (organizationMemberController.organizationMembers.length > 1) {
+        organizationMemberController.deleteOrganizationMemberForm(index);
+      } else {
+        displayAlert(message: "At least one organization member is required.");
+      }
     } else {
       organizationMemberController.deleteOrganizationMember(index);
     }
@@ -168,7 +172,7 @@ class _OrganizationMembersFormWidgetState extends State<OrganizationMembersFormW
                       Icon(Icons.add_circle, color: themeData.offWhite),
                       Padding(
                         padding: EdgeInsets.only(left: 5),
-                        child: Text(appLocalizations.addMemberButtonText, style: TextStyle(color: themeData.offWhite)),
+                        child: Text(appLocalizations.organizationMemberFormAddMemberButtonText.toUpperCase(), style: TextStyle(color: themeData.offWhite)),
                       ),
                     ],
                   ),
@@ -215,7 +219,7 @@ class _OrganizationMembersFormWidgetState extends State<OrganizationMembersFormW
                         margin: const EdgeInsets.only(left: 5),
                         child: ElevatedButtonWidget(
                           appColorScheme: AppColorScheme.primary,
-                          buttonText: appLocalizations.nextButtonText,
+                          buttonText: appLocalizations.nextButtonText.toUpperCase(),
                           disabled: false,
                           onPressed: () => onNextStep(),
                         ),
@@ -225,7 +229,7 @@ class _OrganizationMembersFormWidgetState extends State<OrganizationMembersFormW
                         margin: const EdgeInsets.only(left: 5),
                         child: ElevatedButtonWidget(
                           appColorScheme: AppColorScheme.primary,
-                          buttonText: appLocalizations.previousButtonText,
+                          buttonText: appLocalizations.previousButtonText.toUpperCase(),
                           disabled: false,
                           onPressed: () => onPreviousStep(),
                         ),

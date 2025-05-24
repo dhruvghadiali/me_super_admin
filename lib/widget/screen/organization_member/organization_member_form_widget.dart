@@ -94,16 +94,15 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
      * This ensures that the form is pre-filled with existing data when editing an
      * organization member.
      */
-    if (widget.organizationMember.id.isNotEmpty) {
-      OrganizationMember organizationMember = widget.organizationMember;
-      _emailTextEditingController.text = organizationMember.email;
-      _addressTextEditingController.text = organizationMember.address;
-      _positionTextEditingController.text = organizationMember.position;
-      _lastNameTextEditingController.text = organizationMember.lastName;
-      _firstNameTextEditingController.text = organizationMember.firstName;
-      _phoneNumberTextEditingController.text = organizationMember.phoneNumber;
-      _aadhaarNumberTextEditingController.text = organizationMember.aadhaarNumber;
-    }
+    OrganizationMember organizationMember = widget.organizationMember;
+    _emailTextEditingController.text = organizationMember.email;
+    _addressTextEditingController.text = organizationMember.address;
+    _positionTextEditingController.text = organizationMember.position;
+    _lastNameTextEditingController.text = organizationMember.lastName;
+    _firstNameTextEditingController.text = organizationMember.firstName;
+    _phoneNumberTextEditingController.text = organizationMember.phoneNumber;
+    _aadhaarNumberTextEditingController.text = organizationMember.aadhaarNumber;
+
     super.initState();
   }
 
@@ -250,7 +249,7 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                     focusNode: _firstNameFocusNode,
                     appColorScheme: AppColorScheme.primary,
                     controller: _firstNameTextEditingController,
-                    labelText: appLocalizations.firstNameTextFieldLabelText,
+                    labelText: appLocalizations.organizationMemberFormFirstNameTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: organizationMemberControllerContext.firstNameValidator,
                     onChange: (String value) => organizationMemberControllerContext.onFirstNameChange(value, widget.index),
@@ -264,7 +263,7 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                     focusNode: _lastNameFocusNode,
                     appColorScheme: AppColorScheme.primary,
                     controller: _lastNameTextEditingController,
-                    labelText: appLocalizations.lastNameTextFieldLabelText,
+                    labelText: appLocalizations.organizationMemberFormLastNameTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: organizationMemberControllerContext.lastNameValidator,
                     onChange: (String value) => organizationMemberControllerContext.onLastNameChange(value, widget.index),
@@ -279,7 +278,7 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                     appColorScheme: AppColorScheme.primary,
                     textInputType: TextInputType.emailAddress,
                     controller: _emailTextEditingController,
-                    labelText: appLocalizations.emailTextFieldLabelText,
+                    labelText: appLocalizations.organizationMemberFormEmailTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: organizationMemberControllerContext.emailValidator,
                     onChange: (String value) => organizationMemberControllerContext.onEmailChange(value, widget.index),
@@ -294,7 +293,7 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                     appColorScheme: AppColorScheme.primary,
                     textInputType: TextInputType.phone,
                     controller: _phoneNumberTextEditingController,
-                    labelText: appLocalizations.phoneNumberTextFieldLabelText,
+                    labelText: appLocalizations.organizationMemberFormPhoneNumberTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: organizationMemberControllerContext.phoneNumberValidator,
                     onChange: (String value) => organizationMemberControllerContext.onPhoneNumberChange(value, widget.index),
@@ -309,7 +308,7 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                     appColorScheme: AppColorScheme.primary,
                     textInputType: TextInputType.phone,
                     controller: _aadhaarNumberTextEditingController,
-                    labelText: appLocalizations.aadhaarNumberTextFieldLabelText,
+                    labelText: appLocalizations.organizationMemberFormAadhaarNumberTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: organizationMemberControllerContext.aadhaarNumberValidator,
                     onChange: (String value) => organizationMemberControllerContext.onAadhaarNumberChange(value, widget.index),
@@ -323,7 +322,7 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                     focusNode: _addressFocusNode,
                     appColorScheme: AppColorScheme.primary,
                     controller: _addressTextEditingController,
-                    labelText: appLocalizations.addressTextFieldLabelText,
+                    labelText: appLocalizations.organizationMemberFormAddressTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: organizationMemberControllerContext.addressValidator,
                     onChange: (String value) => organizationMemberControllerContext.onAddressChange(value, widget.index),
@@ -335,7 +334,7 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                   child: DropdownWidget(
                     fieldKey: _positionFieldKey,
                     validator: organizationMemberControllerContext.positionValidator,
-                    labelText: appLocalizations.positionDropdownFieldLabelText,
+                    labelText: appLocalizations.organizationMemberFormPositionDropdownFieldLabelText,
                     selectedItem: organizationMemberControllerContext.organizationMembers[widget.index].position,
                     appColorScheme: AppColorScheme.primary,
                     onChanged: (String value) => organizationMemberControllerContext.onPositionChange(value, widget.index, _positionFieldKey),
@@ -409,7 +408,7 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                         margin: const EdgeInsets.only(left: 5),
                         child: ElevatedButtonWidget(
                           appColorScheme: AppColorScheme.primary,
-                          buttonText: appLocalizations.submitButtonText,
+                          buttonText: appLocalizations.submitButtonText.toUpperCase(),
                           disabled: false,
                           onPressed: () => onSubmitForm(context),
                         ),

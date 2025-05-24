@@ -5,10 +5,17 @@ import 'package:me_super_admin/model/stepper/school_form_stepper.dart';
 class SchoolFormStepperController extends GetxController {
   List<SchoolFormStepper> schoolFormStepper = SchoolFormStepper.defaultValues();
   int currentIndex = 0;
+  bool showSummary = false;
 
   void resetStepper() {
     schoolFormStepper = SchoolFormStepper.defaultValues();
     currentIndex = 0;
+    showSummary = false;
+    update();
+  }
+
+  void toggleShowSummary() {
+    showSummary = !showSummary;
     update();
   }
 

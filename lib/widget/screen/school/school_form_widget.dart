@@ -85,15 +85,13 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
    */
   @override
   void initState() {
-    if (schoolController.school.id.isNotEmpty) {
-      School school = schoolController.school;
-      _nameTextEditingController.text = school.name;
-      _shortNameTextEditingController.text = school.shortName;
-      _emailTextEditingController.text = school.email;
-      _phoneNumberTextEditingController.text = school.phoneNumber;
-      _affiliateNumberTextEditingController.text = school.affiliateNumber;
-      _establishedYearTextEditingController.text = school.establishedYear.toString();
-    }
+    School school = schoolController.school;
+    _nameTextEditingController.text = school.name;
+    _shortNameTextEditingController.text = school.shortName;
+    _emailTextEditingController.text = school.email;
+    _phoneNumberTextEditingController.text = school.phoneNumber;
+    _affiliateNumberTextEditingController.text = school.affiliateNumber;
+    _establishedYearTextEditingController.text = school.establishedYear.toString();
     super.initState();
   }
 
@@ -338,7 +336,7 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                     focusNode: _affiliateNumberFocusNode,
                     appColorScheme: AppColorScheme.primary,
                     controller: _affiliateNumberTextEditingController,
-                    labelText: appLocalizations.schoolAffiliateNumberTextFieldLabelText,
+                    labelText: appLocalizations.schoolFormSchoolAffiliateNumberTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: schoolControllerContext.affiliateNumberValidator,
                     onChange: (String value) => schoolControllerContext.onAffiliateNumberChange(value),
@@ -352,7 +350,7 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                     focusNode: _nameFocusNode,
                     appColorScheme: AppColorScheme.primary,
                     controller: _nameTextEditingController,
-                    labelText: appLocalizations.schoolNameTextFieldLabelText,
+                    labelText: appLocalizations.schoolFormSchoolNameTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: schoolControllerContext.nameValidator,
                     onChange: (String value) => schoolControllerContext.onNameChange(value),
@@ -366,7 +364,7 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                     focusNode: _shortNameFocusNode,
                     appColorScheme: AppColorScheme.primary,
                     controller: _shortNameTextEditingController,
-                    labelText: appLocalizations.schoolShortNameTextFieldLabelText,
+                    labelText: appLocalizations.schoolFormSchoolShortNameTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: schoolControllerContext.shortNameValidator,
                     onChange: (String value) => schoolControllerContext.onShortNameChange(value),
@@ -381,7 +379,7 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                     appColorScheme: AppColorScheme.primary,
                     textInputType: TextInputType.emailAddress,
                     controller: _emailTextEditingController,
-                    labelText: appLocalizations.schoolEmailTextFieldLabelText,
+                    labelText: appLocalizations.schoolFormSchoolEmailTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: schoolControllerContext.emailValidator,
                     onChange: (String value) => schoolControllerContext.onEmailChange(value),
@@ -396,7 +394,7 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                     appColorScheme: AppColorScheme.primary,
                     textInputType: TextInputType.phone,
                     controller: _phoneNumberTextEditingController,
-                    labelText: appLocalizations.phoneNumberTextFieldLabelText,
+                    labelText: appLocalizations.schoolFormSchoolPhoneNumberTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: schoolControllerContext.phoneNumberValidator,
                     onChange: (String value) => schoolControllerContext.onPhoneNumberChange(value),
@@ -411,7 +409,7 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                     appColorScheme: AppColorScheme.primary,
                     textInputType: TextInputType.number,
                     controller: _establishedYearTextEditingController,
-                    labelText: appLocalizations.schoolEstablishedYearTextFieldLabelText,
+                    labelText: appLocalizations.schoolFormSchoolEstablishedYearTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: schoolControllerContext.establishedYearValidator,
                     onChange: (String value) => schoolControllerContext.onEstablishedYearChange(value),
@@ -423,7 +421,7 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                   child: DropdownWidget(
                     fieldKey: _schoolTypeFieldKey,
                     validator: schoolControllerContext.schoolTypeValidator,
-                    labelText: appLocalizations.schoolTypeDropdownFieldLabelText,
+                    labelText: appLocalizations.schoolFormSchoolTypeDropdownLabelText,
                     selectedItem: schoolControllerContext.school.schoolType.id,
                     appColorScheme: AppColorScheme.primary,
                     onChanged: (String value) => onSchoolTypeChange(value),
@@ -440,7 +438,7 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                   child: DropdownWidget(
                     fieldKey: _educationBoardFieldKey,
                     validator: schoolControllerContext.educationBoardValidator,
-                    labelText: appLocalizations.educationBoardDropdownFieldLabelText,
+                    labelText: appLocalizations.schoolFormSchoolEducationBoardsDropdownLabelText,
                     multiSelection: true,
                     selectedItem:
                         schoolControllerContext.school.educationBoards.isEmpty
@@ -466,7 +464,7 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                             margin: const EdgeInsets.only(left: 5),
                             child: ElevatedButtonWidget(
                               appColorScheme: AppColorScheme.primary,
-                              buttonText: appLocalizations.nextButtonText,
+                              buttonText: appLocalizations.nextButtonText.toUpperCase(),
                               disabled: false,
                               onPressed: () => onNextStep(),
                             ),
@@ -476,7 +474,7 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                             margin: const EdgeInsets.only(left: 5),
                             child: ElevatedButtonWidget(
                               appColorScheme: AppColorScheme.primary,
-                              buttonText: appLocalizations.previousButtonText,
+                              buttonText: appLocalizations.previousButtonText.toUpperCase(),
                               disabled: false,
                               onPressed: () => onPreviousStep(),
                             ),
@@ -491,7 +489,7 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                           margin: const EdgeInsets.only(top: 30),
                           child: ElevatedButtonWidget(
                             appColorScheme: AppColorScheme.primary,
-                            buttonText: appLocalizations.submitButtonText,
+                            buttonText: appLocalizations.submitButtonText.toUpperCase(),
                             disabled: schoolControllerContext.isLoader,
                             onPressed: () => onSubmitForm(context),
                           ),

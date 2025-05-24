@@ -68,13 +68,11 @@ class _SchoolAdminFormWidgetState extends State<SchoolAdminFormWidget> {
      * This ensures that the form is pre-filled with existing data when editing a
      * school admin.
      */
-    if (widget.schoolAdmin.id.isNotEmpty) {
-      SchoolAdmin schoolAdmin = widget.schoolAdmin;
-      _firstNameTextEditingController.text = schoolAdmin.firstName;
-      _lastNameTextEditingController.text = schoolAdmin.lastName;
-      _emailTextEditingController.text = schoolAdmin.email;
-      _phoneNumberTextEditingController.text = schoolAdmin.phoneNumber;
-    }
+    SchoolAdmin schoolAdmin = widget.schoolAdmin;
+    _firstNameTextEditingController.text = schoolAdmin.firstName;
+    _lastNameTextEditingController.text = schoolAdmin.lastName;
+    _emailTextEditingController.text = schoolAdmin.email;
+    _phoneNumberTextEditingController.text = schoolAdmin.phoneNumber;
     super.initState();
   }
 
@@ -187,7 +185,7 @@ class _SchoolAdminFormWidgetState extends State<SchoolAdminFormWidget> {
                     textInputAction: TextInputAction.next,
                     controller: _firstNameTextEditingController,
                     validator: schoolAdminControllerContext.firstNameValidator,
-                    labelText: appLocalizations.firstNameTextFieldLabelText,
+                    labelText: appLocalizations.schoolAdminFormFirstNameTextFieldLabelText,
                     onChange: (String value) => schoolAdminControllerContext.onFirstNameChange(value, widget.index),
                     onFieldSubmitted: (String value) => onFirstNameTextFieldSubmit(context, value),
                   ),
@@ -201,7 +199,7 @@ class _SchoolAdminFormWidgetState extends State<SchoolAdminFormWidget> {
                     textInputAction: TextInputAction.next,
                     controller: _lastNameTextEditingController,
                     validator: schoolAdminControllerContext.lastNameValidator,
-                    labelText: appLocalizations.lastNameTextFieldLabelText,
+                    labelText: appLocalizations.schoolAdminFormLastNameTextFieldLabelText,
                     onChange: (String value) => schoolAdminControllerContext.onLastNameChange(value, widget.index),
                     onFieldSubmitted: (String value) => onLastNameTextFieldSubmit(context, value),
                   ),
@@ -216,7 +214,7 @@ class _SchoolAdminFormWidgetState extends State<SchoolAdminFormWidget> {
                     textInputType: TextInputType.emailAddress,
                     controller: _emailTextEditingController,
                     validator: schoolAdminControllerContext.emailValidator,
-                    labelText: appLocalizations.emailTextFieldLabelText,
+                    labelText: appLocalizations.schoolAdminFormEmailTextFieldLabelText,
                     onChange: (String value) => schoolAdminControllerContext.onEmailChange(value, widget.index),
                     onFieldSubmitted: (String value) => onEmailTextFieldSubmit(context, value),
                   ),
@@ -231,7 +229,7 @@ class _SchoolAdminFormWidgetState extends State<SchoolAdminFormWidget> {
                     textInputType: TextInputType.phone,
                     controller: _phoneNumberTextEditingController,
                     validator: schoolAdminControllerContext.phoneNumberValidator,
-                    labelText: appLocalizations.phoneNumberTextFieldLabelText,
+                    labelText: appLocalizations.schoolAdminFormPhoneNumberTextFieldLabelText,
                     onChange: (String value) => schoolAdminControllerContext.onPhoneNumberChange(value, widget.index),
                     onFieldSubmitted: (String value) => onPhoneNumberTextFieldSubmit(context, value),
                   ),
@@ -245,7 +243,7 @@ class _SchoolAdminFormWidgetState extends State<SchoolAdminFormWidget> {
                         margin: const EdgeInsets.only(left: 5),
                         child: ElevatedButtonWidget(
                           appColorScheme: AppColorScheme.primary,
-                          buttonText: appLocalizations.submitButtonText,
+                          buttonText: appLocalizations.submitButtonText.toUpperCase(),
                           disabled: false,
                           onPressed: () => onSubmitForm(context),
                         ),

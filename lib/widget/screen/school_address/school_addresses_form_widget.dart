@@ -29,14 +29,14 @@ class _SchoolAddressesFormWidgetState extends State<SchoolAddressesFormWidget> {
    * This function shows a dialog with a validation alert message. The dialog
    * prevents dismissal by tapping outside and provides a button to close it.
    */
-  void displayAlert() {
+  void displayAlert({String? message}) {
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertWidget(
-          message: appLocalizations.organizationMemberFormValidationAlertMessage,
+          message: message ?? appLocalizations.organizationMemberFormValidationAlertMessage,
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -125,7 +125,11 @@ class _SchoolAddressesFormWidgetState extends State<SchoolAddressesFormWidget> {
    */
   void deleteSchoolAddressForm(int index) {
     if (widget.isStepperForm) {
-      schoolAddressController.deleteSchoolAddressForm(index);
+      if (schoolAddressController.schoolAddresses.length > 1) {
+        schoolAddressController.deleteSchoolAddressForm(index);
+      } else {
+        displayAlert(message: "At least one school address is required.");
+      }
     } else {
       schoolAddressController.deleteSchoolAddress(index);
     }
@@ -168,7 +172,7 @@ class _SchoolAddressesFormWidgetState extends State<SchoolAddressesFormWidget> {
                       Icon(Icons.add_circle, color: themeData.offWhite),
                       Padding(
                         padding: EdgeInsets.only(left: 5),
-                        child: Text(appLocalizations.addSchoolAddressButtonText, style: TextStyle(color: themeData.offWhite)),
+                        child: Text(appLocalizations.schoolAddressFormAddSchoolAddressButtonText.toUpperCase(), style: TextStyle(color: themeData.offWhite)),
                       ),
                     ],
                   ),
@@ -215,7 +219,7 @@ class _SchoolAddressesFormWidgetState extends State<SchoolAddressesFormWidget> {
                         margin: const EdgeInsets.only(left: 5),
                         child: ElevatedButtonWidget(
                           appColorScheme: AppColorScheme.primary,
-                          buttonText: appLocalizations.nextButtonText,
+                          buttonText: appLocalizations.nextButtonText.toUpperCase(),
                           disabled: false,
                           onPressed: () => onNextStep(),
                         ),
@@ -225,7 +229,7 @@ class _SchoolAddressesFormWidgetState extends State<SchoolAddressesFormWidget> {
                         margin: const EdgeInsets.only(left: 5),
                         child: ElevatedButtonWidget(
                           appColorScheme: AppColorScheme.primary,
-                          buttonText: appLocalizations.previousButtonText,
+                          buttonText: appLocalizations.previousButtonText.toUpperCase(),
                           disabled: false,
                           onPressed: () => onPreviousStep(),
                         ),

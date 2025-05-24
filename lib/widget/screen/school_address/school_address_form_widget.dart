@@ -74,10 +74,8 @@ class _SchoolAddressFormWidgetState extends State<SchoolAddressFormWidget> {
      * This ensures that the form is pre-filled with existing data when editing a
      * school address.
      */
-    if (widget.schoolAddress.id.isNotEmpty) {
-      SchoolAddress schoolAddress = widget.schoolAddress;
-      _addressTextEditingController.text = schoolAddress.address;
-    }
+    SchoolAddress schoolAddress = widget.schoolAddress;
+    _addressTextEditingController.text = schoolAddress.address;
     super.initState();
   }
 
@@ -134,7 +132,7 @@ class _SchoolAddressFormWidgetState extends State<SchoolAddressFormWidget> {
                     focusNode: _addressFocusNode,
                     appColorScheme: AppColorScheme.primary,
                     controller: _addressTextEditingController,
-                    labelText: appLocalizations.addressTextFieldLabelText,
+                    labelText: appLocalizations.schoolAddressFormAddressTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: schoolAddressControllerContext.addressValidator,
                     onChange: (String value) => schoolAddressControllerContext.onAddressChange(value, widget.index),
@@ -199,7 +197,7 @@ class _SchoolAddressFormWidgetState extends State<SchoolAddressFormWidget> {
                         margin: const EdgeInsets.only(left: 5),
                         child: ElevatedButtonWidget(
                           appColorScheme: AppColorScheme.primary,
-                          buttonText: appLocalizations.submitButtonText,
+                          buttonText: appLocalizations.submitButtonText.toUpperCase(),
                           disabled: false,
                           onPressed: () => onSubmitForm(context),
                         ),
