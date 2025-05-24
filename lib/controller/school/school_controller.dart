@@ -4,11 +4,13 @@ import 'package:form_validator/form_validator.dart';
 
 import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/utils/utils.dart';
+import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/model/school/school.dart';
 import 'package:me_super_admin/utils/snackbar/snackbar.dart';
 import 'package:me_super_admin/service/http/http_service.dart';
 import 'package:me_super_admin/model/school_type/school_type.dart';
 import 'package:me_super_admin/model/http_service/put_http_service.dart';
+import 'package:me_super_admin/model/http_service/post_http_service.dart';
 import 'package:me_super_admin/model/education_board/education_board.dart';
 import 'package:me_super_admin/model/http_service/http_response_service.dart';
 import 'package:me_super_admin/model/http_service/mock_http_api_property_service.dart';
@@ -460,6 +462,32 @@ class SchoolController extends GetxController {
     if (formKey.currentState?.validate() ?? false) {
       (school.id.isNotEmpty) ? await putSchool() : null;
     }
+  }
+
+  Future<void> postSchool(Map<String, dynamic> jsonData) async {
+    String authToken = await Utils.getAuthToken();
+    isLoader = true;
+    update();
+
+    PostHttpService postHttpService = PostHttpService(
+      endPoint: 'super-admin/schools',
+      headers: {"Authorization": 'Bearer $authToken'},
+      body: jsonData,
+      mockHttpAPIProperty: MockHttpAPIPropertyService(endPoint: 'assets/mock_data/schools/schools_200.json', statusCode: 200),
+    );
+
+    HttpResponseService response = await HttpService.postRequest(postHttpService);
+
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
+      isLoader = false;
+      Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.success);
+      Get.offAllNamed(RoutePaths.schools);
+    } else {
+      isLoader = false;
+      Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.error);
+    }
+
+    update();
   }
 
   Future<void> putSchool() async {

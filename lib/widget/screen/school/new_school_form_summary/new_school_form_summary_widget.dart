@@ -6,6 +6,7 @@ import 'package:me_super_admin/app_enum.dart';
 import 'package:tab_container/tab_container.dart';
 import 'package:me_super_admin/controller/school/school_controller.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
+import 'package:me_super_admin/widget/common/loader/api_request_loader_widget.dart';
 import 'package:me_super_admin/controller/school_admin/school_admin_controller.dart';
 import 'package:me_super_admin/controller/organization/organization_controller.dart';
 import 'package:me_super_admin/controller/school/school_form_stepper_controller.dart';
@@ -67,77 +68,115 @@ class _NewSchoolFormSummaryWidgetState extends State<NewSchoolFormSummaryWidget>
     super.dispose();
   }
 
+  void addSchoolDetails() {
+    OrganizationController organizationController = Get.find<OrganizationController>();
+    OrganizationMemberController organizationMemberController = Get.find<OrganizationMemberController>();
+    SchoolController schoolController = Get.find<SchoolController>();
+    SchoolAddressController schoolAddressController = Get.find<SchoolAddressController>();
+    SchoolAdminController schoolAdminController = Get.find<SchoolAdminController>();
+
+    Map<String, dynamic> toJson() => {
+      'organization': organizationController.organization.toJson(),
+      'organization_members': organizationMemberController.organizationMembers.map((member) => member.toJson()).toList(),
+      'school': schoolController.school.toJson(),
+      'school_admins': schoolAdminController.schoolAdmins.map((admin) => admin.toJson()).toList(),
+      'school_addresses':
+          schoolAddressController.schoolAddresses
+              .asMap()
+              .map((index, address) {
+                return MapEntry(index, {"user_phone_number": schoolAdminController.schoolAdmins[index].phoneNumber, ...address.toJson()});
+              })
+              .values
+              .toList(),
+    };
+
+    schoolController.postSchool(toJson());
+  }
+
   @override
   Widget build(BuildContext context) {
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 10),
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.only(bottom: 20),
-            alignment: Alignment.topLeft,
-            child: Text(
-              appLocalizations.newSchoolSummaryHeaderText.toUpperCase(),
-              style: Theme.of(context).textTheme.displaySmall?.copyWith(color: themeData.eerieBlack, fontWeight: FontWeight.bold),
-            ),
-          ),
-          TabContainer(
-            controller: _tabController,
-            color: themeData.eerieBlack,
-            tabs: [
-              NewSchoolFormSummaryTabTitleWidget(title: appLocalizations.newSchoolSummaryOrganizationTabLabelText.toUpperCase(), isActive: _currentIndex == 0),
-              NewSchoolFormSummaryTabTitleWidget(title: appLocalizations.newSchoolSummarySchoolTabLabelText.toUpperCase(), isActive: _currentIndex == 1),
-            ],
+    return GetBuilder<SchoolController>(
+      builder: (schoolControllerContext) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 10),
+          child: Column(
             children: [
-              NewSchoolFormSummaryTabCardWidget(
-                showOrganization: true,
-                showOrganizationMembers: true,
-                showSchool: false,
-                showSchoolAddresses: false,
-                showSchoolAdmins: false,
+              Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                alignment: Alignment.topLeft,
+                child: Text(
+                  appLocalizations.newSchoolSummaryHeaderText.toUpperCase(),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(color: themeData.eerieBlack, fontWeight: FontWeight.bold),
+                ),
               ),
-              NewSchoolFormSummaryTabCardWidget(
-                showOrganization: false,
-                showOrganizationMembers: false,
-                showSchool: true,
-                showSchoolAddresses: true,
-                showSchoolAdmins: true,
+              TabContainer(
+                controller: _tabController,
+                color: themeData.eerieBlack,
+                tabs: [
+                  NewSchoolFormSummaryTabTitleWidget(
+                    title: appLocalizations.newSchoolSummaryOrganizationTabLabelText.toUpperCase(),
+                    isActive: _currentIndex == 0,
+                  ),
+                  NewSchoolFormSummaryTabTitleWidget(title: appLocalizations.newSchoolSummarySchoolTabLabelText.toUpperCase(), isActive: _currentIndex == 1),
+                ],
+                children: [
+                  NewSchoolFormSummaryTabCardWidget(
+                    showOrganization: true,
+                    showOrganizationMembers: true,
+                    showSchool: false,
+                    showSchoolAddresses: false,
+                    showSchoolAdmins: false,
+                  ),
+                  NewSchoolFormSummaryTabCardWidget(
+                    showOrganization: false,
+                    showOrganizationMembers: false,
+                    showSchool: true,
+                    showSchoolAddresses: true,
+                    showSchoolAdmins: true,
+                  ),
+                ],
               ),
+              schoolControllerContext.isLoader
+                  ? Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
+                    alignment: Alignment.center,
+                    child: SizedBox(height: 70, child: ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)),
+                  )
+                  : Container(
+                    margin: const EdgeInsets.only(top: 30),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ElevatedButtonWidget(
+                            appColorScheme: AppColorScheme.primary,
+                            buttonText: appLocalizations.addButtonText.toUpperCase(),
+                            disabled: false,
+                            onPressed: () => addSchoolDetails(),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: GetBuilder<SchoolFormStepperController>(
+                            builder: (schoolFormStepperControllerContext) {
+                              return ElevatedButtonWidget(
+                                appColorScheme: AppColorScheme.primary,
+                                buttonText: appLocalizations.editButtonText.toUpperCase(),
+                                disabled: false,
+                                onPressed: () => schoolFormStepperControllerContext.toggleShowSummary(),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
             ],
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 30),
-            child: Row(
-              children: [
-                Expanded(
-                  child: ElevatedButtonWidget(
-                    appColorScheme: AppColorScheme.primary,
-                    buttonText: appLocalizations.addButtonText.toUpperCase(),
-                    disabled: false,
-                    onPressed: () {},
-                  ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: GetBuilder<SchoolFormStepperController>(
-                    builder: (schoolFormStepperControllerContext) {
-                      return ElevatedButtonWidget(
-                        appColorScheme: AppColorScheme.primary,
-                        buttonText: appLocalizations.editButtonText.toUpperCase(),
-                        disabled: false,
-                        onPressed: () => schoolFormStepperControllerContext.toggleShowSummary(),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

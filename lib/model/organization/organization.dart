@@ -176,7 +176,7 @@ class Organization {
    */
   Map<String, dynamic> toJson() => {
     'name': name,
-    'shortName': shortName,
+    'short_name': shortName,
     'email': email,
     'phone_number': phoneNumber,
     'government_registration_number': governmentRegistrationNumber,

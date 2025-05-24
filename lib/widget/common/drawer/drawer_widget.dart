@@ -5,6 +5,7 @@ import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/drawer_items.dart';
 import 'package:me_super_admin/controller/city/city_controller.dart';
 import 'package:me_super_admin/controller/state/state_controller.dart';
+import 'package:me_super_admin/controller/school/school_controller.dart';
 import 'package:me_super_admin/controller/zipcode/zipcode_controller.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 import 'package:me_super_admin/controller/district/district_controller.dart';
@@ -117,6 +118,7 @@ class DrawerWidget extends StatelessWidget {
     OrganizationMemberController organizationMemberController = Get.put(OrganizationMemberController());
     SchoolAddressController schoolAddressController = Get.put(SchoolAddressController());
     SchoolAdminController schoolAdminController = Get.put(SchoolAdminController());
+    SchoolController schoolController = Get.put(SchoolController());
     SchoolFormStepperController schoolFormStepperController = Get.put(SchoolFormStepperController());
 
     getStates();
@@ -130,6 +132,7 @@ class DrawerWidget extends StatelessWidget {
     schoolFormStepperController.resetStepper();
     organizationController.resetOrganizationForm();
     organizationMemberController.resetOrganizationMemberForm();
+    schoolController.resetSchoolForm();
     schoolAddressController.resetSchoolAddressForm();
     schoolAdminController.resetSchoolAdminForm();
   }

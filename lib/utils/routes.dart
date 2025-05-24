@@ -1,4 +1,5 @@
 class RoutePaths {
+  static const String schools = '/schools';
   static const String schoolForm = '/school/form';
   static const String schoolTypes = '/school-types';
   static const String schoolTypeForm = '/school-type/form';

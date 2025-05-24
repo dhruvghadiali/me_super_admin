@@ -155,14 +155,13 @@ class School {
    * - A map containing key-value pairs representing the school's attributes.
    */
   Map<String, dynamic> toJson() => {
-    'id': id,
     'affiliate_number': affiliateNumber,
     'name': name,
     'short_name': shortName,
     'email': email,
     'phone_number': phoneNumber,
     'established_year': establishedYear,
-    'school_type': schoolType.toJson(),
+    'school_type': schoolType.id,
     'education_boards': educationBoards.map((e) => e.id).toList(),
   };
 

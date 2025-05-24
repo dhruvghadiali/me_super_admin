@@ -57,9 +57,6 @@ class _SchoolAdminsFormWidgetState extends State<SchoolAdminsFormWidget> {
    * - `false` if all forms are valid.
    */
   bool isSchoolAdminsFormValidated() {
-    schoolAdminController.schoolAdminFormValidated.forEach((element) {
-      print("element: $element");
-    });
     int index = schoolAdminController.schoolAdminFormValidated.indexOf(false);
     return index != -1;
   }
@@ -160,6 +157,13 @@ class _SchoolAdminsFormWidgetState extends State<SchoolAdminsFormWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            Container(
+              margin: const EdgeInsets.only(bottom: 5, left: 10),
+              child: Text(
+                "** Always provide unique phone number for each school admin.",
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold, color: themeData.metallicRed),
+              ),
+            ),
             Container(
               margin: const EdgeInsets.only(left: 10),
               child: SizedBox(
