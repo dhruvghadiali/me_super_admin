@@ -18,32 +18,29 @@ class AuditTrailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
     return Row(
       children: [
         Expanded(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 width: 60,
                 child: Text(
                   audioInfoLabel,
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.labelSmall!.copyWith(color: themeData.offWhite),
+                  style: Theme.of(context).textTheme.labelSmall!.copyWith(color: themeData.offWhite),
                 ),
               ),
               Expanded(
                 child: Text(
                   audioUserInfo,
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.labelSmall!.copyWith(color: themeData.offWhite),
+                  style: Theme.of(context).textTheme.labelSmall!.copyWith(color: themeData.offWhite),
                 ),
               ),
             ],
@@ -51,26 +48,24 @@ class AuditTrailWidget extends StatelessWidget {
         ),
         Expanded(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 width: 60,
                 child: Text(
                   audioDateTimeInfoLabel,
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.labelSmall!.copyWith(color: themeData.offWhite),
+                  style: Theme.of(context).textTheme.labelSmall!.copyWith(color: themeData.offWhite),
                 ),
               ),
               Expanded(
                 child: Text(
                   auditDateTimeInfo,
-                  maxLines: 1,
+                  maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.labelSmall!.copyWith(color: themeData.offWhite),
+                  style: Theme.of(context).textTheme.labelSmall!.copyWith(color: themeData.offWhite),
                 ),
               ),
             ],

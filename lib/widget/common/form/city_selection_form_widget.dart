@@ -50,11 +50,9 @@ class CitySelectionFormWidget extends StatelessWidget {
           validator: validator,
           isEnable: selectedDistrict.id.isNotEmpty,
           labelText: appLocalizations.cityDropdownFieldLabelText,
-          selectedItem: selectedCity.id,
+          selectedItem: cityControllerContext.cities.isEmpty ? '' : selectedCity.id,
           appColorScheme: AppColorScheme.primary,
-          onChanged:
-              (String value) =>
-                  onCityChange(value, cityControllerContext.cities),
+          onChanged: (String value) => onCityChange(value, cityControllerContext.cities),
           items:
               cityControllerContext.cities.isEmpty
                   ? []

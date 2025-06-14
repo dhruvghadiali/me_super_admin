@@ -65,9 +65,7 @@ class OrganizationController extends GetxController {
    * - Null if the input is valid.
    */
   String? nameValidator(String? value) {
-    return ValidationBuilder(
-          requiredMessage: OrganizationValidationMessage.organizationNameRequired,
-        )
+    return ValidationBuilder(requiredMessage: OrganizationValidationMessage.organizationNameRequired)
         .required(OrganizationValidationMessage.organizationNameRequired)
         .minLength(2, OrganizationValidationMessage.organizationNameMinLength)
         .maxLength(100, OrganizationValidationMessage.organizationNameMaxLength)
@@ -107,9 +105,7 @@ class OrganizationController extends GetxController {
    * - Null if the input is valid.
    */
   String? emailValidator(String? value) {
-    return ValidationBuilder(
-          requiredMessage: OrganizationValidationMessage.organizationEmailRequired,
-        )
+    return ValidationBuilder(requiredMessage: OrganizationValidationMessage.organizationEmailRequired)
         .required(OrganizationValidationMessage.organizationEmailRequired)
         .minLength(10, OrganizationValidationMessage.organizationEmailMinLength)
         .maxLength(100, OrganizationValidationMessage.organizationEmailMaxLength)
@@ -129,9 +125,7 @@ class OrganizationController extends GetxController {
    * - Null if the input is valid.
    */
   String? phoneNumberValidator(String? value) {
-    return ValidationBuilder(
-          requiredMessage: OrganizationValidationMessage.organizationPhoneNumberRequired,
-        )
+    return ValidationBuilder(requiredMessage: OrganizationValidationMessage.organizationPhoneNumberRequired)
         .required(OrganizationValidationMessage.organizationPhoneNumberRequired)
         .minLength(10, OrganizationValidationMessage.organizationPhoneNumberLength)
         .maxLength(10, OrganizationValidationMessage.organizationPhoneNumberLength)
@@ -151,19 +145,10 @@ class OrganizationController extends GetxController {
    * - Null if the input passes all validation checks.
    */
   String? governmentRegistrationNumberValidator(String? value) {
-    return ValidationBuilder(
-          requiredMessage:
-              OrganizationValidationMessage.organizationGovernmentRegistrationNumberRequired,
-        )
+    return ValidationBuilder(requiredMessage: OrganizationValidationMessage.organizationGovernmentRegistrationNumberRequired)
         .required(OrganizationValidationMessage.organizationGovernmentRegistrationNumberRequired)
-        .minLength(
-          5,
-          OrganizationValidationMessage.organizationGovernmentRegistrationNumberMinLength,
-        )
-        .maxLength(
-          50,
-          OrganizationValidationMessage.organizationGovernmentRegistrationNumberMaxLength,
-        )
+        .minLength(5, OrganizationValidationMessage.organizationGovernmentRegistrationNumberMinLength)
+        .maxLength(50, OrganizationValidationMessage.organizationGovernmentRegistrationNumberMaxLength)
         .build()(value?.trim());
   }
 
@@ -180,9 +165,7 @@ class OrganizationController extends GetxController {
    * - Null if the input passes all validation checks.
    */
   String? addressValidator(String? value) {
-    return ValidationBuilder(
-          requiredMessage: OrganizationValidationMessage.organizationAddressRequired,
-        )
+    return ValidationBuilder(requiredMessage: OrganizationValidationMessage.organizationAddressRequired)
         .required(OrganizationValidationMessage.organizationAddressRequired)
         .minLength(10, OrganizationValidationMessage.organizationAddressMinLength)
         .maxLength(500, OrganizationValidationMessage.organizationAddressMaxLength)
@@ -200,9 +183,9 @@ class OrganizationController extends GetxController {
    * - Null if the input passes all validation checks.
    */
   String? stateValidator(String? value) {
-    return ValidationBuilder(
-      requiredMessage: StateFormValidationMessage.stateRequired,
-    ).required(StateFormValidationMessage.stateRequired).build()(value?.trim());
+    return ValidationBuilder(requiredMessage: StateFormValidationMessage.stateRequired).required(StateFormValidationMessage.stateRequired).build()(
+      value?.trim(),
+    );
   }
 
   /*
@@ -217,9 +200,9 @@ class OrganizationController extends GetxController {
    * - Null if the input is valid.
    */
   String? districtValidator(String? value) {
-    return ValidationBuilder(
-      requiredMessage: DistrictFormValidationMessage.districtRequired,
-    ).required(DistrictFormValidationMessage.districtRequired).build()(value?.trim());
+    return ValidationBuilder(requiredMessage: DistrictFormValidationMessage.districtRequired).required(DistrictFormValidationMessage.districtRequired).build()(
+      value?.trim(),
+    );
   }
 
   /*
@@ -233,9 +216,7 @@ class OrganizationController extends GetxController {
    * - Null if the input passes all validation checks.
    */
   String? cityValidator(String? value) {
-    return ValidationBuilder(
-      requiredMessage: CityFormValidationMessage.cityRequired,
-    ).required(CityFormValidationMessage.cityRequired).build()(value?.trim());
+    return ValidationBuilder(requiredMessage: CityFormValidationMessage.cityRequired).required(CityFormValidationMessage.cityRequired).build()(value?.trim());
   }
 
   /*
@@ -249,9 +230,9 @@ class OrganizationController extends GetxController {
    * - Null if the input passes all validation checks.
    */
   String? areaNameValidator(String? value) {
-    return ValidationBuilder(
-      requiredMessage: AreaNameFormValidationMessage.areaNameRequired,
-    ).required(AreaNameFormValidationMessage.areaNameRequired).build()(value?.trim());
+    return ValidationBuilder(requiredMessage: AreaNameFormValidationMessage.areaNameRequired).required(AreaNameFormValidationMessage.areaNameRequired).build()(
+      value?.trim(),
+    );
   }
 
   /*
@@ -265,9 +246,9 @@ class OrganizationController extends GetxController {
    * - Null if the input passes all validation checks.
    */
   String? zipcodeValidator(String? value) {
-    return ValidationBuilder(
-      requiredMessage: ZipcodeFormValidationMessage.zipcodeRequired,
-    ).required(ZipcodeFormValidationMessage.zipcodeRequired).build()(value?.trim());
+    return ValidationBuilder(requiredMessage: ZipcodeFormValidationMessage.zipcodeRequired).required(ZipcodeFormValidationMessage.zipcodeRequired).build()(
+      value?.trim(),
+    );
   }
 
   /*
@@ -592,10 +573,7 @@ class OrganizationController extends GetxController {
  *   any extra spaces.
  * - `formFieldKey`: A reference to the form field's state, used to trigger validation.
  */
-  void onGovernmentRegistrationNumberSubmitted(
-    String value,
-    GlobalKey<FormFieldState> formFieldKey,
-  ) {
+  void onGovernmentRegistrationNumberSubmitted(String value, GlobalKey<FormFieldState> formFieldKey) {
     organization = organization.copyWith(governmentRegistrationNumber: value.trim());
     formFieldKey.currentState?.validate();
   }
@@ -674,29 +652,18 @@ class OrganizationController extends GetxController {
       endPoint: 'super-admin/organizations/${organization.id}',
       headers: {"Authorization": 'Bearer $authToken'},
       body: organization.toJson(),
-      mockHttpAPIProperty: MockHttpAPIPropertyService(
-        endPoint: 'assets/mock_data/organizations/organizations_200.json',
-        statusCode: 200,
-      ),
+      mockHttpAPIProperty: MockHttpAPIPropertyService(endPoint: 'assets/mock_data/organizations/organizations_200.json', statusCode: 200),
     );
 
     HttpResponseService response = await HttpService.putRequest(putHttpService);
 
     if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
-      Snackbar.getSnackbar(
-        title: snackbarTitle,
-        message: response.message,
-        appSnackbarStatus: AppSnackbarStatus.success,
-      );
-      Get.offAllNamed(RoutePaths.zipcodes); // schools
+      Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.success);
+      Get.offAllNamed(RoutePaths.schoolForm);
     } else {
       isLoader = false;
-      Snackbar.getSnackbar(
-        title: snackbarTitle,
-        message: response.message,
-        appSnackbarStatus: AppSnackbarStatus.error,
-      );
+      Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.error);
     }
 
     update();

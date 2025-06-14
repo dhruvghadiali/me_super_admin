@@ -50,24 +50,15 @@ class DistrictSelectionFormWidget extends StatelessWidget {
           validator: validator,
           isEnable: selectedState.id.isNotEmpty,
           labelText: appLocalizations.districtDropdownFieldLabelText,
-          selectedItem: selectedDistrict.id,
+          selectedItem: districtControllerContext.districts.isEmpty ? '' : selectedDistrict.id,
           appColorScheme: AppColorScheme.primary,
-          onChanged:
-              (String value) =>
-                  onDistrictChange(value, districtControllerContext.districts),
+          onChanged: (String value) => onDistrictChange(value, districtControllerContext.districts),
           items:
               districtControllerContext.districts.isEmpty
                   ? []
                   : districtControllerContext.districts
-                      .where(
-                        (district) => district.state.id == selectedState.id,
-                      )
-                      .map(
-                        (district) => {
-                          'label': district.name,
-                          "value": district.id,
-                        },
-                      )
+                      .where((district) => district.state.id == selectedState.id)
+                      .map((district) => {'label': district.name, "value": district.id})
                       .toList(),
         );
       },

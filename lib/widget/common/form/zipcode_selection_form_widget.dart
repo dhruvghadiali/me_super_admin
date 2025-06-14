@@ -50,24 +50,15 @@ class ZipcodeSelectionFormWidget extends StatelessWidget {
           validator: validator,
           isEnable: selectedAreaName.id.isNotEmpty,
           labelText: appLocalizations.zipcodeDropdownFieldLabelText,
-          selectedItem: selectedZipcode.id,
+          selectedItem: zipcodeControllerContext.zipcodes.isEmpty ? '' : selectedZipcode.id,
           appColorScheme: AppColorScheme.primary,
-          onChanged:
-              (String value) =>
-                  onZipcodeChange(value, zipcodeControllerContext.zipcodes),
+          onChanged: (String value) => onZipcodeChange(value, zipcodeControllerContext.zipcodes),
           items:
               zipcodeControllerContext.zipcodes.isEmpty
                   ? []
                   : zipcodeControllerContext.zipcodes
-                      .where(
-                        (zipcode) => zipcode.areaName.id == selectedAreaName.id,
-                      )
-                      .map(
-                        (zipcode) => {
-                          'label': zipcode.zipcode,
-                          "value": zipcode.id,
-                        },
-                      )
+                      .where((zipcode) => zipcode.areaName.id == selectedAreaName.id)
+                      .map((zipcode) => {'label': zipcode.zipcode, "value": zipcode.id})
                       .toList(),
         );
       },

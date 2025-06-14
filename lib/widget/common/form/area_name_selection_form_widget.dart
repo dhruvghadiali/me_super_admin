@@ -50,22 +50,15 @@ class AreaNameSelectionFormWidget extends StatelessWidget {
           validator: validator,
           isEnable: selectedCity.id.isNotEmpty,
           labelText: appLocalizations.areaNameDropdownFieldLabelText,
-          selectedItem: selectedAreaName.id,
+          selectedItem: areaNameControllerContext.areaNames.isEmpty ? '' : selectedAreaName.id,
           appColorScheme: AppColorScheme.primary,
-          onChanged:
-              (String value) =>
-                  onAreaNameChange(value, areaNameControllerContext.areaNames),
+          onChanged: (String value) => onAreaNameChange(value, areaNameControllerContext.areaNames),
           items:
               areaNameControllerContext.areaNames.isEmpty
                   ? []
                   : areaNameControllerContext.areaNames
                       .where((areaName) => areaName.city.id == selectedCity.id)
-                      .map(
-                        (areaName) => {
-                          'label': areaName.name,
-                          "value": areaName.id,
-                        },
-                      )
+                      .map((areaName) => {'label': areaName.name, "value": areaName.id})
                       .toList(),
         );
       },
