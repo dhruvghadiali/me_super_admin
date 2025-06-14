@@ -33,6 +33,7 @@ class SchoolAddress {
   String updatedBy;
   DateTime createdAt;
   DateTime updatedAt;
+  String userId;
 
   /*
    * Constructor for the `SchoolAddress` class.
@@ -53,6 +54,7 @@ class SchoolAddress {
     required this.updatedBy,
     required this.createdAt,
     required this.updatedAt,
+    required this.userId,
   });
 
   /*
@@ -78,6 +80,7 @@ class SchoolAddress {
       updatedBy: setUpdatedBy(json),
       createdAt: setCreatedAt(json),
       updatedAt: setUpdatedAt(json),
+      userId: setUserId(json),
     );
   }
 
@@ -103,6 +106,7 @@ class SchoolAddress {
     String? updatedBy,
     DateTime? createdAt,
     DateTime? updatedAt,
+    String? userId,
   }) => SchoolAddress(
     id: id ?? this.id,
     address: address ?? this.address,
@@ -116,6 +120,7 @@ class SchoolAddress {
     updatedBy: updatedBy ?? this.updatedBy,
     createdAt: createdAt ?? this.createdAt,
     updatedAt: updatedAt ?? this.updatedAt,
+    userId: userId ?? this.userId,
   );
 
   /*
@@ -137,6 +142,7 @@ class SchoolAddress {
     updatedBy: '',
     createdAt: DateTime(1500, 01, 01),
     updatedAt: DateTime(1500, 01, 01),
+    userId: '',
   );
 
   /*
@@ -430,5 +436,27 @@ class SchoolAddress {
     }
 
     return DateTime(1500, 01, 01);
+  }
+
+  /*
+   * Parses and validates the user id field from a JSON object.
+   *
+   * This method extracts the 'user_id' field from the JSON object and ensures it is a
+   * non-empty string. If the field is missing or invalid, it returns an empty string as
+   * the default value.
+   *
+   * Parameters:
+   * - `json`: A map containing the JSON representation of the school address.
+   *
+   * Returns:
+   * - An `String` value representing the school address user id.
+   */
+  static String setUserId(Map<String, dynamic> json) {
+    if (json.containsKey('user_id')) {
+      if (json['user_id'] != null && json['user_id'] is String && json['user_id'].toString().isNotEmpty) {
+        return json['user_id'];
+      }
+    }
+    return '';
   }
 }

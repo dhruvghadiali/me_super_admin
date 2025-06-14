@@ -3,6 +3,7 @@ class RoutePaths {
   static const String inactiveSchools = '/schools/inactive';
   static const String schoolForm = '/school/form';
   static const String organizationForm = '/organization/form';
+  static const String organizationMemberForm = '/organization-member/form';
   static const String schoolTypes = '/school-types';
   static const String schoolTypeForm = '/school-type/form';
   static const String academicGrades = '/academic-grades';

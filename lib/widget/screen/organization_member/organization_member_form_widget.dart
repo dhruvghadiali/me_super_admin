@@ -18,12 +18,14 @@ import 'package:me_super_admin/widget/common/form_fields/dropdown/dropdown_widge
 import 'package:me_super_admin/widget/common/form_fields/elevated_button/elevated_button.dart';
 import 'package:me_super_admin/controller/organization_member/organization_member_controller.dart';
 import 'package:me_super_admin/widget/common/form_fields/text_fields/floating_text_field_widget.dart';
+import 'package:me_super_admin/widget/common/loader/api_request_loader_widget.dart';
 
 class OrganizationMemberFormWidget extends StatefulWidget {
-  const OrganizationMemberFormWidget({super.key, required this.organizationMember, required this.index, required this.onSubmitForm});
+  const OrganizationMemberFormWidget({super.key, required this.organizationMember, required this.index, required this.isStepper, required this.onSubmitForm});
 
   final OrganizationMember organizationMember;
   final int index;
+  final bool isStepper;
   final Function onSubmitForm;
 
   @override
@@ -335,18 +337,18 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                     fieldKey: _positionFieldKey,
                     validator: organizationMemberControllerContext.positionValidator,
                     labelText: appLocalizations.organizationMemberFormPositionDropdownFieldLabelText,
-                    selectedItem: organizationMemberControllerContext.organizationMembers[widget.index].position,
+                    selectedItem: organizationMemberControllerContext.organizationMembers[widget.index].position.toLowerCase(),
                     appColorScheme: AppColorScheme.primary,
                     onChanged: (String value) => organizationMemberControllerContext.onPositionChange(value, widget.index, _positionFieldKey),
                     items: [
-                      {"value": "President", "label": "President"},
-                      {"value": "Vice President", "label": "Vice President"},
-                      {"value": "Secretary", "label": "Secretary"},
-                      {"value": "Joint Secretary", "label": "Joint Secretary"},
-                      {"value": "Treasurer", "label": "Treasurer"},
-                      {"value": "Member", "label": "Member"},
-                      {"value": "Principal", "label": "Principal"},
-                      {"value": "Other", "label": "Other"},
+                      {"value": "president", "label": "President"},
+                      {"value": "vice president", "label": "Vice President"},
+                      {"value": "secretary", "label": "Secretary"},
+                      {"value": "joint secretary", "label": "Joint Secretary"},
+                      {"value": "treasurer", "label": "Treasurer"},
+                      {"value": "member", "label": "Member"},
+                      {"value": "principal", "label": "Principal"},
+                      {"value": "other", "label": "Other"},
                     ],
                   ),
                 ),
@@ -401,17 +403,26 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 30),
-                  child: Row(
+                  child: Column(
                     children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width / 3,
-                        margin: const EdgeInsets.only(left: 5),
-                        child: ElevatedButtonWidget(
-                          appColorScheme: AppColorScheme.primary,
-                          buttonText: appLocalizations.submitButtonText.toUpperCase(),
-                          disabled: false,
-                          onPressed: () => onSubmitForm(context),
-                        ),
+                      widget.isStepper
+                          ? Container()
+                          : organizationMemberControllerContext.isLoader
+                          ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)
+                          : Container(),
+                      Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width / 3,
+                            margin: const EdgeInsets.only(left: 5),
+                            child: ElevatedButtonWidget(
+                              appColorScheme: AppColorScheme.primary,
+                              buttonText: appLocalizations.submitButtonText.toUpperCase(),
+                              disabled: false,
+                              onPressed: () => onSubmitForm(context),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

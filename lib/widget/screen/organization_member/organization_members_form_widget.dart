@@ -108,8 +108,6 @@ class _OrganizationMembersFormWidgetState extends State<OrganizationMembersFormW
   void onOrganizationMemberFormSubmit(bool status, int index) {
     if (widget.isStepperForm) {
       organizationMemberController.changeOrganizationMemberFormValidatedStatus(index, status);
-    } else {
-      status ? organizationMemberController.putOrganizationMember(index) : displayAlert();
     }
   }
 
@@ -203,6 +201,7 @@ class _OrganizationMembersFormWidgetState extends State<OrganizationMembersFormW
                     title: OrganizationMemberFormWidget(
                       organizationMember: entry.value,
                       index: entry.key,
+                      isStepper: true,
                       onSubmitForm: (bool status) => onOrganizationMemberFormSubmit(status, entry.key),
                     ),
                   ),

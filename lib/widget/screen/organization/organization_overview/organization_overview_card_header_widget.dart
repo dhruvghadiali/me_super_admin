@@ -29,9 +29,7 @@ class OrganizationOverviewCardHeaderWidget extends StatelessWidget {
             : IconButtonWidget(
               iconData: Icons.edit_document,
               iconColor: themeData.offWhite!,
-              onPressed: () {
-                Navigator.pushNamed(context, RoutePaths.organizationForm);
-              },
+              onPressed: () => Navigator.pushNamed(context, RoutePaths.organizationForm),
             ),
       ],
     );
