@@ -18,32 +18,23 @@ class SchoolTypeFormWidget extends StatefulWidget {
 
 class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GlobalKey<FormFieldState> _schoolTypeFieldKey =
-      GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _schoolTypeFieldKey = GlobalKey<FormFieldState>();
 
-  final SchoolTypeController schoolTypeController = Get.put(
-    SchoolTypeController(),
-  );
+  final SchoolTypeController schoolTypeController = Get.put(SchoolTypeController());
 
-  final TextEditingController schoolTypeTextEditingController =
-      TextEditingController();
+  final TextEditingController schoolTypeTextEditingController = TextEditingController();
 
   @override
   void initState() {
     if (schoolTypeController.schoolType.id.isNotEmpty) {
-      schoolTypeTextEditingController.text =
-          schoolTypeController.schoolType.schoolType;
+      schoolTypeTextEditingController.text = schoolTypeController.schoolType.schoolType;
     }
     super.initState();
   }
 
   onSchoolTypeTextFieldSubmit(BuildContext context, String value) {
     FocusManager.instance.primaryFocus?.unfocus();
-    schoolTypeController.onSchoolTypeSubmitted(
-      value,
-      _schoolTypeFieldKey,
-      _formKey,
-    );
+    schoolTypeController.onSchoolTypeSubmitted(value, _schoolTypeFieldKey, _formKey);
   }
 
   onSubmitForm(BuildContext context) {
@@ -53,8 +44,7 @@ class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Expanded(
       child: Container(
@@ -83,25 +73,20 @@ class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
                     Container(
                       margin: const EdgeInsets.only(top: 30),
                       child: FloatingTextFieldWidget(
-                        key: _schoolTypeFieldKey,
+                        fieldKey: _schoolTypeFieldKey,
                         appColorScheme: AppColorScheme.primary,
                         controller: schoolTypeTextEditingController,
                         labelText: appLocalizations.schoolTypeTextFieldLabelText,
                         textInputAction: TextInputAction.next,
-                        validator:
-                            schoolTypeControllerContext.schoolTypeValidator,
+                        validator: schoolTypeControllerContext.schoolTypeValidator,
                         onChange:
-                            (String value) => schoolTypeControllerContext
-                                .onSchoolTypeChange(value),
+                            (String value) => schoolTypeControllerContext.onSchoolTypeChange(value),
                         onFieldSubmitted:
-                            (String value) =>
-                                onSchoolTypeTextFieldSubmit(context, value),
+                            (String value) => onSchoolTypeTextFieldSubmit(context, value),
                       ),
                     ),
                     schoolTypeControllerContext.isLoader
-                        ? const ApiRequestLoaderWidget(
-                          appColorScheme: AppColorScheme.primary,
-                        )
+                        ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)
                         : Container(),
                     Container(
                       margin: const EdgeInsets.only(top: 30),
