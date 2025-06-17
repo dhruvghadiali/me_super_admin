@@ -1,3 +1,5 @@
+import 'package:me_super_admin/utils/utils.dart';
+
 class State {
   String id;
   String name;
@@ -55,9 +57,7 @@ class State {
 
   static String setId(Map<String, dynamic> json) {
     if (json.containsKey('id')) {
-      if (json['id'] != null &&
-          json['id'] is String &&
-          json['id'].toString().isNotEmpty) {
+      if (json['id'] != null && json['id'] is String && json['id'].toString().isNotEmpty) {
         return json['id'];
       }
     }
@@ -67,9 +67,7 @@ class State {
 
   static String setName(Map<String, dynamic> json) {
     if (json.containsKey('name')) {
-      if (json['name'] != null &&
-          json['name'] is String &&
-          json['name'].toString().isNotEmpty) {
+      if (json['name'] != null && json['name'] is String && json['name'].toString().isNotEmpty) {
         return json['name'];
       }
     }
@@ -107,7 +105,7 @@ class State {
           json['created_at'] is String &&
           json['created_at'].toString().isNotEmpty) {
         try {
-          return DateTime.parse(json['created_at']);
+          return Utils.formatToIST(json['created_at']);
         } catch (e) {
           return DateTime(1500, 01, 01);
         }
@@ -123,7 +121,7 @@ class State {
           json['updated_at'] is String &&
           json['updated_at'].toString().isNotEmpty) {
         try {
-          return DateTime.parse(json['updated_at']).toUtc();
+          return Utils.formatToIST(json['updated_at']);
         } catch (e) {
           return DateTime(1500, 01, 01);
         }

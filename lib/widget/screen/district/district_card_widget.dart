@@ -11,8 +11,7 @@ class DistrictCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
 
     return Card(
       elevation: 2,
@@ -40,9 +39,9 @@ class DistrictCardWidget extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 5),
                     child: Text(
                       '(${district.state.name.toUpperCase()})',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: themeData.offWhite,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleSmall!.copyWith(color: themeData.offWhite),
                     ),
                   )
                   : Container(),
@@ -51,17 +50,13 @@ class DistrictCardWidget extends StatelessWidget {
                 audioDateTimeInfoLabel: 'Created At:',
                 audioInfoLabel: 'Created By:',
                 audioUserInfo: district.createdBy,
-                auditDateTimeInfo: DateFormat(
-                  'dd MMM yyyy hh:mm a',
-                ).format(district.createdAt),
+                auditDateTimeInfo: DateFormat('dd MMM yyyy hh:mm a').format(district.createdAt),
               ),
               AuditTrailWidget(
                 audioDateTimeInfoLabel: 'Updated At:',
                 audioInfoLabel: 'Updated By:',
                 audioUserInfo: district.updatedBy,
-                auditDateTimeInfo: DateFormat(
-                  'dd MMM yyyy hh:mm a',
-                ).format(district.updatedAt),
+                auditDateTimeInfo: DateFormat('dd MMM yyyy hh:mm a').format(district.updatedAt),
               ),
             ],
           ),

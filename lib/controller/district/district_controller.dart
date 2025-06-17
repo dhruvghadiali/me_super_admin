@@ -34,7 +34,7 @@ class DistrictController extends GetxController {
     update();
 
     if (district.id.isNotEmpty) {
-      Get.offAllNamed(RoutePaths.districtForm);
+      Get.toNamed(RoutePaths.districtForm);
     }
   }
 
@@ -45,19 +45,14 @@ class DistrictController extends GetxController {
   }
 
   String? districtValidator(String? value) {
-    return ValidationBuilder(
-          requiredMessage: DistrictFormValidationMessage.districtRequired,
-        )
+    return ValidationBuilder(requiredMessage: DistrictFormValidationMessage.districtRequired)
         .required(DistrictFormValidationMessage.districtRequired)
         .minLength(2, DistrictFormValidationMessage.districtMinLength)
         .maxLength(100, DistrictFormValidationMessage.districtMaxLength)
         .build()(value?.trim());
   }
 
-  void onStateChange(
-    state_mode.State value,
-    GlobalKey<FormFieldState> formFieldKey,
-  ) {
+  void onStateChange(state_mode.State value, GlobalKey<FormFieldState> formFieldKey) {
     district = district.copyWith(state: value);
     formFieldKey.currentState?.validate();
     update();
@@ -68,10 +63,7 @@ class DistrictController extends GetxController {
     update();
   }
 
-  void onDistrictSubmitted(
-    String value,
-    GlobalKey<FormFieldState> formFieldKey,
-  ) {
+  void onDistrictSubmitted(String value, GlobalKey<FormFieldState> formFieldKey) {
     district = district.copyWith(name: value.trim());
     formFieldKey.currentState?.validate();
   }
@@ -99,8 +91,7 @@ class DistrictController extends GetxController {
 
     HttpResponseService response = await HttpService.getRequest(getHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       for (var districtJson in response.data) {
         final District districtObj = District.fromJson(districtJson);
@@ -133,12 +124,9 @@ class DistrictController extends GetxController {
       ),
     );
 
-    HttpResponseService response = await HttpService.postRequest(
-      postHttpService,
-    );
+    HttpResponseService response = await HttpService.postRequest(postHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,
@@ -175,8 +163,7 @@ class DistrictController extends GetxController {
 
     HttpResponseService response = await HttpService.putRequest(putHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,
@@ -210,12 +197,9 @@ class DistrictController extends GetxController {
       ),
     );
 
-    HttpResponseService response = await HttpService.deleteRequest(
-      deleteHttpService,
-    );
+    HttpResponseService response = await HttpService.deleteRequest(deleteHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,

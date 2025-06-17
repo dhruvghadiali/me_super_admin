@@ -18,32 +18,29 @@ class StateFormWidget extends StatefulWidget {
 
 class _StateFormWidgetState extends State<StateFormWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GlobalKey<FormFieldState> _stateFieldKey =
-      GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _stateFieldKey = GlobalKey<FormFieldState>();
 
-  final StateController stateController = Get.put(
-    StateController(),
-  );
+  final StateController stateController = Get.put(StateController());
 
-  final TextEditingController stateTextEditingController =
-      TextEditingController();
+  final TextEditingController _stateTextEditingController = TextEditingController();
 
   @override
   void initState() {
     if (stateController.state.id.isNotEmpty) {
-      stateTextEditingController.text =
-          stateController.state.name;
+      _stateTextEditingController.text = stateController.state.name;
     }
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _stateTextEditingController.dispose();
+    super.dispose();
+  }
+
   onStateTextFieldSubmit(BuildContext context, String value) {
     FocusManager.instance.primaryFocus?.unfocus();
-    stateController.onStateSubmitted(
-      value,
-      _stateFieldKey,
-      _formKey,
-    );
+    stateController.onStateSubmitted(value, _stateFieldKey, _formKey);
   }
 
   onSubmitForm(BuildContext context) {
@@ -53,8 +50,7 @@ class _StateFormWidgetState extends State<StateFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Expanded(
       child: Container(
@@ -83,25 +79,18 @@ class _StateFormWidgetState extends State<StateFormWidget> {
                     Container(
                       margin: const EdgeInsets.only(top: 30),
                       child: FloatingTextFieldWidget(
-                        key: _stateFieldKey,
+                        fieldKey: _stateFieldKey,
                         appColorScheme: AppColorScheme.primary,
-                        controller: stateTextEditingController,
+                        controller: _stateTextEditingController,
                         labelText: appLocalizations.stateTextFieldLabelText,
                         textInputAction: TextInputAction.next,
-                        validator:
-                            stateControllerContext.stateValidator,
-                        onChange:
-                            (String value) => stateControllerContext
-                                .onStateChange(value),
-                        onFieldSubmitted:
-                            (String value) =>
-                                onStateTextFieldSubmit(context, value),
+                        validator: stateControllerContext.stateValidator,
+                        onChange: (String value) => stateControllerContext.onStateChange(value),
+                        onFieldSubmitted: (String value) => onStateTextFieldSubmit(context, value),
                       ),
                     ),
                     stateControllerContext.isLoader
-                        ? const ApiRequestLoaderWidget(
-                          appColorScheme: AppColorScheme.primary,
-                        )
+                        ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)
                         : Container(),
                     Container(
                       margin: const EdgeInsets.only(top: 30),

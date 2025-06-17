@@ -24,20 +24,24 @@ class _CityFormWidgetState extends State<CityFormWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<FormFieldState> _cityFieldKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> _stateFieldKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> _districtFieldKey =
-      GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _districtFieldKey = GlobalKey<FormFieldState>();
 
   final CityController cityController = Get.put(CityController());
 
-  final TextEditingController cityTextEditingController =
-      TextEditingController();
+  final TextEditingController _cityTextEditingController = TextEditingController();
 
   @override
   void initState() {
     if (cityController.city.id.isNotEmpty) {
-      cityTextEditingController.text = cityController.city.name;
+      _cityTextEditingController.text = cityController.city.name;
     }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _cityTextEditingController.dispose();
+    super.dispose();
   }
 
   onCityTextFieldSubmit(BuildContext context, String value) {
@@ -61,8 +65,7 @@ class _CityFormWidgetState extends State<CityFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Expanded(
       child: Container(
@@ -93,11 +96,9 @@ class _CityFormWidgetState extends State<CityFormWidget> {
                       child: StateSelectionFormWidget(
                         formFieldKey: _stateFieldKey,
                         validator: cityControllerContext.stateValidator,
-                        selectedState:
-                            cityControllerContext.city.district.state,
+                        selectedState: cityControllerContext.city.district.state,
                         onChange:
-                            (state_model.State state) =>
-                                onStateDropdownChanged(context, state),
+                            (state_model.State state) => onStateDropdownChanged(context, state),
                       ),
                     ),
                     Container(
@@ -106,34 +107,27 @@ class _CityFormWidgetState extends State<CityFormWidget> {
                         formFieldKey: _districtFieldKey,
                         validator: cityControllerContext.districtValidator,
                         selectedDistrict: cityControllerContext.city.district,
-                        selectedState:
-                            cityControllerContext.city.district.state,
+                        selectedState: cityControllerContext.city.district.state,
                         onChange:
-                            (District district) => cityController
-                                .onDistrictChange(district, _districtFieldKey),
+                            (District district) =>
+                                cityController.onDistrictChange(district, _districtFieldKey),
                       ),
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 30),
                       child: FloatingTextFieldWidget(
-                        key: _cityFieldKey,
+                        fieldKey: _cityFieldKey,
                         appColorScheme: AppColorScheme.primary,
-                        controller: cityTextEditingController,
+                        controller: _cityTextEditingController,
                         labelText: appLocalizations.cityTextFieldLabelText,
                         textInputAction: TextInputAction.next,
                         validator: cityControllerContext.cityValidator,
-                        onChange:
-                            (String value) =>
-                                cityControllerContext.onCityChange(value),
-                        onFieldSubmitted:
-                            (String value) =>
-                                onCityTextFieldSubmit(context, value),
+                        onChange: (String value) => cityControllerContext.onCityChange(value),
+                        onFieldSubmitted: (String value) => onCityTextFieldSubmit(context, value),
                       ),
                     ),
                     cityControllerContext.isLoader
-                        ? const ApiRequestLoaderWidget(
-                          appColorScheme: AppColorScheme.primary,
-                        )
+                        ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)
                         : Container(),
                     Container(
                       margin: const EdgeInsets.only(top: 30),

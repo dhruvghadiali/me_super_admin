@@ -1,4 +1,5 @@
 import 'package:me_super_admin/model/city/city.dart';
+import 'package:me_super_admin/utils/utils.dart';
 
 class AreaName {
   String id;
@@ -63,9 +64,7 @@ class AreaName {
 
   static String setId(Map<String, dynamic> json) {
     if (json.containsKey('id')) {
-      if (json['id'] != null &&
-          json['id'] is String &&
-          json['id'].toString().isNotEmpty) {
+      if (json['id'] != null && json['id'] is String && json['id'].toString().isNotEmpty) {
         return json['id'];
       }
     }
@@ -75,9 +74,7 @@ class AreaName {
 
   static String setName(Map<String, dynamic> json) {
     if (json.containsKey('name')) {
-      if (json['name'] != null &&
-          json['name'] is String &&
-          json['name'].toString().isNotEmpty) {
+      if (json['name'] != null && json['name'] is String && json['name'].toString().isNotEmpty) {
         return json['name'];
       }
     }
@@ -115,7 +112,7 @@ class AreaName {
           json['created_at'] is String &&
           json['created_at'].toString().isNotEmpty) {
         try {
-          return DateTime.parse(json['created_at']);
+          return Utils.formatToIST(json['created_at']);
         } catch (e) {
           return DateTime(1500, 01, 01);
         }
@@ -131,7 +128,7 @@ class AreaName {
           json['updated_at'] is String &&
           json['updated_at'].toString().isNotEmpty) {
         try {
-          return DateTime.parse(json['updated_at']).toUtc();
+          return Utils.formatToIST(json['updated_at']).toUtc();
         } catch (e) {
           return DateTime(1500, 01, 01);
         }

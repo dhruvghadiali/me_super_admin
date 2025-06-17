@@ -24,24 +24,27 @@ class AreaNameFormWidget extends StatefulWidget {
 
 class _AreaNameFormWidgetState extends State<AreaNameFormWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GlobalKey<FormFieldState> _areaNameFieldKey =
-      GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _areaNameFieldKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> _cityFieldKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> _stateFieldKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> _districtFieldKey =
-      GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _districtFieldKey = GlobalKey<FormFieldState>();
 
   final AreaNameController areaNameController = Get.put(AreaNameController());
 
-  final TextEditingController areaNameTextEditingController =
-      TextEditingController();
+  final TextEditingController _areaNameTextEditingController = TextEditingController();
 
   @override
   void initState() {
     if (areaNameController.areaName.id.isNotEmpty) {
-      areaNameTextEditingController.text = areaNameController.areaName.name;
+      _areaNameTextEditingController.text = areaNameController.areaName.name;
     }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _areaNameTextEditingController.dispose();
+    super.dispose();
   }
 
   onAreaNameTextFieldSubmit(BuildContext context, String value) {
@@ -76,8 +79,7 @@ class _AreaNameFormWidgetState extends State<AreaNameFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Expanded(
       child: Container(
@@ -108,15 +110,9 @@ class _AreaNameFormWidgetState extends State<AreaNameFormWidget> {
                       child: StateSelectionFormWidget(
                         formFieldKey: _stateFieldKey,
                         validator: areaNameControllerContext.stateValidator,
-                        selectedState:
-                            areaNameControllerContext
-                                .areaName
-                                .city
-                                .district
-                                .state,
+                        selectedState: areaNameControllerContext.areaName.city.district.state,
                         onChange:
-                            (state_model.State state) =>
-                                onStateDropdownChanged(context, state),
+                            (state_model.State state) => onStateDropdownChanged(context, state),
                       ),
                     ),
                     Container(
@@ -124,17 +120,10 @@ class _AreaNameFormWidgetState extends State<AreaNameFormWidget> {
                       child: DistrictSelectionFormWidget(
                         formFieldKey: _districtFieldKey,
                         validator: areaNameControllerContext.districtValidator,
-                        selectedDistrict:
-                            areaNameControllerContext.areaName.city.district,
-                        selectedState:
-                            areaNameControllerContext
-                                .areaName
-                                .city
-                                .district
-                                .state,
+                        selectedDistrict: areaNameControllerContext.areaName.city.district,
+                        selectedState: areaNameControllerContext.areaName.city.district.state,
                         onChange:
-                            (District district) =>
-                                onDistrictDropdownChanged(context, district),
+                            (District district) => onDistrictDropdownChanged(context, district),
                       ),
                     ),
                     Container(
@@ -142,35 +131,30 @@ class _AreaNameFormWidgetState extends State<AreaNameFormWidget> {
                       child: CitySelectionFormWidget(
                         formFieldKey: _cityFieldKey,
                         validator: areaNameControllerContext.cityValidator,
-                        selectedDistrict:
-                            areaNameControllerContext.areaName.city.district,
+                        selectedDistrict: areaNameControllerContext.areaName.city.district,
                         selectedCity: areaNameControllerContext.areaName.city,
                         onChange:
-                            (City city) => areaNameControllerContext
-                                .onCityChange(city, _cityFieldKey),
+                            (City city) =>
+                                areaNameControllerContext.onCityChange(city, _cityFieldKey),
                       ),
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 30),
                       child: FloatingTextFieldWidget(
-                        key: _areaNameFieldKey,
+                        fieldKey: _areaNameFieldKey,
                         appColorScheme: AppColorScheme.primary,
-                        controller: areaNameTextEditingController,
+                        controller: _areaNameTextEditingController,
                         labelText: appLocalizations.areaNameTextFieldLabelText,
                         textInputAction: TextInputAction.next,
                         validator: areaNameControllerContext.areaNameValidator,
                         onChange:
-                            (String value) => areaNameControllerContext
-                                .onAreaNameChange(value),
+                            (String value) => areaNameControllerContext.onAreaNameChange(value),
                         onFieldSubmitted:
-                            (String value) =>
-                                onAreaNameTextFieldSubmit(context, value),
+                            (String value) => onAreaNameTextFieldSubmit(context, value),
                       ),
                     ),
                     areaNameControllerContext.isLoader
-                        ? const ApiRequestLoaderWidget(
-                          appColorScheme: AppColorScheme.primary,
-                        )
+                        ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)
                         : Container(),
                     Container(
                       margin: const EdgeInsets.only(top: 30),

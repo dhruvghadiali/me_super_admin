@@ -46,7 +46,7 @@ class FeeTypeController extends GetxController {
     update();
 
     if (feeType.id.isNotEmpty) {
-      Get.offAllNamed(RoutePaths.feeTypeForm);
+      Get.toNamed(RoutePaths.feeTypeForm);
     }
   }
 
@@ -97,7 +97,11 @@ class FeeTypeController extends GetxController {
    * - `value`: The fee type entered by the user, which will be trimmed of any extra spaces.
    * - `formFieldKey`: A GlobalKey used to access the form field's state for validation.
    */
-  void onFeeTypeSubmitted(String value, GlobalKey<FormFieldState> formFieldKey, GlobalKey<FormState> formKey) {
+  void onFeeTypeSubmitted(
+    String value,
+    GlobalKey<FormFieldState> formFieldKey,
+    GlobalKey<FormState> formKey,
+  ) {
     feeType = feeType.copyWith(feeType: value.trim());
     formFieldKey.currentState?.validate();
     onSubmitForm(formKey);
@@ -134,7 +138,10 @@ class FeeTypeController extends GetxController {
     GetHttpService getHttpService = GetHttpService(
       endPoint: 'super-admin/fee-types',
       headers: {"Authorization": 'Bearer $authToken'},
-      mockHttpAPIProperty: MockHttpAPIPropertyService(endPoint: 'assets/mock_data/fee_types/fee_types_200.json', statusCode: 200),
+      mockHttpAPIProperty: MockHttpAPIPropertyService(
+        endPoint: 'assets/mock_data/fee_types/fee_types_200.json',
+        statusCode: 200,
+      ),
     );
 
     HttpResponseService response = await HttpService.getRequest(getHttpService);
@@ -147,7 +154,11 @@ class FeeTypeController extends GetxController {
       }
     } else {
       isLoader = false;
-      Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.error);
+      Snackbar.getSnackbar(
+        title: snackbarTitle,
+        message: response.message,
+        appSnackbarStatus: AppSnackbarStatus.error,
+      );
     }
 
     update();
@@ -168,18 +179,29 @@ class FeeTypeController extends GetxController {
       endPoint: 'super-admin/fee-types',
       headers: {"Authorization": 'Bearer $authToken'},
       body: feeType.toJson(),
-      mockHttpAPIProperty: MockHttpAPIPropertyService(endPoint: 'assets/mock_data/fee_types/fee_types_200.json', statusCode: 200),
+      mockHttpAPIProperty: MockHttpAPIPropertyService(
+        endPoint: 'assets/mock_data/fee_types/fee_types_200.json',
+        statusCode: 200,
+      ),
     );
 
     HttpResponseService response = await HttpService.postRequest(postHttpService);
 
     if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
-      Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.success);
+      Snackbar.getSnackbar(
+        title: snackbarTitle,
+        message: response.message,
+        appSnackbarStatus: AppSnackbarStatus.success,
+      );
       Get.offAllNamed(RoutePaths.feeTypes);
     } else {
       isLoader = false;
-      Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.error);
+      Snackbar.getSnackbar(
+        title: snackbarTitle,
+        message: response.message,
+        appSnackbarStatus: AppSnackbarStatus.error,
+      );
     }
 
     update();
@@ -200,18 +222,29 @@ class FeeTypeController extends GetxController {
       endPoint: 'super-admin/fee-types/${feeType.id}',
       headers: {"Authorization": 'Bearer $authToken'},
       body: feeType.toJson(),
-      mockHttpAPIProperty: MockHttpAPIPropertyService(endPoint: 'assets/mock_data/fee_types/fee_types_200.json', statusCode: 200),
+      mockHttpAPIProperty: MockHttpAPIPropertyService(
+        endPoint: 'assets/mock_data/fee_types/fee_types_200.json',
+        statusCode: 200,
+      ),
     );
 
     HttpResponseService response = await HttpService.putRequest(putHttpService);
 
     if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
-      Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.success);
+      Snackbar.getSnackbar(
+        title: snackbarTitle,
+        message: response.message,
+        appSnackbarStatus: AppSnackbarStatus.success,
+      );
       Get.offAllNamed(RoutePaths.feeTypes);
     } else {
       isLoader = false;
-      Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.error);
+      Snackbar.getSnackbar(
+        title: snackbarTitle,
+        message: response.message,
+        appSnackbarStatus: AppSnackbarStatus.error,
+      );
     }
 
     update();
@@ -231,18 +264,29 @@ class FeeTypeController extends GetxController {
     DeleteHttpService deleteHttpService = DeleteHttpService(
       endPoint: 'super-admin/fee-types/$id',
       headers: {"Authorization": 'Bearer $authToken'},
-      mockHttpAPIProperty: MockHttpAPIPropertyService(endPoint: 'assets/mock_data/fee_types/fee_types_200.json', statusCode: 200),
+      mockHttpAPIProperty: MockHttpAPIPropertyService(
+        endPoint: 'assets/mock_data/fee_types/fee_types_200.json',
+        statusCode: 200,
+      ),
     );
 
     HttpResponseService response = await HttpService.deleteRequest(deleteHttpService);
 
     if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
-      Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.success);
+      Snackbar.getSnackbar(
+        title: snackbarTitle,
+        message: response.message,
+        appSnackbarStatus: AppSnackbarStatus.success,
+      );
       getFeeTypes();
     } else {
       isLoader = false;
-      Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.error);
+      Snackbar.getSnackbar(
+        title: snackbarTitle,
+        message: response.message,
+        appSnackbarStatus: AppSnackbarStatus.error,
+      );
     }
 
     update();

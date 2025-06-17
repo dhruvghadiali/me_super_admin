@@ -11,8 +11,7 @@ class StateCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
 
     return Card(
       elevation: 2,
@@ -40,17 +39,13 @@ class StateCardWidget extends StatelessWidget {
                 audioDateTimeInfoLabel: 'Created At:',
                 audioInfoLabel: 'Created By:',
                 audioUserInfo: state.createdBy,
-                auditDateTimeInfo: DateFormat(
-                  'dd MMM yyyy hh:mm a',
-                ).format(state.createdAt),
+                auditDateTimeInfo: DateFormat('dd MMM yyyy hh:mm a').format(state.createdAt),
               ),
               AuditTrailWidget(
                 audioDateTimeInfoLabel: 'Updated At:',
                 audioInfoLabel: 'Updated By:',
                 audioUserInfo: state.updatedBy,
-                auditDateTimeInfo: DateFormat(
-                  'dd MMM yyyy hh:mm a',
-                ).format(state.updatedAt),
+                auditDateTimeInfo: DateFormat('dd MMM yyyy hh:mm a').format(state.updatedAt),
               ),
             ],
           ),

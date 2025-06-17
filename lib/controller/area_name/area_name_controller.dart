@@ -38,7 +38,7 @@ class AreaNameController extends GetxController {
     update();
 
     if (areaName.id.isNotEmpty) {
-      Get.offAllNamed(RoutePaths.areaNameForm);
+      Get.toNamed(RoutePaths.areaNameForm);
     }
   }
 
@@ -51,9 +51,7 @@ class AreaNameController extends GetxController {
   String? districtValidator(String? value) {
     return ValidationBuilder(
       requiredMessage: DistrictFormValidationMessage.districtRequired,
-    ).required(DistrictFormValidationMessage.districtRequired).build()(
-      value?.trim(),
-    );
+    ).required(DistrictFormValidationMessage.districtRequired).build()(value?.trim());
   }
 
   String? cityValidator(String? value) {
@@ -63,19 +61,14 @@ class AreaNameController extends GetxController {
   }
 
   String? areaNameValidator(String? value) {
-    return ValidationBuilder(
-          requiredMessage: AreaNameFormValidationMessage.areaNameRequired,
-        )
+    return ValidationBuilder(requiredMessage: AreaNameFormValidationMessage.areaNameRequired)
         .required(AreaNameFormValidationMessage.areaNameRequired)
         .minLength(2, AreaNameFormValidationMessage.areaNameMinLength)
         .maxLength(100, AreaNameFormValidationMessage.areaNameMaxLength)
         .build()(value?.trim());
   }
 
-  void onStateChange(
-    state_mode.State value,
-    GlobalKey<FormFieldState> formFieldKey,
-  ) {
+  void onStateChange(state_mode.State value, GlobalKey<FormFieldState> formFieldKey) {
     City city = areaName.city;
     District district = city.district;
 
@@ -87,10 +80,7 @@ class AreaNameController extends GetxController {
     update();
   }
 
-  void onDistrictChange(
-    District value,
-    GlobalKey<FormFieldState> formFieldKey,
-  ) {
+  void onDistrictChange(District value, GlobalKey<FormFieldState> formFieldKey) {
     City city = areaName.city;
     city = city.copyWith(district: value, id: "", name: "");
 
@@ -111,10 +101,7 @@ class AreaNameController extends GetxController {
     update();
   }
 
-  void onAreaNameSubmitted(
-    String value,
-    GlobalKey<FormFieldState> formFieldKey,
-  ) {
+  void onAreaNameSubmitted(String value, GlobalKey<FormFieldState> formFieldKey) {
     areaName = areaName.copyWith(name: value.trim());
     formFieldKey.currentState?.validate();
   }
@@ -142,8 +129,7 @@ class AreaNameController extends GetxController {
 
     HttpResponseService response = await HttpService.getRequest(getHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
 
       for (var areaNameJson in response.data) {
@@ -177,12 +163,9 @@ class AreaNameController extends GetxController {
       ),
     );
 
-    HttpResponseService response = await HttpService.postRequest(
-      postHttpService,
-    );
+    HttpResponseService response = await HttpService.postRequest(postHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,
@@ -219,8 +202,7 @@ class AreaNameController extends GetxController {
 
     HttpResponseService response = await HttpService.putRequest(putHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,
@@ -254,12 +236,9 @@ class AreaNameController extends GetxController {
       ),
     );
 
-    HttpResponseService response = await HttpService.deleteRequest(
-      deleteHttpService,
-    );
+    HttpResponseService response = await HttpService.deleteRequest(deleteHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,

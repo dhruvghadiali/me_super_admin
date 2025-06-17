@@ -11,8 +11,7 @@ class AreaNameCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
 
     return Card(
       elevation: 2,
@@ -35,15 +34,14 @@ class AreaNameCardWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              areaName.city.name.isNotEmpty &&
-                      areaName.city.district.name.isNotEmpty
+              areaName.city.name.isNotEmpty && areaName.city.district.name.isNotEmpty
                   ? Container(
                     margin: const EdgeInsets.only(top: 5),
                     child: Text(
                       '(${areaName.city.name.toUpperCase()} - ${areaName.city.district.name.toUpperCase()})',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: themeData.offWhite,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleSmall!.copyWith(color: themeData.offWhite),
                     ),
                   )
                   : Container(),
@@ -52,9 +50,9 @@ class AreaNameCardWidget extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 5),
                     child: Text(
                       '(${areaName.city.district.state.name.toUpperCase()})',
-                      style: Theme.of(context).textTheme.labelSmall!.copyWith(
-                        color: themeData.offWhite,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.labelSmall!.copyWith(color: themeData.offWhite),
                     ),
                   )
                   : Container(),
@@ -63,17 +61,13 @@ class AreaNameCardWidget extends StatelessWidget {
                 audioDateTimeInfoLabel: 'Created At:',
                 audioInfoLabel: 'Created By:',
                 audioUserInfo: areaName.createdBy,
-                auditDateTimeInfo: DateFormat(
-                  'dd MMM yyyy hh:mm a',
-                ).format(areaName.createdAt),
+                auditDateTimeInfo: DateFormat('dd MMM yyyy hh:mm a').format(areaName.createdAt),
               ),
               AuditTrailWidget(
                 audioDateTimeInfoLabel: 'Updated At:',
                 audioInfoLabel: 'Updated By:',
                 audioUserInfo: areaName.updatedBy,
-                auditDateTimeInfo: DateFormat(
-                  'dd MMM yyyy hh:mm a',
-                ).format(areaName.updatedAt),
+                auditDateTimeInfo: DateFormat('dd MMM yyyy hh:mm a').format(areaName.updatedAt),
               ),
             ],
           ),

@@ -11,8 +11,7 @@ class CityCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
 
     return Card(
       elevation: 2,
@@ -35,15 +34,14 @@ class CityCardWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              city.district.name.isNotEmpty &&
-                      city.district.state.name.isNotEmpty
+              city.district.name.isNotEmpty && city.district.state.name.isNotEmpty
                   ? Container(
                     margin: const EdgeInsets.only(top: 5),
                     child: Text(
                       '(${city.district.name.toUpperCase()} - ${city.district.state.name.toUpperCase()})',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        color: themeData.offWhite,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.titleSmall!.copyWith(color: themeData.offWhite),
                     ),
                   )
                   : Container(),
@@ -52,17 +50,13 @@ class CityCardWidget extends StatelessWidget {
                 audioDateTimeInfoLabel: 'Created At:',
                 audioInfoLabel: 'Created By:',
                 audioUserInfo: city.createdBy,
-                auditDateTimeInfo: DateFormat(
-                  'dd MMM yyyy hh:mm a',
-                ).format(city.createdAt),
+                auditDateTimeInfo: DateFormat('dd MMM yyyy hh:mm a').format(city.createdAt),
               ),
               AuditTrailWidget(
                 audioDateTimeInfoLabel: 'Updated At:',
                 audioInfoLabel: 'Updated By:',
                 audioUserInfo: city.updatedBy,
-                auditDateTimeInfo: DateFormat(
-                  'dd MMM yyyy hh:mm a',
-                ).format(city.updatedAt),
+                auditDateTimeInfo: DateFormat('dd MMM yyyy hh:mm a').format(city.updatedAt),
               ),
             ],
           ),

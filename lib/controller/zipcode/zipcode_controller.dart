@@ -40,7 +40,7 @@ class ZipcodeController extends GetxController {
     update();
 
     if (zipcode.id.isNotEmpty) {
-      Get.offAllNamed(RoutePaths.zipcodeForm);
+      Get.toNamed(RoutePaths.zipcodeForm);
     }
   }
 
@@ -53,9 +53,7 @@ class ZipcodeController extends GetxController {
   String? districtValidator(String? value) {
     return ValidationBuilder(
       requiredMessage: DistrictFormValidationMessage.districtRequired,
-    ).required(DistrictFormValidationMessage.districtRequired).build()(
-      value?.trim(),
-    );
+    ).required(DistrictFormValidationMessage.districtRequired).build()(value?.trim());
   }
 
   String? cityValidator(String? value) {
@@ -67,27 +65,17 @@ class ZipcodeController extends GetxController {
   String? areaNameValidator(String? value) {
     return ValidationBuilder(
       requiredMessage: AreaNameFormValidationMessage.areaNameRequired,
-    ).required(AreaNameFormValidationMessage.areaNameRequired).build()(
-      value?.trim(),
-    );
+    ).required(AreaNameFormValidationMessage.areaNameRequired).build()(value?.trim());
   }
 
   String? zipcodeValidator(String? value) {
-    return ValidationBuilder(
-          requiredMessage: ZipcodeFormValidationMessage.zipcodeRequired,
-        )
+    return ValidationBuilder(requiredMessage: ZipcodeFormValidationMessage.zipcodeRequired)
         .required(ZipcodeFormValidationMessage.zipcodeRequired)
-        .regExp(
-          RegExp(r'^[1-9][0-9]{5}$'),
-          ZipcodeFormValidationMessage.invalidZipcode,
-        )
+        .regExp(RegExp(r'^[1-9][0-9]{5}$'), ZipcodeFormValidationMessage.invalidZipcode)
         .build()(value?.trim());
   }
 
-  void onStateChange(
-    state_mode.State value,
-    GlobalKey<FormFieldState> formFieldKey,
-  ) {
+  void onStateChange(state_mode.State value, GlobalKey<FormFieldState> formFieldKey) {
     AreaName areaName = zipcode.areaName;
     City city = areaName.city;
     District district = city.district;
@@ -101,10 +89,7 @@ class ZipcodeController extends GetxController {
     update();
   }
 
-  void onDistrictChange(
-    District value,
-    GlobalKey<FormFieldState> formFieldKey,
-  ) {
+  void onDistrictChange(District value, GlobalKey<FormFieldState> formFieldKey) {
     AreaName areaName = zipcode.areaName;
     City city = areaName.city;
 
@@ -127,10 +112,7 @@ class ZipcodeController extends GetxController {
     update();
   }
 
-  void onAreaNameChange(
-    AreaName value,
-    GlobalKey<FormFieldState> formFieldKey,
-  ) {
+  void onAreaNameChange(AreaName value, GlobalKey<FormFieldState> formFieldKey) {
     zipcode = zipcode.copyWith(areaName: value);
 
     formFieldKey.currentState?.validate();
@@ -142,10 +124,7 @@ class ZipcodeController extends GetxController {
     update();
   }
 
-  void onZipcodeSubmitted(
-    String value,
-    GlobalKey<FormFieldState> formFieldKey,
-  ) {
+  void onZipcodeSubmitted(String value, GlobalKey<FormFieldState> formFieldKey) {
     zipcode = zipcode.copyWith(zipcode: value.trim());
     formFieldKey.currentState?.validate();
   }
@@ -173,8 +152,7 @@ class ZipcodeController extends GetxController {
 
     HttpResponseService response = await HttpService.getRequest(getHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
 
       for (var zipcodeJson in response.data) {
@@ -208,12 +186,9 @@ class ZipcodeController extends GetxController {
       ),
     );
 
-    HttpResponseService response = await HttpService.postRequest(
-      postHttpService,
-    );
+    HttpResponseService response = await HttpService.postRequest(postHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,
@@ -250,8 +225,7 @@ class ZipcodeController extends GetxController {
 
     HttpResponseService response = await HttpService.putRequest(putHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,
@@ -285,12 +259,9 @@ class ZipcodeController extends GetxController {
       ),
     );
 
-    HttpResponseService response = await HttpService.deleteRequest(
-      deleteHttpService,
-    );
+    HttpResponseService response = await HttpService.deleteRequest(deleteHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,

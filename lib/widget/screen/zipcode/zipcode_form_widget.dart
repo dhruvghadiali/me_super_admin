@@ -26,26 +26,28 @@ class ZipcodeFormWidget extends StatefulWidget {
 
 class _ZipcodeFormWidgetState extends State<ZipcodeFormWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GlobalKey<FormFieldState> _zipcodeFieldKey =
-      GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> _areaNameFieldKey =
-      GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _zipcodeFieldKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _areaNameFieldKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> _cityFieldKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> _stateFieldKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> _districtFieldKey =
-      GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _districtFieldKey = GlobalKey<FormFieldState>();
 
   final ZipcodeController zipcodeController = Get.put(ZipcodeController());
 
-  final TextEditingController zipcodeTextEditingController =
-      TextEditingController();
+  final TextEditingController _zipcodeTextEditingController = TextEditingController();
 
   @override
   void initState() {
     if (zipcodeController.zipcode.id.isNotEmpty) {
-      zipcodeTextEditingController.text = zipcodeController.zipcode.zipcode;
+      _zipcodeTextEditingController.text = zipcodeController.zipcode.zipcode;
     }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _zipcodeTextEditingController.dispose();
+    super.dispose();
   }
 
   onZipcodeTextFieldSubmit(BuildContext context, String value) {
@@ -93,8 +95,7 @@ class _ZipcodeFormWidgetState extends State<ZipcodeFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Expanded(
       child: Container(
@@ -126,15 +127,9 @@ class _ZipcodeFormWidgetState extends State<ZipcodeFormWidget> {
                         formFieldKey: _stateFieldKey,
                         validator: zipcodeControllerContext.stateValidator,
                         selectedState:
-                            zipcodeControllerContext
-                                .zipcode
-                                .areaName
-                                .city
-                                .district
-                                .state,
+                            zipcodeControllerContext.zipcode.areaName.city.district.state,
                         onChange:
-                            (state_model.State state) =>
-                                onStateDropdownChanged(context, state),
+                            (state_model.State state) => onStateDropdownChanged(context, state),
                       ),
                     ),
                     Container(
@@ -142,22 +137,11 @@ class _ZipcodeFormWidgetState extends State<ZipcodeFormWidget> {
                       child: DistrictSelectionFormWidget(
                         formFieldKey: _districtFieldKey,
                         validator: zipcodeControllerContext.districtValidator,
-                        selectedDistrict:
-                            zipcodeControllerContext
-                                .zipcode
-                                .areaName
-                                .city
-                                .district,
+                        selectedDistrict: zipcodeControllerContext.zipcode.areaName.city.district,
                         selectedState:
-                            zipcodeControllerContext
-                                .zipcode
-                                .areaName
-                                .city
-                                .district
-                                .state,
+                            zipcodeControllerContext.zipcode.areaName.city.district.state,
                         onChange:
-                            (District district) =>
-                                onDistrictDropdownChanged(context, district),
+                            (District district) => onDistrictDropdownChanged(context, district),
                       ),
                     ),
                     Container(
@@ -165,16 +149,9 @@ class _ZipcodeFormWidgetState extends State<ZipcodeFormWidget> {
                       child: CitySelectionFormWidget(
                         formFieldKey: _cityFieldKey,
                         validator: zipcodeControllerContext.cityValidator,
-                        selectedDistrict:
-                            zipcodeControllerContext
-                                .zipcode
-                                .areaName
-                                .city
-                                .district,
-                        selectedCity:
-                            zipcodeControllerContext.zipcode.areaName.city,
-                        onChange:
-                            (City city) => onCityDropdownChanged(context, city),
+                        selectedDistrict: zipcodeControllerContext.zipcode.areaName.city.district,
+                        selectedCity: zipcodeControllerContext.zipcode.areaName.city,
+                        onChange: (City city) => onCityDropdownChanged(context, city),
                       ),
                     ),
                     Container(
@@ -182,36 +159,31 @@ class _ZipcodeFormWidgetState extends State<ZipcodeFormWidget> {
                       child: AreaNameSelectionFormWidget(
                         formFieldKey: _areaNameFieldKey,
                         validator: zipcodeControllerContext.areaNameValidator,
-                        selectedAreaName:
-                            zipcodeControllerContext.zipcode.areaName,
-                        selectedCity:
-                            zipcodeControllerContext.zipcode.areaName.city,
+                        selectedAreaName: zipcodeControllerContext.zipcode.areaName,
+                        selectedCity: zipcodeControllerContext.zipcode.areaName.city,
                         onChange:
-                            (AreaName areaName) => zipcodeControllerContext
-                                .onAreaNameChange(areaName, _areaNameFieldKey),
+                            (AreaName areaName) => zipcodeControllerContext.onAreaNameChange(
+                              areaName,
+                              _areaNameFieldKey,
+                            ),
                       ),
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 30),
                       child: FloatingTextFieldWidget(
-                        key: _zipcodeFieldKey,
+                        fieldKey: _zipcodeFieldKey,
                         appColorScheme: AppColorScheme.primary,
-                        controller: zipcodeTextEditingController,
+                        controller: _zipcodeTextEditingController,
                         labelText: appLocalizations.zipcodeTextFieldLabelText,
                         textInputAction: TextInputAction.next,
                         validator: zipcodeControllerContext.zipcodeValidator,
-                        onChange:
-                            (String value) =>
-                                zipcodeControllerContext.onZipcodeChange(value),
+                        onChange: (String value) => zipcodeControllerContext.onZipcodeChange(value),
                         onFieldSubmitted:
-                            (String value) =>
-                                onZipcodeTextFieldSubmit(context, value),
+                            (String value) => onZipcodeTextFieldSubmit(context, value),
                       ),
                     ),
                     zipcodeControllerContext.isLoader
-                        ? const ApiRequestLoaderWidget(
-                          appColorScheme: AppColorScheme.primary,
-                        )
+                        ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)
                         : Container(),
                     Container(
                       margin: const EdgeInsets.only(top: 30),

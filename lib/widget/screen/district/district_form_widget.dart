@@ -20,21 +20,25 @@ class DistrictFormWidget extends StatefulWidget {
 
 class _DistrictFormWidgetState extends State<DistrictFormWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GlobalKey<FormFieldState> _districtFieldKey =
-      GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _districtFieldKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> _stateFieldKey = GlobalKey<FormFieldState>();
 
   final DistrictController districtController = Get.put(DistrictController());
 
-  final TextEditingController districtTextEditingController =
-      TextEditingController();
+  final TextEditingController _districtTextEditingController = TextEditingController();
 
   @override
   void initState() {
     if (districtController.district.id.isNotEmpty) {
-      districtTextEditingController.text = districtController.district.name;
+      _districtTextEditingController.text = districtController.district.name;
     }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _districtTextEditingController.dispose();
+    super.dispose();
   }
 
   onDistrictTextFieldSubmit(BuildContext context, String value) {
@@ -49,8 +53,7 @@ class _DistrictFormWidgetState extends State<DistrictFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Expanded(
       child: Container(
@@ -83,31 +86,27 @@ class _DistrictFormWidgetState extends State<DistrictFormWidget> {
                         validator: districtControllerContext.stateValidator,
                         selectedState: districtControllerContext.district.state,
                         onChange:
-                            (state_model.State state) => districtController
-                                .onStateChange(state, _stateFieldKey),
+                            (state_model.State state) =>
+                                districtController.onStateChange(state, _stateFieldKey),
                       ),
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 30),
                       child: FloatingTextFieldWidget(
-                        key: _districtFieldKey,
+                        fieldKey: _districtFieldKey,
                         appColorScheme: AppColorScheme.primary,
-                        controller: districtTextEditingController,
+                        controller: _districtTextEditingController,
                         labelText: appLocalizations.districtTextFieldLabelText,
                         textInputAction: TextInputAction.next,
                         validator: districtControllerContext.districtValidator,
                         onChange:
-                            (String value) => districtControllerContext
-                                .onDistrictChange(value),
+                            (String value) => districtControllerContext.onDistrictChange(value),
                         onFieldSubmitted:
-                            (String value) =>
-                                onDistrictTextFieldSubmit(context, value),
+                            (String value) => onDistrictTextFieldSubmit(context, value),
                       ),
                     ),
                     districtControllerContext.isLoader
-                        ? const ApiRequestLoaderWidget(
-                          appColorScheme: AppColorScheme.primary,
-                        )
+                        ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)
                         : Container(),
                     Container(
                       margin: const EdgeInsets.only(top: 30),

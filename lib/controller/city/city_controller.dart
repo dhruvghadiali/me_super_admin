@@ -36,7 +36,7 @@ class CityController extends GetxController {
     update();
 
     if (city.id.isNotEmpty) {
-      Get.offAllNamed(RoutePaths.cityForm);
+      Get.toNamed(RoutePaths.cityForm);
     }
   }
 
@@ -49,25 +49,18 @@ class CityController extends GetxController {
   String? districtValidator(String? value) {
     return ValidationBuilder(
       requiredMessage: DistrictFormValidationMessage.districtRequired,
-    ).required(DistrictFormValidationMessage.districtRequired).build()(
-      value?.trim(),
-    );
+    ).required(DistrictFormValidationMessage.districtRequired).build()(value?.trim());
   }
 
   String? cityValidator(String? value) {
-    return ValidationBuilder(
-          requiredMessage: CityFormValidationMessage.cityRequired,
-        )
+    return ValidationBuilder(requiredMessage: CityFormValidationMessage.cityRequired)
         .required(CityFormValidationMessage.cityRequired)
         .minLength(2, CityFormValidationMessage.cityMinLength)
         .maxLength(100, CityFormValidationMessage.cityMaxLength)
         .build()(value?.trim());
   }
 
-  void onStateChange(
-    state_mode.State value,
-    GlobalKey<FormFieldState> formFieldKey,
-  ) {
+  void onStateChange(state_mode.State value, GlobalKey<FormFieldState> formFieldKey) {
     District district = city.district;
     district = district.copyWith(state: value, id: "", name: "");
     city = city.copyWith(district: district);
@@ -75,10 +68,7 @@ class CityController extends GetxController {
     update();
   }
 
-  void onDistrictChange(
-    District value,
-    GlobalKey<FormFieldState> formFieldKey,
-  ) {
+  void onDistrictChange(District value, GlobalKey<FormFieldState> formFieldKey) {
     city = city.copyWith(district: value);
     formFieldKey.currentState?.validate();
     update();
@@ -117,8 +107,7 @@ class CityController extends GetxController {
 
     HttpResponseService response = await HttpService.getRequest(getHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
 
       for (var cityJson in response.data) {
@@ -152,12 +141,9 @@ class CityController extends GetxController {
       ),
     );
 
-    HttpResponseService response = await HttpService.postRequest(
-      postHttpService,
-    );
+    HttpResponseService response = await HttpService.postRequest(postHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,
@@ -194,8 +180,7 @@ class CityController extends GetxController {
 
     HttpResponseService response = await HttpService.putRequest(putHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,
@@ -229,12 +214,9 @@ class CityController extends GetxController {
       ),
     );
 
-    HttpResponseService response = await HttpService.deleteRequest(
-      deleteHttpService,
-    );
+    HttpResponseService response = await HttpService.deleteRequest(deleteHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,
