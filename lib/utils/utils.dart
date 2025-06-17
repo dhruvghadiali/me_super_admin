@@ -27,4 +27,7 @@ class Utils {
     await pref.setString('user', '{}');
     Get.offAllNamed('/');
   }
+
+  static DateTime formatToIST(String dateTime, {String pattern = 'dd MMM yyyy hh:mm a'}) =>
+      DateTime.parse(dateTime).add(const Duration(hours: 5, minutes: 30));
 }

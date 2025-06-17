@@ -11,8 +11,7 @@ class FeeTypeCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
 
     return Card(
       elevation: 2,
@@ -40,17 +39,13 @@ class FeeTypeCardWidget extends StatelessWidget {
                 audioDateTimeInfoLabel: 'Created At:',
                 audioInfoLabel: 'Created By:',
                 audioUserInfo: feeType.createdBy,
-                auditDateTimeInfo: DateFormat(
-                  'dd MMM yyyy hh:mm a',
-                ).format(feeType.createdAt),
+                auditDateTimeInfo: DateFormat('dd MMM yyyy hh:mm a').format(feeType.createdAt),
               ),
               AuditTrailWidget(
                 audioDateTimeInfoLabel: 'Updated At:',
                 audioInfoLabel: 'Updated By:',
                 audioUserInfo: feeType.createdBy,
-                auditDateTimeInfo: DateFormat(
-                  'dd MMM yyyy hh:mm a',
-                ).format(feeType.createdAt),
+                auditDateTimeInfo: DateFormat('dd MMM yyyy hh:mm a').format(feeType.updatedAt),
               ),
             ],
           ),

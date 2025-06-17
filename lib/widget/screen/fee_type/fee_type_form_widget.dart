@@ -18,20 +18,24 @@ class FeeTypeFormWidget extends StatefulWidget {
 
 class _FeeTypeFormWidgetState extends State<FeeTypeFormWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GlobalKey<FormFieldState> _feeTypeFieldKey =
-      GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _feeTypeFieldKey = GlobalKey<FormFieldState>();
 
   final FeeTypeController feeTypeController = Get.put(FeeTypeController());
 
-  final TextEditingController feeTypeTextEditingController =
-      TextEditingController();
+  final TextEditingController _feeTypeTextEditingController = TextEditingController();
 
   @override
   void initState() {
     if (feeTypeController.feeType.id.isNotEmpty) {
-      feeTypeTextEditingController.text = feeTypeController.feeType.feeType;
+      _feeTypeTextEditingController.text = feeTypeController.feeType.feeType;
     }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _feeTypeTextEditingController.dispose();
+    super.dispose();
   }
 
   onFeeTypeTextFieldSubmit(BuildContext context, String value) {
@@ -46,8 +50,7 @@ class _FeeTypeFormWidgetState extends State<FeeTypeFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Expanded(
       child: Container(
@@ -76,27 +79,19 @@ class _FeeTypeFormWidgetState extends State<FeeTypeFormWidget> {
                     Container(
                       margin: const EdgeInsets.only(top: 30),
                       child: FloatingTextFieldWidget(
-                        key: _feeTypeFieldKey,
+                        fieldKey: _feeTypeFieldKey,
                         appColorScheme: AppColorScheme.primary,
-                        controller: feeTypeTextEditingController,
-                        labelText:
-                            appLocalizations.feeTypeTextFieldLabelText,
+                        controller: _feeTypeTextEditingController,
+                        labelText: appLocalizations.feeTypeTextFieldLabelText,
                         textInputAction: TextInputAction.next,
-                        validator:
-                            feeTypeControllerContext
-                                .feeTypeValidator,
-                        onChange:
-                            (String value) => feeTypeControllerContext
-                                .onFeeTypeChange(value),
+                        validator: feeTypeControllerContext.feeTypeValidator,
+                        onChange: (String value) => feeTypeControllerContext.onFeeTypeChange(value),
                         onFieldSubmitted:
-                            (String value) =>
-                                onFeeTypeTextFieldSubmit(context, value),
+                            (String value) => onFeeTypeTextFieldSubmit(context, value),
                       ),
                     ),
                     feeTypeControllerContext.isLoader
-                        ? const ApiRequestLoaderWidget(
-                          appColorScheme: AppColorScheme.primary,
-                        )
+                        ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)
                         : Container(),
                     Container(
                       margin: const EdgeInsets.only(top: 30),
