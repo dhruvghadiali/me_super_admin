@@ -1,3 +1,5 @@
+import 'package:me_super_admin/utils/utils.dart';
+
 class AdmissionDocument {
   String id;
   String admissionDocument;
@@ -55,9 +57,7 @@ class AdmissionDocument {
 
   static String setId(Map<String, dynamic> json) {
     if (json.containsKey('id')) {
-      if (json['id'] != null &&
-          json['id'] is String &&
-          json['id'].toString().isNotEmpty) {
+      if (json['id'] != null && json['id'] is String && json['id'].toString().isNotEmpty) {
         return json['id'];
       }
     }
@@ -107,7 +107,7 @@ class AdmissionDocument {
           json['created_at'] is String &&
           json['created_at'].toString().isNotEmpty) {
         try {
-          return DateTime.parse(json['created_at']);
+          return Utils.formatToIST(json['created_at']);
         } catch (e) {
           return DateTime(1500, 01, 01);
         }
@@ -123,7 +123,7 @@ class AdmissionDocument {
           json['updated_at'] is String &&
           json['updated_at'].toString().isNotEmpty) {
         try {
-          return DateTime.parse(json['updated_at']);
+          return Utils.formatToIST(json['updated_at']);
         } catch (e) {
           return DateTime(1500, 01, 01);
         }

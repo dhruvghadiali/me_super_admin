@@ -32,7 +32,7 @@ class AdmissionDocumentController extends GetxController {
     update();
 
     if (admissionDocument.id.isNotEmpty) {
-      Get.offAllNamed(RoutePaths.admissionDocumentForm);
+      Get.toNamed(RoutePaths.admissionDocumentForm);
     }
   }
 
@@ -63,9 +63,7 @@ class AdmissionDocumentController extends GetxController {
 
   void onSubmitForm(GlobalKey<FormState> formKey) async {
     if (formKey.currentState?.validate() ?? false) {
-      (admissionDocument.id.isEmpty)
-          ? await postAdmissionDocument()
-          : await putAdmissionDocument();
+      (admissionDocument.id.isEmpty) ? await postAdmissionDocument() : await putAdmissionDocument();
     }
   }
 
@@ -86,8 +84,7 @@ class AdmissionDocumentController extends GetxController {
 
     HttpResponseService response = await HttpService.getRequest(getHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       for (var admissionDocumentJson in response.data) {
         final AdmissionDocument admissionDocumentObj = AdmissionDocument.fromJson(
@@ -122,12 +119,9 @@ class AdmissionDocumentController extends GetxController {
       ),
     );
 
-    HttpResponseService response = await HttpService.postRequest(
-      postHttpService,
-    );
+    HttpResponseService response = await HttpService.postRequest(postHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,
@@ -164,8 +158,7 @@ class AdmissionDocumentController extends GetxController {
 
     HttpResponseService response = await HttpService.putRequest(putHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,
@@ -199,12 +192,9 @@ class AdmissionDocumentController extends GetxController {
       ),
     );
 
-    HttpResponseService response = await HttpService.deleteRequest(
-      deleteHttpService,
-    );
+    HttpResponseService response = await HttpService.deleteRequest(deleteHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,

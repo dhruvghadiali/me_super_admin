@@ -6,16 +6,12 @@ import 'package:me_super_admin/widget/common/container/audit_trail_widget.dart';
 import 'package:me_super_admin/model/admission_document/admission_document.dart';
 
 class AdmissionDocumentCardWidget extends StatelessWidget {
-  const AdmissionDocumentCardWidget({
-    super.key,
-    required this.admissionDocument,
-  });
+  const AdmissionDocumentCardWidget({super.key, required this.admissionDocument});
   final AdmissionDocument admissionDocument;
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
 
     return Card(
       elevation: 2,
@@ -50,10 +46,10 @@ class AdmissionDocumentCardWidget extends StatelessWidget {
               AuditTrailWidget(
                 audioDateTimeInfoLabel: 'Updated At:',
                 audioInfoLabel: 'Updated By:',
-                audioUserInfo: admissionDocument.createdBy,
+                audioUserInfo: admissionDocument.updatedBy,
                 auditDateTimeInfo: DateFormat(
                   'dd MMM yyyy hh:mm a',
-                ).format(admissionDocument.createdAt),
+                ).format(admissionDocument.updatedAt),
               ),
             ],
           ),

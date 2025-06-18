@@ -13,30 +13,32 @@ class AdmissionDocumentFormWidget extends StatefulWidget {
   const AdmissionDocumentFormWidget({super.key});
 
   @override
-  State<AdmissionDocumentFormWidget> createState() =>
-      _AdmissionDocumentFormWidgetState();
+  State<AdmissionDocumentFormWidget> createState() => _AdmissionDocumentFormWidgetState();
 }
 
-class _AdmissionDocumentFormWidgetState
-    extends State<AdmissionDocumentFormWidget> {
+class _AdmissionDocumentFormWidgetState extends State<AdmissionDocumentFormWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GlobalKey<FormFieldState> _admissionDocumentFieldKey =
-      GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _admissionDocumentFieldKey = GlobalKey<FormFieldState>();
 
   final AdmissionDocumentController admissionDocumentController = Get.put(
     AdmissionDocumentController(),
   );
 
-  final TextEditingController admissionDocumentTextEditingController =
-      TextEditingController();
+  final TextEditingController _admissionDocumentTextEditingController = TextEditingController();
 
   @override
   void initState() {
     if (admissionDocumentController.admissionDocument.id.isNotEmpty) {
-      admissionDocumentTextEditingController.text =
+      _admissionDocumentTextEditingController.text =
           admissionDocumentController.admissionDocument.admissionDocument;
     }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _admissionDocumentTextEditingController.dispose();
+    super.dispose();
   }
 
   onAdmissionDocumentTextFieldSubmit(BuildContext context, String value) {
@@ -55,8 +57,7 @@ class _AdmissionDocumentFormWidgetState
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Expanded(
       child: Container(
@@ -85,31 +86,21 @@ class _AdmissionDocumentFormWidgetState
                     Container(
                       margin: const EdgeInsets.only(top: 30),
                       child: FloatingTextFieldWidget(
-                        key: _admissionDocumentFieldKey,
+                        fieldKey: _admissionDocumentFieldKey,
                         appColorScheme: AppColorScheme.primary,
-                        controller: admissionDocumentTextEditingController,
-                        labelText:
-                            appLocalizations
-                                .admissionDocumentTextFieldLabelText,
+                        controller: _admissionDocumentTextEditingController,
+                        labelText: appLocalizations.admissionDocumentTextFieldLabelText,
                         textInputAction: TextInputAction.next,
-                        validator:
-                            admissionDocumentControllerContext
-                                .admissionDocumentValidator,
+                        validator: admissionDocumentControllerContext.admissionDocumentValidator,
                         onChange:
-                            (String value) => admissionDocumentControllerContext
-                                .onAdmissionDocumentChange(value),
-                        onFieldSubmitted:
                             (String value) =>
-                                onAdmissionDocumentTextFieldSubmit(
-                                  context,
-                                  value,
-                                ),
+                                admissionDocumentControllerContext.onAdmissionDocumentChange(value),
+                        onFieldSubmitted:
+                            (String value) => onAdmissionDocumentTextFieldSubmit(context, value),
                       ),
                     ),
                     admissionDocumentControllerContext.isLoader
-                        ? const ApiRequestLoaderWidget(
-                          appColorScheme: AppColorScheme.primary,
-                        )
+                        ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)
                         : Container(),
                     Container(
                       margin: const EdgeInsets.only(top: 30),
