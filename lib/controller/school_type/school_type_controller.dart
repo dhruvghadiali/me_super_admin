@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:form_validator/form_validator.dart';
 
 import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/utils/utils.dart';
@@ -12,11 +14,11 @@ import 'package:me_super_admin/model/http_service/post_http_service.dart';
 import 'package:me_super_admin/model/http_service/delete_http_service.dart';
 import 'package:me_super_admin/model/http_service/http_response_service.dart';
 import 'package:me_super_admin/model/http_service/mock_http_api_property_service.dart';
+import 'package:me_super_admin/utils/validation_message/school_type_validation_message.dart';
 
 class SchoolTypeController extends GetxController {
   String snackbarTitle = "School Type Alert";
   bool isLoader = false;
-  bool showErrorForSchoolTypeTextEditingController = false;
   SchoolType schoolType = SchoolType.defaultValues();
   List<SchoolType> schoolTypes = [];
 
@@ -27,44 +29,39 @@ class SchoolTypeController extends GetxController {
 
   void setSchoolTypeForm(SchoolType schoolTypeObj) {
     schoolType = schoolTypeObj;
-    showErrorForSchoolTypeTextEditingController = false;
     update();
 
     if (schoolType.id.isNotEmpty) {
-      Get.offAllNamed(RoutePaths.schoolTypesRegistration);
+      Get.toNamed(RoutePaths.schoolTypeForm);
     }
   }
 
+  String? schoolTypeValidator(String? value) {
+    return ValidationBuilder(requiredMessage: SchoolTypeValidationMessage.schoolTypeRequired)
+        .required(SchoolTypeValidationMessage.schoolTypeRequired)
+        .minLength(2, SchoolTypeValidationMessage.schoolTypeMinLength)
+        .maxLength(100, SchoolTypeValidationMessage.schoolTypeMaxLength)
+        .build()(value?.trim());
+  }
+
   void onSchoolTypeChange(String value) {
-    schoolType = schoolType.copyWith(schoolType: value);
+    schoolType = schoolType.copyWith(schoolType: value.trim());
     update();
   }
 
-  void onSchoolTypeSubmit(String value) {
-    schoolType = schoolType.copyWith(schoolType: value);
-    formValidation();
-    update();
+  void onSchoolTypeSubmitted(
+    String value,
+    GlobalKey<FormFieldState> formFieldKey,
+    GlobalKey<FormState> formKey,
+  ) {
+    schoolType = schoolType.copyWith(schoolType: value.trim());
+    formFieldKey.currentState?.validate();
+    onSubmitForm(formKey);
   }
 
-  void onSubmitForm() {
-    formValidation();
-    update();
-  }
-
-  Future<void> formValidation() async {
-    if (schoolType.schoolType.isNotEmpty &&
-        schoolType.schoolType.length > 2 &&
-        schoolType.schoolType.length < 100) {
-      showErrorForSchoolTypeTextEditingController = false;
-      if (schoolType.id.isEmpty) {
-        await postSchoolType();
-      } else {
-        await putSchoolType();
-      }
-      update();
-    } else {
-      showErrorForSchoolTypeTextEditingController = true;
-      update();
+  void onSubmitForm(GlobalKey<FormState> formKey) async {
+    if (formKey.currentState?.validate() ?? false) {
+      (schoolType.id.isEmpty) ? await postSchoolType() : await putSchoolType();
     }
   }
 
@@ -85,8 +82,7 @@ class SchoolTypeController extends GetxController {
 
     HttpResponseService response = await HttpService.getRequest(getHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       for (var schoolTypeJson in response.data) {
         final SchoolType schoolTypeObj = SchoolType.fromJson(schoolTypeJson);
@@ -119,12 +115,9 @@ class SchoolTypeController extends GetxController {
       ),
     );
 
-    HttpResponseService response = await HttpService.postRequest(
-      postHttpService,
-    );
+    HttpResponseService response = await HttpService.postRequest(postHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,
@@ -161,8 +154,7 @@ class SchoolTypeController extends GetxController {
 
     HttpResponseService response = await HttpService.putRequest(putHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,
@@ -182,7 +174,7 @@ class SchoolTypeController extends GetxController {
     update();
   }
 
-  Future<void> deleteSchoolTypes(String id) async {
+  Future<void> deleteSchoolType(String id) async {
     String authToken = await Utils.getAuthToken();
     isLoader = true;
     update();
@@ -196,12 +188,9 @@ class SchoolTypeController extends GetxController {
       ),
     );
 
-    HttpResponseService response = await HttpService.deleteRequest(
-      deleteHttpService,
-    );
+    HttpResponseService response = await HttpService.deleteRequest(deleteHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,

@@ -6,36 +6,69 @@ class AuditTrailWidget extends StatelessWidget {
   const AuditTrailWidget({
     super.key,
     required this.audioUserInfo,
+    required this.audioInfoLabel,
     required this.auditDateTimeInfo,
+    required this.audioDateTimeInfoLabel,
   });
 
-  final String auditDateTimeInfo;
   final String audioUserInfo;
+  final String audioInfoLabel;
+  final String auditDateTimeInfo;
+  final String audioDateTimeInfoLabel;
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
     return Row(
       children: [
         Expanded(
-          child: Text(
-            audioUserInfo,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(
-              context,
-            ).textTheme.labelSmall!.copyWith(color: themeData.offWhite),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 60,
+                child: Text(
+                  audioInfoLabel,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.labelSmall!.copyWith(color: themeData.offWhite!.withValues(alpha: 0.7), fontSize: 10),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  audioUserInfo,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.labelSmall!.copyWith(color: themeData.offWhite, fontSize: 10, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
           ),
         ),
         Expanded(
-          child: Text(
-            auditDateTimeInfo,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(
-              context,
-            ).textTheme.labelSmall!.copyWith(color: themeData.offWhite),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: 60,
+                child: Text(
+                  audioDateTimeInfoLabel,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.labelSmall!.copyWith(color: themeData.offWhite!.withValues(alpha: 0.7), fontSize: 10),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  auditDateTimeInfo,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.labelSmall!.copyWith(color: themeData.offWhite, fontSize: 10, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
           ),
         ),
       ],

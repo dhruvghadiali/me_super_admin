@@ -1,30 +1,11 @@
-enum AppEnvironment {
-  production,
-  uat,
-  development,
-  demo,
-}
+enum AppEnvironment { production, uat, development, demo }
 
-enum AppHttpRequestStatus {
-  isSuccessfullyServiced,
-  unAuthorizedUser,
-  notSuccessfullyServiced,
-  error,
-}
+enum AppHttpRequestStatus { isSuccessfullyServiced, unAuthorizedUser, notSuccessfullyServiced, error }
 
-enum AppRequiredDocumentStatus {
-  required,
-  notRequired,
-  optional,
-}
+enum AppRequiredDocumentStatus { required, notRequired, optional }
 
-enum AppSnackbarStatus {
-  success,
-  warning,
-  error,
-}
+enum AppSnackbarStatus { success, warning, error }
 
-enum AppColorScheme {
-  primary,
-  secondary,
-}
+enum AppColorScheme { primary, secondary }
+
+enum SchoolFormStepName { organization, organizationMembers, school, schoolAddresses, schoolAdmin }

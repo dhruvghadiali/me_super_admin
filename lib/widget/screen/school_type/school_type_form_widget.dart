@@ -1,5 +1,3 @@
-
-
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,32 +17,40 @@ class SchoolTypeFormWidget extends StatefulWidget {
 }
 
 class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
-  final SchoolTypeController schoolTypeController = Get.put(
-    SchoolTypeController(),
-  );
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormFieldState> _schoolTypeFieldKey = GlobalKey<FormFieldState>();
 
-  final TextEditingController schoolTypeTextEditingController =
-      TextEditingController();
+  final SchoolTypeController schoolTypeController = Get.put(SchoolTypeController());
+
+  final TextEditingController _schoolTypeTextEditingController = TextEditingController();
 
   @override
   void initState() {
-    // TODO: implement initState
     if (schoolTypeController.schoolType.id.isNotEmpty) {
-      schoolTypeTextEditingController.text =
-          schoolTypeController.schoolType.schoolType;
+      _schoolTypeTextEditingController.text = schoolTypeController.schoolType.schoolType;
     }
     super.initState();
   }
-  
+
+  @override
+  void dispose() {
+    _schoolTypeTextEditingController.dispose();
+    super.dispose();
+  }
+
+  onSchoolTypeTextFieldSubmit(BuildContext context, String value) {
+    FocusManager.instance.primaryFocus?.unfocus();
+    schoolTypeController.onSchoolTypeSubmitted(value, _schoolTypeFieldKey, _formKey);
+  }
+
   onSubmitForm(BuildContext context) {
-    FocusScope.of(context).unfocus();
-    schoolTypeController.onSubmitForm();
+    FocusManager.instance.primaryFocus?.unfocus();
+    schoolTypeController.onSubmitForm(_formKey);
   }
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Expanded(
       child: Container(
@@ -66,41 +72,39 @@ class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
         child: SingleChildScrollView(
           child: GetBuilder<SchoolTypeController>(
             builder: (schoolTypeControllerContext) {
-              return Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 30),
-                    child: FloatingTextFieldWidget(
-                      appColorScheme: AppColorScheme.primary,
-                      controller: schoolTypeTextEditingController,
-                      labelText: appLocalizations.schoolTypeLabelText,
-                      showError:
-                          schoolTypeControllerContext
-                              .showErrorForSchoolTypeTextEditingController,
-                      textInputAction: TextInputAction.next,
-                      onChange:
-                          (String value) => schoolTypeControllerContext
-                              .onSchoolTypeChange(value),
-                      onSubmitted:
-                          (String value) => schoolTypeControllerContext
-                              .onSchoolTypeSubmit(value),
-                    ),
-                  ),
-                  schoolTypeControllerContext.isLoader
-                      ? const ApiRequestLoaderWidget(
+              return Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: 30),
+                      child: FloatingTextFieldWidget(
+                        fieldKey: _schoolTypeFieldKey,
                         appColorScheme: AppColorScheme.primary,
-                      )
-                      : Container(),
-                  Container(
-                    margin: const EdgeInsets.only(top: 30),
-                    child: ElevatedButtonWidget(
-                      appColorScheme: AppColorScheme.primary,
-                      buttonText: appLocalizations.signInButtonText,
-                      disabled: schoolTypeControllerContext.isLoader,
-                      onPressed: () => onSubmitForm(context),
+                        controller: _schoolTypeTextEditingController,
+                        labelText: appLocalizations.schoolTypeTextFieldLabelText,
+                        textInputAction: TextInputAction.next,
+                        validator: schoolTypeControllerContext.schoolTypeValidator,
+                        onChange:
+                            (String value) => schoolTypeControllerContext.onSchoolTypeChange(value),
+                        onFieldSubmitted:
+                            (String value) => onSchoolTypeTextFieldSubmit(context, value),
+                      ),
                     ),
-                  ),
-                ],
+                    schoolTypeControllerContext.isLoader
+                        ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)
+                        : Container(),
+                    Container(
+                      margin: const EdgeInsets.only(top: 30),
+                      child: ElevatedButtonWidget(
+                        appColorScheme: AppColorScheme.primary,
+                        buttonText: appLocalizations.submitButtonText,
+                        disabled: schoolTypeControllerContext.isLoader,
+                        onPressed: () => onSubmitForm(context),
+                      ),
+                    ),
+                  ],
+                ),
               );
             },
           ),

@@ -11,8 +11,7 @@ class SchoolTypeCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
 
     return Card(
       elevation: 2,
@@ -37,14 +36,16 @@ class SchoolTypeCardWidget extends StatelessWidget {
               ),
               Divider(color: themeData.offWhite, thickness: 0.4),
               AuditTrailWidget(
-                audioUserInfo: "Created By:  ${schoolType.createdBy}",
-                auditDateTimeInfo:
-                    "Created At:  ${DateFormat('dd MMM yyyy hh:mm a').format(schoolType.createdAt)}",
+                audioDateTimeInfoLabel: 'Created At:',
+                audioInfoLabel: 'Created By:',
+                audioUserInfo: schoolType.createdBy,
+                auditDateTimeInfo: DateFormat('dd MMM yyyy hh:mm a').format(schoolType.createdAt),
               ),
               AuditTrailWidget(
-                audioUserInfo: "Updated By:  ${schoolType.updatedBy}",
-                auditDateTimeInfo:
-                    "Updated At:  ${DateFormat('dd MMM yyyy hh:mm a').format(schoolType.updatedAt)}",
+                audioDateTimeInfoLabel: 'Updated At:',
+                audioInfoLabel: 'Updated By:',
+                audioUserInfo: schoolType.createdBy,
+                auditDateTimeInfo: DateFormat('dd MMM yyyy hh:mm a').format(schoolType.updatedAt),
               ),
             ],
           ),

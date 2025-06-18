@@ -1,51 +1,468 @@
 {
   "@@locale": "en",
-  "apiRequestProcessingTitle" : "Processing ...",
+  "apiRequestProcessingTitle": "Processing ...",
   "@apiRequestProcessingTitle": {},
-  "apiRequestProcessingMessage" : "Please wait your request is processing",
+  "apiRequestProcessingMessage": "Please wait your request is processing",
   "@apiRequestProcessingMessage": {},
-  "signInFormTitle" : "Hello, Boss!!",
+  "signInFormTitle": "Hello, Boss!!",
   "@signInFormTitle": {},
-  "addSchoolFormTitle" : "Register School",
+  "addButtonText": "add",
+  "@addButtonText": {
+    "description": "Common use for button text: Add button"
+  },
+  "editButtonText": "edit",
+  "@editButtonText": {
+    "description": "Common use for button text: Edit button"
+  },
+  "nextButtonText": "next",
+  "@nextButtonText": {
+    "description": "Common use for button text: Next button"
+  },
+  "previousButtonText": "previous",
+  "@previousButtonText": {
+    "description": "Common use for button text: Previous button"
+  },
+  "submitButtonText": "submit",
+  "@submitButtonText": {
+    "description": "Common use for button text: Submit button"
+  },
+  "stateDropdownFieldLabelText": "Select State",
+  "@stateDropdownFieldLabelText": {
+    "description": "Common use for dropdown text: State dropdown"
+  },
+  "districtDropdownFieldLabelText": "Select District",
+  "@districtDropdownFieldLabelText": {
+    "description": "Common use for dropdown text: District dropdown"
+  },
+  "cityDropdownFieldLabelText": "Select City",
+  "@cityDropdownFieldLabelText": {
+    "description": "Common use for dropdown text: City dropdown"
+  },
+  "areaNameDropdownFieldLabelText": "Select Area Name",
+  "@areaNameDropdownFieldLabelText": {
+    "description": "Common use for dropdown text: Area Name dropdown"
+  },
+  "zipcodeDropdownFieldLabelText": "Select Zipcode",
+  "@zipcodeDropdownFieldLabelText": {
+    "description": "Common use for dropdown text: Zipcode dropdown"
+  },
+  "indianPhoneNumberCodeText": "+91",
+  "@indianPhoneNumberCodeText": {
+    "description": "Common use for text: Indian phone number code"
+  },
+  "newSchoolSummaryHeaderText": "summary",
+  "@newSchoolSummaryHeaderText": {
+    "description": "Header text in new school summary"
+  },
+  "newSchoolSummaryOrganizationTabLabelText": "organization",
+  "@newSchoolSummaryOrganizationTabLabelText": {
+    "description": "Label text for organization tab in new school summary"
+  },
+  "newSchoolSummarySchoolTabLabelText": "School",
+  "@newSchoolSummarySchoolTabLabelText": {
+    "description": "Label text for school tab in new school summary"
+  },
+  "newSchoolSummaryOrganizationNameLabelText": "organization name",
+  "@newSchoolSummaryOrganizationNameLabelText": {
+    "description": "Label text for organization name in new school summary"
+  },
+  "newSchoolSummaryOrganizationShortNameLabelText": "organization short name",
+  "@newSchoolSummaryOrganizationShortNameLabelText": {
+    "description": "Label text for organization short name in new school summary"
+  },
+  "newSchoolSummaryOrganizationEmailLabelText": "email",
+  "@newSchoolSummaryOrganizationEmailLabelText": {
+    "description": "Label text for organization email in new school summary"
+  },
+  "newSchoolSummaryOrganizationPhoneNumberLabelText": "organization phone number",
+  "@newSchoolSummaryOrganizationPhoneNumberLabelText": {
+    "description": "Label text for organization phone number in new school summary"
+  },
+  "newSchoolSummaryOrganizationGovernmentRegistrationNumberLabelText": "government registration number",
+  "@newSchoolSummaryOrganizationGovernmentRegistrationNumberLabelText": {
+    "description": "Label text for organization government registration number in new school summary"
+  },
+  "newSchoolSummaryOrganizationAddressLabelText": "address",
+  "@newSchoolSummaryOrganizationAddressLabelText": {
+    "description": "Label text for organization address in new school summary"
+  },
+  "newSchoolSummaryOrganizationStateLabelText": "state",
+  "@newSchoolSummaryOrganizationStateLabelText": {
+    "description": "Label text for organization state in new school summary"
+  },
+  "newSchoolSummaryOrganizationDistrictLabelText": "district",
+  "@newSchoolSummaryOrganizationDistrictLabelText": {
+    "description": "Label text for organization district in new school summary"
+  },
+  "newSchoolSummaryOrganizationCityLabelText": "city",
+  "@newSchoolSummaryOrganizationCityLabelText": {
+    "description": "Label text for organization city in new school summary"
+  },
+  "newSchoolSummaryOrganizationAreaNameLabelText": "area name",
+  "@newSchoolSummaryOrganizationAreaNameLabelText": {
+    "description": "Label text for organization area name in new school summary"
+  },
+  "newSchoolSummaryOrganizationZipcodeLabelText": "zipcode",
+  "@newSchoolSummaryOrganizationZipcodeLabelText": {
+    "description": "Label text for organization zipcode in new school summary"
+  },
+  "newSchoolSummaryOrganizationEmptyValue":"N/A",
+  "@newSchoolSummaryOrganizationEmptyValue": {
+    "description": "When organization model value is empty, show this value"
+  },
+  "newSchoolSummaryOrganizationMembersNotFound": "Organization members details not available",
+  "@newSchoolSummaryOrganizationMembersNotFound": {
+    "description": "When organization members details not available in new school summary"
+  },
+  "newSchoolSummaryOrganizationMemberTitle": "organization member",
+  "@newSchoolSummaryOrganizationMemberTitle": {
+    "description": "Title text for organization member in new school summary"
+  },
+  "newSchoolSummaryOrganizationMemberEmptyValue":"N/A",
+  "@newSchoolSummaryOrganizationMemberEmptyValue": {
+    "description": "When organization member model value is empty, show this value"
+  },
+  "newSchoolSummaryOrganizationMemberFirstNameLabelText": "first name",
+  "@newSchoolSummaryOrganizationMemberFirstNameLabelText": {
+    "description": "Label text for organization member first name in new school summary"
+  },
+  "newSchoolSummaryOrganizationMemberLastNameLabelText": "last name",
+  "@newSchoolSummaryOrganizationMemberLastNameLabelText": {
+    "description": "Label text for organization member last name in new school summary"
+  },
+  "newSchoolSummaryOrganizationMemberEmailLabelText": "email",
+  "@newSchoolSummaryOrganizationMemberEmailLabelText": {
+    "description": "Label text for organization member email in new school summary"
+  },
+  "newSchoolSummaryOrganizationMemberPhoneNumberLabelText": "phone number",
+  "@newSchoolSummaryOrganizationMemberPhoneNumberLabelText": {
+    "description": "Label text for organization member phone number in new school summary"
+  },
+  "newSchoolSummaryOrganizationMemberAadhaarNumberLabelText": "aadhaar number",
+  "@newSchoolSummaryOrganizationMemberAadhaarNumberLabelText": {
+    "description": "Label text for organization member aadhaar number in new school summary"
+  },
+  "newSchoolSummaryOrganizationMemberPositionLabelText": "position",
+  "@newSchoolSummaryOrganizationMemberPositionLabelText": {
+    "description": "Label text for organization member position in new school summary"
+  },
+  "newSchoolSummaryOrganizationMemberAddressLabelText": "address",
+  "@newSchoolSummaryOrganizationMemberAddressLabelText": {
+    "description": "Label text for organization member address in new school summary"
+  },
+  "newSchoolSummaryOrganizationMemberStateLabelText": "state",
+  "@newSchoolSummaryOrganizationMemberStateLabelText": {
+    "description": "Label text for organization member state in new school summary"
+  },
+  "newSchoolSummaryOrganizationMemberDistrictLabelText": "district",
+  "@newSchoolSummaryOrganizationMemberDistrictLabelText": {
+    "description": "Label text for organization member district in new school summary"
+  },
+  "newSchoolSummaryOrganizationMemberCityLabelText": "city",
+  "@newSchoolSummaryOrganizationMemberCityLabelText": {
+    "description": "Label text for organization member city in new school summary"
+  },
+  "newSchoolSummaryOrganizationMemberAreaNameLabelText": "area name",
+  "@newSchoolSummaryOrganizationMemberAreaNameLabelText": {
+    "description": "Label text for organization member area name in new school summary"
+  },
+  "newSchoolSummaryOrganizationMemberZipcodeLabelText": "zipcode",
+  "@newSchoolSummaryOrganizationMemberZipcodeLabelText": {
+    "description": "Label text for organization member zipcode in new school summary"
+  },
+  "newSchoolSummarySchoolAffiliateNumberLabelText": "school affiliate number",
+  "@newSchoolSummarySchoolAffiliateNumberLabelText": {
+    "description": "Label text for school affiliate number in new school summary"
+  },
+  "newSchoolSummarySchoolNameLabelText": "school name",
+  "@newSchoolSummarySchoolNameLabelText": {
+    "description": "Label text for school name in new school summary"
+  },
+  "newSchoolSummarySchoolShortNameLabelText": "school short name",
+  "@newSchoolSummarySchoolShortNameLabelText": {
+    "description": "Label text for school short name in new school summary"
+  },
+  "newSchoolSummarySchoolEmailLabelText": "school email",
+  "@newSchoolSummarySchoolEmailLabelText": {
+    "description": "Label text for school email in new school summary"
+  },
+  "newSchoolSummarySchoolPhoneNumberLabelText": "school phone number",
+  "@newSchoolSummarySchoolPhoneNumberLabelText": {
+    "description": "Label text for school phone number in new school summary"
+  },
+  "newSchoolSummarySchoolEstablishedYearLabelText": "school established year",
+  "@newSchoolSummarySchoolEstablishedYearLabelText": {
+    "description": "Label text for school established year in new school summary"
+  },
+  "newSchoolSummarySchoolTypeLabelText": "school type",
+  "@newSchoolSummarySchoolTypeLabelText": {
+    "description": "Label text for school type in new school summary"
+  },
+  "newSchoolSummarySchoolEducationBoardsLabelText": "school education boards",
+  "@newSchoolSummarySchoolEducationBoardsLabelText": {
+    "description": "Label text for school education boards in new school summary"
+  },
+  "newSchoolSummarySchoolEmptyValue":"N/A",
+  "@newSchoolSummarySchoolEmptyValue": {
+    "description": "When school model value is empty, show this value"
+  },
+  "newSchoolSummarySchoolAddressesAndAdminsMissMatch": "School Address and Admin details mismatch",
+  "@newSchoolSummarySchoolAddressesAndAdminsMissMatch": {
+    "description": "When school address and admin details mismatch in new school summary"
+  },
+  "newSchoolSummarySchoolAddressTitle": "address",
+  "@newSchoolSummarySchoolAddressTitle": {
+    "description": "Title text for school address in new school summary"
+  },
+  "newSchoolSummarySchoolAdminTitle": "admin",
+  "@newSchoolSummarySchoolAdminTitle": {
+    "description": "Title text for school admin in new school summary"
+  },
+  "newSchoolSummarySchoolAddressEmptyValue":"N/A",
+  "@newSchoolSummarySchoolAddressEmptyValue": {
+    "description": "When school address model value is empty, show this value"
+  },
+  "newSchoolSummarySchoolAdminEmptyValue":"N/A",
+  "@newSchoolSummarySchoolAdminEmptyValue": {
+    "description": "When school admin model value is empty, show this value"
+  },
+  "newSchoolSummarySchoolAddressLabelText": "address",
+  "@newSchoolSummarySchoolAddressLabelText": {
+    "description": "Label text for school address in new school summary"
+  },
+  "newSchoolSummarySchoolStateLabelText": "state",
+  "@newSchoolSummarySchoolStateLabelText": {
+    "description": "Label text for school state in new school summary"
+  },
+  "newSchoolSummarySchoolDistrictLabelText": "district",
+  "@newSchoolSummarySchoolDistrictLabelText": {
+    "description": "Label text for school district in new school summary"
+  },
+  "newSchoolSummarySchoolCityLabelText": "city",
+  "@newSchoolSummarySchoolCityLabelText": {
+    "description": "Label text for school city in new school summary"
+  },
+  "newSchoolSummarySchoolAreaNameLabelText": "area name",
+  "@newSchoolSummarySchoolAreaNameLabelText": {
+    "description": "Label text for school area name in new school summary"
+  },
+  "newSchoolSummarySchoolZipcodeLabelText": "zipcode",
+  "@newSchoolSummarySchoolZipcodeLabelText": {
+    "description": "Label text for school zipcode in new school summary"
+  },
+  "newSchoolSummarySchoolAdminFirstNameLabelText": "first name",
+  "@newSchoolSummarySchoolAdminFirstNameLabelText": {
+    "description": "Label text for school admin first name in new school summary"
+  },
+  "newSchoolSummarySchoolAdminLastNameLabelText": "last name",
+  "@newSchoolSummarySchoolAdminLastNameLabelText": {
+    "description": "Label text for school admin last name in new school summary"
+  },
+  "newSchoolSummarySchoolAdminEmailLabelText": "email",
+  "@newSchoolSummarySchoolAdminEmailLabelText": {
+    "description": "Label text for school admin email in new school summary"
+  },
+  "newSchoolSummarySchoolAdminPhoneNumberLabelText": "phone number",
+  "@newSchoolSummarySchoolAdminPhoneNumberLabelText": {
+    "description": "Label text for school admin phone number in new school summary"
+  },
+  "schoolFormSchoolAffiliateNumberTextFieldLabelText": "School affiliate number",
+  "@schoolFormSchoolAffiliateNumberTextFieldLabelText": {
+    "description": "Text field label text for school affiliate number in school form"
+  },
+  "schoolFormSchoolNameTextFieldLabelText": "School name",
+  "@schoolFormSchoolNameTextFieldLabelText": {
+    "description": "Text field label text for school name in school form"
+  },
+  "schoolFormSchoolShortNameTextFieldLabelText": "School short name",
+  "@schoolFormSchoolShortNameTextFieldLabelText": {
+    "description": "Text field label text for school short name in school form"
+  },
+  "schoolFormSchoolEmailTextFieldLabelText": "Email",
+  "@schoolFormSchoolEmailTextFieldLabelText": {
+    "description": "Text field label text for school email in school form"
+  },
+  "schoolFormSchoolPhoneNumberTextFieldLabelText": "Phone number",
+  "@schoolFormSchoolPhoneNumberTextFieldLabelText": {
+    "description": "Text field label text for school phone number in school form"
+  },
+  "schoolFormSchoolEstablishedYearTextFieldLabelText": "Established year",
+  "@schoolFormSchoolEstablishedYearTextFieldLabelText": {
+    "description": "Text field label text for school established year in school form"
+  },
+  "schoolFormSchoolTypeDropdownLabelText": "School type",
+  "@schoolFormSchoolTypeDropdownLabelText": {
+    "description": "Text field label text for school type in school form"
+  },
+  "schoolFormSchoolEducationBoardsDropdownLabelText": "Education boards",
+  "@schoolFormSchoolEducationBoardsDropdownLabelText": {
+    "description": "Text field label text for school education boards in school form"
+  },
+  "organizationFormOrganizationNameTextFieldLabelText": "Organization name",
+  "@organizationFormOrganizationNameTextFieldLabelText": {
+    "description": "Text field label text for organization name in organization form"
+  },
+  "organizationFormOrganizationShortNameTextFieldLabelText": "Organization short name",
+  "@organizationFormOrganizationShortNameTextFieldLabelText": {
+    "description": "Text field label text for organization short name in organization form"
+  },
+  "organizationFormOrganizationEmailTextFieldLabelText": "Email",
+  "@organizationFormOrganizationEmailTextFieldLabelText": {
+    "description": "Text field label text for organization email in organization form"
+  },
+  "organizationFormOrganizationPhoneNumberTextFieldLabelText": "Phone number",
+  "@organizationFormOrganizationPhoneNumberTextFieldLabelText": {
+    "description": "Text field label text for organization phone number in organization form"
+  },
+  "organizationFormOrganizationGovernmentRegistrationNumberTextFieldLabelText": "Government registration number",
+  "@organizationFormOrganizationGovernmentRegistrationNumberTextFieldLabelText": {
+    "description": "Text field label text for organization government registration number in organization form"
+  },
+  "organizationFormOrganizationAddressTextFieldLabelText": "Address",
+  "@organizationFormOrganizationAddressTextFieldLabelText": {
+    "description": "Text field label text for organization address in organization form"
+  },
+  "organizationMemberFormAddMemberButtonText": "add member",
+  "@organizationMemberFormAddMemberButtonText": {
+    "description": "Button text for adding a member in organization member form"
+  },
+  "organizationMemberFormExpansionTile":"Organization Member Form",
+  "@organizationMemberFormExpansionTile": {
+    "description": "Expansion tile title for organization member form"
+  },
+  "organizationMemberFormFirstNameTextFieldLabelText": "First Name",
+  "@organizationMemberFormFirstNameTextFieldLabelText": {
+    "description": "Text field label text for first name in organization member form"
+  },
+  "organizationMemberFormLastNameTextFieldLabelText": "Last Name",
+  "@organizationMemberFormLastNameTextFieldLabelText": {
+    "description": "Text field label text for last name in organization member form"
+  },
+  "organizationMemberFormEmailTextFieldLabelText": "Email",
+  "@organizationMemberFormEmailTextFieldLabelText": {
+    "description": "Text field label text for email in organization member form"
+  },
+  "organizationMemberFormPhoneNumberTextFieldLabelText": "Phone number",
+  "@organizationMemberFormPhoneNumberTextFieldLabelText": {
+    "description": "Text field label text for phone number in organization member form"
+  },
+  "organizationMemberFormAadhaarNumberTextFieldLabelText": "Aadhaar number",
+  "@organizationMemberFormAadhaarNumberTextFieldLabelText": {
+    "description": "Text field label text for aadhaar number in organization member form"
+  },
+  "organizationMemberFormAddressTextFieldLabelText": "Address",
+  "@organizationMemberFormAddressTextFieldLabelText": {
+    "description": "Text field label text for address in organization member form"
+  },
+  "organizationMemberFormPositionDropdownFieldLabelText": "Select Position",
+  "@organizationMemberFormPositionDropdownFieldLabelText": {
+    "description": "Dropdown field label text for position in organization member form"
+  },
+  "schoolAddressFormAddSchoolAddressButtonText": "Add School Address",
+  "@schoolAddressFormAddSchoolAddressButtonText": {
+    "description": "Button text for adding a school address in school address form"
+  },
+  "schoolAddressFormExpansionTile":"School Address Form",
+  "@schoolAddressFormExpansionTile": {
+    "description": "Expansion tile title for school address form"
+  },
+  "schoolAddressFormAddressTextFieldLabelText": "Address",
+  "@schoolAddressFormAddressTextFieldLabelText": {
+    "description": "Text field label text for address in school address form"
+  },
+  "schoolAdminFormFirstNameTextFieldLabelText": "First Name",
+  "@schoolAdminFormFirstNameTextFieldLabelText": {
+    "description": "Text field label text for first name in school admin form"
+  },
+  "schoolAdminFormLastNameTextFieldLabelText": "Last Name",
+  "@schoolAdminFormLastNameTextFieldLabelText": {
+    "description": "Text field label text for last name in school admin form"
+  },
+  "schoolAdminFormEmailTextFieldLabelText": "Email",
+  "@schoolAdminFormEmailTextFieldLabelText": {
+    "description": "Text field label text for email in school admin form"
+  },
+  "schoolAdminFormPhoneNumberTextFieldLabelText": "Phone number",
+  "@schoolAdminFormPhoneNumberTextFieldLabelText": {
+    "description": "Text field label text for phone number in school admin form"
+  },
+
+
+
+  "addSchoolFormTitle": "Register School",
   "@addSchoolFormTitle": {},
-  "deleteAlertTitle" : "Are you sure?",
+  "deleteAlertTitle": "Are you sure?",
   "@deleteAlertTitle": {},
-  "deleteAlertSubtitle" : "Do you really want to delete these record? This process cannot be undone",
+  "deleteAlertSubtitle": "Do you really want to delete these record? This process cannot be undone",
   "@deleteAlertSubtitle": {},
-  "restoreAlertSubtitle" : "Do you really want to restore these record? This process cannot be undone",
+  "restoreAlertSubtitle": "Do you really want to restore these record? This process cannot be undone",
   "@restoreAlertSubtitle": {},
-  "noDataFoundTitleMessage" : "No records found",
+  "noDataFoundTitleMessage": "No records found",
   "@noDataFoundTitleMessage": {},
-  "noDataFoundSubtitleMessage" : "Please try again later",
+  "noDataFoundSubtitleMessage": "Please try again later",
   "@noDataFoundSubtitleMessage": {},
-  "usernameLabelText" : "Username",
+  "usernameLabelText": "Username",
   "@usernameLabelText": {},
-  "passwordLabelText" : "Password",
+  "passwordLabelText": "Password",
   "@passwordLabelText": {},
-  "schoolNameLabelText" : "School name",
+  "schoolNameLabelText": "School name",
   "@schoolNameLabelText": {},
-  "addressLabelText" : "Address",
-  "@addressLabelText": {},
-  "emailLabelText" : "Email",
+  "emailLabelText": "Email",
   "@emailLabelText": {},
-  "phoneNumberLabelText" : "Phone number",
+  "phoneNumberLabelText": "Phone number",
   "@phoneNumberLabelText": {},
-  "establishedYearLabelText" : "Established year",
+  "establishedYearLabelText": "Established year",
   "@establishedYearLabelText": {},
-  "affiliationNumberLabelText" : "School affiliation number",
+  "affiliationNumberLabelText": "School affiliation number",
   "@affiliationNumberLabelText": {},
-  "schoolTypeLabelText" : "School type",
-  "@schoolTypeLabelText": {},
-  "schoolBoardLabelText" : "School board",
+  "schoolTypeTextFieldLabelText": "School type",
+  "@schoolTypeTextFieldLabelText": {},
+  "academicGradeTextFieldLabelText": "Academic grade",
+  "@academicGradeTextFieldLabelText": {},
+  "educationBoardTextFieldLabelText": "Education board",
+  "@educationBoardTextFieldLabelText": {},
+  "feeTypeTextFieldLabelText": "Fee type",
+  "@feeTypeTextFieldLabelText": {},
+  "admissionDocumentTextFieldLabelText": "Admission Document",
+  "@admissionDocumentTextFieldLabelText": {},
+  "stateTextFieldLabelText": "State",
+  "@stateTextFieldLabelText": {},
+  "districtTextFieldLabelText": "District",
+  "@districtTextFieldLabelText": {},
+  "cityTextFieldLabelText": "City",
+  "@cityTextFieldLabelText": {},
+  "areaNameTextFieldLabelText": "Area Name",
+  "@areaNameTextFieldLabelText": {},
+  "zipcodeTextFieldLabelText": "Zipcode",
+  "@zipcodeTextFieldLabelText": {},
+  "schoolTypeDropdownFieldLabelText": "Select School Type",
+  "@schoolTypeDropdownFieldLabelText": {},
+  "educationBoardDropdownFieldLabelText": "Select Education Boards",
+  "@educationBoardDropdownFieldLabelText": {},
+  "schoolBoardLabelText": "School board",
   "@schoolBoardLabelText": {},
-  "signInButtonText" : "SIGNIN",
+  "signInButtonText": "SIGNIN",
   "@signInButtonText": {},
-  "registerSchoolButtonText" : "REGISTER SCHOOL",
+  "registerSchoolButtonText": "REGISTER SCHOOL",
   "@registerSchoolButtonText": {},
-  "cancelButtonText" : "Cancel",
+  "cancelButtonText": "Cancel",
   "@cancelButtonText": {},
-  "deleteButtonText" : "Delete",
+  "deleteButtonText": "Delete",
   "@deleteButtonText": {},
-  "restoreButtonText" : "Restore",
-  "@restoreButtonText": {}
+  "restoreButtonText": "Restore",
+  "@restoreButtonText": {},
+  "okButtonText": "OK",
+  "@okButtonText": {},
+  "addSchoolAdminButtonText": "Add School Admin",
+  "@addSchoolAdminButtonText": {},
+  "organizationMemberFormValidationAlertMessage": "Please fill up all the organization member form details.",
+  "@organizationMemberFormValidationAlertMessage": {},
+  "schoolAdminFormExpansionTile":"School Admin Form",
+  "@schoolAdminFormExpansionTile": {},
+  "selectedDropdownItemsText": "items selected",
+  "@selectedDropdownItemsText": {},
+  "selectDropdownOptionsText": "select options",
+  "@selectDropdownOptionsText": {},
+  "selectDropdownOptionText": "select option",
+  "@selectDropdownOptionText": {}
 }
