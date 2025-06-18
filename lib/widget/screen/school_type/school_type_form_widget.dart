@@ -22,14 +22,20 @@ class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
 
   final SchoolTypeController schoolTypeController = Get.put(SchoolTypeController());
 
-  final TextEditingController schoolTypeTextEditingController = TextEditingController();
+  final TextEditingController _schoolTypeTextEditingController = TextEditingController();
 
   @override
   void initState() {
     if (schoolTypeController.schoolType.id.isNotEmpty) {
-      schoolTypeTextEditingController.text = schoolTypeController.schoolType.schoolType;
+      _schoolTypeTextEditingController.text = schoolTypeController.schoolType.schoolType;
     }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _schoolTypeTextEditingController.dispose();
+    super.dispose();
   }
 
   onSchoolTypeTextFieldSubmit(BuildContext context, String value) {
@@ -75,7 +81,7 @@ class _SchoolTypeFormWidgetState extends State<SchoolTypeFormWidget> {
                       child: FloatingTextFieldWidget(
                         fieldKey: _schoolTypeFieldKey,
                         appColorScheme: AppColorScheme.primary,
-                        controller: schoolTypeTextEditingController,
+                        controller: _schoolTypeTextEditingController,
                         labelText: appLocalizations.schoolTypeTextFieldLabelText,
                         textInputAction: TextInputAction.next,
                         validator: schoolTypeControllerContext.schoolTypeValidator,

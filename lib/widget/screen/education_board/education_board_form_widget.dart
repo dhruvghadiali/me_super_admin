@@ -13,38 +13,35 @@ class EducationBoardFormWidget extends StatefulWidget {
   const EducationBoardFormWidget({super.key});
 
   @override
-  State<EducationBoardFormWidget> createState() =>
-      _EducationBoardFormWidgetState();
+  State<EducationBoardFormWidget> createState() => _EducationBoardFormWidgetState();
 }
 
 class _EducationBoardFormWidgetState extends State<EducationBoardFormWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GlobalKey<FormFieldState> _educationBoardFieldKey =
-      GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _educationBoardFieldKey = GlobalKey<FormFieldState>();
 
-  final EducationBoardController educationBoardController = Get.put(
-    EducationBoardController(),
-  );
+  final EducationBoardController educationBoardController = Get.put(EducationBoardController());
 
-  final TextEditingController educationBoardTextEditingController =
-      TextEditingController();
+  final TextEditingController _educationBoardTextEditingController = TextEditingController();
 
   @override
   void initState() {
     if (educationBoardController.educationBoard.id.isNotEmpty) {
-      educationBoardTextEditingController.text =
+      _educationBoardTextEditingController.text =
           educationBoardController.educationBoard.educationBoard;
     }
     super.initState();
   }
 
+  @override
+  void dispose() {
+    _educationBoardTextEditingController.dispose();
+    super.dispose();
+  }
+
   onEducationBoardTextFieldSubmit(BuildContext context, String value) {
     FocusManager.instance.primaryFocus?.unfocus();
-    educationBoardController.onEducationBoardSubmitted(
-      value,
-      _educationBoardFieldKey,
-      _formKey,
-    );
+    educationBoardController.onEducationBoardSubmitted(value, _educationBoardFieldKey, _formKey);
   }
 
   onSubmitForm(BuildContext context) {
@@ -54,8 +51,7 @@ class _EducationBoardFormWidgetState extends State<EducationBoardFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Expanded(
       child: Container(
@@ -84,26 +80,21 @@ class _EducationBoardFormWidgetState extends State<EducationBoardFormWidget> {
                     Container(
                       margin: const EdgeInsets.only(top: 30),
                       child: FloatingTextFieldWidget(
-                        key: _educationBoardFieldKey,
+                        fieldKey: _educationBoardFieldKey,
                         appColorScheme: AppColorScheme.primary,
-                        controller: educationBoardTextEditingController,
-                        labelText:
-                            appLocalizations.educationBoardTextFieldLabelText,
+                        controller: _educationBoardTextEditingController,
+                        labelText: appLocalizations.educationBoardTextFieldLabelText,
                         textInputAction: TextInputAction.next,
-                        validator:
-                            educationBoardControllerContext.educationBoardValidator,
+                        validator: educationBoardControllerContext.educationBoardValidator,
                         onChange:
-                            (String value) => educationBoardControllerContext
-                                .onEducationBoardChange(value),
-                        onFieldSubmitted:
                             (String value) =>
-                                onEducationBoardTextFieldSubmit(context, value),
+                                educationBoardControllerContext.onEducationBoardChange(value),
+                        onFieldSubmitted:
+                            (String value) => onEducationBoardTextFieldSubmit(context, value),
                       ),
                     ),
                     educationBoardControllerContext.isLoader
-                        ? const ApiRequestLoaderWidget(
-                          appColorScheme: AppColorScheme.primary,
-                        )
+                        ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)
                         : Container(),
                     Container(
                       margin: const EdgeInsets.only(top: 30),

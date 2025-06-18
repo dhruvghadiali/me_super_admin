@@ -32,7 +32,7 @@ class EducationBoardController extends GetxController {
     update();
 
     if (educationBoard.id.isNotEmpty) {
-      Get.offAllNamed(RoutePaths.educationBoardForm);
+      Get.toNamed(RoutePaths.educationBoardForm);
     }
   }
 
@@ -63,9 +63,7 @@ class EducationBoardController extends GetxController {
 
   void onSubmitForm(GlobalKey<FormState> formKey) async {
     if (formKey.currentState?.validate() ?? false) {
-      (educationBoard.id.isEmpty)
-          ? await postEducationBoard()
-          : await putEducationBoard();
+      (educationBoard.id.isEmpty) ? await postEducationBoard() : await putEducationBoard();
     }
   }
 
@@ -86,13 +84,10 @@ class EducationBoardController extends GetxController {
 
     HttpResponseService response = await HttpService.getRequest(getHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       for (var educationBoardJson in response.data) {
-        final EducationBoard educationBoardObj = EducationBoard.fromJson(
-          educationBoardJson,
-        );
+        final EducationBoard educationBoardObj = EducationBoard.fromJson(educationBoardJson);
         educationBoards.add(educationBoardObj);
       }
     } else {
@@ -122,12 +117,9 @@ class EducationBoardController extends GetxController {
       ),
     );
 
-    HttpResponseService response = await HttpService.postRequest(
-      postHttpService,
-    );
+    HttpResponseService response = await HttpService.postRequest(postHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,
@@ -164,8 +156,7 @@ class EducationBoardController extends GetxController {
 
     HttpResponseService response = await HttpService.putRequest(putHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,
@@ -199,12 +190,9 @@ class EducationBoardController extends GetxController {
       ),
     );
 
-    HttpResponseService response = await HttpService.deleteRequest(
-      deleteHttpService,
-    );
+    HttpResponseService response = await HttpService.deleteRequest(deleteHttpService);
 
-    if (response.appHttpRequestStatus ==
-        AppHttpRequestStatus.isSuccessfullyServiced) {
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(
         title: snackbarTitle,

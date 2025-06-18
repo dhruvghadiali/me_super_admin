@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/model/education_board/education_board.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 import 'package:me_super_admin/widget/common/alert/delete_alert_widget.dart';
@@ -24,9 +25,7 @@ class EducationBoardListViewWidget extends StatelessWidget {
     required BuildContext context,
     required EducationBoard educationBoard,
   }) async {
-    final EducationBoardController educationBoardController = Get.put(
-      EducationBoardController(),
-    );
+    final EducationBoardController educationBoardController = Get.put(EducationBoardController());
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -45,56 +44,77 @@ class EducationBoardListViewWidget extends StatelessWidget {
     required BuildContext context,
     required EducationBoard educationBoard,
   }) async {
-    final EducationBoardController educationBoardController = Get.put(
-      EducationBoardController(),
-    );
+    final EducationBoardController educationBoardController = Get.put(EducationBoardController());
     educationBoardController.setEducationBoardForm(educationBoard);
+  }
+
+  void onAddEducationBoardClicked(BuildContext context) {
+    final EducationBoardController educationBoardController = Get.put(EducationBoardController());
+    educationBoardController.resetEducationBoardForm();
+    Navigator.pushNamed(context, RoutePaths.educationBoardForm);
   }
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
 
     return Container(
       margin: const EdgeInsets.only(right: 5, top: 10, bottom: 10),
       child: RefreshIndicator(
         onRefresh: () => onRefresh(),
         color: themeData.offWhite,
-        child: ListView.builder(
-          itemCount: educationBoards.length,
-          padding: const EdgeInsets.all(0.0),
-          itemBuilder: (BuildContext context, int index) {
-            return SizedBox(
-              width: double.infinity,
-              child: Slidable(
-                key: ValueKey(UniqueKey()),
-                endActionPane: ActionPane(
-                  dragDismissible: false,
-                  motion: const ScrollMotion(),
-                  children: [
-                    EditSlidableActionWidget(
-                      onEdit:
-                          () => editEducationBoard(
-                            context: context,
-                            educationBoard: educationBoards[index],
-                          ),
+        child: Stack(
+          children: [
+            ListView.builder(
+              itemCount: educationBoards.length,
+              padding: const EdgeInsets.all(0.0),
+              itemBuilder: (BuildContext context, int index) {
+                return SizedBox(
+                  width: double.infinity,
+                  child: Slidable(
+                    key: ValueKey(UniqueKey()),
+                    endActionPane: ActionPane(
+                      dragDismissible: false,
+                      motion: const ScrollMotion(),
+                      children: [
+                        EditSlidableActionWidget(
+                          onEdit:
+                              () => editEducationBoard(
+                                context: context,
+                                educationBoard: educationBoards[index],
+                              ),
+                        ),
+                        DeleteSlidableActionWidget(
+                          onDelete:
+                              () => deleteEducationBoard(
+                                context: context,
+                                educationBoard: educationBoards[index],
+                              ),
+                        ),
+                      ],
                     ),
-                    DeleteSlidableActionWidget(
-                      onDelete:
-                          () => deleteEducationBoard(
-                            context: context,
-                            educationBoard: educationBoards[index],
-                          ),
-                    ),
-                  ],
-                ),
-                child: EducationBoardCardWidget(
-                  educationBoard: educationBoards[index],
-                ),
+                    child: EducationBoardCardWidget(educationBoard: educationBoards[index]),
+                  ),
+                );
+              },
+            ),
+            Positioned(
+              bottom: 16,
+              right: 16,
+              child: FloatingActionButton(
+                onPressed: () => onAddEducationBoardClicked(context),
+                shape: const CircleBorder(),
+                elevation: 10,
+                backgroundColor: themeData.calPolyPomonaGreen,
+                foregroundColor: themeData.offWhite,
+                focusElevation: 10,
+                hoverElevation: 12,
+                highlightElevation: 14,
+                tooltip: 'Add',
+                child: const Icon(Icons.add),
               ),
-            );
-          },
+            ),
+          ],
         ),
       ),
     );
