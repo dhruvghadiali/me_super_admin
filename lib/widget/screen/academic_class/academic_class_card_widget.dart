@@ -1,18 +1,17 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:me_super_admin/model/academic_grade/academic_grade.dart';
+import 'package:me_super_admin/model/academic_class/academic_class.dart';
 
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 import 'package:me_super_admin/widget/common/container/audit_trail_widget.dart';
 
-class AcademicGradeCardWidget extends StatelessWidget {
-  const AcademicGradeCardWidget({super.key, required this.academicGrade});
-  final AcademicGrade academicGrade;
+class AcademicClassCardWidget extends StatelessWidget {
+  const AcademicClassCardWidget({super.key, required this.academicClass});
+  final AcademicClass academicClass;
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
 
     return Card(
       elevation: 2,
@@ -29,7 +28,7 @@ class AcademicGradeCardWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                academicGrade.academicGrade.toUpperCase(),
+                academicClass.academicClass.toUpperCase(),
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                   color: themeData.offWhite,
                   fontWeight: FontWeight.bold,
@@ -39,18 +38,18 @@ class AcademicGradeCardWidget extends StatelessWidget {
               AuditTrailWidget(
                 audioDateTimeInfoLabel: 'Created At:',
                 audioInfoLabel: 'Created By:',
-                audioUserInfo: academicGrade.createdBy,
+                audioUserInfo: academicClass.createdBy,
                 auditDateTimeInfo: DateFormat(
                   'dd MMM yyyy hh:mm a',
-                ).format(academicGrade.createdAt),
+                ).format(academicClass.createdAt),
               ),
               AuditTrailWidget(
                 audioDateTimeInfoLabel: 'Updated At:',
                 audioInfoLabel: 'Updated By:',
-                audioUserInfo: academicGrade.createdBy,
+                audioUserInfo: academicClass.updatedBy,
                 auditDateTimeInfo: DateFormat(
                   'dd MMM yyyy hh:mm a',
-                ).format(academicGrade.createdAt),
+                ).format(academicClass.updatedAt),
               ),
             ],
           ),

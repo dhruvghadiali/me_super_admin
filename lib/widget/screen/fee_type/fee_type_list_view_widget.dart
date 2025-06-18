@@ -56,7 +56,7 @@ class FeeTypeListViewWidget extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              margin: const EdgeInsets.only(bottom: 35),
+              margin: const EdgeInsets.only(bottom: 60),
               child: ListView.builder(
                 itemCount: feeTypes.length,
                 padding: const EdgeInsets.all(0.0),

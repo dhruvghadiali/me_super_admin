@@ -65,38 +65,41 @@ class EducationBoardListViewWidget extends StatelessWidget {
         color: themeData.offWhite,
         child: Stack(
           children: [
-            ListView.builder(
-              itemCount: educationBoards.length,
-              padding: const EdgeInsets.all(0.0),
-              itemBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  width: double.infinity,
-                  child: Slidable(
-                    key: ValueKey(UniqueKey()),
-                    endActionPane: ActionPane(
-                      dragDismissible: false,
-                      motion: const ScrollMotion(),
-                      children: [
-                        EditSlidableActionWidget(
-                          onEdit:
-                              () => editEducationBoard(
-                                context: context,
-                                educationBoard: educationBoards[index],
-                              ),
-                        ),
-                        DeleteSlidableActionWidget(
-                          onDelete:
-                              () => deleteEducationBoard(
-                                context: context,
-                                educationBoard: educationBoards[index],
-                              ),
-                        ),
-                      ],
+            Container(
+              margin: const EdgeInsets.only(bottom: 60),
+              child: ListView.builder(
+                itemCount: educationBoards.length,
+                padding: const EdgeInsets.all(0.0),
+                itemBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    width: double.infinity,
+                    child: Slidable(
+                      key: ValueKey(UniqueKey()),
+                      endActionPane: ActionPane(
+                        dragDismissible: false,
+                        motion: const ScrollMotion(),
+                        children: [
+                          EditSlidableActionWidget(
+                            onEdit:
+                                () => editEducationBoard(
+                                  context: context,
+                                  educationBoard: educationBoards[index],
+                                ),
+                          ),
+                          DeleteSlidableActionWidget(
+                            onDelete:
+                                () => deleteEducationBoard(
+                                  context: context,
+                                  educationBoard: educationBoards[index],
+                                ),
+                          ),
+                        ],
+                      ),
+                      child: EducationBoardCardWidget(educationBoard: educationBoards[index]),
                     ),
-                    child: EducationBoardCardWidget(educationBoard: educationBoards[index]),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
             Positioned(
               bottom: 16,

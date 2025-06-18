@@ -71,40 +71,43 @@ class AdmissionDocumentListViewWidget extends StatelessWidget {
         color: themeData.offWhite,
         child: Stack(
           children: [
-            ListView.builder(
-              itemCount: admissionDocuments.length,
-              padding: const EdgeInsets.all(0.0),
-              itemBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  width: double.infinity,
-                  child: Slidable(
-                    key: ValueKey(UniqueKey()),
-                    endActionPane: ActionPane(
-                      dragDismissible: false,
-                      motion: const ScrollMotion(),
-                      children: [
-                        EditSlidableActionWidget(
-                          onEdit:
-                              () => editAdmissionDocument(
-                                context: context,
-                                admissionDocument: admissionDocuments[index],
-                              ),
-                        ),
-                        DeleteSlidableActionWidget(
-                          onDelete:
-                              () => deleteAdmissionDocument(
-                                context: context,
-                                admissionDocument: admissionDocuments[index],
-                              ),
-                        ),
-                      ],
+            Container(
+              margin: const EdgeInsets.only(bottom: 60),
+              child: ListView.builder(
+                itemCount: admissionDocuments.length,
+                padding: const EdgeInsets.all(0.0),
+                itemBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    width: double.infinity,
+                    child: Slidable(
+                      key: ValueKey(UniqueKey()),
+                      endActionPane: ActionPane(
+                        dragDismissible: false,
+                        motion: const ScrollMotion(),
+                        children: [
+                          EditSlidableActionWidget(
+                            onEdit:
+                                () => editAdmissionDocument(
+                                  context: context,
+                                  admissionDocument: admissionDocuments[index],
+                                ),
+                          ),
+                          DeleteSlidableActionWidget(
+                            onDelete:
+                                () => deleteAdmissionDocument(
+                                  context: context,
+                                  admissionDocument: admissionDocuments[index],
+                                ),
+                          ),
+                        ],
+                      ),
+                      child: AdmissionDocumentCardWidget(
+                        admissionDocument: admissionDocuments[index],
+                      ),
                     ),
-                    child: AdmissionDocumentCardWidget(
-                      admissionDocument: admissionDocuments[index],
-                    ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
             Positioned(
               bottom: 16,

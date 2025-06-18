@@ -58,30 +58,33 @@ class StateListViewWidget extends StatelessWidget {
         color: themeData.offWhite,
         child: Stack(
           children: [
-            ListView.builder(
-              itemCount: states.length,
-              padding: const EdgeInsets.all(0.0),
-              itemBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  width: double.infinity,
-                  child: Slidable(
-                    key: ValueKey(UniqueKey()),
-                    endActionPane: ActionPane(
-                      dragDismissible: false,
-                      motion: const ScrollMotion(),
-                      children: [
-                        EditSlidableActionWidget(
-                          onEdit: () => editState(context: context, state: states[index]),
-                        ),
-                        DeleteSlidableActionWidget(
-                          onDelete: () => deleteState(context: context, state: states[index]),
-                        ),
-                      ],
+            Container(
+              margin: const EdgeInsets.only(bottom: 60),
+              child: ListView.builder(
+                itemCount: states.length,
+                padding: const EdgeInsets.all(0.0),
+                itemBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    width: double.infinity,
+                    child: Slidable(
+                      key: ValueKey(UniqueKey()),
+                      endActionPane: ActionPane(
+                        dragDismissible: false,
+                        motion: const ScrollMotion(),
+                        children: [
+                          EditSlidableActionWidget(
+                            onEdit: () => editState(context: context, state: states[index]),
+                          ),
+                          DeleteSlidableActionWidget(
+                            onDelete: () => deleteState(context: context, state: states[index]),
+                          ),
+                        ],
+                      ),
+                      child: StateCardWidget(state: states[index]),
                     ),
-                    child: StateCardWidget(state: states[index]),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
             Positioned(
               bottom: 16,

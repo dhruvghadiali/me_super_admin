@@ -1,24 +1,26 @@
-class AcademicGrade {
+import 'package:me_super_admin/utils/utils.dart';
+
+class AcademicClass {
   String id;
-  String academicGrade;
+  String academicClass;
   String createdBy;
   String updatedBy;
   DateTime createdAt;
   DateTime updatedAt;
 
-  AcademicGrade({
+  AcademicClass({
     required this.id,
-    required this.academicGrade,
+    required this.academicClass,
     required this.createdBy,
     required this.updatedBy,
     required this.createdAt,
     required this.updatedAt,
   });
 
-  factory AcademicGrade.fromJson(Map<String, dynamic> json) {
-    return AcademicGrade(
+  factory AcademicClass.fromJson(Map<String, dynamic> json) {
+    return AcademicClass(
       id: setId(json),
-      academicGrade: setAcademicGrade(json),
+      academicClass: setAcademicClass(json),
       createdBy: setCreatedBy(json),
       updatedBy: setUpdatedBy(json),
       createdAt: setCreatedAt(json),
@@ -26,38 +28,36 @@ class AcademicGrade {
     );
   }
 
-  AcademicGrade copyWith({
+  AcademicClass copyWith({
     String? id,
-    String? academicGrade,
+    String? academicClass,
     String? createdBy,
     String? updatedBy,
     DateTime? createdAt,
     DateTime? updatedAt,
-  }) => AcademicGrade(
+  }) => AcademicClass(
     id: id ?? this.id,
-    academicGrade: academicGrade ?? this.academicGrade,
+    academicClass: academicClass ?? this.academicClass,
     createdBy: createdBy ?? this.createdBy,
     updatedBy: updatedBy ?? this.updatedBy,
     createdAt: createdAt ?? this.createdAt,
     updatedAt: updatedAt ?? this.updatedAt,
   );
 
-  static AcademicGrade defaultValues() => AcademicGrade(
+  static AcademicClass defaultValues() => AcademicClass(
     id: '',
-    academicGrade: '',
+    academicClass: '',
     createdBy: '',
     updatedBy: '',
     createdAt: DateTime(1500, 01, 01),
     updatedAt: DateTime(1500, 01, 01),
   );
 
-  Map<String, dynamic> toJson() => {'academic_grade': academicGrade};
+  Map<String, dynamic> toJson() => {'academic_class': academicClass};
 
   static String setId(Map<String, dynamic> json) {
     if (json.containsKey('id')) {
-      if (json['id'] != null &&
-          json['id'] is String &&
-          json['id'].toString().isNotEmpty) {
+      if (json['id'] != null && json['id'] is String && json['id'].toString().isNotEmpty) {
         return json['id'];
       }
     }
@@ -65,12 +65,12 @@ class AcademicGrade {
     return '';
   }
 
-  static String setAcademicGrade(Map<String, dynamic> json) {
-    if (json.containsKey('academic_grade')) {
-      if (json['academic_grade'] != null &&
-          json['academic_grade'] is String &&
-          json['academic_grade'].toString().isNotEmpty) {
-        return json['academic_grade'];
+  static String setAcademicClass(Map<String, dynamic> json) {
+    if (json.containsKey('academic_class')) {
+      if (json['academic_class'] != null &&
+          json['academic_class'] is String &&
+          json['academic_class'].toString().isNotEmpty) {
+        return json['academic_class'];
       }
     }
 
@@ -107,7 +107,7 @@ class AcademicGrade {
           json['created_at'] is String &&
           json['created_at'].toString().isNotEmpty) {
         try {
-          return DateTime.parse(json['created_at']);
+          return Utils.formatToIST(json['created_at']);
         } catch (e) {
           return DateTime(1500, 01, 01);
         }
@@ -123,7 +123,7 @@ class AcademicGrade {
           json['updated_at'] is String &&
           json['updated_at'].toString().isNotEmpty) {
         try {
-          return DateTime.parse(json['updated_at']);
+          return Utils.formatToIST(json['updated_at']);
         } catch (e) {
           return DateTime(1500, 01, 01);
         }

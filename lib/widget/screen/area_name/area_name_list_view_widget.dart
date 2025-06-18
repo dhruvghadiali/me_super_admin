@@ -55,31 +55,35 @@ class AreaNameListViewWidget extends StatelessWidget {
         color: themeData.offWhite,
         child: Stack(
           children: [
-            ListView.builder(
-              itemCount: areaNames.length,
-              padding: const EdgeInsets.all(0.0),
-              itemBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  width: double.infinity,
-                  child: Slidable(
-                    key: ValueKey(UniqueKey()),
-                    endActionPane: ActionPane(
-                      dragDismissible: false,
-                      motion: const ScrollMotion(),
-                      children: [
-                        EditSlidableActionWidget(
-                          onEdit: () => editAreaName(context: context, areaName: areaNames[index]),
-                        ),
-                        DeleteSlidableActionWidget(
-                          onDelete:
-                              () => deleteAreaName(context: context, areaName: areaNames[index]),
-                        ),
-                      ],
+            Container(
+              margin: const EdgeInsets.only(bottom: 60),
+              child: ListView.builder(
+                itemCount: areaNames.length,
+                padding: const EdgeInsets.all(0.0),
+                itemBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    width: double.infinity,
+                    child: Slidable(
+                      key: ValueKey(UniqueKey()),
+                      endActionPane: ActionPane(
+                        dragDismissible: false,
+                        motion: const ScrollMotion(),
+                        children: [
+                          EditSlidableActionWidget(
+                            onEdit:
+                                () => editAreaName(context: context, areaName: areaNames[index]),
+                          ),
+                          DeleteSlidableActionWidget(
+                            onDelete:
+                                () => deleteAreaName(context: context, areaName: areaNames[index]),
+                          ),
+                        ],
+                      ),
+                      child: AreaNameCardWidget(areaName: areaNames[index]),
                     ),
-                    child: AreaNameCardWidget(areaName: areaNames[index]),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
             Positioned(
               bottom: 16,

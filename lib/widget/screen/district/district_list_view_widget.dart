@@ -55,31 +55,35 @@ class DistrictListViewWidget extends StatelessWidget {
         color: themeData.offWhite,
         child: Stack(
           children: [
-            ListView.builder(
-              itemCount: districts.length,
-              padding: const EdgeInsets.all(0.0),
-              itemBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  width: double.infinity,
-                  child: Slidable(
-                    key: ValueKey(UniqueKey()),
-                    endActionPane: ActionPane(
-                      dragDismissible: false,
-                      motion: const ScrollMotion(),
-                      children: [
-                        EditSlidableActionWidget(
-                          onEdit: () => editDistrict(context: context, district: districts[index]),
-                        ),
-                        DeleteSlidableActionWidget(
-                          onDelete:
-                              () => deleteDistrict(context: context, district: districts[index]),
-                        ),
-                      ],
+            Container(
+              margin: const EdgeInsets.only(bottom: 60),
+              child: ListView.builder(
+                itemCount: districts.length,
+                padding: const EdgeInsets.all(0.0),
+                itemBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    width: double.infinity,
+                    child: Slidable(
+                      key: ValueKey(UniqueKey()),
+                      endActionPane: ActionPane(
+                        dragDismissible: false,
+                        motion: const ScrollMotion(),
+                        children: [
+                          EditSlidableActionWidget(
+                            onEdit:
+                                () => editDistrict(context: context, district: districts[index]),
+                          ),
+                          DeleteSlidableActionWidget(
+                            onDelete:
+                                () => deleteDistrict(context: context, district: districts[index]),
+                          ),
+                        ],
+                      ),
+                      child: DistrictCardWidget(district: districts[index]),
                     ),
-                    child: DistrictCardWidget(district: districts[index]),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
             Positioned(
               bottom: 16,
