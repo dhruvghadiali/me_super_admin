@@ -37,6 +37,7 @@ class OrganizationMemberController extends GetxController {
   List<OrganizationMember> organizationMembers = [];
   List<bool> organizationMemberFormValidated = [];
   bool isLoader = false;
+  int organizationFormIndex = 0;
 
   /*
    * Resets the organization member form to its default state with two empty forms.
@@ -44,6 +45,17 @@ class OrganizationMemberController extends GetxController {
   void resetOrganizationMemberForm() {
     organizationMembers = [OrganizationMember.defaultValues(), OrganizationMember.defaultValues()];
     organizationMemberFormValidated = [false, false];
+    update();
+  }
+
+  void setOrganizationMembersForm(List<OrganizationMember> organizationMemberList) {
+    organizationMembers = organizationMemberList;
+    organizationMemberFormValidated = List.generate(organizationMembers.length, (index) => false);
+    update();
+  }
+
+  void setOrganizationFormIndex(int index) {
+    organizationFormIndex = index;
     update();
   }
 
@@ -71,18 +83,6 @@ class OrganizationMemberController extends GetxController {
   void changeOrganizationMemberFormValidatedStatus(int index, bool status) {
     organizationMemberFormValidated[index] = status;
     update();
-  }
-
-  /*
-   * Sets the organization member form data for the active form index.
-   */
-  void setOrganizationMemberForm(OrganizationMember organizationMemberObj) {
-    // organizationMember = organizationMemberObj;
-    update();
-
-    // if (organization.id.isNotEmpty) {
-    //   Get.offAllNamed(RoutePaths.zipcodeForm);
-    // }
   }
 
   /*
@@ -772,8 +772,8 @@ class OrganizationMemberController extends GetxController {
    * Returns:
    * - A `Future` that completes when the request is processed.
    */
-  Future<void> putOrganizationMember(int index) async {
-    OrganizationMember organizationMember = organizationMembers[index];
+  Future<void> putOrganizationMember() async {
+    OrganizationMember organizationMember = organizationMembers[organizationFormIndex];
     String authToken = await Utils.getAuthToken();
     isLoader = true;
     update();
@@ -790,7 +790,7 @@ class OrganizationMemberController extends GetxController {
     if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.success);
-      Get.offAllNamed(RoutePaths.zipcodes);
+      Get.offAllNamed(RoutePaths.schoolForm);
     } else {
       isLoader = false;
       Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.error);

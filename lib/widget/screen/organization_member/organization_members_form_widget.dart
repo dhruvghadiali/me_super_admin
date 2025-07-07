@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 import 'package:me_super_admin/widget/common/alert/alert_widget.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 import 'package:me_super_admin/widget/common/form_fields/elevated_button/elevated_button.dart';
@@ -10,7 +10,12 @@ import 'package:me_super_admin/controller/organization_member/organization_membe
 import 'package:me_super_admin/widget/screen/organization_member/organization_member_form_widget.dart';
 
 class OrganizationMembersFormWidget extends StatefulWidget {
-  const OrganizationMembersFormWidget({super.key, required this.isStepperForm, this.onNextStep, this.onPreviousStep});
+  const OrganizationMembersFormWidget({
+    super.key,
+    required this.isStepperForm,
+    this.onNextStep,
+    this.onPreviousStep,
+  });
 
   final bool isStepperForm;
   final Function? onNextStep;
@@ -21,7 +26,9 @@ class OrganizationMembersFormWidget extends StatefulWidget {
 }
 
 class _OrganizationMembersFormWidgetState extends State<OrganizationMembersFormWidget> {
-  final OrganizationMemberController organizationMemberController = Get.put(OrganizationMemberController());
+  final OrganizationMemberController organizationMemberController = Get.put(
+    OrganizationMemberController(),
+  );
 
   /*
    * Displays an alert dialog when validation fails.
@@ -84,7 +91,8 @@ class _OrganizationMembersFormWidgetState extends State<OrganizationMembersFormW
    * If any form is invalid, it displays an alert. Otherwise, it calls the `onPreviousStep`
    * callback provided by the parent widget.
    */
-  void onPreviousStep() => isOrganizationMembersFormValidated() ? displayAlert() : widget.onPreviousStep!();
+  void onPreviousStep() =>
+      isOrganizationMembersFormValidated() ? displayAlert() : widget.onPreviousStep!();
 
   /*
    * Adds a new organization member form.
@@ -162,7 +170,10 @@ class _OrganizationMembersFormWidgetState extends State<OrganizationMembersFormW
               child: SizedBox(
                 width: null,
                 child: TextButton(
-                  style: TextButton.styleFrom(backgroundColor: themeData.eerieBlack, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+                  style: TextButton.styleFrom(
+                    backgroundColor: themeData.eerieBlack,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                  ),
                   onPressed: () => addNewOrganizationMemberForm(),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -170,7 +181,10 @@ class _OrganizationMembersFormWidgetState extends State<OrganizationMembersFormW
                       Icon(Icons.add_circle, color: themeData.offWhite),
                       Padding(
                         padding: EdgeInsets.only(left: 5),
-                        child: Text(appLocalizations.organizationMemberFormAddMemberButtonText.toUpperCase(), style: TextStyle(color: themeData.offWhite)),
+                        child: Text(
+                          appLocalizations.organizationMemberFormAddMemberButtonText.toUpperCase(),
+                          style: TextStyle(color: themeData.offWhite),
+                        ),
                       ),
                     ],
                   ),
@@ -180,17 +194,29 @@ class _OrganizationMembersFormWidgetState extends State<OrganizationMembersFormW
             ...organizationMemberControllerContext.organizationMembers.asMap().entries.map((entry) {
               return ExpansionTile(
                 onExpansionChanged: (bool expanded) => onExpansionChanged(expanded, entry.key),
-                collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.zero, side: BorderSide.none),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero, side: BorderSide.none),
+                collapsedShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero,
+                  side: BorderSide.none,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero,
+                  side: BorderSide.none,
+                ),
                 tilePadding: EdgeInsets.zero,
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(icon: Icon(Icons.delete, color: themeData.metallicRed, size: 22), onPressed: () => deleteOrganizationMemberForm(entry.key)),
+                    IconButton(
+                      icon: Icon(Icons.delete, color: themeData.metallicRed, size: 22),
+                      onPressed: () => deleteOrganizationMemberForm(entry.key),
+                    ),
                     Expanded(
                       child: Text(
                         '${appLocalizations.organizationMemberFormExpansionTile} ${entry.key + 1}',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: themeData.eerieBlack, fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: themeData.eerieBlack,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
@@ -202,7 +228,8 @@ class _OrganizationMembersFormWidgetState extends State<OrganizationMembersFormW
                       organizationMember: entry.value,
                       index: entry.key,
                       isStepper: true,
-                      onSubmitForm: (bool status) => onOrganizationMemberFormSubmit(status, entry.key),
+                      onSubmitForm:
+                          (bool status) => onOrganizationMemberFormSubmit(status, entry.key),
                     ),
                   ),
                 ],

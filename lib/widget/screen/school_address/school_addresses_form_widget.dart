@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/widget/common/alert/alert_widget.dart';
@@ -10,7 +10,12 @@ import 'package:me_super_admin/widget/screen/school_address/school_address_form_
 import 'package:me_super_admin/widget/common/form_fields/elevated_button/elevated_button.dart';
 
 class SchoolAddressesFormWidget extends StatefulWidget {
-  const SchoolAddressesFormWidget({super.key, required this.isStepperForm, this.onNextStep, this.onPreviousStep});
+  const SchoolAddressesFormWidget({
+    super.key,
+    required this.isStepperForm,
+    this.onNextStep,
+    this.onPreviousStep,
+  });
 
   final bool isStepperForm;
   final Function? onNextStep;
@@ -84,7 +89,8 @@ class _SchoolAddressesFormWidgetState extends State<SchoolAddressesFormWidget> {
    * If any form is invalid, it displays an alert. Otherwise, it calls the `onPreviousStep`
    * callback provided by the parent widget.
    */
-  void onPreviousStep() => isSchoolAddressesFormValidated() ? displayAlert() : widget.onPreviousStep!();
+  void onPreviousStep() =>
+      isSchoolAddressesFormValidated() ? displayAlert() : widget.onPreviousStep!();
 
   /*
    * Adds a new school address form.
@@ -164,7 +170,10 @@ class _SchoolAddressesFormWidgetState extends State<SchoolAddressesFormWidget> {
               child: SizedBox(
                 width: null,
                 child: TextButton(
-                  style: TextButton.styleFrom(backgroundColor: themeData.eerieBlack, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+                  style: TextButton.styleFrom(
+                    backgroundColor: themeData.eerieBlack,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                  ),
                   onPressed: () => addNewSchoolAddressForm(),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -172,7 +181,11 @@ class _SchoolAddressesFormWidgetState extends State<SchoolAddressesFormWidget> {
                       Icon(Icons.add_circle, color: themeData.offWhite),
                       Padding(
                         padding: EdgeInsets.only(left: 5),
-                        child: Text(appLocalizations.schoolAddressFormAddSchoolAddressButtonText.toUpperCase(), style: TextStyle(color: themeData.offWhite)),
+                        child: Text(
+                          appLocalizations.schoolAddressFormAddSchoolAddressButtonText
+                              .toUpperCase(),
+                          style: TextStyle(color: themeData.offWhite),
+                        ),
                       ),
                     ],
                   ),
@@ -182,17 +195,29 @@ class _SchoolAddressesFormWidgetState extends State<SchoolAddressesFormWidget> {
             ...schoolAddressController.schoolAddresses.asMap().entries.map((entry) {
               return ExpansionTile(
                 onExpansionChanged: (bool expanded) => onExpansionChanged(expanded, entry.key),
-                collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.zero, side: BorderSide.none),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero, side: BorderSide.none),
+                collapsedShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero,
+                  side: BorderSide.none,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero,
+                  side: BorderSide.none,
+                ),
                 tilePadding: EdgeInsets.zero,
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(icon: Icon(Icons.delete, color: themeData.metallicRed, size: 22), onPressed: () => deleteSchoolAddressForm(entry.key)),
+                    IconButton(
+                      icon: Icon(Icons.delete, color: themeData.metallicRed, size: 22),
+                      onPressed: () => deleteSchoolAddressForm(entry.key),
+                    ),
                     Expanded(
                       child: Text(
                         '${appLocalizations.schoolAddressFormExpansionTile} ${entry.key + 1}',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: themeData.eerieBlack, fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: themeData.eerieBlack,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/model/school/school.dart';
@@ -16,7 +16,12 @@ import 'package:me_super_admin/widget/common/form_fields/elevated_button/elevate
 import 'package:me_super_admin/widget/common/form_fields/text_fields/floating_text_field_widget.dart';
 
 class SchoolFormWidget extends StatefulWidget {
-  const SchoolFormWidget({super.key, required this.isStepperForm, this.onNextStep, this.onPreviousStep});
+  const SchoolFormWidget({
+    super.key,
+    required this.isStepperForm,
+    this.onNextStep,
+    this.onPreviousStep,
+  });
 
   final bool isStepperForm;
   final Function? onNextStep;
@@ -239,7 +244,10 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
   void onSchoolTypeChange(String value) {
     SchoolType schoolType = SchoolType.defaultValues();
     if (value.isNotEmpty) {
-      schoolType = schoolTypeController.schoolTypes.firstWhere((schoolType) => schoolType.id == value, orElse: () => schoolType);
+      schoolType = schoolTypeController.schoolTypes.firstWhere(
+        (schoolType) => schoolType.id == value,
+        orElse: () => schoolType,
+      );
     }
 
     schoolController.onSchoolTypeChange(schoolType, _schoolTypeFieldKey);
@@ -261,7 +269,10 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
     List<EducationBoard> educationBoards = [];
     if (value.isNotEmpty) {
       List<String> selectedItems = value.split(',');
-      educationBoards = educationBoardController.educationBoards.where((educationBoard) => selectedItems.contains(educationBoard.id)).toList();
+      educationBoards =
+          educationBoardController.educationBoards
+              .where((educationBoard) => selectedItems.contains(educationBoard.id))
+              .toList();
     }
 
     schoolController.onEducationBoardsChange(educationBoards, _educationBoardFieldKey);
@@ -339,8 +350,10 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                     labelText: appLocalizations.schoolFormSchoolAffiliateNumberTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: schoolControllerContext.affiliateNumberValidator,
-                    onChange: (String value) => schoolControllerContext.onAffiliateNumberChange(value),
-                    onFieldSubmitted: (String value) => onAffiliateNumberTextFieldSubmit(context, value),
+                    onChange:
+                        (String value) => schoolControllerContext.onAffiliateNumberChange(value),
+                    onFieldSubmitted:
+                        (String value) => onAffiliateNumberTextFieldSubmit(context, value),
                   ),
                 ),
                 Container(
@@ -398,7 +411,8 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                     textInputAction: TextInputAction.next,
                     validator: schoolControllerContext.phoneNumberValidator,
                     onChange: (String value) => schoolControllerContext.onPhoneNumberChange(value),
-                    onFieldSubmitted: (String value) => onPhoneNumberTextFieldSubmit(context, value),
+                    onFieldSubmitted:
+                        (String value) => onPhoneNumberTextFieldSubmit(context, value),
                   ),
                 ),
                 Container(
@@ -412,8 +426,10 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                     labelText: appLocalizations.schoolFormSchoolEstablishedYearTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: schoolControllerContext.establishedYearValidator,
-                    onChange: (String value) => schoolControllerContext.onEstablishedYearChange(value),
-                    onFieldSubmitted: (String value) => onEstablishedYearTextFieldSubmit(context, value),
+                    onChange:
+                        (String value) => schoolControllerContext.onEstablishedYearChange(value),
+                    onFieldSubmitted:
+                        (String value) => onEstablishedYearTextFieldSubmit(context, value),
                   ),
                 ),
                 Container(
@@ -429,7 +445,12 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                         schoolTypeController.schoolTypes.isEmpty
                             ? []
                             : schoolTypeController.schoolTypes
-                                .map((SchoolType schoolType) => {'label': schoolType.schoolType, "value": schoolType.id})
+                                .map(
+                                  (SchoolType schoolType) => {
+                                    'label': schoolType.schoolType,
+                                    "value": schoolType.id,
+                                  },
+                                )
                                 .toList(),
                   ),
                 ),
@@ -443,14 +464,22 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                     selectedItem:
                         schoolControllerContext.school.educationBoards.isEmpty
                             ? ""
-                            : schoolControllerContext.school.educationBoards.map((educationBoard) => educationBoard.id).where((id) => id.isNotEmpty).join(','),
+                            : schoolControllerContext.school.educationBoards
+                                .map((educationBoard) => educationBoard.id)
+                                .where((id) => id.isNotEmpty)
+                                .join(','),
                     appColorScheme: AppColorScheme.primary,
                     onChanged: (String value) => onEducationBoardChange(value),
                     items:
                         educationBoardController.educationBoards.isEmpty
                             ? []
                             : educationBoardController.educationBoards
-                                .map((EducationBoard educationBoard) => {'label': educationBoard.educationBoard, "value": educationBoard.id})
+                                .map(
+                                  (EducationBoard educationBoard) => {
+                                    'label': educationBoard.educationBoard,
+                                    "value": educationBoard.id,
+                                  },
+                                )
                                 .toList(),
                   ),
                 ),
@@ -484,7 +513,9 @@ class _SchoolFormWidgetState extends State<SchoolFormWidget> {
                     )
                     : Column(
                       children: [
-                        schoolControllerContext.isLoader ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary) : Container(),
+                        schoolControllerContext.isLoader
+                            ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)
+                            : Container(),
                         Container(
                           margin: const EdgeInsets.only(top: 30),
                           child: ElevatedButtonWidget(

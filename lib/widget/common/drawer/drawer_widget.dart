@@ -16,7 +16,7 @@ import 'package:me_super_admin/controller/organization/organization_controller.d
 import 'package:me_super_admin/controller/school_admin/school_admin_controller.dart';
 import 'package:me_super_admin/controller/school/school_form_stepper_controller.dart';
 import 'package:me_super_admin/controller/school_address/school_address_controller.dart';
-import 'package:me_super_admin/controller/academic_grade/academic_grade_controller.dart';
+import 'package:me_super_admin/controller/academic_class/academic_class_controller.dart';
 import 'package:me_super_admin/controller/education_board/education_board_controller.dart';
 import 'package:me_super_admin/controller/organization_member/organization_member_controller.dart';
 
@@ -63,9 +63,9 @@ class DrawerWidget extends StatelessWidget {
     schoolTypeController.resetSchoolTypeForm();
   }
 
-  void resetAcademicGradeFormValues() {
-    AcademicGradeController academicGradeController = Get.put(AcademicGradeController());
-    academicGradeController.resetAcademicGradeForm();
+  void resetAcademicClassFormValues() {
+    AcademicClassController academicClassController = Get.put(AcademicClassController());
+    academicClassController.resetAcademicClassForm();
   }
 
   void resetEductionBoardFormValues() {
@@ -115,11 +115,15 @@ class DrawerWidget extends StatelessWidget {
 
   void resetSchoolFormValues() {
     OrganizationController organizationController = Get.put(OrganizationController());
-    OrganizationMemberController organizationMemberController = Get.put(OrganizationMemberController());
+    OrganizationMemberController organizationMemberController = Get.put(
+      OrganizationMemberController(),
+    );
     SchoolAddressController schoolAddressController = Get.put(SchoolAddressController());
     SchoolAdminController schoolAdminController = Get.put(SchoolAdminController());
     SchoolController schoolController = Get.put(SchoolController());
-    SchoolFormStepperController schoolFormStepperController = Get.put(SchoolFormStepperController());
+    SchoolFormStepperController schoolFormStepperController = Get.put(
+      SchoolFormStepperController(),
+    );
 
     getStates();
     getCities();
@@ -142,8 +146,8 @@ class DrawerWidget extends StatelessWidget {
       case RoutePaths.schoolTypeForm || RoutePaths.schoolTypes:
         resetSchoolTypeFormValues();
         break;
-      case RoutePaths.academicGradeForm || RoutePaths.academicGrades:
-        resetAcademicGradeFormValues();
+      case RoutePaths.academicClassForm || RoutePaths.academicClasses:
+        resetAcademicClassFormValues();
         break;
       case RoutePaths.educationBoardForm || RoutePaths.educationBoards:
         resetEductionBoardFormValues();
@@ -192,14 +196,28 @@ class DrawerWidget extends StatelessWidget {
                       collapsedIconColor: themeData.offWhite,
                       iconColor: themeData.offWhite,
                       leading: Icon(item.icon, color: themeData.offWhite),
-                      title: Text(item.title, style: Theme.of(context).textTheme.titleMedium?.copyWith(color: themeData.offWhite)),
+                      title: Text(
+                        item.title,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(color: themeData.offWhite),
+                      ),
                       children:
                           item.submenu
                               .map(
                                 (submenuItem) => ListTile(
                                   contentPadding: EdgeInsets.only(left: 50),
-                                  leading: Icon(submenuItem.icon, color: themeData.offWhite, size: 20),
-                                  title: Text(submenuItem.title, style: Theme.of(context).textTheme.labelLarge?.copyWith(color: themeData.offWhite)),
+                                  leading: Icon(
+                                    submenuItem.icon,
+                                    color: themeData.offWhite,
+                                    size: 20,
+                                  ),
+                                  title: Text(
+                                    submenuItem.title,
+                                    style: Theme.of(
+                                      context,
+                                    ).textTheme.labelLarge?.copyWith(color: themeData.offWhite),
+                                  ),
                                   onTap: () => onDrawerClick(context, submenuItem.route),
                                 ),
                               )
@@ -208,7 +226,12 @@ class DrawerWidget extends StatelessWidget {
                     : ListTile(
                       iconColor: themeData.offWhite,
                       leading: Icon(item.icon, color: themeData.offWhite),
-                      title: Text(item.title, style: Theme.of(context).textTheme.titleMedium?.copyWith(color: themeData.offWhite)),
+                      title: Text(
+                        item.title,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(color: themeData.offWhite),
+                      ),
                       onTap: () => onDrawerClick(context, item.route),
                     ),
           ),

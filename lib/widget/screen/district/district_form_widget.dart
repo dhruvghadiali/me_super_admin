@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 import 'package:me_super_admin/model/state/state.dart' as state_model;
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 import 'package:me_super_admin/controller/district/district_controller.dart';

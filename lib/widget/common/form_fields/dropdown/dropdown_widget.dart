@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:me_super_admin/app_enum.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 
 /*
@@ -73,12 +73,21 @@ class DropdownWidget extends StatelessWidget {
    * @param selectedItem The currently selected item(s).
    * @return A styled Text widget for the dropdown item.
    */
-  Widget setDropdownLabel({required BuildContext context, required String label, required String value, required String selectedItem}) {
+  Widget setDropdownLabel({
+    required BuildContext context,
+    required String label,
+    required String value,
+    required String selectedItem,
+  }) {
     return Text(
       label.toUpperCase(),
       style: Theme.of(context).textTheme.titleMedium!.copyWith(
         fontWeight:
-            (multiSelection! ? selectedItem.split(',').indexWhere((data) => data == value) != -1 : selectedItem == value) ? FontWeight.bold : FontWeight.normal,
+            (multiSelection!
+                    ? selectedItem.split(',').indexWhere((data) => data == value) != -1
+                    : selectedItem == value)
+                ? FontWeight.bold
+                : FontWeight.normal,
         color: setDropdownColor(context: context, appColorScheme: appColorScheme),
       ),
     );
@@ -92,7 +101,11 @@ class DropdownWidget extends StatelessWidget {
    * @param isSelected Whether the item is selected.
    * @return A styled Text widget for the selected item(s).
    */
-  Widget setSelectedItemLabel({required BuildContext context, required String label, required bool isSelected}) {
+  Widget setSelectedItemLabel({
+    required BuildContext context,
+    required String label,
+    required bool isSelected,
+  }) {
     return Text(
       label.toUpperCase(),
       style: Theme.of(context).textTheme.titleMedium!.copyWith(
@@ -156,7 +169,10 @@ class DropdownWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         // Label above the dropdown
-        Container(margin: const EdgeInsets.only(bottom: 5), child: Text(labelText, style: Theme.of(context).textTheme.labelSmall)),
+        Container(
+          margin: const EdgeInsets.only(bottom: 5),
+          child: Text(labelText, style: Theme.of(context).textTheme.labelSmall),
+        ),
         // Dropdown form field
         DropdownButtonFormField(
           key: fieldKey ?? key,
@@ -176,13 +192,25 @@ class DropdownWidget extends StatelessWidget {
             border: OutlineInputBorder(),
             errorStyle: TextStyle(color: themeData.metallicRed),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: setDropdownColor(context: context, appColorScheme: appColorScheme) as Color, width: 1),
+              borderSide: BorderSide(
+                color: setDropdownColor(context: context, appColorScheme: appColorScheme) as Color,
+                width: 1,
+              ),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: setDropdownColor(context: context, appColorScheme: appColorScheme) as Color, width: 1),
+              borderSide: BorderSide(
+                color: setDropdownColor(context: context, appColorScheme: appColorScheme) as Color,
+                width: 1,
+              ),
             ),
-            disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: setDropdownColor(context: context, appColorScheme: appColorScheme) as Color)),
-            errorBorder: OutlineInputBorder(borderSide: BorderSide(color: themeData.metallicRed as Color)),
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: setDropdownColor(context: context, appColorScheme: appColorScheme) as Color,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: themeData.metallicRed as Color),
+            ),
             filled: true,
             fillColor: themeData.offWhite,
           ),
@@ -213,7 +241,13 @@ class DropdownWidget extends StatelessWidget {
             return items.isNotEmpty
                 ? [
                   setSelectedItemLabel(context: context, label: label, isSelected: isSelected),
-                  ...items.map((item) => setSelectedItemLabel(context: context, label: label, isSelected: isSelected)),
+                  ...items.map(
+                    (item) => setSelectedItemLabel(
+                      context: context,
+                      label: label,
+                      isSelected: isSelected,
+                    ),
+                  ),
                 ]
                 : [setSelectedItemLabel(context: context, label: label, isSelected: isSelected)];
           },
@@ -233,7 +267,9 @@ class DropdownWidget extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(right: 10),
                                     child: Icon(
-                                      selectedItem.split(',').indexWhere((data) => data == "") != -1 ? Icons.check_box : Icons.check_box_outline_blank,
+                                      selectedItem.split(',').indexWhere((data) => data == "") != -1
+                                          ? Icons.check_box
+                                          : Icons.check_box_outline_blank,
                                     ),
                                   ),
                                   Expanded(
@@ -246,7 +282,12 @@ class DropdownWidget extends StatelessWidget {
                                   ),
                                 ],
                               )
-                              : setDropdownLabel(context: context, label: appLocalizations.selectDropdownOptionText, value: "", selectedItem: selectedItem),
+                              : setDropdownLabel(
+                                context: context,
+                                label: appLocalizations.selectDropdownOptionText,
+                                value: "",
+                                selectedItem: selectedItem,
+                              ),
                     ),
                     ...items.toSet().toList().map((Map<String, String> item) {
                       return DropdownMenuItem(
@@ -261,7 +302,10 @@ class DropdownWidget extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(right: 10),
                                       child: Icon(
-                                        selectedItem.split(',').indexWhere((data) => data == item['value']) != -1
+                                        selectedItem
+                                                    .split(',')
+                                                    .indexWhere((data) => data == item['value']) !=
+                                                -1
                                             ? Icons.check_box
                                             : Icons.check_box_outline_blank,
                                       ),
@@ -276,7 +320,12 @@ class DropdownWidget extends StatelessWidget {
                                     ),
                                   ],
                                 )
-                                : setDropdownLabel(context: context, label: item['label'] ?? "", value: item['value'] ?? "", selectedItem: selectedItem),
+                                : setDropdownLabel(
+                                  context: context,
+                                  label: item['label'] ?? "",
+                                  value: item['value'] ?? "",
+                                  selectedItem: selectedItem,
+                                ),
                       );
                     }),
                   ]
@@ -284,11 +333,19 @@ class DropdownWidget extends StatelessWidget {
                     DropdownMenuItem(
                       value: "",
                       enabled: isEnable ?? true,
-                      child: setDropdownLabel(context: context, label: appLocalizations.selectDropdownOptionText, value: "", selectedItem: selectedItem),
+                      child: setDropdownLabel(
+                        context: context,
+                        label: appLocalizations.selectDropdownOptionText,
+                        value: "",
+                        selectedItem: selectedItem,
+                      ),
                     ),
                   ],
           // Handles selection changes
-          onChanged: isEnable == true ? (String? selectedOption) => onDropDownSelectionChanged(selectedOption) : null,
+          onChanged:
+              isEnable == true
+                  ? (String? selectedOption) => onDropDownSelectionChanged(selectedOption)
+                  : null,
         ),
       ],
     );

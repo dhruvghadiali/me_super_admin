@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 
 class ApiRequestLoaderWidget extends StatelessWidget {
@@ -9,10 +9,7 @@ class ApiRequestLoaderWidget extends StatelessWidget {
 
   final AppColorScheme appColorScheme;
 
-  Color? setLoaderColor({
-    required BuildContext context,
-    required AppColorScheme appColorScheme,
-  }) {
+  Color? setLoaderColor({required BuildContext context, required AppColorScheme appColorScheme}) {
     switch (appColorScheme) {
       case AppColorScheme.primary:
         return Theme.of(context).colorScheme.primary;
@@ -23,8 +20,7 @@ class ApiRequestLoaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
 
     return Container(
@@ -35,10 +31,7 @@ class ApiRequestLoaderWidget extends StatelessWidget {
           Container(
             height: 40,
             width: 40,
-            color: setLoaderColor(
-              context: context,
-              appColorScheme: appColorScheme,
-            ),
+            color: setLoaderColor(context: context, appColorScheme: appColorScheme),
             padding: const EdgeInsets.all(10),
             child: CircularProgressIndicator(color: themeData.offWhite),
           ),
@@ -47,12 +40,7 @@ class ApiRequestLoaderWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 color: themeData.offWhite,
                 border: Border.all(
-                  color:
-                      setLoaderColor(
-                            context: context,
-                            appColorScheme: appColorScheme,
-                          )
-                          as Color,
+                  color: setLoaderColor(context: context, appColorScheme: appColorScheme) as Color,
                   width: 1,
                 ),
               ),

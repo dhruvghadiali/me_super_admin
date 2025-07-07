@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
 
 import 'package:me_super_admin/app_enum.dart';
+import 'package:me_super_admin/model/http_service/get_http_service.dart';
 import 'package:me_super_admin/utils/utils.dart';
 import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/model/school/school.dart';
@@ -22,6 +23,8 @@ class SchoolController extends GetxController {
   String snackbarTitle = "School Alert";
   School school = School.defaultValues();
   bool isLoader = false;
+  List<School> schools = [];
+  List<dynamic> schoolDetails = [];
 
   void resetSchoolForm() {
     school = School.defaultValues();
@@ -30,11 +33,11 @@ class SchoolController extends GetxController {
 
   void setSchoolForm(School schoolObj) {
     school = schoolObj;
-    update();
 
-    // if (organization.id.isNotEmpty) {
-    //   Get.offAllNamed(RoutePaths.zipcodeForm);
-    // }
+    if (school.id.isNotEmpty) {
+      Get.offAllNamed(RoutePaths.schoolForm);
+    }
+    update();
   }
 
   /*
@@ -464,6 +467,35 @@ class SchoolController extends GetxController {
     }
   }
 
+  Future<void> getSchools(bool isActive) async {
+    String authToken = await Utils.getAuthToken();
+    schools = [];
+    isLoader = true;
+    update();
+
+    GetHttpService getHttpService = GetHttpService(
+      endPoint: 'super-admin/schools?isActive=$isActive',
+      headers: {"Authorization": 'Bearer $authToken'},
+      mockHttpAPIProperty: MockHttpAPIPropertyService(endPoint: 'assets/mock_data/schools/schools_200.json', statusCode: 200),
+    );
+
+    HttpResponseService response = await HttpService.getRequest(getHttpService);
+
+    if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
+      isLoader = false;
+      schoolDetails = response.data;
+      for (var schoolJson in response.data) {
+        final School schoolObj = School.fromJson(schoolJson);
+        schools.add(schoolObj);
+      }
+    } else {
+      isLoader = false;
+      Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.error);
+    }
+
+    update();
+  }
+
   Future<void> postSchool(Map<String, dynamic> jsonData) async {
     String authToken = await Utils.getAuthToken();
     isLoader = true;
@@ -481,7 +513,7 @@ class SchoolController extends GetxController {
     if (response.appHttpRequestStatus == AppHttpRequestStatus.isSuccessfullyServiced) {
       isLoader = false;
       Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.success);
-      Get.offAllNamed(RoutePaths.schools);
+      Get.offAllNamed(RoutePaths.activeSchools);
     } else {
       isLoader = false;
       Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.error);
@@ -512,6 +544,14 @@ class SchoolController extends GetxController {
       isLoader = false;
       Snackbar.getSnackbar(title: snackbarTitle, message: response.message, appSnackbarStatus: AppSnackbarStatus.error);
     }
+
+    update();
+  }
+
+  Future<void> deleteSchool(String schoolId) async {
+    String authToken = await Utils.getAuthToken();
+    isLoader = true;
+    update();
 
     update();
   }

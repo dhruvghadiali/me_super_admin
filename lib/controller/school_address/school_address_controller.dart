@@ -47,6 +47,12 @@ class SchoolAddressController extends GetxController {
     update();
   }
 
+  void setSchoolAddressesForm(List<SchoolAddress> schoolAddressList) {
+    schoolAddresses = schoolAddressList;
+    schoolAddressFormValidated = List.generate(schoolAddresses.length, (index) => false);
+    update();
+  }
+
   /*
    * Adds a new school address form to the list.
    */
@@ -79,10 +85,6 @@ class SchoolAddressController extends GetxController {
   void setSchoolAddressForm(SchoolAddress schoolAddressObj) {
     schoolAddresses[selectedIndex] = schoolAddressObj;
     update();
-
-    // if (schoolAddress.id.isNotEmpty) {
-    //   Get.offAllNamed(RoutePaths.zipcodeForm);
-    // }
   }
 
   /*

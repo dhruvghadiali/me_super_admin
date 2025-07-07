@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/model/city/city.dart';
@@ -19,7 +19,12 @@ import 'package:me_super_admin/widget/common/form_fields/elevated_button/elevate
 import 'package:me_super_admin/widget/common/form_fields/text_fields/floating_text_field_widget.dart';
 
 class SchoolAddressFormWidget extends StatefulWidget {
-  const SchoolAddressFormWidget({super.key, required this.schoolAddress, required this.index, required this.onSubmitForm});
+  const SchoolAddressFormWidget({
+    super.key,
+    required this.schoolAddress,
+    required this.index,
+    required this.onSubmitForm,
+  });
 
   final SchoolAddress schoolAddress;
   final int index;
@@ -135,7 +140,9 @@ class _SchoolAddressFormWidgetState extends State<SchoolAddressFormWidget> {
                     labelText: appLocalizations.schoolAddressFormAddressTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: schoolAddressControllerContext.addressValidator,
-                    onChange: (String value) => schoolAddressControllerContext.onAddressChange(value, widget.index),
+                    onChange:
+                        (String value) =>
+                            schoolAddressControllerContext.onAddressChange(value, widget.index),
                     onFieldSubmitted: (String value) => onAddressTextFieldSubmit(context, value),
                   ),
                 ),
@@ -144,8 +151,14 @@ class _SchoolAddressFormWidgetState extends State<SchoolAddressFormWidget> {
                   child: StateSelectionFormWidget(
                     formFieldKey: _stateFieldKey,
                     validator: schoolAddressControllerContext.stateValidator,
-                    selectedState: schoolAddressControllerContext.schoolAddresses[widget.index].state,
-                    onChange: (state_model.State state) => schoolAddressControllerContext.onStateChange(state, widget.index, _stateFieldKey),
+                    selectedState:
+                        schoolAddressControllerContext.schoolAddresses[widget.index].state,
+                    onChange:
+                        (state_model.State state) => schoolAddressControllerContext.onStateChange(
+                          state,
+                          widget.index,
+                          _stateFieldKey,
+                        ),
                   ),
                 ),
                 Container(
@@ -153,9 +166,16 @@ class _SchoolAddressFormWidgetState extends State<SchoolAddressFormWidget> {
                   child: DistrictSelectionFormWidget(
                     formFieldKey: _districtFieldKey,
                     validator: schoolAddressControllerContext.districtValidator,
-                    selectedDistrict: schoolAddressControllerContext.schoolAddresses[widget.index].district,
-                    selectedState: schoolAddressControllerContext.schoolAddresses[widget.index].state,
-                    onChange: (District district) => schoolAddressControllerContext.onDistrictChange(district, widget.index, _districtFieldKey),
+                    selectedDistrict:
+                        schoolAddressControllerContext.schoolAddresses[widget.index].district,
+                    selectedState:
+                        schoolAddressControllerContext.schoolAddresses[widget.index].state,
+                    onChange:
+                        (District district) => schoolAddressControllerContext.onDistrictChange(
+                          district,
+                          widget.index,
+                          _districtFieldKey,
+                        ),
                   ),
                 ),
                 Container(
@@ -164,8 +184,14 @@ class _SchoolAddressFormWidgetState extends State<SchoolAddressFormWidget> {
                     formFieldKey: _cityFieldKey,
                     validator: schoolAddressControllerContext.cityValidator,
                     selectedCity: schoolAddressControllerContext.schoolAddresses[widget.index].city,
-                    selectedDistrict: schoolAddressControllerContext.schoolAddresses[widget.index].district,
-                    onChange: (City city) => schoolAddressControllerContext.onCityChange(city, widget.index, _cityFieldKey),
+                    selectedDistrict:
+                        schoolAddressControllerContext.schoolAddresses[widget.index].district,
+                    onChange:
+                        (City city) => schoolAddressControllerContext.onCityChange(
+                          city,
+                          widget.index,
+                          _cityFieldKey,
+                        ),
                   ),
                 ),
                 Container(
@@ -173,9 +199,15 @@ class _SchoolAddressFormWidgetState extends State<SchoolAddressFormWidget> {
                   child: AreaNameSelectionFormWidget(
                     formFieldKey: _areaNameFieldKey,
                     validator: schoolAddressControllerContext.areaNameValidator,
-                    selectedAreaName: schoolAddressControllerContext.schoolAddresses[widget.index].areaName,
+                    selectedAreaName:
+                        schoolAddressControllerContext.schoolAddresses[widget.index].areaName,
                     selectedCity: schoolAddressControllerContext.schoolAddresses[widget.index].city,
-                    onChange: (AreaName areaName) => schoolAddressControllerContext.onAreaNameChange(areaName, widget.index, _areaNameFieldKey),
+                    onChange:
+                        (AreaName areaName) => schoolAddressControllerContext.onAreaNameChange(
+                          areaName,
+                          widget.index,
+                          _areaNameFieldKey,
+                        ),
                   ),
                 ),
                 Container(
@@ -183,9 +215,16 @@ class _SchoolAddressFormWidgetState extends State<SchoolAddressFormWidget> {
                   child: ZipcodeSelectionFormWidget(
                     formFieldKey: _zipcodeFieldKey,
                     validator: schoolAddressControllerContext.zipcodeValidator,
-                    selectedAreaName: schoolAddressControllerContext.schoolAddresses[widget.index].areaName,
-                    selectedZipcode: schoolAddressControllerContext.schoolAddresses[widget.index].zipcode,
-                    onChange: (Zipcode zipcode) => schoolAddressControllerContext.onZipcodeChange(zipcode, widget.index, _zipcodeFieldKey),
+                    selectedAreaName:
+                        schoolAddressControllerContext.schoolAddresses[widget.index].areaName,
+                    selectedZipcode:
+                        schoolAddressControllerContext.schoolAddresses[widget.index].zipcode,
+                    onChange:
+                        (Zipcode zipcode) => schoolAddressControllerContext.onZipcodeChange(
+                          zipcode,
+                          widget.index,
+                          _zipcodeFieldKey,
+                        ),
                   ),
                 ),
                 Container(

@@ -36,6 +36,12 @@ class SchoolAdminController extends GetxController {
     update();
   }
 
+  void setSchoolAdminsForm(List<SchoolAdmin> schoolAdminList) {
+    schoolAdmins = schoolAdminList;
+    schoolAdminFormValidated = List.generate(schoolAdmins.length, (index) => false);
+    update();
+  }
+
   /*
    * Adds a new school admin form to the list.
    */

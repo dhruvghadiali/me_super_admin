@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 import 'package:me_super_admin/model/city/city.dart';
 import 'package:me_super_admin/model/zipcode/zipcode.dart';
 import 'package:me_super_admin/model/district/district.dart';
@@ -21,7 +21,13 @@ import 'package:me_super_admin/widget/common/form_fields/text_fields/floating_te
 import 'package:me_super_admin/widget/common/loader/api_request_loader_widget.dart';
 
 class OrganizationMemberFormWidget extends StatefulWidget {
-  const OrganizationMemberFormWidget({super.key, required this.organizationMember, required this.index, required this.isStepper, required this.onSubmitForm});
+  const OrganizationMemberFormWidget({
+    super.key,
+    required this.organizationMember,
+    required this.index,
+    required this.isStepper,
+    required this.onSubmitForm,
+  });
 
   final OrganizationMember organizationMember;
   final int index;
@@ -34,7 +40,9 @@ class OrganizationMemberFormWidget extends StatefulWidget {
 
 class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWidget> {
   // Importing the OrganizationMemberController using GetX for state management.
-  final OrganizationMemberController organizationMemberController = Get.put(OrganizationMemberController());
+  final OrganizationMemberController organizationMemberController = Get.put(
+    OrganizationMemberController(),
+  );
 
   /*
    * Global keys used for form validation and accessing specific form field states.
@@ -195,7 +203,11 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
   void onAadhaarNumberTextFieldSubmit(BuildContext context, String value) {
     FocusManager.instance.primaryFocus?.unfocus();
     FocusScope.of(context).requestFocus(_addressFocusNode);
-    organizationMemberController.onAadhaarNumberSubmitted(value, widget.index, _aadhaarNumberFieldKey);
+    organizationMemberController.onAadhaarNumberSubmitted(
+      value,
+      widget.index,
+      _aadhaarNumberFieldKey,
+    );
   }
 
   /*
@@ -254,7 +266,11 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                     labelText: appLocalizations.organizationMemberFormFirstNameTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: organizationMemberControllerContext.firstNameValidator,
-                    onChange: (String value) => organizationMemberControllerContext.onFirstNameChange(value, widget.index),
+                    onChange:
+                        (String value) => organizationMemberControllerContext.onFirstNameChange(
+                          value,
+                          widget.index,
+                        ),
                     onFieldSubmitted: (String value) => onFirstNameTextFieldSubmit(context, value),
                   ),
                 ),
@@ -268,7 +284,11 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                     labelText: appLocalizations.organizationMemberFormLastNameTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: organizationMemberControllerContext.lastNameValidator,
-                    onChange: (String value) => organizationMemberControllerContext.onLastNameChange(value, widget.index),
+                    onChange:
+                        (String value) => organizationMemberControllerContext.onLastNameChange(
+                          value,
+                          widget.index,
+                        ),
                     onFieldSubmitted: (String value) => onLastNameTextFieldSubmit(context, value),
                   ),
                 ),
@@ -283,7 +303,9 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                     labelText: appLocalizations.organizationMemberFormEmailTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: organizationMemberControllerContext.emailValidator,
-                    onChange: (String value) => organizationMemberControllerContext.onEmailChange(value, widget.index),
+                    onChange:
+                        (String value) =>
+                            organizationMemberControllerContext.onEmailChange(value, widget.index),
                     onFieldSubmitted: (String value) => onEmailTextFieldSubmit(context, value),
                   ),
                 ),
@@ -298,8 +320,13 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                     labelText: appLocalizations.organizationMemberFormPhoneNumberTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: organizationMemberControllerContext.phoneNumberValidator,
-                    onChange: (String value) => organizationMemberControllerContext.onPhoneNumberChange(value, widget.index),
-                    onFieldSubmitted: (String value) => onPhoneNumberTextFieldSubmit(context, value),
+                    onChange:
+                        (String value) => organizationMemberControllerContext.onPhoneNumberChange(
+                          value,
+                          widget.index,
+                        ),
+                    onFieldSubmitted:
+                        (String value) => onPhoneNumberTextFieldSubmit(context, value),
                   ),
                 ),
                 Container(
@@ -310,11 +337,17 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                     appColorScheme: AppColorScheme.primary,
                     textInputType: TextInputType.phone,
                     controller: _aadhaarNumberTextEditingController,
-                    labelText: appLocalizations.organizationMemberFormAadhaarNumberTextFieldLabelText,
+                    labelText:
+                        appLocalizations.organizationMemberFormAadhaarNumberTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: organizationMemberControllerContext.aadhaarNumberValidator,
-                    onChange: (String value) => organizationMemberControllerContext.onAadhaarNumberChange(value, widget.index),
-                    onFieldSubmitted: (String value) => onAadhaarNumberTextFieldSubmit(context, value),
+                    onChange:
+                        (String value) => organizationMemberControllerContext.onAadhaarNumberChange(
+                          value,
+                          widget.index,
+                        ),
+                    onFieldSubmitted:
+                        (String value) => onAadhaarNumberTextFieldSubmit(context, value),
                   ),
                 ),
                 Container(
@@ -327,7 +360,11 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                     labelText: appLocalizations.organizationMemberFormAddressTextFieldLabelText,
                     textInputAction: TextInputAction.next,
                     validator: organizationMemberControllerContext.addressValidator,
-                    onChange: (String value) => organizationMemberControllerContext.onAddressChange(value, widget.index),
+                    onChange:
+                        (String value) => organizationMemberControllerContext.onAddressChange(
+                          value,
+                          widget.index,
+                        ),
                     onFieldSubmitted: (String value) => onAddressTextFieldSubmit(context, value),
                   ),
                 ),
@@ -336,10 +373,20 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                   child: DropdownWidget(
                     fieldKey: _positionFieldKey,
                     validator: organizationMemberControllerContext.positionValidator,
-                    labelText: appLocalizations.organizationMemberFormPositionDropdownFieldLabelText,
-                    selectedItem: organizationMemberControllerContext.organizationMembers[widget.index].position.toLowerCase(),
+                    labelText:
+                        appLocalizations.organizationMemberFormPositionDropdownFieldLabelText,
+                    selectedItem:
+                        organizationMemberControllerContext
+                            .organizationMembers[widget.index]
+                            .position
+                            .toLowerCase(),
                     appColorScheme: AppColorScheme.primary,
-                    onChanged: (String value) => organizationMemberControllerContext.onPositionChange(value, widget.index, _positionFieldKey),
+                    onChanged:
+                        (String value) => organizationMemberControllerContext.onPositionChange(
+                          value,
+                          widget.index,
+                          _positionFieldKey,
+                        ),
                     items: [
                       {"value": "president", "label": "President"},
                       {"value": "vice president", "label": "Vice President"},
@@ -357,8 +404,11 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                   child: StateSelectionFormWidget(
                     formFieldKey: _stateFieldKey,
                     validator: organizationMemberControllerContext.stateValidator,
-                    selectedState: organizationMemberControllerContext.organizationMembers[widget.index].state,
-                    onChange: (state_model.State state) => organizationMemberControllerContext.onStateChange(state, widget.index, _stateFieldKey),
+                    selectedState:
+                        organizationMemberControllerContext.organizationMembers[widget.index].state,
+                    onChange:
+                        (state_model.State state) => organizationMemberControllerContext
+                            .onStateChange(state, widget.index, _stateFieldKey),
                   ),
                 ),
                 Container(
@@ -366,9 +416,18 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                   child: DistrictSelectionFormWidget(
                     formFieldKey: _districtFieldKey,
                     validator: organizationMemberControllerContext.districtValidator,
-                    selectedDistrict: organizationMemberControllerContext.organizationMembers[widget.index].district,
-                    selectedState: organizationMemberControllerContext.organizationMembers[widget.index].state,
-                    onChange: (District district) => organizationMemberControllerContext.onDistrictChange(district, widget.index, _districtFieldKey),
+                    selectedDistrict:
+                        organizationMemberControllerContext
+                            .organizationMembers[widget.index]
+                            .district,
+                    selectedState:
+                        organizationMemberControllerContext.organizationMembers[widget.index].state,
+                    onChange:
+                        (District district) => organizationMemberControllerContext.onDistrictChange(
+                          district,
+                          widget.index,
+                          _districtFieldKey,
+                        ),
                   ),
                 ),
                 Container(
@@ -376,9 +435,18 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                   child: CitySelectionFormWidget(
                     formFieldKey: _cityFieldKey,
                     validator: organizationMemberControllerContext.cityValidator,
-                    selectedCity: organizationMemberControllerContext.organizationMembers[widget.index].city,
-                    selectedDistrict: organizationMemberControllerContext.organizationMembers[widget.index].district,
-                    onChange: (City city) => organizationMemberControllerContext.onCityChange(city, widget.index, _cityFieldKey),
+                    selectedCity:
+                        organizationMemberControllerContext.organizationMembers[widget.index].city,
+                    selectedDistrict:
+                        organizationMemberControllerContext
+                            .organizationMembers[widget.index]
+                            .district,
+                    onChange:
+                        (City city) => organizationMemberControllerContext.onCityChange(
+                          city,
+                          widget.index,
+                          _cityFieldKey,
+                        ),
                   ),
                 ),
                 Container(
@@ -386,9 +454,18 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                   child: AreaNameSelectionFormWidget(
                     formFieldKey: _areaNameFieldKey,
                     validator: organizationMemberControllerContext.areaNameValidator,
-                    selectedAreaName: organizationMemberControllerContext.organizationMembers[widget.index].areaName,
-                    selectedCity: organizationMemberControllerContext.organizationMembers[widget.index].city,
-                    onChange: (AreaName areaName) => organizationMemberControllerContext.onAreaNameChange(areaName, widget.index, _areaNameFieldKey),
+                    selectedAreaName:
+                        organizationMemberControllerContext
+                            .organizationMembers[widget.index]
+                            .areaName,
+                    selectedCity:
+                        organizationMemberControllerContext.organizationMembers[widget.index].city,
+                    onChange:
+                        (AreaName areaName) => organizationMemberControllerContext.onAreaNameChange(
+                          areaName,
+                          widget.index,
+                          _areaNameFieldKey,
+                        ),
                   ),
                 ),
                 Container(
@@ -396,9 +473,20 @@ class _OrganizationMemberFormWidgetState extends State<OrganizationMemberFormWid
                   child: ZipcodeSelectionFormWidget(
                     formFieldKey: _zipcodeFieldKey,
                     validator: organizationMemberControllerContext.zipcodeValidator,
-                    selectedAreaName: organizationMemberControllerContext.organizationMembers[widget.index].areaName,
-                    selectedZipcode: organizationMemberControllerContext.organizationMembers[widget.index].zipcode,
-                    onChange: (Zipcode zipcode) => organizationMemberControllerContext.onZipcodeChange(zipcode, widget.index, _zipcodeFieldKey),
+                    selectedAreaName:
+                        organizationMemberControllerContext
+                            .organizationMembers[widget.index]
+                            .areaName,
+                    selectedZipcode:
+                        organizationMemberControllerContext
+                            .organizationMembers[widget.index]
+                            .zipcode,
+                    onChange:
+                        (Zipcode zipcode) => organizationMemberControllerContext.onZipcodeChange(
+                          zipcode,
+                          widget.index,
+                          _zipcodeFieldKey,
+                        ),
                   ),
                 ),
                 Container(

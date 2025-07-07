@@ -16,9 +16,7 @@ class FeeTypeScreen extends StatefulWidget {
 }
 
 class _FeeTypeScreenState extends State<FeeTypeScreen> {
-  final FeeTypeController feeTypeController = Get.put(
-    FeeTypeController(),
-  );
+  final FeeTypeController feeTypeController = Get.put(FeeTypeController());
 
   @override
   void initState() {
@@ -36,7 +34,7 @@ class _FeeTypeScreenState extends State<FeeTypeScreen> {
     return GetBuilder<FeeTypeController>(
       builder: (feeTypeControllerContext) {
         return ScaffoldWidget(
-          title: 'FeeR Types',
+          title: 'Fee Types',
           child:
               feeTypeControllerContext.isLoader
                   ? LoaderWidget(appColorScheme: AppColorScheme.primary)

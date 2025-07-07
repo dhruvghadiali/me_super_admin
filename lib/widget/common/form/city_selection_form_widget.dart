@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 import 'package:me_super_admin/model/city/city.dart';
 import 'package:me_super_admin/model/district/district.dart';
 import 'package:me_super_admin/controller/city/city_controller.dart';

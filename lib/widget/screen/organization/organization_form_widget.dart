@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 import 'package:me_super_admin/model/city/city.dart';
 import 'package:me_super_admin/model/zipcode/zipcode.dart';
 import 'package:me_super_admin/model/district/district.dart';
@@ -50,7 +50,8 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
   final GlobalKey<FormFieldState> _areaNameFieldKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> _shortNameFieldKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> _phoneNumberFieldKey = GlobalKey<FormFieldState>();
-  final GlobalKey<FormFieldState> _governmentRegistrationNumberFieldKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> _governmentRegistrationNumberFieldKey =
+      GlobalKey<FormFieldState>();
 
   /*
    * FocusNodes used to manage the focus state of individual form fields.
@@ -78,7 +79,8 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
   final TextEditingController _addressTextEditingController = TextEditingController();
   final TextEditingController _shortNameTextEditingController = TextEditingController();
   final TextEditingController _phoneNumberTextEditingController = TextEditingController();
-  final TextEditingController _governmentRegistrationNumberTextEditingController = TextEditingController();
+  final TextEditingController _governmentRegistrationNumberTextEditingController =
+      TextEditingController();
 
   /*
    * The initState() method is called when the widget is inserted into the widget tree.
@@ -98,7 +100,8 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
     _addressTextEditingController.text = organizationController.organization.address;
     _shortNameTextEditingController.text = organizationController.organization.shortName;
     _phoneNumberTextEditingController.text = organizationController.organization.phoneNumber;
-    _governmentRegistrationNumberTextEditingController.text = organizationController.organization.governmentRegistrationNumber;
+    _governmentRegistrationNumberTextEditingController.text =
+        organizationController.organization.governmentRegistrationNumber;
     super.initState();
   }
 
@@ -207,7 +210,10 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
   void onGovernmentRegistrationNumberTextFieldSubmit(BuildContext context, String value) {
     FocusManager.instance.primaryFocus?.unfocus();
     FocusScope.of(context).requestFocus(_addressFocusNode);
-    organizationController.onGovernmentRegistrationNumberSubmitted(value, _governmentRegistrationNumberFieldKey);
+    organizationController.onGovernmentRegistrationNumberSubmitted(
+      value,
+      _governmentRegistrationNumberFieldKey,
+    );
   }
 
   /*
@@ -284,8 +290,10 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     textInputAction: TextInputAction.next,
                     controller: _shortNameTextEditingController,
                     validator: organizationControllerContext.shortNameValidator,
-                    labelText: appLocalizations.organizationFormOrganizationShortNameTextFieldLabelText,
-                    onChange: (String value) => organizationControllerContext.onShortNameChange(value),
+                    labelText:
+                        appLocalizations.organizationFormOrganizationShortNameTextFieldLabelText,
+                    onChange:
+                        (String value) => organizationControllerContext.onShortNameChange(value),
                     onFieldSubmitted: (String value) => onShortNameTextFieldSubmit(context, value),
                   ),
                 ),
@@ -314,9 +322,12 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     controller: _phoneNumberTextEditingController,
                     textInputType: TextInputType.phone,
                     validator: organizationControllerContext.phoneNumberValidator,
-                    labelText: appLocalizations.organizationFormOrganizationPhoneNumberTextFieldLabelText,
-                    onChange: (String value) => organizationControllerContext.onPhoneNumberChange(value),
-                    onFieldSubmitted: (String value) => onPhoneNumberTextFieldSubmit(context, value),
+                    labelText:
+                        appLocalizations.organizationFormOrganizationPhoneNumberTextFieldLabelText,
+                    onChange:
+                        (String value) => organizationControllerContext.onPhoneNumberChange(value),
+                    onFieldSubmitted:
+                        (String value) => onPhoneNumberTextFieldSubmit(context, value),
                   ),
                 ),
                 Container(
@@ -328,9 +339,15 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     textInputAction: TextInputAction.next,
                     controller: _governmentRegistrationNumberTextEditingController,
                     validator: organizationControllerContext.governmentRegistrationNumberValidator,
-                    labelText: appLocalizations.organizationFormOrganizationGovernmentRegistrationNumberTextFieldLabelText,
-                    onChange: (String value) => organizationControllerContext.onGovernmentRegistrationNumberChange(value),
-                    onFieldSubmitted: (String value) => onGovernmentRegistrationNumberTextFieldSubmit(context, value),
+                    labelText:
+                        appLocalizations
+                            .organizationFormOrganizationGovernmentRegistrationNumberTextFieldLabelText,
+                    onChange:
+                        (String value) => organizationControllerContext
+                            .onGovernmentRegistrationNumberChange(value),
+                    onFieldSubmitted:
+                        (String value) =>
+                            onGovernmentRegistrationNumberTextFieldSubmit(context, value),
                   ),
                 ),
                 Container(
@@ -342,8 +359,10 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     textInputAction: TextInputAction.done,
                     controller: _addressTextEditingController,
                     validator: organizationControllerContext.addressValidator,
-                    labelText: appLocalizations.organizationFormOrganizationAddressTextFieldLabelText,
-                    onChange: (String value) => organizationControllerContext.onAddressChange(value),
+                    labelText:
+                        appLocalizations.organizationFormOrganizationAddressTextFieldLabelText,
+                    onChange:
+                        (String value) => organizationControllerContext.onAddressChange(value),
                     onFieldSubmitted: (String value) => onAddressTextFieldSubmit(context, value),
                   ),
                 ),
@@ -353,7 +372,9 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     formFieldKey: _stateFieldKey,
                     validator: organizationControllerContext.stateValidator,
                     selectedState: organizationControllerContext.organization.state,
-                    onChange: (state_model.State state) => organizationControllerContext.onStateChange(state, _stateFieldKey),
+                    onChange:
+                        (state_model.State state) =>
+                            organizationControllerContext.onStateChange(state, _stateFieldKey),
                   ),
                 ),
                 Container(
@@ -363,7 +384,11 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     validator: organizationControllerContext.districtValidator,
                     selectedDistrict: organizationControllerContext.organization.district,
                     selectedState: organizationControllerContext.organization.state,
-                    onChange: (District district) => organizationControllerContext.onDistrictChange(district, _districtFieldKey),
+                    onChange:
+                        (District district) => organizationControllerContext.onDistrictChange(
+                          district,
+                          _districtFieldKey,
+                        ),
                   ),
                 ),
                 Container(
@@ -373,7 +398,9 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     validator: organizationControllerContext.cityValidator,
                     selectedCity: organizationControllerContext.organization.city,
                     selectedDistrict: organizationControllerContext.organization.district,
-                    onChange: (City city) => organizationControllerContext.onCityChange(city, _cityFieldKey),
+                    onChange:
+                        (City city) =>
+                            organizationControllerContext.onCityChange(city, _cityFieldKey),
                   ),
                 ),
                 Container(
@@ -383,7 +410,11 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     validator: organizationControllerContext.areaNameValidator,
                     selectedAreaName: organizationControllerContext.organization.areaName,
                     selectedCity: organizationControllerContext.organization.city,
-                    onChange: (AreaName areaName) => organizationControllerContext.onAreaNameChange(areaName, _areaNameFieldKey),
+                    onChange:
+                        (AreaName areaName) => organizationControllerContext.onAreaNameChange(
+                          areaName,
+                          _areaNameFieldKey,
+                        ),
                   ),
                 ),
                 Container(
@@ -393,7 +424,11 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     validator: organizationControllerContext.zipcodeValidator,
                     selectedAreaName: organizationControllerContext.organization.areaName,
                     selectedZipcode: organizationControllerContext.organization.zipcode,
-                    onChange: (Zipcode zipcode) => organizationControllerContext.onZipcodeChange(zipcode, _zipcodeFieldKey),
+                    onChange:
+                        (Zipcode zipcode) => organizationControllerContext.onZipcodeChange(
+                          zipcode,
+                          _zipcodeFieldKey,
+                        ),
                   ),
                 ),
                 widget.isStepperForm
@@ -416,7 +451,9 @@ class _OrganizationFormWidgetState extends State<OrganizationFormWidget> {
                     )
                     : Column(
                       children: [
-                        organizationControllerContext.isLoader ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary) : Container(),
+                        organizationControllerContext.isLoader
+                            ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)
+                            : Container(),
                         Container(
                           margin: const EdgeInsets.only(top: 30),
                           child: ElevatedButtonWidget(

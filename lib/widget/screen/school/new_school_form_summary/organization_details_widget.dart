@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 
 import 'package:me_super_admin/controller/organization/organization_controller.dart';
 import 'package:me_super_admin/widget/screen/school/new_school_form_summary/new_school_form_summary_tab_card_text_widget.dart';
@@ -32,15 +32,24 @@ class OrganizationDetailsWidget extends StatelessWidget {
           children: [
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummaryOrganizationNameLabelText,
-              value: organization.name.isNotEmpty ? organization.name : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
+              value:
+                  organization.name.isNotEmpty
+                      ? organization.name
+                      : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummaryOrganizationShortNameLabelText,
-              value: organization.shortName.isNotEmpty ? organization.shortName : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
+              value:
+                  organization.shortName.isNotEmpty
+                      ? organization.shortName
+                      : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummaryOrganizationEmailLabelText,
-              value: organization.email.isNotEmpty ? organization.email : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
+              value:
+                  organization.email.isNotEmpty
+                      ? organization.email
+                      : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummaryOrganizationPhoneNumberLabelText,
@@ -50,7 +59,9 @@ class OrganizationDetailsWidget extends StatelessWidget {
                       : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
             ),
             NewSchoolFormSummaryTabCardTextWidget(
-              title: appLocalizations.newSchoolSummaryOrganizationGovernmentRegistrationNumberLabelText,
+              title:
+                  appLocalizations
+                      .newSchoolSummaryOrganizationGovernmentRegistrationNumberLabelText,
               value:
                   organization.governmentRegistrationNumber.isNotEmpty
                       ? organization.governmentRegistrationNumber
@@ -58,27 +69,45 @@ class OrganizationDetailsWidget extends StatelessWidget {
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummaryOrganizationAddressLabelText,
-              value: organization.address.isNotEmpty ? organization.address : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
+              value:
+                  organization.address.isNotEmpty
+                      ? organization.address
+                      : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummaryOrganizationStateLabelText,
-              value: organization.state.name.isNotEmpty ? organization.state.name : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
+              value:
+                  organization.state.name.isNotEmpty
+                      ? organization.state.name
+                      : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummaryOrganizationDistrictLabelText,
-              value: organization.district.name.isNotEmpty ? organization.district.name : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
+              value:
+                  organization.district.name.isNotEmpty
+                      ? organization.district.name
+                      : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummaryOrganizationCityLabelText,
-              value: organization.city.name.isNotEmpty ? organization.city.name : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
+              value:
+                  organization.city.name.isNotEmpty
+                      ? organization.city.name
+                      : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummaryOrganizationAreaNameLabelText,
-              value: organization.areaName.name.isNotEmpty ? organization.areaName.name : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
+              value:
+                  organization.areaName.name.isNotEmpty
+                      ? organization.areaName.name
+                      : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummaryOrganizationZipcodeLabelText,
-              value: organization.zipcode.zipcode.isNotEmpty ? organization.zipcode.zipcode : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
+              value:
+                  organization.zipcode.zipcode.isNotEmpty
+                      ? organization.zipcode.zipcode
+                      : appLocalizations.newSchoolSummaryOrganizationEmptyValue,
             ),
           ],
         );

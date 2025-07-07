@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 
 import 'package:me_super_admin/controller/school/school_controller.dart';
 import 'package:me_super_admin/widget/screen/school/new_school_form_summary/new_school_form_summary_tab_card_text_widget.dart';
@@ -32,19 +32,31 @@ class SchoolDetailsWidget extends StatelessWidget {
           children: [
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummarySchoolAffiliateNumberLabelText.toUpperCase(),
-              value: school.affiliateNumber.isNotEmpty ? school.affiliateNumber : appLocalizations.newSchoolSummarySchoolEmptyValue,
+              value:
+                  school.affiliateNumber.isNotEmpty
+                      ? school.affiliateNumber
+                      : appLocalizations.newSchoolSummarySchoolEmptyValue,
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummarySchoolNameLabelText.toUpperCase(),
-              value: school.name.isNotEmpty ? school.name : appLocalizations.newSchoolSummarySchoolEmptyValue,
+              value:
+                  school.name.isNotEmpty
+                      ? school.name
+                      : appLocalizations.newSchoolSummarySchoolEmptyValue,
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummarySchoolShortNameLabelText.toUpperCase(),
-              value: school.shortName.isNotEmpty ? school.shortName : appLocalizations.newSchoolSummarySchoolEmptyValue,
+              value:
+                  school.shortName.isNotEmpty
+                      ? school.shortName
+                      : appLocalizations.newSchoolSummarySchoolEmptyValue,
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummarySchoolEmailLabelText.toUpperCase(),
-              value: school.email.isNotEmpty ? school.email : appLocalizations.newSchoolSummarySchoolEmptyValue,
+              value:
+                  school.email.isNotEmpty
+                      ? school.email
+                      : appLocalizations.newSchoolSummarySchoolEmptyValue,
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummarySchoolPhoneNumberLabelText.toUpperCase(),
@@ -55,11 +67,17 @@ class SchoolDetailsWidget extends StatelessWidget {
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummarySchoolEstablishedYearLabelText.toUpperCase(),
-              value: school.establishedYear.toString().isNotEmpty ? school.establishedYear.toString() : appLocalizations.newSchoolSummarySchoolEmptyValue,
+              value:
+                  school.establishedYear.toString().isNotEmpty
+                      ? school.establishedYear.toString()
+                      : appLocalizations.newSchoolSummarySchoolEmptyValue,
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummarySchoolTypeLabelText.toUpperCase(),
-              value: school.schoolType.schoolType.isNotEmpty ? school.schoolType.schoolType : appLocalizations.newSchoolSummarySchoolEmptyValue,
+              value:
+                  school.schoolType.schoolType.isNotEmpty
+                      ? school.schoolType.schoolType
+                      : appLocalizations.newSchoolSummarySchoolEmptyValue,
             ),
             NewSchoolFormSummaryTabCardTextWidget(
               title: appLocalizations.newSchoolSummarySchoolEducationBoardsLabelText.toUpperCase(),

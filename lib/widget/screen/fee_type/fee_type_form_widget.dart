@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 import 'package:me_super_admin/controller/fee_type/fee_type_controller.dart';
 import 'package:me_super_admin/widget/common/loader/api_request_loader_widget.dart';

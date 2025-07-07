@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/model/authentication/sign_in.dart';
@@ -14,10 +14,8 @@ class SignInFormWidget extends StatelessWidget {
   SignInFormWidget({super.key});
 
   final SignInController signInController = Get.put(SignInController());
-  final TextEditingController usernameTextEditingController =
-      TextEditingController();
-  final TextEditingController passwordTextEditingController =
-      TextEditingController();
+  final TextEditingController usernameTextEditingController = TextEditingController();
+  final TextEditingController passwordTextEditingController = TextEditingController();
 
   void onPressed() {
     signInController.signIn(
@@ -44,8 +42,7 @@ class SignInFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Expanded(
       child: Container(
@@ -90,10 +87,9 @@ class SignInFormWidget extends StatelessWidget {
                           validator: () {},
                           onChange: (String value) => onUsernameChange(value),
                           onFieldSubmitted:
-                              (String value) =>
-                                  signInControllerContext.usernameValidation(
-                                    usernameTextEditingController.text,
-                                  ),
+                              (String value) => signInControllerContext.usernameValidation(
+                                usernameTextEditingController.text,
+                              ),
                         ),
                       ),
                       Container(
@@ -107,16 +103,13 @@ class SignInFormWidget extends StatelessWidget {
                           validator: () {},
                           onChange: (String value) => onPasswordChange(value),
                           onFieldSubmitted:
-                              (String value) =>
-                                  signInControllerContext.passwordValidation(
-                                    passwordTextEditingController.text,
-                                  ),
+                              (String value) => signInControllerContext.passwordValidation(
+                                passwordTextEditingController.text,
+                              ),
                         ),
                       ),
                       signInControllerContext.isLoader
-                          ? const ApiRequestLoaderWidget(
-                            appColorScheme: AppColorScheme.primary,
-                          )
+                          ? const ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)
                           : Container(),
                       Container(
                         margin: const EdgeInsets.only(top: 150),

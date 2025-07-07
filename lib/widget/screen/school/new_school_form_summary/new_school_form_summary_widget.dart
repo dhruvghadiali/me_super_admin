@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
 import 'package:tab_container/tab_container.dart';
@@ -35,7 +35,8 @@ class NewSchoolFormSummaryWidget extends StatefulWidget {
   State<NewSchoolFormSummaryWidget> createState() => _NewSchoolFormSummaryWidgetState();
 }
 
-class _NewSchoolFormSummaryWidgetState extends State<NewSchoolFormSummaryWidget> with SingleTickerProviderStateMixin {
+class _NewSchoolFormSummaryWidgetState extends State<NewSchoolFormSummaryWidget>
+    with SingleTickerProviderStateMixin {
   late final TabController _tabController;
   int _currentIndex = 0;
 
@@ -70,21 +71,28 @@ class _NewSchoolFormSummaryWidgetState extends State<NewSchoolFormSummaryWidget>
 
   void addSchoolDetails() {
     OrganizationController organizationController = Get.find<OrganizationController>();
-    OrganizationMemberController organizationMemberController = Get.find<OrganizationMemberController>();
+    OrganizationMemberController organizationMemberController =
+        Get.find<OrganizationMemberController>();
     SchoolController schoolController = Get.find<SchoolController>();
     SchoolAddressController schoolAddressController = Get.find<SchoolAddressController>();
     SchoolAdminController schoolAdminController = Get.find<SchoolAdminController>();
 
     Map<String, dynamic> toJson() => {
       'organization': organizationController.organization.toJson(),
-      'organization_members': organizationMemberController.organizationMembers.map((member) => member.toJson()).toList(),
+      'organization_members':
+          organizationMemberController.organizationMembers
+              .map((member) => member.toJson())
+              .toList(),
       'school': schoolController.school.toJson(),
       'school_admins': schoolAdminController.schoolAdmins.map((admin) => admin.toJson()).toList(),
       'school_addresses':
           schoolAddressController.schoolAddresses
               .asMap()
               .map((index, address) {
-                return MapEntry(index, {"user_phone_number": schoolAdminController.schoolAdmins[index].phoneNumber, ...address.toJson()});
+                return MapEntry(index, {
+                  "user_phone_number": schoolAdminController.schoolAdmins[index].phoneNumber,
+                  ...address.toJson(),
+                });
               })
               .values
               .toList(),
@@ -109,7 +117,10 @@ class _NewSchoolFormSummaryWidgetState extends State<NewSchoolFormSummaryWidget>
                 alignment: Alignment.topLeft,
                 child: Text(
                   appLocalizations.newSchoolSummaryHeaderText.toUpperCase(),
-                  style: Theme.of(context).textTheme.displaySmall?.copyWith(color: themeData.eerieBlack, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                    color: themeData.eerieBlack,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               TabContainer(
@@ -120,7 +131,10 @@ class _NewSchoolFormSummaryWidgetState extends State<NewSchoolFormSummaryWidget>
                     title: appLocalizations.newSchoolSummaryOrganizationTabLabelText.toUpperCase(),
                     isActive: _currentIndex == 0,
                   ),
-                  NewSchoolFormSummaryTabTitleWidget(title: appLocalizations.newSchoolSummarySchoolTabLabelText.toUpperCase(), isActive: _currentIndex == 1),
+                  NewSchoolFormSummaryTabTitleWidget(
+                    title: appLocalizations.newSchoolSummarySchoolTabLabelText.toUpperCase(),
+                    isActive: _currentIndex == 1,
+                  ),
                 ],
                 children: [
                   NewSchoolFormSummaryTabCardWidget(
@@ -143,7 +157,10 @@ class _NewSchoolFormSummaryWidgetState extends State<NewSchoolFormSummaryWidget>
                   ? Container(
                     margin: const EdgeInsets.symmetric(horizontal: 10),
                     alignment: Alignment.center,
-                    child: SizedBox(height: 70, child: ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary)),
+                    child: SizedBox(
+                      height: 70,
+                      child: ApiRequestLoaderWidget(appColorScheme: AppColorScheme.primary),
+                    ),
                   )
                   : Container(
                     margin: const EdgeInsets.only(top: 30),
@@ -165,7 +182,8 @@ class _NewSchoolFormSummaryWidgetState extends State<NewSchoolFormSummaryWidget>
                                 appColorScheme: AppColorScheme.primary,
                                 buttonText: appLocalizations.editButtonText.toUpperCase(),
                                 disabled: false,
-                                onPressed: () => schoolFormStepperControllerContext.toggleShowSummary(),
+                                onPressed:
+                                    () => schoolFormStepperControllerContext.toggleShowSummary(),
                               );
                             },
                           ),

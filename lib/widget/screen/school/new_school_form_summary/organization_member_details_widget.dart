@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 import 'package:me_super_admin/controller/organization_member/organization_member_controller.dart';
@@ -42,7 +42,10 @@ class OrganizationMemberDetailsWidget extends StatelessWidget {
                   child: Text(
                     appLocalizations.newSchoolSummaryOrganizationMembersNotFound,
                     maxLines: 1,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: themeData.offWhite, fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: themeData.offWhite,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
@@ -56,90 +59,130 @@ class OrganizationMemberDetailsWidget extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      NewSchoolFormSummaryTabCardTitleWidget(title: appLocalizations.newSchoolSummaryOrganizationMemberTitle.toUpperCase()),
+                      NewSchoolFormSummaryTabCardTitleWidget(
+                        title:
+                            appLocalizations.newSchoolSummaryOrganizationMemberTitle.toUpperCase(),
+                      ),
                       NewSchoolFormSummaryTabCardTextWidget(
-                        title: appLocalizations.newSchoolSummaryOrganizationMemberFirstNameLabelText.toUpperCase(),
+                        title:
+                            appLocalizations.newSchoolSummaryOrganizationMemberFirstNameLabelText
+                                .toUpperCase(),
                         value:
                             organizationMember.firstName.isNotEmpty
                                 ? organizationMember.firstName
-                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue.toUpperCase(),
+                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue
+                                    .toUpperCase(),
                       ),
                       NewSchoolFormSummaryTabCardTextWidget(
-                        title: appLocalizations.newSchoolSummaryOrganizationMemberLastNameLabelText.toUpperCase(),
+                        title:
+                            appLocalizations.newSchoolSummaryOrganizationMemberLastNameLabelText
+                                .toUpperCase(),
                         value:
                             organizationMember.lastName.isNotEmpty
                                 ? organizationMember.lastName
-                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue.toUpperCase(),
+                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue
+                                    .toUpperCase(),
                       ),
                       NewSchoolFormSummaryTabCardTextWidget(
-                        title: appLocalizations.newSchoolSummaryOrganizationMemberEmailLabelText.toUpperCase(),
+                        title:
+                            appLocalizations.newSchoolSummaryOrganizationMemberEmailLabelText
+                                .toUpperCase(),
                         value:
                             organizationMember.email.isNotEmpty
                                 ? organizationMember.email
-                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue.toUpperCase(),
+                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue
+                                    .toUpperCase(),
                       ),
                       NewSchoolFormSummaryTabCardTextWidget(
-                        title: appLocalizations.newSchoolSummaryOrganizationMemberPhoneNumberLabelText.toUpperCase(),
+                        title:
+                            appLocalizations.newSchoolSummaryOrganizationMemberPhoneNumberLabelText
+                                .toUpperCase(),
                         value:
                             organizationMember.phoneNumber.isNotEmpty
                                 ? "${appLocalizations.indianPhoneNumberCodeText} ${organizationMember.phoneNumber}"
-                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue.toUpperCase(),
+                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue
+                                    .toUpperCase(),
                       ),
                       NewSchoolFormSummaryTabCardTextWidget(
-                        title: appLocalizations.newSchoolSummaryOrganizationMemberAadhaarNumberLabelText.toUpperCase(),
+                        title:
+                            appLocalizations
+                                .newSchoolSummaryOrganizationMemberAadhaarNumberLabelText
+                                .toUpperCase(),
                         value:
                             organizationMember.aadhaarNumber.isNotEmpty
                                 ? organizationMember.aadhaarNumber
-                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue.toUpperCase(),
+                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue
+                                    .toUpperCase(),
                       ),
                       NewSchoolFormSummaryTabCardTextWidget(
-                        title: appLocalizations.newSchoolSummaryOrganizationMemberPositionLabelText.toUpperCase(),
+                        title:
+                            appLocalizations.newSchoolSummaryOrganizationMemberPositionLabelText
+                                .toUpperCase(),
                         value:
                             organizationMember.position.isNotEmpty
                                 ? organizationMember.position
-                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue.toUpperCase(),
+                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue
+                                    .toUpperCase(),
                       ),
                       NewSchoolFormSummaryTabCardTextWidget(
-                        title: appLocalizations.newSchoolSummaryOrganizationMemberAddressLabelText.toUpperCase(),
+                        title:
+                            appLocalizations.newSchoolSummaryOrganizationMemberAddressLabelText
+                                .toUpperCase(),
                         value:
                             organizationMember.address.isNotEmpty
                                 ? organizationMember.address
-                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue.toUpperCase(),
+                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue
+                                    .toUpperCase(),
                       ),
                       NewSchoolFormSummaryTabCardTextWidget(
-                        title: appLocalizations.newSchoolSummaryOrganizationMemberStateLabelText.toUpperCase(),
+                        title:
+                            appLocalizations.newSchoolSummaryOrganizationMemberStateLabelText
+                                .toUpperCase(),
                         value:
                             organizationMember.state.name.isNotEmpty
                                 ? organizationMember.state.name
-                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue.toUpperCase(),
+                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue
+                                    .toUpperCase(),
                       ),
                       NewSchoolFormSummaryTabCardTextWidget(
-                        title: appLocalizations.newSchoolSummaryOrganizationMemberDistrictLabelText.toUpperCase(),
+                        title:
+                            appLocalizations.newSchoolSummaryOrganizationMemberDistrictLabelText
+                                .toUpperCase(),
                         value:
                             organizationMember.district.name.isNotEmpty
                                 ? organizationMember.district.name
-                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue.toUpperCase(),
+                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue
+                                    .toUpperCase(),
                       ),
                       NewSchoolFormSummaryTabCardTextWidget(
-                        title: appLocalizations.newSchoolSummaryOrganizationMemberCityLabelText.toUpperCase(),
+                        title:
+                            appLocalizations.newSchoolSummaryOrganizationMemberCityLabelText
+                                .toUpperCase(),
                         value:
                             organizationMember.city.name.isNotEmpty
                                 ? organizationMember.city.name
-                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue.toUpperCase(),
+                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue
+                                    .toUpperCase(),
                       ),
                       NewSchoolFormSummaryTabCardTextWidget(
-                        title: appLocalizations.newSchoolSummaryOrganizationMemberAreaNameLabelText.toUpperCase(),
+                        title:
+                            appLocalizations.newSchoolSummaryOrganizationMemberAreaNameLabelText
+                                .toUpperCase(),
                         value:
                             organizationMember.areaName.name.isNotEmpty
                                 ? organizationMember.areaName.name
-                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue.toUpperCase(),
+                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue
+                                    .toUpperCase(),
                       ),
                       NewSchoolFormSummaryTabCardTextWidget(
-                        title: appLocalizations.newSchoolSummaryOrganizationMemberZipcodeLabelText.toUpperCase(),
+                        title:
+                            appLocalizations.newSchoolSummaryOrganizationMemberZipcodeLabelText
+                                .toUpperCase(),
                         value:
                             organizationMember.zipcode.zipcode.isNotEmpty
                                 ? organizationMember.zipcode.zipcode
-                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue.toUpperCase(),
+                                : appLocalizations.newSchoolSummaryOrganizationMemberEmptyValue
+                                    .toUpperCase(),
                       ),
                     ],
                   );

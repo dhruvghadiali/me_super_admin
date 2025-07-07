@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/model/school_admin/school_admin.dart';
@@ -9,7 +9,12 @@ import 'package:me_super_admin/widget/common/form_fields/elevated_button/elevate
 import 'package:me_super_admin/widget/common/form_fields/text_fields/floating_text_field_widget.dart';
 
 class SchoolAdminFormWidget extends StatefulWidget {
-  const SchoolAdminFormWidget({super.key, required this.schoolAdmin, required this.index, required this.onSubmitForm});
+  const SchoolAdminFormWidget({
+    super.key,
+    required this.schoolAdmin,
+    required this.index,
+    required this.onSubmitForm,
+  });
 
   final SchoolAdmin schoolAdmin;
   final int index;
@@ -186,7 +191,9 @@ class _SchoolAdminFormWidgetState extends State<SchoolAdminFormWidget> {
                     controller: _firstNameTextEditingController,
                     validator: schoolAdminControllerContext.firstNameValidator,
                     labelText: appLocalizations.schoolAdminFormFirstNameTextFieldLabelText,
-                    onChange: (String value) => schoolAdminControllerContext.onFirstNameChange(value, widget.index),
+                    onChange:
+                        (String value) =>
+                            schoolAdminControllerContext.onFirstNameChange(value, widget.index),
                     onFieldSubmitted: (String value) => onFirstNameTextFieldSubmit(context, value),
                   ),
                 ),
@@ -200,7 +207,9 @@ class _SchoolAdminFormWidgetState extends State<SchoolAdminFormWidget> {
                     controller: _lastNameTextEditingController,
                     validator: schoolAdminControllerContext.lastNameValidator,
                     labelText: appLocalizations.schoolAdminFormLastNameTextFieldLabelText,
-                    onChange: (String value) => schoolAdminControllerContext.onLastNameChange(value, widget.index),
+                    onChange:
+                        (String value) =>
+                            schoolAdminControllerContext.onLastNameChange(value, widget.index),
                     onFieldSubmitted: (String value) => onLastNameTextFieldSubmit(context, value),
                   ),
                 ),
@@ -215,7 +224,9 @@ class _SchoolAdminFormWidgetState extends State<SchoolAdminFormWidget> {
                     controller: _emailTextEditingController,
                     validator: schoolAdminControllerContext.emailValidator,
                     labelText: appLocalizations.schoolAdminFormEmailTextFieldLabelText,
-                    onChange: (String value) => schoolAdminControllerContext.onEmailChange(value, widget.index),
+                    onChange:
+                        (String value) =>
+                            schoolAdminControllerContext.onEmailChange(value, widget.index),
                     onFieldSubmitted: (String value) => onEmailTextFieldSubmit(context, value),
                   ),
                 ),
@@ -230,8 +241,11 @@ class _SchoolAdminFormWidgetState extends State<SchoolAdminFormWidget> {
                     controller: _phoneNumberTextEditingController,
                     validator: schoolAdminControllerContext.phoneNumberValidator,
                     labelText: appLocalizations.schoolAdminFormPhoneNumberTextFieldLabelText,
-                    onChange: (String value) => schoolAdminControllerContext.onPhoneNumberChange(value, widget.index),
-                    onFieldSubmitted: (String value) => onPhoneNumberTextFieldSubmit(context, value),
+                    onChange:
+                        (String value) =>
+                            schoolAdminControllerContext.onPhoneNumberChange(value, widget.index),
+                    onFieldSubmitted:
+                        (String value) => onPhoneNumberTextFieldSubmit(context, value),
                   ),
                 ),
                 Container(

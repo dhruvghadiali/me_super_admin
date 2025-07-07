@@ -4,12 +4,7 @@ import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/model/drawer_item/drawer_item.dart';
 
 List<DrawerItem> drawerItems = [
-  DrawerItem(
-    title: 'Dashboard',
-    icon: Icons.speed_rounded,
-    route: '/dashboard',
-    submenu: [],
-  ),
+  DrawerItem(title: 'Dashboard', icon: Icons.speed_rounded, route: '/dashboard', submenu: []),
   DrawerItem(
     title: 'Manage Schools',
     icon: Icons.supervised_user_circle_rounded,
@@ -18,13 +13,13 @@ List<DrawerItem> drawerItems = [
       DrawerItem(
         title: 'Active Schools',
         icon: Icons.check_circle,
-        route: '/schools/active',
+        route: RoutePaths.activeSchools,
         submenu: [],
       ),
       DrawerItem(
         title: 'Inactive Schools',
         icon: Icons.remove_circle,
-        route: '/schools/inactive',
+        route: RoutePaths.inactiveSchools,
         submenu: [],
       ),
       DrawerItem(
@@ -59,12 +54,7 @@ List<DrawerItem> drawerItems = [
     icon: Icons.home_repair_service_sharp,
     route: '',
     submenu: [
-      DrawerItem(
-        title: 'Facilities',
-        icon: Icons.folder,
-        route: RoutePaths.feeTypes,
-        submenu: [],
-      ),
+      DrawerItem(title: 'Facilities', icon: Icons.folder, route: RoutePaths.feeTypes, submenu: []),
       DrawerItem(
         title: 'Add Facility',
         icon: Icons.add_circle,
@@ -78,12 +68,7 @@ List<DrawerItem> drawerItems = [
     icon: Icons.currency_rupee,
     route: '',
     submenu: [
-      DrawerItem(
-        title: 'Fee Types',
-        icon: Icons.folder,
-        route: RoutePaths.feeTypes,
-        submenu: [],
-      ),
+      DrawerItem(title: 'Fee Types', icon: Icons.folder, route: RoutePaths.feeTypes, submenu: []),
       DrawerItem(
         title: 'Add Fee Type',
         icon: Icons.add_circle,
@@ -150,20 +135,20 @@ List<DrawerItem> drawerItems = [
     ],
   ),
   DrawerItem(
-    title: 'Manage Academic Grades',
+    title: 'Manage Academic Classes',
     icon: Icons.emoji_events,
     route: '',
     submenu: [
       DrawerItem(
-        title: 'Academic Grades',
+        title: 'Academic Classes',
         icon: Icons.folder,
-        route: RoutePaths.academicGrades,
+        route: RoutePaths.academicClasses,
         submenu: [],
       ),
       DrawerItem(
-        title: 'Add Academic Grade',
+        title: 'Add Academic Class',
         icon: Icons.add_circle,
-        route: RoutePaths.academicGradeForm,
+        route: RoutePaths.academicClassForm,
         submenu: [],
       ),
     ],
@@ -173,12 +158,7 @@ List<DrawerItem> drawerItems = [
     icon: Icons.map,
     route: '',
     submenu: [
-      DrawerItem(
-        title: 'States',
-        icon: Icons.folder,
-        route: RoutePaths.states,
-        submenu: [],
-      ),
+      DrawerItem(title: 'States', icon: Icons.folder, route: RoutePaths.states, submenu: []),
       DrawerItem(
         title: 'Add State',
         icon: Icons.add_circle,
@@ -192,12 +172,7 @@ List<DrawerItem> drawerItems = [
     icon: Icons.account_balance,
     route: '',
     submenu: [
-      DrawerItem(
-        title: 'Districts',
-        icon: Icons.folder,
-        route: RoutePaths.districts,
-        submenu: [],
-      ),
+      DrawerItem(title: 'Districts', icon: Icons.folder, route: RoutePaths.districts, submenu: []),
       DrawerItem(
         title: 'Add District',
         icon: Icons.add_circle,
@@ -211,12 +186,7 @@ List<DrawerItem> drawerItems = [
     icon: Icons.business,
     route: '',
     submenu: [
-      DrawerItem(
-        title: 'Cities',
-        icon: Icons.folder,
-        route: RoutePaths.cities,
-        submenu: [],
-      ),
+      DrawerItem(title: 'Cities', icon: Icons.folder, route: RoutePaths.cities, submenu: []),
       DrawerItem(
         title: 'Add City',
         icon: Icons.add_circle,
@@ -230,12 +200,7 @@ List<DrawerItem> drawerItems = [
     icon: Icons.location_city_outlined,
     route: '',
     submenu: [
-      DrawerItem(
-        title: 'Area Names',
-        icon: Icons.folder,
-        route: RoutePaths.areaNames,
-        submenu: [],
-      ),
+      DrawerItem(title: 'Area Names', icon: Icons.folder, route: RoutePaths.areaNames, submenu: []),
       DrawerItem(
         title: 'Add Area Name',
         icon: Icons.add_circle,
@@ -249,12 +214,7 @@ List<DrawerItem> drawerItems = [
     icon: Icons.location_on_outlined,
     route: '',
     submenu: [
-      DrawerItem(
-        title: 'Zipcodes',
-        icon: Icons.folder,
-        route: RoutePaths.zipcodes,
-        submenu: [],
-      ),
+      DrawerItem(title: 'Zipcodes', icon: Icons.folder, route: RoutePaths.zipcodes, submenu: []),
       DrawerItem(
         title: 'Add Zipcode',
         icon: Icons.add_circle,

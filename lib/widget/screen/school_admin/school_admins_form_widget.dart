@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 
 import 'package:me_super_admin/app_enum.dart';
 import 'package:me_super_admin/widget/common/alert/alert_widget.dart';
@@ -10,7 +10,12 @@ import 'package:me_super_admin/widget/screen/school_admin/school_admin_form_widg
 import 'package:me_super_admin/widget/common/form_fields/elevated_button/elevated_button.dart';
 
 class SchoolAdminsFormWidget extends StatefulWidget {
-  const SchoolAdminsFormWidget({super.key, required this.isStepperForm, this.onNextStep, this.onPreviousStep});
+  const SchoolAdminsFormWidget({
+    super.key,
+    required this.isStepperForm,
+    this.onNextStep,
+    this.onPreviousStep,
+  });
 
   final bool isStepperForm;
   final Function? onNextStep;
@@ -84,7 +89,8 @@ class _SchoolAdminsFormWidgetState extends State<SchoolAdminsFormWidget> {
    * If any form is invalid, it displays an alert. Otherwise, it calls the `onPreviousStep`
    * callback provided by the parent widget.
    */
-  void onPreviousStep() => isSchoolAdminsFormValidated() ? displayAlert() : widget.onPreviousStep!();
+  void onPreviousStep() =>
+      isSchoolAdminsFormValidated() ? displayAlert() : widget.onPreviousStep!();
 
   /*
    * Adds a new school admin form.
@@ -161,7 +167,10 @@ class _SchoolAdminsFormWidgetState extends State<SchoolAdminsFormWidget> {
               margin: const EdgeInsets.only(bottom: 5, left: 10),
               child: Text(
                 "** Always provide unique phone number for each school admin.",
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(fontWeight: FontWeight.bold, color: themeData.metallicRed),
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: themeData.metallicRed,
+                ),
               ),
             ),
             Container(
@@ -169,7 +178,10 @@ class _SchoolAdminsFormWidgetState extends State<SchoolAdminsFormWidget> {
               child: SizedBox(
                 width: null,
                 child: TextButton(
-                  style: TextButton.styleFrom(backgroundColor: themeData.eerieBlack, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0))),
+                  style: TextButton.styleFrom(
+                    backgroundColor: themeData.eerieBlack,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                  ),
                   onPressed: () => addNewSchoolAdminForm(),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -177,7 +189,10 @@ class _SchoolAdminsFormWidgetState extends State<SchoolAdminsFormWidget> {
                       Icon(Icons.add_circle, color: themeData.offWhite),
                       Padding(
                         padding: EdgeInsets.only(left: 5),
-                        child: Text(appLocalizations.addSchoolAdminButtonText, style: TextStyle(color: themeData.offWhite)),
+                        child: Text(
+                          appLocalizations.addSchoolAdminButtonText,
+                          style: TextStyle(color: themeData.offWhite),
+                        ),
                       ),
                     ],
                   ),
@@ -187,17 +202,29 @@ class _SchoolAdminsFormWidgetState extends State<SchoolAdminsFormWidget> {
             ...schoolAdminController.schoolAdmins.asMap().entries.map((entry) {
               return ExpansionTile(
                 onExpansionChanged: (bool expanded) => onExpansionChanged(expanded, entry.key),
-                collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.zero, side: BorderSide.none),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero, side: BorderSide.none),
+                collapsedShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero,
+                  side: BorderSide.none,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero,
+                  side: BorderSide.none,
+                ),
                 tilePadding: EdgeInsets.zero,
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(icon: Icon(Icons.delete, color: themeData.metallicRed, size: 22), onPressed: () => deleteSchoolAdminForm(entry.key)),
+                    IconButton(
+                      icon: Icon(Icons.delete, color: themeData.metallicRed, size: 22),
+                      onPressed: () => deleteSchoolAdminForm(entry.key),
+                    ),
                     Expanded(
                       child: Text(
                         '${appLocalizations.schoolAdminFormExpansionTile} ${entry.key + 1}',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: themeData.eerieBlack, fontWeight: FontWeight.bold),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: themeData.eerieBlack,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 
 import 'package:me_super_admin/utils/theme_data/extensions_theme_data.dart';
 
@@ -8,8 +8,7 @@ class NoDataFoundWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ExtensionsThemeData themeData =
-        Theme.of(context).extension<ExtensionsThemeData>()!;
+    ExtensionsThemeData themeData = Theme.of(context).extension<ExtensionsThemeData>()!;
     AppLocalizations appLocalizations = AppLocalizations.of(context)!;
     return Container(
       alignment: Alignment.center,
@@ -17,11 +16,7 @@ class NoDataFoundWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.warning_rounded,
-            color: themeData.metallicRed,
-            size: 80,
-          ),
+          Icon(Icons.warning_rounded, color: themeData.metallicRed, size: 80),
           Text(
             appLocalizations.noDataFoundTitleMessage,
             style: Theme.of(context).textTheme.headlineSmall,
@@ -32,7 +27,7 @@ class NoDataFoundWidget extends StatelessWidget {
               appLocalizations.noDataFoundSubtitleMessage,
               style: Theme.of(context).textTheme.labelSmall,
             ),
-          )
+          ),
         ],
       ),
     );
