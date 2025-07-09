@@ -55,7 +55,7 @@ class FacilityTypeController extends GetxController {
    *
    * Applies the following rules:
    * - Field is required (shows custom required message).
-   * - Must be at least 10 characters long.
+   * - Must be at least 2 characters long.
    * - Must not exceed 100 characters.
    *
    * Returns:
@@ -65,7 +65,7 @@ class FacilityTypeController extends GetxController {
   String? facilityTypeValidator(String? value) {
     return ValidationBuilder(requiredMessage: FacilityTypeValidationMessage.facilityTypeRequired)
         .required(FacilityTypeValidationMessage.facilityTypeRequired)
-        .minLength(10, FacilityTypeValidationMessage.facilityTypeMinLength)
+        .minLength(2, FacilityTypeValidationMessage.facilityTypeMinLength)
         .maxLength(100, FacilityTypeValidationMessage.facilityTypeMaxLength)
         .build()(value?.trim());
   }
