@@ -379,6 +379,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get educationBoardTextFieldLabelText => 'Education board';
 
   @override
+  String get facilityTypeTextFieldLabelText => 'Facility type';
+
+  @override
   String get feeTypeTextFieldLabelText => 'Fee type';
 
   @override

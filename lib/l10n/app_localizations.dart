@@ -779,6 +779,12 @@ abstract class AppLocalizations {
   /// **'Education board'**
   String get educationBoardTextFieldLabelText;
 
+  /// No description provided for @facilityTypeTextFieldLabelText.
+  ///
+  /// In en, this message translates to:
+  /// **'Facility type'**
+  String get facilityTypeTextFieldLabelText;
+
   /// No description provided for @feeTypeTextFieldLabelText.
   ///
   /// In en, this message translates to:
