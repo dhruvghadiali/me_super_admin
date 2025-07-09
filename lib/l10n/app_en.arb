@@ -106,7 +106,7 @@
   "@newSchoolSummaryOrganizationZipcodeLabelText": {
     "description": "Label text for organization zipcode in new school summary"
   },
-  "newSchoolSummaryOrganizationEmptyValue":"N/A",
+  "newSchoolSummaryOrganizationEmptyValue": "N/A",
   "@newSchoolSummaryOrganizationEmptyValue": {
     "description": "When organization model value is empty, show this value"
   },
@@ -118,7 +118,7 @@
   "@newSchoolSummaryOrganizationMemberTitle": {
     "description": "Title text for organization member in new school summary"
   },
-  "newSchoolSummaryOrganizationMemberEmptyValue":"N/A",
+  "newSchoolSummaryOrganizationMemberEmptyValue": "N/A",
   "@newSchoolSummaryOrganizationMemberEmptyValue": {
     "description": "When organization member model value is empty, show this value"
   },
@@ -202,7 +202,7 @@
   "@newSchoolSummarySchoolEducationBoardsLabelText": {
     "description": "Label text for school education boards in new school summary"
   },
-  "newSchoolSummarySchoolEmptyValue":"N/A",
+  "newSchoolSummarySchoolEmptyValue": "N/A",
   "@newSchoolSummarySchoolEmptyValue": {
     "description": "When school model value is empty, show this value"
   },
@@ -218,11 +218,11 @@
   "@newSchoolSummarySchoolAdminTitle": {
     "description": "Title text for school admin in new school summary"
   },
-  "newSchoolSummarySchoolAddressEmptyValue":"N/A",
+  "newSchoolSummarySchoolAddressEmptyValue": "N/A",
   "@newSchoolSummarySchoolAddressEmptyValue": {
     "description": "When school address model value is empty, show this value"
   },
-  "newSchoolSummarySchoolAdminEmptyValue":"N/A",
+  "newSchoolSummarySchoolAdminEmptyValue": "N/A",
   "@newSchoolSummarySchoolAdminEmptyValue": {
     "description": "When school admin model value is empty, show this value"
   },
@@ -326,7 +326,7 @@
   "@organizationMemberFormAddMemberButtonText": {
     "description": "Button text for adding a member in organization member form"
   },
-  "organizationMemberFormExpansionTile":"Organization Member Form",
+  "organizationMemberFormExpansionTile": "Organization Member Form",
   "@organizationMemberFormExpansionTile": {
     "description": "Expansion tile title for organization member form"
   },
@@ -362,7 +362,7 @@
   "@schoolAddressFormAddSchoolAddressButtonText": {
     "description": "Button text for adding a school address in school address form"
   },
-  "schoolAddressFormExpansionTile":"School Address Form",
+  "schoolAddressFormExpansionTile": "School Address Form",
   "@schoolAddressFormExpansionTile": {
     "description": "Expansion tile title for school address form"
   },
@@ -386,9 +386,6 @@
   "@schoolAdminFormPhoneNumberTextFieldLabelText": {
     "description": "Text field label text for phone number in school admin form"
   },
-
-
-
   "addSchoolFormTitle": "Register School",
   "@addSchoolFormTitle": {},
   "deleteAlertTitle": "Are you sure?",
@@ -421,6 +418,8 @@
   "@academicClassTextFieldLabelText": {},
   "educationBoardTextFieldLabelText": "Education board",
   "@educationBoardTextFieldLabelText": {},
+  "facilityTypeTextFieldLabelText": "Facility type",
+  "@facilityTypeTextFieldLabelText": {},
   "feeTypeTextFieldLabelText": "Fee type",
   "@feeTypeTextFieldLabelText": {},
   "admissionDocumentTextFieldLabelText": "Admission Document",
@@ -457,7 +456,7 @@
   "@addSchoolAdminButtonText": {},
   "organizationMemberFormValidationAlertMessage": "Please fill up all the organization member form details.",
   "@organizationMemberFormValidationAlertMessage": {},
-  "schoolAdminFormExpansionTile":"School Admin Form",
+  "schoolAdminFormExpansionTile": "School Admin Form",
   "@schoolAdminFormExpansionTile": {},
   "selectedDropdownItemsText": "items selected",
   "@selectedDropdownItemsText": {},

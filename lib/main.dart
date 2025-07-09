@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:me_super_admin/l10n/app_localizations.dart';
-import 'package:me_super_admin/screens/organization_member/organization_member_form_screen.dart';
+import 'package:me_super_admin/screens/facility_type/facility_type_form_screen.dart';
 
 import 'package:me_super_admin/utils/routes.dart';
+import 'package:me_super_admin/l10n/app_localizations.dart';
 import 'package:me_super_admin/screens/city/city_screen.dart';
 import 'package:me_super_admin/screens/state/state_screen.dart';
 import 'package:me_super_admin/screens/city/city_form_screen.dart';
@@ -24,6 +24,7 @@ import 'package:me_super_admin/screens/district/district_form_screen.dart';
 import 'package:me_super_admin/screens/fee_type/fee_type_form_screen.dart';
 import 'package:me_super_admin/screens/school_type/school_type_screen.dart';
 import 'package:me_super_admin/screens/area_name/area_name_form_screen.dart';
+import 'package:me_super_admin/screens/facility_type/facility_type_screen.dart';
 import 'package:me_super_admin/screens/school_type/school_type_form_screen.dart';
 import 'package:me_super_admin/screens/academic_class/academic_class_screen.dart';
 import 'package:me_super_admin/screens/organization/organization_form_screen.dart';
@@ -32,6 +33,7 @@ import 'package:me_super_admin/screens/academic_class/academic_class_form_screen
 import 'package:me_super_admin/screens/education_board/education_board_form_screen.dart';
 import 'package:me_super_admin/screens/admission_document/admission_document_screen.dart';
 import 'package:me_super_admin/screens/admission_document/admission_document_form_screen.dart';
+import 'package:me_super_admin/screens/organization_member/organization_member_form_screen.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -59,6 +61,8 @@ class MeSuperAdminApp extends StatelessWidget {
         RoutePaths.schoolForm: (context) => SchoolFormScreen(),
         RoutePaths.organizationForm: (context) => OrganizationFormScreen(),
         RoutePaths.organizationMemberForm: (context) => OrganizationMemberFormScreen(),
+        RoutePaths.facilityTypes: (context) => const FacilityTypeScreen(),
+        RoutePaths.facilityTypeForm: (context) => const FacilityTypeFormScreen(),
         RoutePaths.feeTypes: (context) => const FeeTypeScreen(),
         RoutePaths.feeTypeForm: (context) => const FeeTypeFormScreen(),
         RoutePaths.schoolTypes: (context) => const SchoolTypeScreen(),

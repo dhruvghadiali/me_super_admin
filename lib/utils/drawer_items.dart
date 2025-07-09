@@ -38,13 +38,13 @@ List<DrawerItem> drawerItems = [
       DrawerItem(
         title: 'Facility Types',
         icon: Icons.folder,
-        route: RoutePaths.feeTypes,
+        route: RoutePaths.facilityTypes,
         submenu: [],
       ),
       DrawerItem(
         title: 'Add Facility Type',
         icon: Icons.add_circle,
-        route: RoutePaths.feeTypeForm,
+        route: RoutePaths.facilityTypeForm,
         submenu: [],
       ),
     ],

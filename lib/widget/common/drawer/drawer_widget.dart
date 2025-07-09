@@ -15,6 +15,7 @@ import 'package:me_super_admin/controller/school_type/school_type_controller.dar
 import 'package:me_super_admin/controller/organization/organization_controller.dart';
 import 'package:me_super_admin/controller/school_admin/school_admin_controller.dart';
 import 'package:me_super_admin/controller/school/school_form_stepper_controller.dart';
+import 'package:me_super_admin/controller/facility_type/facility_type_controller.dart';
 import 'package:me_super_admin/controller/school_address/school_address_controller.dart';
 import 'package:me_super_admin/controller/academic_class/academic_class_controller.dart';
 import 'package:me_super_admin/controller/education_board/education_board_controller.dart';
@@ -71,6 +72,11 @@ class DrawerWidget extends StatelessWidget {
   void resetEductionBoardFormValues() {
     EducationBoardController educationBoardController = Get.put(EducationBoardController());
     educationBoardController.resetEducationBoardForm();
+  }
+
+  void resetFacilityTypeFormValues() {
+    FacilityTypeController facilityTypeController = Get.put(FacilityTypeController());
+    facilityTypeController.resetFacilityTypeForm();
   }
 
   void resetFeeTypeFormValues() {
@@ -151,6 +157,9 @@ class DrawerWidget extends StatelessWidget {
         break;
       case RoutePaths.educationBoardForm || RoutePaths.educationBoards:
         resetEductionBoardFormValues();
+        break;
+      case RoutePaths.facilityTypeForm || RoutePaths.facilityTypes:
+        resetFacilityTypeFormValues();
         break;
       case RoutePaths.feeTypeForm || RoutePaths.feeTypes:
         resetFeeTypeFormValues();
