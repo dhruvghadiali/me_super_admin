@@ -382,6 +382,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get facilityTypeTextFieldLabelText => 'Facility type';
 
   @override
+  String get facilityNameTextFieldLabelText => 'Facility name';
+
+  @override
   String get feeTypeTextFieldLabelText => 'Fee type';
 
   @override
@@ -447,4 +450,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get selectDropdownOptionText => 'select option';
+
+  @override
+  String get facilityTypeDropdownFieldLabelText => 'Select Facility Type';
 }

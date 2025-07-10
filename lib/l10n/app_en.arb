@@ -420,6 +420,8 @@
   "@educationBoardTextFieldLabelText": {},
   "facilityTypeTextFieldLabelText": "Facility type",
   "@facilityTypeTextFieldLabelText": {},
+  "facilityNameTextFieldLabelText": "Facility name",
+  "@facilityNameTextFieldLabelText": {},
   "feeTypeTextFieldLabelText": "Fee type",
   "@feeTypeTextFieldLabelText": {},
   "admissionDocumentTextFieldLabelText": "Admission Document",
@@ -463,5 +465,7 @@
   "selectDropdownOptionsText": "select options",
   "@selectDropdownOptionsText": {},
   "selectDropdownOptionText": "select option",
-  "@selectDropdownOptionText": {}
+  "@selectDropdownOptionText": {},
+  "facilityTypeDropdownFieldLabelText": "Select Facility Type",
+  "@facilityTypeDropdownFieldLabelText": {}
 }

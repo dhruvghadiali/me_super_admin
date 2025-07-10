@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:me_super_admin/controller/facility/facility_controller.dart';
 
 import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/utils/drawer_items.dart';
@@ -77,6 +78,13 @@ class DrawerWidget extends StatelessWidget {
   void resetFacilityTypeFormValues() {
     FacilityTypeController facilityTypeController = Get.put(FacilityTypeController());
     facilityTypeController.resetFacilityTypeForm();
+  }
+
+  void resetFacilityFormValues() {
+    FacilityController facilityController = Get.put(FacilityController());
+    FacilityTypeController facilityTypeController = Get.put(FacilityTypeController());
+    facilityController.resetFacilityForm();
+    facilityTypeController.getFacilityTypes();
   }
 
   void resetFeeTypeFormValues() {
@@ -160,6 +168,9 @@ class DrawerWidget extends StatelessWidget {
         break;
       case RoutePaths.facilityTypeForm || RoutePaths.facilityTypes:
         resetFacilityTypeFormValues();
+        break;
+      case RoutePaths.facilityForm || RoutePaths.facilities:
+        resetFacilityFormValues();
         break;
       case RoutePaths.feeTypeForm || RoutePaths.feeTypes:
         resetFeeTypeFormValues();

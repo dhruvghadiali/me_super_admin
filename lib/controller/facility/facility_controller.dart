@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
 
 import 'package:me_super_admin/app_enum.dart';
-import 'package:me_super_admin/model/facility/facility.dart';
-import 'package:me_super_admin/model/facility_type/facility_type.dart';
 import 'package:me_super_admin/utils/utils.dart';
 import 'package:me_super_admin/utils/routes.dart';
-import 'package:me_super_admin/model/district/district.dart';
+import 'package:me_super_admin/model/facility/facility.dart';
 import 'package:me_super_admin/utils/snackbar/snackbar.dart';
 import 'package:me_super_admin/service/http/http_service.dart';
-import 'package:me_super_admin/model/state/state.dart' as state_mode;
+import 'package:me_super_admin/model/facility_type/facility_type.dart';
 import 'package:me_super_admin/model/http_service/put_http_service.dart';
 import 'package:me_super_admin/model/http_service/get_http_service.dart';
 import 'package:me_super_admin/model/http_service/post_http_service.dart';
@@ -18,8 +16,6 @@ import 'package:me_super_admin/model/http_service/delete_http_service.dart';
 import 'package:me_super_admin/model/http_service/http_response_service.dart';
 import 'package:me_super_admin/model/http_service/mock_http_api_property_service.dart';
 import 'package:me_super_admin/utils/validation_message/facility_form_validation_message.dart';
-import 'package:me_super_admin/utils/validation_message/state_form_validation_message.dart';
-import 'package:me_super_admin/utils/validation_message/district_form_validation_message.dart';
 
 class FacilityController extends GetxController {
   String snackbarTitle = "Facility Alert";
@@ -66,7 +62,7 @@ class FacilityController extends GetxController {
     update();
   }
 
-  void onFacilityTypeSubmitted(String value, GlobalKey<FormFieldState> formFieldKey) {
+  void onFacilitySubmitted(String value, GlobalKey<FormFieldState> formFieldKey) {
     facility = facility.copyWith(facilityName: value.trim());
     formFieldKey.currentState?.validate();
   }

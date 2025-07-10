@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:me_super_admin/screens/facility_type/facility_type_form_screen.dart';
 
 import 'package:me_super_admin/utils/routes.dart';
 import 'package:me_super_admin/l10n/app_localizations.dart';
@@ -20,6 +19,7 @@ import 'package:me_super_admin/screens/dashboard/dashboard_screen.dart';
 import 'package:me_super_admin/screens/area_name/area_name_screen.dart';
 import 'package:me_super_admin/screens/zipcode/zipcode_form_screen.dart';
 import 'package:me_super_admin/screens/school/active_school_screen.dart';
+import 'package:me_super_admin/screens/facility/facility_form_screen.dart';
 import 'package:me_super_admin/screens/district/district_form_screen.dart';
 import 'package:me_super_admin/screens/fee_type/fee_type_form_screen.dart';
 import 'package:me_super_admin/screens/school_type/school_type_screen.dart';
@@ -29,6 +29,7 @@ import 'package:me_super_admin/screens/school_type/school_type_form_screen.dart'
 import 'package:me_super_admin/screens/academic_class/academic_class_screen.dart';
 import 'package:me_super_admin/screens/organization/organization_form_screen.dart';
 import 'package:me_super_admin/screens/education_board/education_board_screen.dart';
+import 'package:me_super_admin/screens/facility_type/facility_type_form_screen.dart';
 import 'package:me_super_admin/screens/academic_class/academic_class_form_screen.dart';
 import 'package:me_super_admin/screens/education_board/education_board_form_screen.dart';
 import 'package:me_super_admin/screens/admission_document/admission_document_screen.dart';
@@ -63,6 +64,8 @@ class MeSuperAdminApp extends StatelessWidget {
         RoutePaths.organizationMemberForm: (context) => OrganizationMemberFormScreen(),
         RoutePaths.facilityTypes: (context) => const FacilityTypeScreen(),
         RoutePaths.facilityTypeForm: (context) => const FacilityTypeFormScreen(),
+        RoutePaths.facilities: (context) => const FacilityTypeScreen(),
+        RoutePaths.facilityForm: (context) => const FacilityFormScreen(),
         RoutePaths.feeTypes: (context) => const FeeTypeScreen(),
         RoutePaths.feeTypeForm: (context) => const FeeTypeFormScreen(),
         RoutePaths.schoolTypes: (context) => const SchoolTypeScreen(),

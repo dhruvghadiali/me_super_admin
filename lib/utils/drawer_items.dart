@@ -54,11 +54,16 @@ List<DrawerItem> drawerItems = [
     icon: Icons.home_repair_service_sharp,
     route: '',
     submenu: [
-      DrawerItem(title: 'Facilities', icon: Icons.folder, route: RoutePaths.feeTypes, submenu: []),
+      DrawerItem(
+        title: 'Facilities',
+        icon: Icons.folder,
+        route: RoutePaths.facilities,
+        submenu: [],
+      ),
       DrawerItem(
         title: 'Add Facility',
         icon: Icons.add_circle,
-        route: RoutePaths.feeTypeForm,
+        route: RoutePaths.facilityForm,
         submenu: [],
       ),
     ],

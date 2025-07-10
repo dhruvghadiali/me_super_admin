@@ -785,6 +785,12 @@ abstract class AppLocalizations {
   /// **'Facility type'**
   String get facilityTypeTextFieldLabelText;
 
+  /// No description provided for @facilityNameTextFieldLabelText.
+  ///
+  /// In en, this message translates to:
+  /// **'Facility name'**
+  String get facilityNameTextFieldLabelText;
+
   /// No description provided for @feeTypeTextFieldLabelText.
   ///
   /// In en, this message translates to:
@@ -916,6 +922,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'select option'**
   String get selectDropdownOptionText;
+
+  /// No description provided for @facilityTypeDropdownFieldLabelText.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Facility Type'**
+  String get facilityTypeDropdownFieldLabelText;
 }
 
 class _AppLocalizationsDelegate
