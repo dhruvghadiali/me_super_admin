@@ -12,6 +12,8 @@ class RoutePaths {
   static const String educationBoardForm = '/education-board/form';
   static const String facilityTypes = '/facility-types';
   static const String facilityTypeForm = '/facility-type/form';
+  static const String facilities = '/facilities';
+  static const String facilityForm = '/facility/form';
   static const String feeTypes = '/fee-types';
   static const String feeTypeForm = '/fee-type/form';
   static const String admissionDocuments = '/admission-documents';
