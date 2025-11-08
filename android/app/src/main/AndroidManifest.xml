@@ -1,4 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Internet permission required for API calls, analytics, auth, etc. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Optional: allow resolving domain names quickly (already implied) -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
     <application
         android:label="me_super_admin"
         android:name="${applicationName}"
